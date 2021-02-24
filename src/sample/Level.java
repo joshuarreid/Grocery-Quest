@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 /**The Level Class
  *
- * @author joshuareid
- *
- *
  * levelNumber - what the current level is Ex. Level 1
  * numberOfMobs - The number of mobs that the current level has
  * storeAvailable - Whether the current level has a store available to the player
