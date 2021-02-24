@@ -2,6 +2,16 @@ package sample;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
+/**The Level Class
+ *
+ * @author joshuareid
+ *
+ *
+ * levelNumber - what the current level is Ex. Level 1
+ * numberOfMobs - The number of mobs that the current level has
+ * storeAvailable - Whether the current level has a store available to the player
+ * mobList - holds the mobs of the current level
+ */
 public class Level {
     private int levelNumber;
     private int numberOfMobs;
@@ -9,7 +19,10 @@ public class Level {
     private ArrayList<Integer> mobList;
 
 
-
+    /**
+     *
+     * @param level the current level
+     */
     public Level(int level) {
         this.levelNumber =  level;
 
@@ -19,8 +32,14 @@ public class Level {
 
     }
 
-    public static void spawnMob(Pane pane, int lane, int spawnLocation) {
-
+    /**
+     * Method spawns mobs into the level
+     *
+     * @param pane idk.. still reading the Plants V Zombie example
+     * @param spawnLocation Coordinates to spawn the mob
+     */
+    public static void spawnMob(Pane pane, int spawnLocation) {
+        return;
     }
 
     public int getLevelNumber() {
