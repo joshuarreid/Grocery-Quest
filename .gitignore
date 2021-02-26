@@ -11,7 +11,7 @@ local.properties
 *.iml
 
 # compiling
-.class
+*.class
 
 # IDE
 .vscode/
