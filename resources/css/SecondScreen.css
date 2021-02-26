@@ -1,0 +1,10 @@
+.statusText {
+    -fx-font: 20px "Century";
+    -fx-padding: 10;
+}
+
+.buttons {
+    -fx-font: 20px "Century";
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
