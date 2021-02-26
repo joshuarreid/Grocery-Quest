@@ -8,6 +8,7 @@ import model.GameModel;
 import view.FirstScreen;
 import view.SecondScreen;
 
+
 public class Controller extends Application {
     private Stage mainWindow;
     private GameModel gameModel;
