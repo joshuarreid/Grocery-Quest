@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * mobList - holds the mobs of the current level
  */
 public class Level {
+    private int difficulty;
     private int levelNumber;
     private int numberOfMobs;
     private boolean storeAvailable;
@@ -18,23 +19,30 @@ public class Level {
 
 
 
+
     /**
      *
      * @param level the current level
      */
-    public Level(int level) {
+    public Level(int level, int difficulty) {
         if (level <= 0 || level > 8) {
             throw new IllegalArgumentException("Level must be between 1 and 8");
         }
+        if (difficulty < 1 || difficulty > 3) {
+            throw new IllegalArgumentException("Difficulty must be between 1 and 3");
+        }
+
         this.levelNumber =  level;
+        this.difficulty = difficulty;
+
 
         //The level number determines the number of AntiMaskers
         if (level <= 2) {
-            this.numberOfMobs = level * 2;
+            this.numberOfMobs = difficulty * level * 2;
         } else if (level > 2 && level < 8) {
-            this.numberOfMobs = (level + 11) / 2;
+            this.numberOfMobs = difficulty * ((level + 11) / 2);
         } else {
-            this.numberOfMobs = 2;
+            this.numberOfMobs = difficulty * 2;
         }
 
         if (level == 8) {
