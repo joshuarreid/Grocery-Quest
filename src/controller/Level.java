@@ -1,4 +1,5 @@
-package sample;
+package controller;
+import controller.AntiMasker;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
@@ -30,15 +31,25 @@ public class Level {
         //The level number determines the number of AntiMaskers
         if (level <= 2) {
             this.numberOfMobs = level * 2;
-        } else if (level > 2) {
-            this.numberOfMobs = (level + 10) / 2;
+        } else if (level > 2 && level < 8) {
+            this.numberOfMobs = (level + 11) / 2;
+        } else {
+            this.numberOfMobs = 2;
         }
 
-        /*Adds AntiMaskers to mobList which will
-          be used for spawning in spawnMob()
+        if (level == 8) {
+            this.storeAvailable = false;
+        } else if (level % 2 == 0 || level == 1 || level == 7) {
+            this.storeAvailable = true;
+        }
+
+        /*
+        Adds AntiMaskers to mobList which will
+        be used for spawning in spawnMob()
          */
+        mobList = new ArrayList<>(numberOfMobs);
         for (int i = 0; i < numberOfMobs; i++) {
-            mobList.add(new AntiMasker()); //TODO initiate AntiMasker object
+            mobList.add(new AntiMasker());
         }
 
     }
@@ -63,6 +74,10 @@ public class Level {
 
     public boolean isStoreAvailable() {
         return storeAvailable;
+    }
+
+    public ArrayList<AntiMasker> getMobList() {
+        return mobList;
     }
 
 
