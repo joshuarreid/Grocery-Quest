@@ -1,5 +1,4 @@
 package controller;
-import controller.AntiMasker;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
@@ -18,11 +17,10 @@ public class Level {
     private ArrayList<AntiMasker> mobList;
 
 
-
-
-    /**
+    /** Constructor for Level
      *
      * @param level the current level
+     * @param difficulty the chosen difficulty
      */
     public Level(int level, int difficulty) {
         if (level <= 0 || level > 8) {
@@ -35,8 +33,11 @@ public class Level {
         this.levelNumber =  level;
         this.difficulty = difficulty;
 
-
-        //The level number determines the number of AntiMaskers
+        /*
+        The level number and difficulty
+        determines the number of AntiMaskers
+        that will spawn.
+         */
         if (level <= 2) {
             this.numberOfMobs = difficulty * level * 2;
         } else if (level > 2 && level < 8) {
@@ -45,6 +46,11 @@ public class Level {
             this.numberOfMobs = difficulty * 2;
         }
 
+        /*
+        The store is available to the player on even level
+        numbers; The exception being Level 1, Level 7. However,
+        Level 8 - the Final Level - does not have a store.
+         */
         if (level == 8) {
             this.storeAvailable = false;
         } else if (level % 2 == 0 || level == 1 || level == 7) {

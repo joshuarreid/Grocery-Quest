@@ -19,3 +19,5 @@ local.properties
 
 # API keys and secrets
 .env
+
+checkstyle-*.jar
