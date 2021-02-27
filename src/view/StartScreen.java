@@ -16,6 +16,9 @@ public class StartScreen {
     private int height;
     private Button startButton;
 
+    private static final String IDLE_BUTTON_STYLE = "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
+    private static final String HOVERED_BUTTON_STYLE = "-fx-background-radius: 20; -fx-background-color: #91bfa1";
+
 
     private StartScreen() {}
     public StartScreen(int width, int height) {
@@ -41,6 +44,8 @@ public class StartScreen {
         startButton.setStyle("-fx-background-color: #a0d3b2; -fx-background-radius: 30px");
         startButton.setMinSize(190, 148);
         startButton.setMaxSize(190, 148);
+        startButton.setOnMouseEntered(e -> startButton.setStyle(HOVERED_BUTTON_STYLE));
+        startButton.setOnMouseExited(e -> startButton.setStyle(IDLE_BUTTON_STYLE));
 
         Label inst = new Label("click to start");
         inst.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 30));

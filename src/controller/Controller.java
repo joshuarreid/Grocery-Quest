@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 
 import model.GameModel;
+import view.GameScreen;
 import view.StartScreen;
 import view.ConfigurationScreen;
 
@@ -45,6 +46,7 @@ public class Controller extends Application {
         Button easyButton = screen.getEasyButton();
         Button mediumButton = screen.getMediumButton();
         Button hardButton = screen.getHardButton();
+        Button startButton = screen.getStartButton();
         Button wipeCrossbowButton = screen.getWipeCrossbowButton();
         Button disinfectantSprayButton = screen.getDisinfectantSprayButton();
         Button thermometerSwordButton = screen.getThermometerSwordButton();
@@ -54,19 +56,21 @@ public class Controller extends Application {
         hardButton.setOnAction( e -> difficultyLevel = 3);
 
         wipeCrossbowButton.setOnAction( e -> {
-//            System.out.println(nameField.getText());
 //            System.out.println("weapon: wipe crossbow ");
             weaponChoice = "wipe crossbow";
         });
         disinfectantSprayButton.setOnAction( e -> {
-//            System.out.println(nameField.getText());
 //            System.out.println("weapon: disinfectant spray ");
             weaponChoice = "disinfectant spray";
         });
         thermometerSwordButton.setOnAction( e -> {
-//            System.out.println(nameField.getText());
 //            System.out.println("weapon: thermometer sword ");
             weaponChoice = "thermometer sword";
+        });
+        
+        startButton.setOnAction(e -> {
+            System.out.println(nameField.getText());
+            goToGameScreen();
         });
 
 //        nameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -91,6 +95,14 @@ public class Controller extends Application {
         mainWindow.setScene(scene);
         mainWindow.show();
 
+    }
+
+    private void goToGameScreen() {
+        GameScreen screen = new GameScreen(width, height);
+
+        Scene scene = screen.getScene();
+        mainWindow.setScene(scene);
+        mainWindow.show();
     }
 
 
