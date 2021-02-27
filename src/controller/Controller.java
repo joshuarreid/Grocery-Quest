@@ -50,7 +50,10 @@ public class Controller extends Application {
     private void initStartScreen() {
         StartScreen screen = new StartScreen(width, height);
         Button startButton = screen.getStartButton();
-        startButton.setOnAction(e -> goToConfigurationScreen());
+        startButton.setOnAction(e -> {
+            gameModel.setState("Configuration Screen");
+            goToConfigurationScreen();
+        });
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -134,14 +137,18 @@ public class Controller extends Application {
                     a.getDialogPane().setPrefSize(width, height);
                     a.setTitle("Error");
                     a.setContentText("Invalid Name");
+                    gameModel.setState("Error Screen");
                     a.showAndWait();
                     nameField.clear();
+                    gameModel.setState("Configuration Screen");
                 } else if (difficultyLevel == 0 || weaponChoice == null) {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.getDialogPane().setPrefSize(width, height);
                     a.setTitle("Error");
                     a.setContentText("You Must Choose a Weapon and Difficulty Level");
+                    gameModel.setState("Error Screen");
                     a.showAndWait();
+                    gameModel.setState("Configuration Screen");
                 } else {
                     //Level levelOne = new Level(1, difficultyLevel);
                     //Player player = new Player(100, 0, name, weaponChoice)
@@ -164,14 +171,18 @@ public class Controller extends Application {
                 a.getDialogPane().setPrefSize(width, height);
                 a.setTitle("Error");
                 a.setContentText("Invalid Name");
+                gameModel.setState("Error Screen");
                 a.showAndWait();
                 nameField.clear();
+                gameModel.setState("Configuration Screen");
             } else if (difficultyLevel == 0 || weaponChoice == null) {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.getDialogPane().setPrefSize(width, height);
                 a.setTitle("Error");
                 a.setContentText("You Must Choose a Weapon and Difficulty Level");
+                gameModel.setState("Error Screen");
                 a.showAndWait();
+                gameModel.setState("Configuration Screen");
             } else {
                 //Level levelOne = new Level(1, difficultyLevel);
                 //Player player = new Player(100, 0, name, weaponChoice)
@@ -195,6 +206,10 @@ public class Controller extends Application {
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
+    }
+
+    public String getState() {
+        return gameModel.getState();
     }
 
 

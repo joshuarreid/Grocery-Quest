@@ -46,6 +46,7 @@ public class StartScreen {
         startButton.setMaxSize(190, 148);
         startButton.setOnMouseEntered(e -> startButton.setStyle(HOVERED_BUTTON_STYLE));
         startButton.setOnMouseExited(e -> startButton.setStyle(IDLE_BUTTON_STYLE));
+        startButton.setId("startButton");
 
         Label inst = new Label("click to start");
         inst.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 30));
@@ -55,7 +56,6 @@ public class StartScreen {
         center.getChildren().addAll(title, startButton, inst );
         center.setSpacing(20);
         Scene welcomeScene = new Scene(pane, width,height);
-
         return welcomeScene;
     }
 
