@@ -19,10 +19,10 @@ public class ConfigurationScreen {
     private Button easyButton;
     private Button mediumButton;
     private Button hardButton;
-    private Button startButton;
     private Button wipeCrossbowButton;
     private Button disinfectantSprayButton;
     private Button thermometerSwordButton;
+    private Button readyButton;
     private TextField nameField;
     private Label enterYourName;
     private Label chooseDifficultyLevel;
@@ -37,13 +37,14 @@ public class ConfigurationScreen {
             "file:resources/dogica/TTF/dogicapixelbold.ttf", 23);
 
 
+
     public ConfigurationScreen(int width, int height) {
         this.width = width;
         this.height = height;
         this.easyButton = new Button("easy");
         this.mediumButton = new Button("medium");
         this.hardButton = new Button("hard");
-        this.startButton = new Button("start");
+        this.readyButton = new Button("READY");
         this.wipeCrossbowButton = new Button();
         this.disinfectantSprayButton = new Button();
         this.thermometerSwordButton = new Button();
@@ -137,17 +138,23 @@ public class ConfigurationScreen {
         weaponBox.setAlignment(Pos.CENTER);
         weaponBox.getChildren().addAll(selectYourWeapon, weaponListBox);
 
-        //start button styling
-        startButton.setFont(dogicaFont);
-        startButton.setStyle(IDLE_BUTTON_STYLE);
-        setHoveredButtonStyle(startButton);
+        //READY Button below Weapon Choice
+        readyButton.setFont(dogicaFontBold);
+        readyButton.setStyle(IDLE_BUTTON_STYLE);
+        setHoveredButtonStyle(readyButton);
+
+        HBox readyHBox = new HBox(15);
+        readyHBox.setAlignment(Pos.CENTER);
+        readyHBox.getChildren().add(readyButton);
 
         //base holds all the other panes and goes into the cofig scene
         VBox base = new VBox(25);
         base.setPadding(new Insets(50,0,50,0));
         base.setAlignment(Pos.CENTER);
 
-        base.getChildren().addAll(namePane,levelBox,weaponBox, startButton);
+
+
+        base.getChildren().addAll(namePane,levelBox,weaponBox, readyHBox);
         base.setStyle("-fx-background-color: #ebd6b4");
 
         Scene configurationScene = new Scene(base, width,height);
@@ -155,17 +162,11 @@ public class ConfigurationScreen {
         return configurationScene;
     }
 
-    public Button getEasyButton() {
-        return easyButton;
-    }
+    public Button getEasyButton() { return easyButton; }
 
-    public Button getMediumButton() {
-        return mediumButton;
-    }
+    public Button getMediumButton() { return mediumButton; }
 
     public Button getHardButton() { return hardButton; }
-
-    public Button getStartButton() { return startButton; }
 
     public Button getWipeCrossbowButton() { return wipeCrossbowButton; }
 
@@ -173,7 +174,9 @@ public class ConfigurationScreen {
 
     public Button getThermometerSwordButton() { return thermometerSwordButton; }
 
-    public TextField getNameField() { return nameField;}
+    public Button getReadyButton() { return readyButton; }
+
+    public TextField getNameField() { return nameField; }
 
     private void setHoveredButtonStyle(Button button) {
         button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));
