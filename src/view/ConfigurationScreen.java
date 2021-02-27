@@ -69,6 +69,7 @@ public class ConfigurationScreen {
         nameField.setPrefHeight(50);
         nameField.setStyle("-fx-background-radius: 10 10 10 10");
         nameField.setStyle("-fx-background-color: #ebd6b4");
+        nameField.setId("nameField");
         //Stack pane to impose name field over the graphic
         StackPane nameFeildPane = new StackPane();
         nameFeildPane.getChildren().addAll(nameTextFieldImgView, nameField);
@@ -86,14 +87,17 @@ public class ConfigurationScreen {
         //setting up easy difficulty button
         easyButton.setFont(DOGICA_FONT);
         easyButton.setStyle(IDLE_BUTTON_STYLE);
+        easyButton.setId("easyButton");
         setHoveredButtonStyle(easyButton);
         //setting up medium difficulty button
         mediumButton.setFont(DOGICA_FONT);
         mediumButton.setStyle(IDLE_BUTTON_STYLE);
+        mediumButton.setId("mediumButton");
         setHoveredButtonStyle(mediumButton);
         //setting up hard difficulty label
         hardButton.setFont(DOGICA_FONT);
         hardButton.setStyle(IDLE_BUTTON_STYLE);
+        hardButton.setId("hardButton");
         setHoveredButtonStyle(hardButton);
         //Horizontal box to hold the level difficulty buttons
         HBox levelButtonBox = new HBox(75);
@@ -114,6 +118,7 @@ public class ConfigurationScreen {
         wipeCrossbow.setPreserveRatio(true);
         wipeCrossbowButton.setGraphic(wipeCrossbow);
         wipeCrossbowButton.setStyle(IDLE_BUTTON_STYLE);
+        wipeCrossbowButton.setId("wipeCrossbowButton");
         setHoveredButtonStyle(wipeCrossbowButton);
         //setting up disinfectantSpray weapon button
         ImageView disinfectantSpray = new ImageView(
@@ -122,6 +127,7 @@ public class ConfigurationScreen {
         disinfectantSpray.setPreserveRatio(true);
         disinfectantSprayButton.setGraphic(disinfectantSpray);
         disinfectantSprayButton.setStyle(IDLE_BUTTON_STYLE);
+        disinfectantSprayButton.setId("disinfectantSprayButton");
         setHoveredButtonStyle(disinfectantSprayButton);
         //setting up thermometerSword weapon button
         ImageView thermometerSword = new ImageView(
@@ -130,6 +136,7 @@ public class ConfigurationScreen {
         thermometerSword.setPreserveRatio(true);
         thermometerSwordButton.setGraphic(thermometerSword);
         thermometerSwordButton.setStyle(IDLE_BUTTON_STYLE);
+        thermometerSwordButton.setId("thermometerSwordButton");
         setHoveredButtonStyle(thermometerSwordButton);
         //Horizontal box pane to hold the weapon buttons
         HBox weaponListBox = new HBox(15);
@@ -147,6 +154,7 @@ public class ConfigurationScreen {
         //READY Button below Weapon Choice
         readyButton.setFont(DOGICA_FONT_BOLD);
         readyButton.setStyle(IDLE_BUTTON_STYLE);
+        readyButton.setId("readyButton");
         setHoveredButtonStyle(readyButton);
 
         HBox readyHBox = new HBox(15);

@@ -1,12 +1,9 @@
 package model;
 
 public class GameModel {
-    private int state = 0;
-    public void decrementState() {
-        state = state - 1;
+    private String state = "None";
+    public void setState(String state) {
+        this.state = state;
     }
-    public void incrementState() {
-        state = state + 1;
-    }
-    public int getState() { return state; }
+    public String getState() { return state; }
 }

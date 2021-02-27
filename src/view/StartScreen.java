@@ -49,6 +49,7 @@ public class StartScreen {
         startButton.setMaxSize(190, 148);
         startButton.setOnMouseEntered(e -> startButton.setStyle(HOVERED_BUTTON_STYLE));
         startButton.setOnMouseExited(e -> startButton.setStyle(IDLE_BUTTON_STYLE));
+        startButton.setId("startButton");
 
         Label inst = new Label("click to start");
         inst.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 30));
