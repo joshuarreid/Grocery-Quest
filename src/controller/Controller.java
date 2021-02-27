@@ -3,7 +3,10 @@ package controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+
 import model.GameModel;
 import view.StartScreen;
 import view.ConfigurationScreen;
@@ -34,19 +37,6 @@ public class Controller extends Application {
 
     private void goToConfigurationScreen() {
         ConfigurationScreen screen = new ConfigurationScreen(width, height);
-        /// *** Needs to change
-        Button decrButton = screen.getDecrButton();
-        decrButton.setOnAction(e -> {
-            gameModel.decrementState();
-            screen.updateLabel(gameModel.getState());
-        });
-        Button incrButton = screen.getIncrButton();
-        incrButton.setOnAction(e -> {
-            gameModel.incrementState();
-            screen.updateLabel(gameModel.getState());
-        });
-        /// *** stop changes
-
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();

@@ -1,4 +1,4 @@
-//Basic player class
+package controller;//Basic player class
 
 class Player {
     private int health;
