@@ -121,8 +121,25 @@ public class Controller extends Application {
         });
 
         readyButton.setOnAction(e -> {
-            System.out.println(nameField.getText());
-            goToGameScreen();
+            String name = nameField.getText();
+            if (name == null || name.trim().isEmpty()) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.getDialogPane().setPrefSize(width, height);
+                a.setTitle("Error");
+                a.setContentText("Invalid Name");
+                a.showAndWait();
+                nameField.clear();
+            } else if (difficultyLevel == 0 || weaponChoice == null) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.getDialogPane().setPrefSize(width, height);
+                a.setTitle("Error");
+                a.setContentText("You Must Choose a Weapon and Difficulty Level");
+                a.showAndWait();
+            } else {
+                //Level levelOne = new Level(1, difficultyLevel);
+                //Launch Initial game screen
+                System.out.println("VALID!");
+            }
         });
 
         //TODO implement readyButton 
