@@ -31,9 +31,9 @@ public class ConfigurationScreen {
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: #ebd6b4";
     private static final String HOVERED_BUTTON_STYLE = "-fx-background-color: #cfbc9d";
 
-    private static final Font dogicaFont = Font.loadFont(
+    private static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 20);
-    private static final Font dogicaFontBold = Font.loadFont(
+    private static final Font DOGICA_FONT_BOLD = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixelbold.ttf", 23);
 
 
@@ -57,20 +57,21 @@ public class ConfigurationScreen {
     public Scene getScene() {
         //***** Enter Your Name ******
         //setting up "Enter Your Name" Label
-        enterYourName.setFont(dogicaFontBold);
+        enterYourName.setFont(DOGICA_FONT_BOLD);
         //setting up graphic for name field
-        ImageView nameTextFeildImgView = new ImageView(new Image("file:resources/pngs/nameTextBox.png"));
-        nameTextFeildImgView.setFitWidth(400);
-        nameTextFeildImgView.setPreserveRatio(true);
+        ImageView nameTextFieldImgView = new ImageView(
+                new Image("file:resources/pngs/nameTextBox.png"));
+        nameTextFieldImgView.setFitWidth(400);
+        nameTextFieldImgView.setPreserveRatio(true);
         //setting up the name field
-        nameField.setFont(dogicaFont);
+        nameField.setFont(DOGICA_FONT);
         nameField.setMaxWidth(380);
         nameField.setPrefHeight(50);
         nameField.setStyle("-fx-background-radius: 10 10 10 10");
         nameField.setStyle("-fx-background-color: #ebd6b4");
         //Stack pane to impose name field over the graphic
         StackPane nameFeildPane = new StackPane();
-        nameFeildPane.getChildren().addAll(nameTextFeildImgView, nameField);
+        nameFeildPane.getChildren().addAll(nameTextFieldImgView, nameField);
         //Vertical box to hold label and name feild
         VBox namePane = new VBox(15);
         namePane.setAlignment(Pos.CENTER);
@@ -79,19 +80,19 @@ public class ConfigurationScreen {
 
         //***** Choose Difficulty Level *****
         //setting up level difficulty label
-        chooseDifficultyLevel.setFont(dogicaFontBold);
+        chooseDifficultyLevel.setFont(DOGICA_FONT_BOLD);
         chooseDifficultyLevel.setAlignment(Pos.CENTER);
         chooseDifficultyLevel.setPrefWidth(500);
         //setting up easy difficulty button
-        easyButton.setFont(dogicaFont);
+        easyButton.setFont(DOGICA_FONT);
         easyButton.setStyle(IDLE_BUTTON_STYLE);
         setHoveredButtonStyle(easyButton);
         //setting up medium difficulty button
-        mediumButton.setFont(dogicaFont);
+        mediumButton.setFont(DOGICA_FONT);
         mediumButton.setStyle(IDLE_BUTTON_STYLE);
         setHoveredButtonStyle(mediumButton);
         //setting up hard difficulty label
-        hardButton.setFont(dogicaFont);
+        hardButton.setFont(DOGICA_FONT);
         hardButton.setStyle(IDLE_BUTTON_STYLE);
         setHoveredButtonStyle(hardButton);
         //Horizontal box to hold the level difficulty buttons
@@ -100,29 +101,31 @@ public class ConfigurationScreen {
         levelButtonBox.setAlignment(Pos.CENTER);
         //Vertical box to hold the level difficulty label and buttons
         VBox levelBox = new VBox(25);
-//        levelBox.setPadding(new Insets(10,0,10,0));
         levelBox.setAlignment(Pos.CENTER);
         levelBox.getChildren().addAll(chooseDifficultyLevel, levelButtonBox);
 
         //***** Select Your Weapon *****
         //setting up weapon title
-        selectYourWeapon.setFont(dogicaFontBold);
+        selectYourWeapon.setFont(DOGICA_FONT_BOLD);
         //setting up wipeCrossbow weapon button
-        ImageView wipeCrossbow = new ImageView(new Image("file:resources/pngs/Grocery Quest Screens-08.png"));
+        ImageView wipeCrossbow = new ImageView(
+                new Image("file:resources/pngs/Grocery Quest Screens-08.png"));
         wipeCrossbow.setFitWidth(140);
         wipeCrossbow.setPreserveRatio(true);
         wipeCrossbowButton.setGraphic(wipeCrossbow);
         wipeCrossbowButton.setStyle(IDLE_BUTTON_STYLE);
         setHoveredButtonStyle(wipeCrossbowButton);
         //setting up disinfectantSpray weapon button
-        ImageView disinfectantSpray = new ImageView(new Image("file:resources/pngs/Grocery Quest Screens-10.png"));
+        ImageView disinfectantSpray = new ImageView(
+                new Image("file:resources/pngs/Grocery Quest Screens-10.png"));
         disinfectantSpray.setFitWidth(140);
         disinfectantSpray.setPreserveRatio(true);
         disinfectantSprayButton.setGraphic(disinfectantSpray);
         disinfectantSprayButton.setStyle(IDLE_BUTTON_STYLE);
         setHoveredButtonStyle(disinfectantSprayButton);
         //setting up thermometerSword weapon button
-        ImageView thermometerSword = new ImageView(new Image("file:resources/pngs/Grocery Quest Screens-11.png"));
+        ImageView thermometerSword = new ImageView(
+                new Image("file:resources/pngs/Grocery Quest Screens-11.png"));
         thermometerSword.setFitWidth(140);
         thermometerSword.setPreserveRatio(true);
         thermometerSwordButton.setGraphic(thermometerSword);
@@ -131,7 +134,10 @@ public class ConfigurationScreen {
         //Horizontal box pane to hold the weapon buttons
         HBox weaponListBox = new HBox(15);
         weaponListBox.setAlignment(Pos.CENTER);
-        weaponListBox.getChildren().addAll(wipeCrossbowButton, disinfectantSprayButton, thermometerSwordButton);
+        weaponListBox.getChildren().addAll(
+                wipeCrossbowButton,
+                disinfectantSprayButton,
+                thermometerSwordButton);
         weaponListBox.setStyle(IDLE_BUTTON_STYLE);
         //Vertical box pane to hold the weapon title and buttons
         VBox weaponBox = new VBox(18);
@@ -139,7 +145,7 @@ public class ConfigurationScreen {
         weaponBox.getChildren().addAll(selectYourWeapon, weaponListBox);
 
         //READY Button below Weapon Choice
-        readyButton.setFont(dogicaFontBold);
+        readyButton.setFont(DOGICA_FONT_BOLD);
         readyButton.setStyle(IDLE_BUTTON_STYLE);
         setHoveredButtonStyle(readyButton);
 
@@ -147,36 +153,52 @@ public class ConfigurationScreen {
         readyHBox.setAlignment(Pos.CENTER);
         readyHBox.getChildren().add(readyButton);
 
-        //base holds all the other panes and goes into the cofig scene
+        //base holds all the other panes and goes into the config scene
         VBox base = new VBox(25);
-        base.setPadding(new Insets(50,0,50,0));
+        base.setPadding(new Insets(50, 0, 50, 0));
         base.setAlignment(Pos.CENTER);
 
 
 
-        base.getChildren().addAll(namePane,levelBox,weaponBox, readyHBox);
+        base.getChildren().addAll(namePane, levelBox, weaponBox, readyHBox);
         base.setStyle("-fx-background-color: #ebd6b4");
 
-        Scene configurationScene = new Scene(base, width,height);
+        Scene configurationScene = new Scene(base, width, height);
 
         return configurationScene;
     }
 
-    public Button getEasyButton() { return easyButton; }
+    public Button getEasyButton() {
+        return easyButton;
+    }
 
-    public Button getMediumButton() { return mediumButton; }
+    public Button getMediumButton() {
+        return mediumButton;
+    }
 
-    public Button getHardButton() { return hardButton; }
+    public Button getHardButton() {
+        return hardButton;
+    }
 
-    public Button getWipeCrossbowButton() { return wipeCrossbowButton; }
+    public Button getWipeCrossbowButton() {
+        return wipeCrossbowButton;
+    }
 
-    public Button getDisinfectantSprayButton() { return disinfectantSprayButton; }
+    public Button getDisinfectantSprayButton() {
+        return disinfectantSprayButton;
+    }
 
-    public Button getThermometerSwordButton() { return thermometerSwordButton; }
+    public Button getThermometerSwordButton() {
+        return thermometerSwordButton;
+    }
 
-    public Button getReadyButton() { return readyButton; }
+    public Button getReadyButton() {
+        return readyButton;
+    }
 
-    public TextField getNameField() { return nameField; }
+    public TextField getNameField() {
+        return nameField;
+    }
 
     private void setHoveredButtonStyle(Button button) {
         button.setOnMouseEntered(e -> button.setStyle(HOVERED_BUTTON_STYLE));

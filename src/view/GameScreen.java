@@ -12,7 +12,7 @@ public class GameScreen {
     private int width;
     private int height;
 
-    private static final Font dogicaFont = Font.loadFont(
+    private static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 20);
 
     public GameScreen(int width, int height) {
@@ -23,7 +23,7 @@ public class GameScreen {
 
     public Scene getScene() {
         Label practice = new Label("This is where the inital game screen goes :)");
-        practice.setFont(dogicaFont);
+        practice.setFont(DOGICA_FONT);
         practice.setWrapText(true);
         VBox base = new VBox(10);
         base.getChildren().addAll(practice);

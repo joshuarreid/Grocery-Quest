@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -16,11 +15,13 @@ public class StartScreen {
     private int height;
     private Button startButton;
 
-    private static final String IDLE_BUTTON_STYLE = "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
-    private static final String HOVERED_BUTTON_STYLE = "-fx-background-radius: 20; -fx-background-color: #91bfa1";
+    private static final String IDLE_BUTTON_STYLE =
+            "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
+    private static final String HOVERED_BUTTON_STYLE =
+            "-fx-background-radius: 20; -fx-background-color: #91bfa1";
 
 
-    private StartScreen() {}
+    private StartScreen() { }
     public StartScreen(int width, int height) {
         this.width = width;
         this.height = height;
@@ -32,11 +33,13 @@ public class StartScreen {
         center.setAlignment(Pos.CENTER);
         pane.setStyle("-fx-background-color: #a0d3b2");
 
-        ImageView title = new ImageView(new Image("file:resources/pngs/Grocery Quest Screens-04.png"));
+        ImageView title = new ImageView(
+                new Image("file:resources/pngs/Grocery Quest Screens-04.png"));
         title.setFitWidth(450);
         title.setPreserveRatio(true);
 
-        ImageView start = new ImageView(new Image("file:resources/pngs/Grocery Quest Screens-03.png"));
+        ImageView start = new ImageView(
+                new Image("file:resources/pngs/Grocery Quest Screens-03.png"));
         start.setFitWidth(190);
         start.setPreserveRatio(true);
 
@@ -52,9 +55,9 @@ public class StartScreen {
 
         //scene
         pane.setCenter(center);
-        center.getChildren().addAll(title, startButton, inst );
+        center.getChildren().addAll(title, startButton, inst);
         center.setSpacing(20);
-        Scene welcomeScene = new Scene(pane, width,height);
+        Scene welcomeScene = new Scene(pane, width, height);
 
         return welcomeScene;
     }
