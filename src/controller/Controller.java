@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+
 import model.GameModel;
 import view.StartScreen;
 import view.ConfigurationScreen;
@@ -32,7 +34,6 @@ public class Controller extends Application {
         StartScreen screen = new StartScreen(width, height);
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> goToConfigurationScreen());
-
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -89,6 +90,7 @@ public class Controller extends Application {
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
+
     }
 
 

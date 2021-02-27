@@ -28,21 +28,21 @@ public class ConfigurationScreen {
     private Label selectYourWeapon;
 
 
-    private ConfigurationScreen() {}
     public ConfigurationScreen(int width, int height) {
         this.width = width;
         this.height = height;
-        easyButton = new Button("easy");
-        mediumButton = new Button("medium");
-        hardButton = new Button("hard");
-        wipeCrossbowButton = new Button();
-        disinfectantSprayButton = new Button();
-        thermometerSwordButton = new Button();
-        nameField = new TextField();
-        enterYourName = new Label("Enter Your Name");
-        chooseDifficultyLevel = new Label("Choose Difficulty Level");
-        selectYourWeapon = new Label("Select Your Weapon");
+        this.easyButton = new Button("easy");
+        this.mediumButton = new Button("medium");
+        this.hardButton = new Button("hard");
+        this.wipeCrossbowButton = new Button();
+        this.disinfectantSprayButton = new Button();
+        this.thermometerSwordButton = new Button();
+        this.nameField = new TextField();
+        this.enterYourName = new Label("Enter Your Name");
+        this.chooseDifficultyLevel = new Label("Choose Difficulty Level");
+        this.selectYourWeapon = new Label("Select Your Weapon");
     }
+
     public Scene getScene() {
         Font dogicaFont = Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20);
         Font dogicaFontBold = Font.loadFont( "file:resources/dogica/TTF/dogicapixelbold.ttf", 23);
@@ -153,7 +153,4 @@ public class ConfigurationScreen {
 
     public TextField getNameField() { return nameField;}
 
-//    public void updateLabel(int state) {
-//        label.setText(Integer.toString(state));
-//    }
 }
