@@ -1,9 +1,12 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
@@ -70,9 +73,30 @@ public class Controller extends Application {
             weaponChoice = "wipe crossbow";
         });
 
+            nameField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent event) {
+                    boolean validName = false;
+                    while (validName == false) {
+                        if (event.getCode() == KeyCode.ENTER) {
+                            String name = nameField.getText();
+                            if (name == null || name.trim().isEmpty()) {
+                                nameField.setPromptText("Invalid Name");
+                            } else {
+                                validName = true;
+                            }
+                        }
+                    }
+                    System.out.print("launch initial game screen");
+                }
+            });
+
+
+
 
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
+        mainWindow.show();
 
     }
 
