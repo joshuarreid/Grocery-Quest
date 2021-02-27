@@ -21,6 +21,7 @@ public class ConfigurationScreen {
     private Button thermometerSword;
     private Button disinfectantSpray;
     private Button wipeCrossbow;
+    private VBox base;
 
 
     public ConfigurationScreen(int width, int height) {
