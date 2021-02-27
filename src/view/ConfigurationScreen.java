@@ -22,10 +22,12 @@ public class ConfigurationScreen {
     private Button wipeCrossbowButton;
     private Button disinfectantSprayButton;
     private Button thermometerSwordButton;
+    private Button readyButton;
     private TextField nameField;
     private Label enterYourName;
     private Label chooseDifficultyLevel;
     private Label selectYourWeapon;
+
 
 
     public ConfigurationScreen(int width, int height) {
@@ -123,11 +125,22 @@ public class ConfigurationScreen {
         weaponBox.setAlignment(Pos.CENTER);
         weaponBox.getChildren().addAll(selectYourWeapon, weaponListBox);
 
+        //READY Button below Weapon Choice
+        readyButton = new Button("READY");
+        readyButton.setFont(dogicaFontBold);
+        readyButton.setStyle("-fx-background-color: #ebd6b4");
+
+        HBox readyHBox = new HBox(15);
+        readyHBox.setAlignment(Pos.CENTER);
+        readyHBox.getChildren().add(readyButton);
+
         //base holds all the other panes and goes into the cofig scene
         VBox base = new VBox(25);
         base.setPadding(new Insets(50,0,50,0));
 
-        base.getChildren().addAll(namePane,levelBox,weaponBox);
+
+
+        base.getChildren().addAll(namePane,levelBox,weaponBox, readyHBox);
         base.setStyle("-fx-background-color: #ebd6b4");
 
         Scene configurationScene = new Scene(base, width,height);
@@ -151,6 +164,8 @@ public class ConfigurationScreen {
 
     public Button getThermometerSwordButton() { return thermometerSwordButton; }
 
-    public TextField getNameField() { return nameField;}
+    public Button getReadyButton() { return readyButton; }
+
+    public TextField getNameField() { return nameField; }
 
 }
