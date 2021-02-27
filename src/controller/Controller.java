@@ -52,6 +52,7 @@ public class Controller extends Application {
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> {
             gameModel.setState("Configuration Screen");
+//            System.out.print(gameModel.getState());
             goToConfigurationScreen();
         });
         Scene scene = screen.getScene();
@@ -150,9 +151,9 @@ public class Controller extends Application {
                     a.showAndWait();
                     gameModel.setState("Configuration Screen");
                 } else {
-                    //Level levelOne = new Level(1, difficultyLevel);
-                    //Player player = new Player(100, 0, name, weaponChoice)
-                    //goToGameScreen()
+                    Level levelOne = new Level(1, difficultyLevel);
+                    Player player = new Player(100, 0, name, weaponChoice);
+                    goToGameScreen();
                     System.out.println("VALID!"); //Delete after previous lines implemented
                 }
             }
@@ -184,9 +185,9 @@ public class Controller extends Application {
                 a.showAndWait();
                 gameModel.setState("Configuration Screen");
             } else {
-                //Level levelOne = new Level(1, difficultyLevel);
-                //Player player = new Player(100, 0, name, weaponChoice)
-                //goToGameScreen()
+                Level levelOne = new Level(1, difficultyLevel);
+                Player player = new Player(100, 0, name, weaponChoice);
+                goToGameScreen();
                 System.out.println("VALID!"); //Delete after previous lines implemented
             }
         });
@@ -211,6 +212,7 @@ public class Controller extends Application {
     public String getState() {
         return gameModel.getState();
     }
+
 
 
     public static void main(String[] args) {

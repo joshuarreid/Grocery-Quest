@@ -28,7 +28,7 @@ public class GameScreen {
         VBox base = new VBox(10);
         base.getChildren().addAll(practice);
         base.setAlignment(Pos.CENTER);
-        Scene gameScene = new Scene(base, width,height);
+        Scene gameScene = new Scene(base, width, height);
         return gameScene;
     }
 }

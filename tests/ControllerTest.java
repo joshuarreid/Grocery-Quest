@@ -1,22 +1,26 @@
 import controller.Controller;
 import javafx.stage.Stage;
-import org.junit.Assert;
-import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.testfx.api.FxAssert.verifyThat;
 
+import org.testfx.framework.junit5.ApplicationTest;
+import org.junit.jupiter.api.Test;
+import org.testfx.matcher.base.NodeMatchers;
 
 public class ControllerTest extends ApplicationTest {
-    Controller controller;
+    private Controller controller;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         controller = new Controller();
         controller.start(primaryStage);
     }
     @Test
     public void testPlay() {
+        System.out.println(controller.getState());
         clickOn("#startButton");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        System.out.println(controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
     }
 
     @Test
@@ -25,7 +29,7 @@ public class ControllerTest extends ApplicationTest {
      */
     public void testConfigScreen() {
         clickOn("#startButton");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
         clickOn("#easyButton");
         clickOn("#mediumButton");
         clickOn("#hardButton");
@@ -43,13 +47,13 @@ public class ControllerTest extends ApplicationTest {
      */
     public void testConfigScreen1() {
         clickOn("#startButton");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
         clickOn("#easyButton");
         clickOn("#thermometerSwordButton");
         clickOn("#readyButton");
-        Assert.assertEquals("Error Screen", controller.getState());
+        assertEquals("Error Screen", controller.getState());
         clickOn("OK");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
     }
 
     @Test
@@ -58,13 +62,13 @@ public class ControllerTest extends ApplicationTest {
      */
     public void testConfigScreen2() {
         clickOn("#startButton");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
         clickOn("#nameField").write("Josh");
         clickOn("#easyButton");
         clickOn("#readyButton");
-        Assert.assertEquals("Error Screen", controller.getState());
+        assertEquals("Error Screen", controller.getState());
         clickOn("OK");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
     }
 
     @Test
@@ -73,13 +77,13 @@ public class ControllerTest extends ApplicationTest {
      */
     public void testConfigScreen3() {
         clickOn("#startButton");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
         clickOn("#nameField").write("Josh");
         clickOn("#thermometerSwordButton");
         clickOn("#readyButton");
-        Assert.assertEquals("Error Screen", controller.getState());
+        assertEquals("Error Screen", controller.getState());
         clickOn("OK");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
     }
 
     @Test
@@ -88,14 +92,14 @@ public class ControllerTest extends ApplicationTest {
      */
     public void testConfigScreen4() {
         clickOn("#startButton");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
         clickOn("#nameField").write("      ");
         clickOn("#thermometerSwordButton");
         clickOn("#easyButton");
         clickOn("#readyButton");
-        Assert.assertEquals("Error Screen", controller.getState());
+        assertEquals("Error Screen", controller.getState());
         clickOn("OK");
-        Assert.assertEquals("Configuration Screen", controller.getState());
+        assertEquals("Configuration Screen", controller.getState());
     }
 
 }
