@@ -202,8 +202,8 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
-        GameScreen screen = new GameScreen(width, height, difficultyLevel, weaponChoice);
         gameModel.setState("Game Screen");
+        GameScreen screen = new GameScreen(width, height, difficultyLevel, weaponChoice);
         
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
