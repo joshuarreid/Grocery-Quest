@@ -21,7 +21,7 @@ import view.ConfigurationScreen;
  * controls of each scene
  *
  * mainWindow - the main window that launches each scene
- * gameModel - ??
+ * gameModel - GameModel object responsible for keeping current state of game
  * difficultyLevel - the difficulty level the player chooses
  * weaponChoice - the weapon the player chooses
  * width - the width of the Stage/mainWindow
