@@ -52,7 +52,7 @@ public class Controller extends Application {
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> {
             gameModel.setState("Configuration Screen");
-//            System.out.print(gameModel.getState());
+            System.out.print(gameModel.getState());
             goToConfigurationScreen();
         });
         Scene scene = screen.getScene();
@@ -203,7 +203,7 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
-        GameScreen screen = new GameScreen(width, height);
+        GameScreen screen = new GameScreen(width, height, difficultyLevel, weaponChoice);
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
