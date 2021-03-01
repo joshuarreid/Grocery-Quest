@@ -1,11 +1,9 @@
 import controller.Controller;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testfx.api.FxAssert.verifyThat;
-
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
-import org.testfx.matcher.base.NodeMatchers;
+
 
 public class ControllerTest extends ApplicationTest {
     private Controller controller;
@@ -17,9 +15,7 @@ public class ControllerTest extends ApplicationTest {
     }
     @Test
     public void testPlay() {
-        System.out.println(controller.getState());
         clickOn("#startButton");
-        System.out.println(controller.getState());
         assertEquals("Configuration Screen", controller.getState());
     }
 
@@ -28,6 +24,7 @@ public class ControllerTest extends ApplicationTest {
      * Testing all buttons and the TextField
      */
     public void testConfigScreen() {
+        assertEquals("Start Screen", controller.getState());
         clickOn("#startButton");
         assertEquals("Configuration Screen", controller.getState());
         clickOn("#easyButton");

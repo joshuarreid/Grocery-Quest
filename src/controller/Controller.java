@@ -21,7 +21,7 @@ import view.ConfigurationScreen;
  * controls of each scene
  *
  * mainWindow - the main window that launches each scene
- * gameModel - ??
+ * gameModel - GameModel object responsible for keeping current state of game
  * difficultyLevel - the difficulty level the player chooses
  * weaponChoice - the weapon the player chooses
  * width - the width of the Stage/mainWindow
@@ -48,11 +48,10 @@ public class Controller extends Application {
      * the Start Screen
      */
     private void initStartScreen() {
+        gameModel.setState("Start Screen");
         StartScreen screen = new StartScreen(width, height);
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> {
-            gameModel.setState("Configuration Screen");
-            System.out.print(gameModel.getState());
             goToConfigurationScreen();
         });
         Scene scene = screen.getScene();
@@ -65,8 +64,8 @@ public class Controller extends Application {
      * the Player Configuration Screen
      */
     private void goToConfigurationScreen() {
+        gameModel.setState("Configuration Screen");
         ConfigurationScreen screen = new ConfigurationScreen(width, height);
-
         Button easyButton = screen.getEasyButton();
         Button mediumButton = screen.getMediumButton();
         Button hardButton = screen.getHardButton();
@@ -204,6 +203,8 @@ public class Controller extends Application {
      */
     private void goToGameScreen() {
         GameScreen screen = new GameScreen(width, height, difficultyLevel, weaponChoice);
+        gameModel.setState("Game Screen");
+        
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
