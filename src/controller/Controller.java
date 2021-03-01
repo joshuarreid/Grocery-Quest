@@ -48,10 +48,10 @@ public class Controller extends Application {
      * the Start Screen
      */
     private void initStartScreen() {
+        gameModel.setState("Start Screen");
         StartScreen screen = new StartScreen(width, height);
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> {
-            gameModel.setState("Configuration Screen");
             goToConfigurationScreen();
         });
         Scene scene = screen.getScene();
@@ -64,8 +64,8 @@ public class Controller extends Application {
      * the Player Configuration Screen
      */
     private void goToConfigurationScreen() {
+        gameModel.setState("Configuration Screen");
         ConfigurationScreen screen = new ConfigurationScreen(width, height);
-
         Button easyButton = screen.getEasyButton();
         Button mediumButton = screen.getMediumButton();
         Button hardButton = screen.getHardButton();
@@ -202,6 +202,7 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
+        gameModel.setState("Game Screen");
         GameScreen screen = new GameScreen(width, height);
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
