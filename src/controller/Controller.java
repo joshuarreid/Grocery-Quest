@@ -52,7 +52,6 @@ public class Controller extends Application {
         Button startButton = screen.getStartButton();
         startButton.setOnAction(e -> {
             gameModel.setState("Configuration Screen");
-//            System.out.print(gameModel.getState());
             goToConfigurationScreen();
         });
         Scene scene = screen.getScene();

@@ -17,9 +17,7 @@ public class ControllerTest extends ApplicationTest {
     }
     @Test
     public void testPlay() {
-        System.out.println(controller.getState());
         clickOn("#startButton");
-        System.out.println(controller.getState());
         assertEquals("Configuration Screen", controller.getState());
     }
 
