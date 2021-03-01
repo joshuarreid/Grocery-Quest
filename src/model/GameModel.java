@@ -1,12 +1,14 @@
 package model;
 
 public class GameModel {
-    private int state = 0;
-    public void decrementState() {
-        state = state - 1;
+    private String state;
+    public GameModel() {
+        this.state = "None";
     }
-    public void incrementState() {
-        state = state + 1;
+    public void setState(String state) {
+        this.state = state;
     }
-    public int getState() { return state; }
+    public String getState() {
+        return state;
+    }
 }

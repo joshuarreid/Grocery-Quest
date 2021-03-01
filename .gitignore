@@ -10,9 +10,17 @@ build/
 local.properties
 *.iml
 
+# compiling
+*.class
+/out/
+
 # IDE
 .vscode/
 .idea/
 
 # API keys and secrets
 .env
+
+checkstyle-*.jar
+*.xml
+
