@@ -35,7 +35,6 @@ public class ControllerTest extends ApplicationTest {
         clickOn("#wipeCrossbowButton");
         clickOn("#nameField").write("Testing TextField");
         clickOn("#readyButton");
-
     }
 
     @Test

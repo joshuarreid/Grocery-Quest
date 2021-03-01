@@ -190,7 +190,6 @@ public class Controller extends Application {
                 System.out.println("VALID!"); //Delete after previous lines implemented
             }
         });
-
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
