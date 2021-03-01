@@ -14,7 +14,11 @@ public class GameScreen {
     private int height;
     private int difficultyLevel;
     private String weaponChoice;
-    private ImageView coinBar, healthBar, mainPerson, door1, tileset;
+    private ImageView coinBar;
+    private ImageView healthBar;
+    private ImageView mainPerson;
+    private ImageView door1;
+    private ImageView tileset;
     private Button exitButton;
 
 
@@ -41,34 +45,34 @@ public class GameScreen {
 
         //Sets the coin and health bars
         switch (difficultyLevel) {
-            case 1: //Easy: 4(full) hearts + 4 magic coins
-                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
-                coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
-                break;
-            case 2: //Medium: 2 hearts + 2 magic coins
-                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
-                coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
-                break;
-            case 3: //Hard: 1 heart + 1 magic coin
-                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
-                coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
-                break;
-            default:
+        case 1: //Easy: 4(full) hearts + 4 magic coins
+            healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
+            coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
+            break;
+        case 2: //Medium: 2 hearts + 2 magic coins
+            healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
+            coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
+            break;
+        case 3: //Hard: 1 heart + 1 magic coin
+            healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
+            coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
+            break;
+        default:
         }
 
         //Sets the main character imageview
         switch (weaponChoice) {
-            case "wipe crossbow":
-                mainPerson = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
-                break;
-            case "disinfectant spray":
-                mainPerson = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
-                break;
-            case "thermometer sword":
-                mainPerson = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
-                break;
-            default:
-                break;
+        case "wipe crossbow":
+            mainPerson = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
+            break;
+        case "disinfectant spray":
+            mainPerson = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
+            break;
+        case "thermometer sword":
+            mainPerson = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
+            break;
+        default:
+            break;
         }
 
         VBox coinHealthBox = new VBox(5);
