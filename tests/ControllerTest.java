@@ -24,6 +24,7 @@ public class ControllerTest extends ApplicationTest {
      * Testing all buttons and the TextField
      */
     public void testConfigScreen() {
+        assertEquals("Start Screen", controller.getState());
         clickOn("#startButton");
         assertEquals("Configuration Screen", controller.getState());
         clickOn("#easyButton");
