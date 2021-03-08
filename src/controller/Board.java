@@ -18,8 +18,10 @@ import javafx.scene.layout.RowConstraints;
  * stands or moves on
  */
 public class Board {
-    private final int maxRow, maxColumn;
-    private boolean win = false, blocked = false; //is win variable even necessary?
+    private final int maxRow;
+    private final int maxColumn;
+    private boolean win = false; //is win variable even necessary?
+    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
 
@@ -46,12 +48,10 @@ public class Board {
         gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
             RowConstraints rowConst = new RowConstraints(33);
-            //rowConst.setPercentHeight(600.0 / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
             ColumnConstraints colConst = new ColumnConstraints(33);
-            //colConst.setPercentWidth(600.0 / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
         hiddenBoard = new String[maxRow][maxColumn];
@@ -99,12 +99,12 @@ public class Board {
         }
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             gridPane.add(thing, firstCol, firstRow);
-            if (blockPlayer) {
+            if (blockPlayer) { //If object should block player
                 hiddenBoard[firstRow][firstCol] = thingName;
             }
         } else { //If thing occupies more than one spot
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
-            if (blockPlayer) {
+            if (blockPlayer) { //If object should block player
                 for (int i = firstRow, j = firstCol; i < firstCol + rowSpan && j < firstCol + colSpan; i++, j++) {
                     hiddenBoard[firstRow][firstCol] = thingName;
                 }
@@ -116,8 +116,7 @@ public class Board {
     //public void removeObject() {}
 
     /**
-     * Gets the gridPne to be used in the initial game
-     * screen and level classes.
+     * Gets the gridPane to be used in the initial game screen and level classes.
      *
      * @return the gridPane
      */
