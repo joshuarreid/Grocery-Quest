@@ -83,24 +83,31 @@ public class Board {
      * also bigger objects that occupy more than one row
      * and/or column.
      *
-     * @param thing The object that is being placed
+     * @param thing The object that is being placed in the gridPane
+     * @param thingName The object being placed in the hidden game board
+     * @param blockPlayer If the object should block the player
      * @param firstRow Starting vertical location
      * @param rowSpan The number of rows the node should span
      * @param firstCol Starting horizontal location
      * @param colSpan The number of columns the node should span
      */
-    public void addObject(Node thing, String thingName, int firstRow, int rowSpan, int firstCol, int colSpan) {
+    public void addObject(Node thing, String thingName, boolean blockPlayer,
+                          int firstRow, int rowSpan, int firstCol, int colSpan) {
         if (hiddenBoard[firstRow][firstCol] != null) { //If object already exists at specified location
             System.out.println("There's already an object here."); //Other option: Throw an exception?
             return;
         }
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             gridPane.add(thing, firstCol, firstRow);
-            hiddenBoard[firstRow][firstCol] = thingName;
+            if (blockPlayer) {
+                hiddenBoard[firstRow][firstCol] = thingName;
+            }
         } else { //If thing occupies more than one spot
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
-            for (int i = firstRow, j = firstCol; i < firstCol + rowSpan && j < firstCol + colSpan; i++, j++ ) {
-                hiddenBoard[firstRow][firstCol] = thingName;
+            if (blockPlayer) {
+                for (int i = firstRow, j = firstCol; i < firstCol + rowSpan && j < firstCol + colSpan; i++, j++) {
+                    hiddenBoard[firstRow][firstCol] = thingName;
+                }
             }
         }
     }
