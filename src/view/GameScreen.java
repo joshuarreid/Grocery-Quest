@@ -1,15 +1,19 @@
 package view;
 
 import controller.Board;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.control.Label;
+
+import java.awt.*;
 
 public class GameScreen {
     private int width;
@@ -21,11 +25,13 @@ public class GameScreen {
     private ImageView mainPerson;
     private ImageView cart;
     private ImageView flower;
+    private ImageView leftTextBox;
+    private ImageView rightTextBox;
     private Board board;
 
 
     private static final Font DOGICA_FONT = Font.loadFont(
-            "file:resources/dogica/TTF/dogicapixel.ttf", 20);
+            "file:resources/dogica/TTF/dogicapixel.ttf", 15);
 
     /**
      * Initial Game Screen Constructor
@@ -53,9 +59,11 @@ public class GameScreen {
 
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
-        gridPane.setBackground(new Background(new BackgroundImage(
-                new Image("file:resources/pngs/blank_tileset.png"), null, null,
-                null, null)));
+        //gridPane.setBackground(new Background(new BackgroundImage(
+        //        new Image("file:resources/pngs/TileGrid.png"), null, null,
+        //        null, null)));
+        //ImageView borderExitImage = new ImageView(new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
+        gridPane.setBackground(new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
 
         //Load in all entities
         loadCoinHealthBar();
@@ -139,9 +147,9 @@ public class GameScreen {
                     continue;
                 }
                 //Replace with actual image of cart
-                cart = new ImageView(new Image("file:resources/pngs/Tissues.png"));
-                cart.setFitWidth(20);
-                cart.setFitHeight(20);
+                cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
+                cart.setFitWidth(30);
+                cart.setFitHeight(30);
                 if (j <= 6 || j >= 11) {
                     board.addObject(cart, "cart", false, i, 0, j, 0);
                 }
@@ -154,11 +162,36 @@ public class GameScreen {
                 continue;
             }
             //Replace with actual image of flowers
-            flower = new ImageView(new Image("file:resources/pngs/Tissues.png"));
-            flower.setFitWidth(20);
-            flower.setFitHeight(20);
+            flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
+            flower.setFitWidth(30);
+            flower.setFitHeight(45);
             board.addObject(flower, "flower", false, i, 0, j, 0);
         }
 
+        //Textboxes using a StackPane
+        leftTextBox = new ImageView(new Image("file:resources/pngs/EmptyTextBox.png"));
+        leftTextBox.setFitWidth(198);
+        leftTextBox.setFitHeight(165);
+        Label leftLabel = new Label("go to weaponry \n\n\nto swap \n\n\nweapons");
+        leftLabel.setFont(DOGICA_FONT);
+        leftLabel.setAlignment(Pos.CENTER);
+        leftLabel.setPrefWidth(190);
+        leftLabel.setPrefHeight(160);
+        StackPane leftStackPane = new StackPane();
+        leftStackPane.getChildren().addAll(leftTextBox, leftLabel);
+
+        rightTextBox = new ImageView(new Image("file:resources/pngs/EmptyTextBox.png"));
+        rightTextBox.setFitWidth(198);
+        rightTextBox.setFitHeight(165);
+        Label rightLabel = new Label("go to training \n\n\nto learn \n\n\ncontrols");
+        rightLabel.setFont(DOGICA_FONT);
+        rightLabel.setAlignment(Pos.CENTER);
+        rightLabel.setPrefWidth(190);
+        rightLabel.setPrefHeight(160);
+        StackPane rightStackPane = new StackPane();
+        rightStackPane.getChildren().addAll(rightTextBox, rightLabel);
+
+        board.addObject(leftStackPane, "text box", true, 1, 5, 1, 6);
+        board.addObject(rightStackPane, "text box", true, 1, 5, 11, 6);
     }
 }
