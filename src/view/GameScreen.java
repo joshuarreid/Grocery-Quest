@@ -33,11 +33,13 @@ public class GameScreen {
      * @param width width of window
      * @param height height of window
      * @param difficultyLevel level of difficulty
+     * @param weaponChoice the weapon the player has
      */
-    public GameScreen(int width, int height, int difficultyLevel) {
+    public GameScreen(int width, int height, int difficultyLevel, String weaponChoice) {
         this.width = width;
         this.height = height;
         this.difficultyLevel = difficultyLevel;
+        this.weaponChoice = weaponChoice;
     }
 
     /**
