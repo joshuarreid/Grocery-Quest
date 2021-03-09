@@ -209,6 +209,26 @@ public class Controller extends Application {
         mainWindow.show();
     }
 
+        /**
+     * This method launches and provides event handling for
+     * the Win Screen
+     */
+    private void initWinScreen() {
+        gameModel.setState("Win Screen");
+        EndScreen screen = new EndScreen(width, height);
+        Button replayButton = screen.getReplayButton();
+        replayButton.setOnAction(e -> {
+            initStartScreen();
+        });
+        Button exitButton = screen.getExitButton();
+        exitButton.setOnAction(e -> {
+            System.exit(0);
+        });
+        Scene scene = screen.getScene();
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+    
     public String getState() {
         return gameModel.getState();
     }
