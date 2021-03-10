@@ -73,7 +73,7 @@ public class Board {
         if (hiddenBoard[row][column] != null && !hiddenBoard[row][column].equals("door")) {
             return true;
         }
-        return true;
+        return false;
     }
 
     /**
