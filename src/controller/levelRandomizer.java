@@ -1,13 +1,15 @@
 package controller;
+import javafx.scene.image.ImageView;
+
 import java.util.*;
 
 /**
- * Mock class for developing level randomizer methods
+ * Class for level randomizer methods
  *
- * @param <T> the object holding the level layout
+ *
  */
-public class levelRandomizer<T> {
-    private Stack<T> layouts;
+public class levelRandomizer {
+    private Stack<ImageView> layouts;
 
     /**
      * Constructor Method
@@ -17,12 +19,12 @@ public class levelRandomizer<T> {
      *
      * @param layouts
      */
-    public levelRandomizer(List<T> layouts) {
+    public levelRandomizer(List<ImageView> layouts) {
         //Randomize the level layouts list
         Collections.shuffle(layouts);
 
         //Add the level layouts to the stack
-        for (T item: layouts) {
+        for (ImageView item: layouts) {
             this.layouts.add(item);
         }
     }
@@ -33,7 +35,7 @@ public class levelRandomizer<T> {
      *
      * @return
      */
-    public T getLayout() {
+    public ImageView getLayout() {
         if (layouts.size() == 0) {
             throw new NoSuchElementException("Stack is empty");
         }
