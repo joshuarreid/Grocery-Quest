@@ -22,7 +22,7 @@ public class GameScreen {
     private String weaponChoice;
     private ImageView coinBar;
     private ImageView healthBar;
-    private ImageView mainPerson;
+    private Player mainPerson;
     private ImageView cart;
     private ImageView flower;
     private ImageView leftTextBox;
@@ -117,21 +117,22 @@ public class GameScreen {
      */
     public void loadMainCharacter() {
         //Sets the main character imageview
-        switch (weaponChoice) {
-        case "wipe crossbow":
-            mainPerson = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
-            break;
-        case "disinfectant spray":
-            mainPerson = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
-            break;
-        case "thermometer sword":
-            mainPerson = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
-            break;
-        default:
-            break;
-        }
-        mainPerson.setFitWidth(60);
-        mainPerson.setFitHeight(60);
+//        switch (weaponChoice) {
+//        case "wipe crossbow":
+//            mainPerson = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
+//            break;
+//        case "disinfectant spray":
+//            mainPerson = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
+//            break;
+//        case "thermometer sword":
+//            mainPerson = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
+//            break;
+//        default:
+//            break;
+//        }
+//        mainPerson.setFitWidth(60);
+//        mainPerson.setFitHeight(60);
+        mainPerson = new Player();
         board.addObject(mainPerson, "mainPerson", false, 15, 0, 8, 0);
     }
 

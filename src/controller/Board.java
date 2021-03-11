@@ -91,11 +91,11 @@ public class Board {
      * @param firstCol Starting horizontal location
      * @param colSpan The number of columns the node should span
      */
-    public void addObject(Node thing, String thingName, boolean blockPlayer,
+    public boolean addObject(Node thing, String thingName, boolean blockPlayer,
                           int firstRow, int rowSpan, int firstCol, int colSpan) {
         if (hiddenBoard[firstRow][firstCol] != null) { //If object already exists at specified location
             System.out.println("There's already an object here."); //Other option: Throw an exception?
-            return;
+            return false;
         }
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             gridPane.add(thing, firstCol, firstRow);
@@ -110,6 +110,7 @@ public class Board {
                 }
             }
         }
+        return true;
     }
 
     //Potential method?? If player has ability to break through aisles or something

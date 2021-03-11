@@ -1,5 +1,8 @@
 package controller;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**The Player Class
  *
  * The Player class is responsible for creating a Player object
@@ -15,7 +18,8 @@ class Player {
     private int money;
     private final String name; //name cannot be changed later
     private String weaponInUse; //weapon info as a string for now
-
+    private ImageView playerImage;
+    private PlayerMovement playerMovement;
 
     /**The Player Constructor
      *
@@ -24,11 +28,27 @@ class Player {
      * @param name The chosen name for the player
      * @param weaponInUse the chosen weapon for the player
      */
-    public Player(int health, int money, String name, String weaponInUse) {
+    public Player(int health, int money, String name, String weaponInUse,Board board) {
         this.weaponInUse = weaponInUse;
         this.health = health;
         this.money = money;
         this.name = name;
+        this.playerMovement = new PlayerMovement(board);
+        switch (weaponInUse) {
+            case "wipe crossbow":
+                playerImage = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
+                break;
+            case "disinfectant spray":
+                playerImage = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
+                break;
+            case "thermometer sword":
+                playerImage = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
+                break;
+            default:
+                break;
+        }
+        playerImage.setFitWidth(60);
+        playerImage.setFitHeight(60);
     }
 
     //getters for all attributes
@@ -46,6 +66,10 @@ class Player {
 
     public String getWeaponInUse() {
         return weaponInUse;
+    }
+
+    public ImageView getPlayerImage(){
+        return playerImage;
     }
 
     //setters for all attributes
@@ -70,6 +94,21 @@ class Player {
         }
     }
 
+    public void setPlayerImage(String weaponInUse){
+        switch (weaponInUse) {
+            case "wipe crossbow":
+                this.playerImage = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
+                break;
+            case "disinfectant spray":
+                this.playerImage = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
+                break;
+            case "thermometer sword":
+                this.playerImage = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
+                break;
+            default:
+                break;
+        }
+    }
     //private utility method to check if a string is all whitespace
     private boolean isWhiteSpaceOnly(String str) {
         for (int i = 0; i < str.length(); i++) {
