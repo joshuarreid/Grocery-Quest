@@ -53,22 +53,30 @@ public class PlayerMovement {
         scene.setOnKeyPressed( event -> {
             switch (event.getCode()) {
                 case UP:
-                    moveHeroBy(hero, 0, -1, board);
+                    if(!board.isBlocked(yPosition - 1, xPosition)) {
+                        moveHeroBy(hero, 0, -1, board);
+                    }
                     break;
                 case DOWN:
-                    moveHeroBy(hero, 0, 1, board);
+                    if(!board.isBlocked(yPosition + 1, xPosition)) {
+                        moveHeroBy(hero, 0, 1, board);
+                    }
                     break;
                 case LEFT:
-                    if(!hero.getCurrentSide().equals("Left")) {
-                        hero.setCurrentSide("Left");
+                    if(!board.isBlocked(yPosition, xPosition - 1)) {
+                        if (!hero.getCurrentSide().equals("Left")) {
+                            hero.setCurrentSide("Left");
+                        }
+                        moveHeroBy(hero, -1, 0, board);
                     }
-                    moveHeroBy(hero, -1, 0, board);
                     break;
                 case RIGHT:
-                    if(!hero.getCurrentSide().equals("Right")) {
-                        hero.setCurrentSide("Right");
+                    if(!board.isBlocked(yPosition, xPosition + 1)) {
+                        if (!hero.getCurrentSide().equals("Right")) {
+                            hero.setCurrentSide("Right");
+                        }
+                        moveHeroBy(hero, 1, 0, board);
                     }
-                    moveHeroBy(hero, 1, 0, board);
                     break;
             }
         });

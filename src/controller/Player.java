@@ -126,8 +126,8 @@ public class Player {
 
     public void setWeaponInUse(String weaponInUse, String side){
         this.playerImage = new ImageView(new Image("file:resources/pngs/"+weaponInUse+"Grandma"+side+".png"));
-        playerImage.setFitWidth(60);
-        playerImage.setFitHeight(60);
+        playerImage.setFitWidth(35);
+        playerImage.setFitHeight(35);
         playerImage.setId("player");
     }
 

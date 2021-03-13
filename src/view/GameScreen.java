@@ -39,7 +39,7 @@ public class GameScreen {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(18, 18);
+        this.board = new Board(19, 19);
     }
 
     /**
@@ -95,7 +95,7 @@ public class GameScreen {
      */
     private void loadMainCharacter() {
         board.addObject(hero.getPlayerImage(),
-                "player", false, 15, 0, 8, 0);
+                "player", false, 17, 0, 9, 0);
     }
 
     /**
@@ -104,23 +104,23 @@ public class GameScreen {
      */
     private void loadObjects() {
         //Carts
-        for (int i = 12; i < 15; i++) {
-            for (int j = 1; j < 17; j++) {
-                if ((i == 14  && j == 6) || (i == 14 && j == 11)) { //Doesn't place cart in that one spot
+        for (int i = 12; i < 15; i++) { // row
+            for (int j = 1; j < 18; j++) { // col
+                if ((i == 14  && j == 6) || (i == 14 && j == 12)) { //Doesn't place cart in that one spot
                     continue;
                 }
                 //Replace with actual image of cart
                 cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
                 cart.setFitWidth(30);
                 cart.setFitHeight(30);
-                if (j <= 6 || j >= 11) {
+                if (j <= 6 || j >= 12) {
                     board.addObject(cart, "cart", true, i, 0, j, 0);
                 }
             }
         }
 
         //Flowers
-        for (int i = 17, j = 2; j < 16; j++) {
+        for (int i = 18, j = 2; j < 16; j++) { // row 18 + col
             if (j > 5 && j < 12) {
                 continue;
             }
@@ -154,7 +154,7 @@ public class GameScreen {
         StackPane rightStackPane = new StackPane();
         rightStackPane.getChildren().addAll(rightTextBox, rightLabel);
 
-        board.addObject(leftStackPane, "text box", true, 1, 5, 1, 6);
-        board.addObject(rightStackPane, "text box", true, 1, 5, 11, 6);
+        board.addObject(leftStackPane, "text box", true, 2, 5, 1, 6);
+        board.addObject(rightStackPane, "text box", true, 2, 5, 11, 6);
     }
 }
