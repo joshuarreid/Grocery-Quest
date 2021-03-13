@@ -1,90 +1,110 @@
 package controller;
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class PlayerMovement {
-    private int xPosition;
-    private int yPosition;
-    boolean goNorth, goSouth, goEast, goWest;
-    private Board board;
+    private int xPosition; //current x or col position
+    private int yPosition; //current y or row position
 
-    public PlayerMovement(Board board) {
-        this.xPosition = 8;
-        this.yPosition = 15;
-        this.board = board;
+    /**
+     * Constructor for player movement
+     *
+     * @param x intial x or col location
+     * @param y inital y or row location
+     */
+    public PlayerMovement(int x, int y) {
+        this.xPosition = x;
+        this.yPosition = y;
     }
-    public void moveCharacter(Stage mainWindow, Scene scene, Player hero) {
 
-        scene.setOnKeyPressed( event -> {
-            switch (event.getCode()) {
-//                case UP:    goNorth = true; break;
-//                case DOWN:  goSouth = true; break;
-//                case LEFT:  goWest  = true; break;
-//                case RIGHT: goEast  = true; break;
-                case UP:    moveHeroBy(hero, 0, -1); break;
-                case DOWN:  moveHeroBy(hero, 0, 1); break;
-                case LEFT:  moveHeroBy(hero, 1, 0); break;
-                case RIGHT: moveHeroBy(hero, -1, 0); break;
-            }
-        });
+    /**
+     * Moves a Player's location on a given board depending on arrow key events
+     *
+     * @param mainWindow main Stage
+     * @param scene current Scene
+     * @param hero current Player
+     * @param board current Board
+     */
+    public void moveCharacter(Stage mainWindow, Scene scene, Player hero, Board board) {
 
-//        scene.setOnKeyReleased(event -> {
-//            switch (event.getCode()) {
-//                case UP:    goNorth = false; break;
-//                case DOWN:  goSouth = false; break;
-//                case LEFT:  goWest  = false; break;
-//                case RIGHT: goEast  = false; break;
-//            }
-//        });
         mainWindow.setScene(scene);
         mainWindow.show();
 
-//        AnimationTimer timer = new AnimationTimer() {
-//            @Override
-//            public void handle(long now) {
-//                int dx = 0, dy = 0;
-//
-//                if (goNorth) dy -= 1;
-//                if (goSouth) dy += 1;
-//                if (goEast)  dx += 1;
-//                if (goWest)  dx -= 1;
-//
-//                moveHeroBy(hero, dx, dy);
-//            }
-//        };
-//        timer.start();
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
-//            int dx = 0, dy = 0;
-//
-//                if (goNorth) dy -= 1;
-//                if (goSouth) dy += 1;
-//                if (goEast)  dx += 1;
-//                if (goWest)  dx -= 1;
-//
-//                moveHeroBy(hero, dx, dy);
-//        }));
-//        timeline.setCycleCount(Animation.INDEFINITE);
-//        timeline.play();
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                handleKeys(scene, hero, board);
+            }
+        };
+        timer.start();
     }
 
-    private void moveHeroBy(Player hero, int dx, int dy) {
+    /**
+     * Method that handles arrow key events and their indicated player movement.
+     * Also updates the side the player is facing
+     *
+     * @param scene current Scene
+     * @param hero current Player
+     * @param board current Board
+     */
+    private void handleKeys(Scene scene, Player hero, Board board) {
+        scene.setOnKeyPressed( event -> {
+            switch (event.getCode()) {
+                case UP:
+                    moveHeroBy(hero, 0, -1, board);
+                    break;
+                case DOWN:
+                    moveHeroBy(hero, 0, 1, board);
+                    break;
+                case LEFT:
+                    if(!hero.getCurrentSide().equals("Left")) {
+                        hero.setCurrentSide("Left");
+                    }
+                    moveHeroBy(hero, -1, 0, board);
+                    break;
+                case RIGHT:
+                    if(!hero.getCurrentSide().equals("Right")) {
+                        hero.setCurrentSide("Right");
+                    }
+                    moveHeroBy(hero, 1, 0, board);
+                    break;
+            }
+        });
+    }
+
+    /**
+     * Calculates position change of the player
+     *
+     * @param hero current Player
+     * @param dx position change in x direction
+     * @param dy position change in y direction
+     * @param board current Board
+     */
+    private void moveHeroBy(Player hero, int dx, int dy, Board board) {
         if (dx == 0 && dy == 0) return;
         int x = xPosition + dx;
         int y = yPosition + dy;
-        moveHeroTo(hero, x, y);
+        moveHeroTo(hero, x, y, board);
     }
 
-    private void moveHeroTo(Player hero, int x, int y){
+    /**
+     * Updates player location by:
+     * 1. removing player from current location
+     * 2. adding player to new location
+     * 3. if adding player to new location is successful,
+     *    current location is updated
+     *
+     * @param hero current Player
+     * @param x tentative new x or col location
+     * @param y tentative new y or row location
+     * @param board current Board
+     */
+    private void moveHeroTo(Player hero, int x, int y, Board board){
         System.out.println(board.removeObject("player", xPosition, yPosition));
-        boolean worked = board.addObject(hero.getPlayerImage(), "player", false, y, 0, x, 0);
+        boolean worked = board.addObject(hero.getPlayerImage(),
+                "player", false, y, 0, x, 0);
         if (worked) {
             xPosition = x;
             yPosition = y;

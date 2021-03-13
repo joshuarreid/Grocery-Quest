@@ -42,15 +42,17 @@ public class Board {
     /**
      * Creates the game board and the hidden String 2D
      * array with fixed rows and columns
+     * @param height height of screen
+     * @param width width of screen
      */
-    public void createBoard() {
+    public void createBoard(double height, double width) {
         gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
-            RowConstraints rowConst = new RowConstraints(33);
+            RowConstraints rowConst = new RowConstraints(height/maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(33);
+            ColumnConstraints colConst = new ColumnConstraints(width/maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
     }
@@ -100,6 +102,7 @@ public class Board {
         }
 
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
+            thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
             if(thing.getId() != null && thing.getId().equals("player")) {System.out.println("placed");}
             if (blockPlayer) { //If object should block player
@@ -117,7 +120,14 @@ public class Board {
     }
 
     //Potential method?? If player has ability to break through aisles or something
-//    public void removeObject() {}
+
+    /**
+     *  Removes object from gridpane using their id. Removes object's id from hidden board.
+     * @param id id of the object being removed
+     * @param x column location of object
+     * @param y row location of object
+     * @return boolean to indicate status of removal (true if removed)
+     */
     public boolean removeObject(String id, int x, int y) {
         for (Node node : this.gridPane.getChildren()) {
             if (node != null
@@ -139,6 +149,4 @@ public class Board {
         return gridPane;
     }
 
-    //Potential method
-    //public void playerMovement(){}
 }

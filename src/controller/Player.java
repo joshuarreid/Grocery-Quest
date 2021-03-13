@@ -16,12 +16,12 @@ import javafx.scene.image.ImageView;
 public class Player {
     private int health;
     private int money;
-    private ImageView healthBar;
-    private ImageView moneyBar;
-    private final String name; //name cannot be changed later
-    private String weaponInUse; //weapon info as a string for now
-    private ImageView playerImage;
-//    private PlayerMovement playerMovement;
+    private ImageView healthBar;   // current player health bar
+    private ImageView moneyBar;    // current player money bar
+    private final String name;     // name cannot be changed later
+    private String weaponInUse;    // weapon info as a string for now
+    private ImageView playerImage; // current player imageview
+    private String currentSide;    // side player is facing
 
     /**The Player Constructor
      *
@@ -29,30 +29,17 @@ public class Player {
      * @param money the amount of currency the player has
      * @param name The chosen name for the player
      * @param weaponInUse the chosen weapon for the player
+     * @param difficultyLevel the chosen difficulty for the player
      */
     public Player(int health, int money, String name,
-                  String weaponInUse,Board board, int difficultyLevel) {
+                  String weaponInUse,int difficultyLevel) {
         this.weaponInUse = weaponInUse;
+        this.currentSide = "Right";
         this.health = health;
         this.money = money;
         this.name = name;
-//        this.playerMovement = new PlayerMovement(board);
-        switch (weaponInUse) {
-            case "wipe crossbow":
-                playerImage = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
-                break;
-            case "disinfectant spray":
-                playerImage = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
-                break;
-            case "thermometer sword":
-                playerImage = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
-                break;
-            default:
-                break;
-        }
-        playerImage.setFitWidth(60);
-        playerImage.setFitHeight(60);
-        playerImage.setId("player");
+        setWeaponInUse(weaponInUse, currentSide);
+
 
         //Sets the coin and health bars
         switch (difficultyLevel) {
@@ -76,15 +63,6 @@ public class Player {
         healthBar.setFitWidth(225);
         healthBar.setFitHeight(37.5);
     }
-
-//    public Player() {
-//        this(100,
-//                100,
-//                "player",
-//                "wipe crossbow",
-//                new Board(18,18, false),
-//                1 );
-//    }
 
     //getters for all attributes
     public String getName() {
@@ -115,6 +93,10 @@ public class Player {
         return playerImage;
     }
 
+    public String getCurrentSide() {
+        return currentSide;
+    }
+
     //setters for all attributes
     public void setHealth(int newHealth) {
         if ((newHealth < 0) || (newHealth > 100)) {
@@ -137,21 +119,18 @@ public class Player {
         }
     }
 
-    public void changeWeapon(String weaponInUse){
-        switch (weaponInUse) {
-            case "wipe crossbow":
-                this.playerImage = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
-                break;
-            case "disinfectant spray":
-                this.playerImage = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
-                break;
-            case "thermometer sword":
-                this.playerImage = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
-                break;
-            default:
-                break;
-        }
+    public void setCurrentSide(String currentSide) {
+        this.currentSide = currentSide;
+        setWeaponInUse(weaponInUse, currentSide);
     }
+
+    public void setWeaponInUse(String weaponInUse, String side){
+        this.playerImage = new ImageView(new Image("file:resources/pngs/"+weaponInUse+"Grandma"+side+".png"));
+        playerImage.setFitWidth(60);
+        playerImage.setFitHeight(60);
+        playerImage.setId("player");
+    }
+
     //private utility method to check if a string is all whitespace
     private boolean isWhiteSpaceOnly(String str) {
         for (int i = 0; i < str.length(); i++) {

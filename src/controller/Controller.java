@@ -37,7 +37,7 @@ public class Controller extends Application {
     private final int width = 600;
     private final int height = 600;
     private Player hero;
-    private Board board;
+//    private Board board;
     private PlayerMovement playerMovement;
 
     @Override
@@ -45,9 +45,9 @@ public class Controller extends Application {
         mainWindow = primaryStage;
         mainWindow.setTitle("Grocery Quest");
         gameModel = new GameModel();
-        board = new Board(18,18);
+//        board = new Board(18,18);
 //        hero = new Player();
-        this.playerMovement = new PlayerMovement(board);
+        this.playerMovement = new PlayerMovement(8, 15);
         initStartScreen();
     }
 
@@ -109,7 +109,7 @@ public class Controller extends Application {
 
         //If player clicks the wipe crossbow button
         wipeCrossbowButton.setOnAction(e -> {
-            weaponChoice = "wipe crossbow";
+            weaponChoice = "Crossbow";
             wipeCrossbowButton.setEffect(new DropShadow(2.0, Color.BLACK));
             disinfectantSprayButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -117,7 +117,7 @@ public class Controller extends Application {
 
         //If player clicks the disinfectant spray button
         disinfectantSprayButton.setOnAction(e -> {
-            weaponChoice = "disinfectant spray";
+            weaponChoice = "Spray";
             disinfectantSprayButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -125,7 +125,7 @@ public class Controller extends Application {
 
         //If player clicks the thermometer sword button
         thermometerSwordButton.setOnAction(e -> {
-            weaponChoice = "thermometer sword";
+            weaponChoice = "Sword";
             thermometerSwordButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             disinfectantSprayButton.setEffect(null);
@@ -159,7 +159,7 @@ public class Controller extends Application {
                     gameModel.setState("Configuration Screen");
                 } else {
                     Level levelOne = new Level(1, difficultyLevel);
-                    hero = new Player(100, 0, name, weaponChoice, board, difficultyLevel);
+                    hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                     goToGameScreen();
                     System.out.println("VALID!"); //Delete after previous lines implemented
                 }
@@ -193,7 +193,7 @@ public class Controller extends Application {
                 gameModel.setState("Configuration Screen");
             } else {
                 Level levelOne = new Level(1, difficultyLevel);
-                hero = new Player(100, 0, name, weaponChoice, board, difficultyLevel);
+                hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                 goToGameScreen();
                 System.out.println("VALID!"); //Delete after previous lines implemented
             }
@@ -213,9 +213,7 @@ public class Controller extends Application {
         GameScreen screen = new GameScreen(width, 700, hero);
 
         Scene scene = screen.getScene();
-        playerMovement.moveCharacter(mainWindow, scene, hero);
-//        mainWindow.setScene(scene);
-//        mainWindow.show();
+        playerMovement.moveCharacter(mainWindow, scene, hero, screen.getBoard());
     }
 
     public String getState() {

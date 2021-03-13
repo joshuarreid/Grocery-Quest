@@ -17,7 +17,7 @@ public class GameScreen {
     private int height;
     private ImageView coinBar;
     private ImageView healthBar;
-    private Player mainPerson;
+    private Player hero;
     private ImageView cart;
     private ImageView flower;
     private ImageView leftTextBox;
@@ -38,17 +38,24 @@ public class GameScreen {
     public GameScreen(int width, int height, Player hero) {
         this.width = width;
         this.height = height;
-        this.mainPerson = hero;
+        this.hero = hero;
         this.board = new Board(18, 18);
     }
 
+    /**
+     * Getter for board
+     * @return board
+     */
+    public Board getBoard() {
+        return this.board;
+    }
     /**
      * Gets the scene for the stage.
      *
      * @return the scene
      */
     public Scene getScene() {
-        board.createBoard();
+        board.createBoard(height, width);
 
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
@@ -70,33 +77,25 @@ public class GameScreen {
         VBox base = new VBox(10);
         base.getChildren().addAll(coinHealthBox, gridPane);
         base.setAlignment(Pos.CENTER);
-        Scene gameScene = new Scene(base, width, height);
+        Scene gameScene = new Scene(base, width, height+100);
         return gameScene;
     }
 
     /**
-     * Determines which coin and health bar to load
-     * depening on what the user chooses in the initial
-     * config screen.
+     * loads hero's health and money
      */
     private void loadCoinHealthBar() {
-        healthBar = mainPerson.getHealthBar();
-        coinBar = mainPerson.getMoneyBar();
+        healthBar = hero.getHealthBar();
+        coinBar = hero.getMoneyBar();
 
     }
 
     /**
-     * Loads in the player with the correct weapon
-     * choice from the initial config screen.
+     * Adds hero to the board
      */
     private void loadMainCharacter() {
-        board.addObject(mainPerson.getPlayerImage(),
-                "player",
-                false,
-                15,
-                0,
-                8,
-                0);
+        board.addObject(hero.getPlayerImage(),
+                "player", false, 15, 0, 8, 0);
     }
 
     /**
