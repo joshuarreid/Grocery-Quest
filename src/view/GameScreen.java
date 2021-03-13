@@ -1,25 +1,20 @@
 package view;
 
 import controller.Board;
+import controller.Player;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.control.Label;
-
-import java.awt.*;
 
 public class GameScreen {
     private int width;
     private int height;
-    private int difficultyLevel;
-    private String weaponChoice;
     private ImageView coinBar;
     private ImageView healthBar;
     private Player mainPerson;
@@ -38,14 +33,13 @@ public class GameScreen {
      *
      * @param width width of window
      * @param height height of window
-     * @param difficultyLevel level of difficulty
-     * @param weaponChoice the weapon the player has
+     * @param hero player
      */
-    public GameScreen(int width, int height, int difficultyLevel, String weaponChoice) {
+    public GameScreen(int width, int height, Player hero) {
         this.width = width;
         this.height = height;
-        this.difficultyLevel = difficultyLevel;
-        this.weaponChoice = weaponChoice;
+        this.mainPerson = hero;
+        this.board = new Board(18, 18);
     }
 
     /**
@@ -54,7 +48,6 @@ public class GameScreen {
      * @return the scene
      */
     public Scene getScene() {
-        board = new Board(18, 18, false);
         board.createBoard();
 
         //Set up gridPane
@@ -86,28 +79,9 @@ public class GameScreen {
      * depening on what the user chooses in the initial
      * config screen.
      */
-    public void loadCoinHealthBar() {
-        //Sets the coin and health bars
-        switch (difficultyLevel) {
-        case 1: //Easy: 4(full) hearts + 4 magic coins
-            healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
-            coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
-            break;
-        case 2: //Medium: 2 hearts + 2 magic coins
-            healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
-            coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
-            break;
-        case 3: //Hard: 1 heart + 1 magic coin
-            healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
-            coinBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
-            break;
-        default:
-        }
-        //Basically CSS
-        coinBar.setFitWidth(225);
-        coinBar.setFitHeight(37.5);
-        healthBar.setFitWidth(225);
-        healthBar.setFitHeight(37.5);
+    private void loadCoinHealthBar() {
+        healthBar = mainPerson.getHealthBar();
+        coinBar = mainPerson.getMoneyBar();
 
     }
 
@@ -115,32 +89,21 @@ public class GameScreen {
      * Loads in the player with the correct weapon
      * choice from the initial config screen.
      */
-    public void loadMainCharacter() {
-        //Sets the main character imageview
-//        switch (weaponChoice) {
-//        case "wipe crossbow":
-//            mainPerson = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
-//            break;
-//        case "disinfectant spray":
-//            mainPerson = new ImageView(new Image("file:resources/pngs/SprayGrandmaRight.png"));
-//            break;
-//        case "thermometer sword":
-//            mainPerson = new ImageView(new Image("file:resources/pngs/SwordGrandmaRight.png"));
-//            break;
-//        default:
-//            break;
-//        }
-//        mainPerson.setFitWidth(60);
-//        mainPerson.setFitHeight(60);
-        mainPerson = new Player();
-        board.addObject(mainPerson, "mainPerson", false, 15, 0, 8, 0);
+    private void loadMainCharacter() {
+        board.addObject(mainPerson.getPlayerImage(),
+                "player",
+                false,
+                15,
+                0,
+                8,
+                0);
     }
 
     /**
      * Loads in all other objects such as carts, text boxes,
      * and flowers.
      */
-    public void loadObjects() {
+    private void loadObjects() {
         //Carts
         for (int i = 12; i < 15; i++) {
             for (int j = 1; j < 17; j++) {
@@ -152,7 +115,7 @@ public class GameScreen {
                 cart.setFitWidth(30);
                 cart.setFitHeight(30);
                 if (j <= 6 || j >= 11) {
-                    board.addObject(cart, "cart", false, i, 0, j, 0);
+                    board.addObject(cart, "cart", true, i, 0, j, 0);
                 }
             }
         }
@@ -166,7 +129,7 @@ public class GameScreen {
             flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
             flower.setFitWidth(30);
             flower.setFitHeight(45);
-            board.addObject(flower, "flower", false, i, 0, j, 0);
+            board.addObject(flower, "flower", true, i, 0, j, 0);
         }
 
         //Textboxes using a StackPane

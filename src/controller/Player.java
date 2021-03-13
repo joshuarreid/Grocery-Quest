@@ -13,13 +13,15 @@ import javafx.scene.image.ImageView;
  * Name - The chosen name for the player
  * WeaponInUse - the chosen weapon for the player
  */
-class Player {
+public class Player {
     private int health;
     private int money;
+    private ImageView healthBar;
+    private ImageView moneyBar;
     private final String name; //name cannot be changed later
     private String weaponInUse; //weapon info as a string for now
     private ImageView playerImage;
-    private PlayerMovement playerMovement;
+//    private PlayerMovement playerMovement;
 
     /**The Player Constructor
      *
@@ -28,12 +30,13 @@ class Player {
      * @param name The chosen name for the player
      * @param weaponInUse the chosen weapon for the player
      */
-    public Player(int health, int money, String name, String weaponInUse,Board board) {
+    public Player(int health, int money, String name,
+                  String weaponInUse,Board board, int difficultyLevel) {
         this.weaponInUse = weaponInUse;
         this.health = health;
         this.money = money;
         this.name = name;
-        this.playerMovement = new PlayerMovement(board);
+//        this.playerMovement = new PlayerMovement(board);
         switch (weaponInUse) {
             case "wipe crossbow":
                 playerImage = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
@@ -49,7 +52,39 @@ class Player {
         }
         playerImage.setFitWidth(60);
         playerImage.setFitHeight(60);
+        playerImage.setId("player");
+
+        //Sets the coin and health bars
+        switch (difficultyLevel) {
+            case 1: //Easy: 4(full) hearts + 4 magic coins
+                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
+                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
+                break;
+            case 2: //Medium: 2 hearts + 2 magic coins
+                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
+                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
+                break;
+            case 3: //Hard: 1 heart + 1 magic coin
+                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
+                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
+                break;
+            default:
+        }
+        //Basically CSS
+        moneyBar.setFitWidth(225);
+        moneyBar.setFitHeight(37.5);
+        healthBar.setFitWidth(225);
+        healthBar.setFitHeight(37.5);
     }
+
+//    public Player() {
+//        this(100,
+//                100,
+//                "player",
+//                "wipe crossbow",
+//                new Board(18,18, false),
+//                1 );
+//    }
 
     //getters for all attributes
     public String getName() {
@@ -62,6 +97,14 @@ class Player {
 
     public int getMoney() {
         return money;
+    }
+
+    public ImageView getHealthBar() {
+        return healthBar;
+    }
+
+    public ImageView getMoneyBar() {
+        return moneyBar;
     }
 
     public String getWeaponInUse() {
@@ -94,7 +137,7 @@ class Player {
         }
     }
 
-    public void setPlayerImage(String weaponInUse){
+    public void changeWeapon(String weaponInUse){
         switch (weaponInUse) {
             case "wipe crossbow":
                 this.playerImage = new ImageView(new Image("file:resources/pngs/CrossbowGrandmaRight.png"));
