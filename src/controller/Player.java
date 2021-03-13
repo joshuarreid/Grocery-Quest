@@ -1,5 +1,8 @@
 package controller;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**The Player Class
  *
  * The Player class is responsible for creating a Player object
@@ -10,12 +13,15 @@ package controller;
  * Name - The chosen name for the player
  * WeaponInUse - the chosen weapon for the player
  */
-class Player {
+public class Player {
     private int health;
     private int money;
-    private final String name; //name cannot be changed later
-    private String weaponInUse; //weapon info as a string for now
-
+    private ImageView healthBar;   // current player health bar
+    private ImageView moneyBar;    // current player money bar
+    private final String name;     // name cannot be changed later
+    private String weaponInUse;    // weapon info as a string for now
+    private ImageView playerImage; // current player imageview
+    private String currentSide;    // side player is facing
 
     /**The Player Constructor
      *
@@ -23,12 +29,39 @@ class Player {
      * @param money the amount of currency the player has
      * @param name The chosen name for the player
      * @param weaponInUse the chosen weapon for the player
+     * @param difficultyLevel the chosen difficulty for the player
      */
-    public Player(int health, int money, String name, String weaponInUse) {
+    public Player(int health, int money, String name,
+                  String weaponInUse,int difficultyLevel) {
         this.weaponInUse = weaponInUse;
+        this.currentSide = "Right";
         this.health = health;
         this.money = money;
         this.name = name;
+        setWeaponInUse(weaponInUse, currentSide);
+
+
+        //Sets the coin and health bars
+        switch (difficultyLevel) {
+            case 1: //Easy: 4(full) hearts + 4 magic coins
+                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
+                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
+                break;
+            case 2: //Medium: 2 hearts + 2 magic coins
+                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
+                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
+                break;
+            case 3: //Hard: 1 heart + 1 magic coin
+                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
+                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
+                break;
+            default:
+        }
+        //Basically CSS
+        moneyBar.setFitWidth(225);
+        moneyBar.setFitHeight(37.5);
+        healthBar.setFitWidth(225);
+        healthBar.setFitHeight(37.5);
     }
 
     //getters for all attributes
@@ -44,8 +77,24 @@ class Player {
         return money;
     }
 
+    public ImageView getHealthBar() {
+        return healthBar;
+    }
+
+    public ImageView getMoneyBar() {
+        return moneyBar;
+    }
+
     public String getWeaponInUse() {
         return weaponInUse;
+    }
+
+    public ImageView getPlayerImage(){
+        return playerImage;
+    }
+
+    public String getCurrentSide() {
+        return currentSide;
     }
 
     //setters for all attributes
@@ -68,6 +117,18 @@ class Player {
         if ((givenName == null) || (givenName.isEmpty()) || (isWhiteSpaceOnly(givenName))) {
             throw new IllegalArgumentException("Name cannot be null, empty or whitespace only");
         }
+    }
+
+    public void setCurrentSide(String currentSide) {
+        this.currentSide = currentSide;
+        setWeaponInUse(weaponInUse, currentSide);
+    }
+
+    public void setWeaponInUse(String weaponInUse, String side){
+        this.playerImage = new ImageView(new Image("file:resources/pngs/"+weaponInUse+"Grandma"+side+".png"));
+        playerImage.setFitWidth(60);
+        playerImage.setFitHeight(60);
+        playerImage.setId("player");
     }
 
     //private utility method to check if a string is all whitespace
