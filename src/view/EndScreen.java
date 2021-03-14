@@ -100,9 +100,12 @@ public class EndScreen {
     }
 
     public Button getReplayButton() {
+
         return replayButton;
     }
-    public Button getExitButton() { return exitButton; }
+    public Button getExitButton() {
+        return exitButton;
+    }
 
 }
 

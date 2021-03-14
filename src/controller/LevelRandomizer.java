@@ -8,7 +8,7 @@ import java.util.*;
  *
  *
  */
-public class levelRandomizer {
+public class LevelRandomizer {
     private Stack<ImageView> layouts;
 
     /**
@@ -17,9 +17,9 @@ public class levelRandomizer {
      * this method takes a list of layouts, shuffles them
      * and puts them into the stack.
      *
-     * @param layouts
+     * @param layouts layout of levels
      */
-    public levelRandomizer(List<ImageView> layouts) {
+    public LevelRandomizer(List<ImageView> layouts) {
         //Randomize the level layouts list
         Collections.shuffle(layouts);
 
@@ -33,7 +33,7 @@ public class levelRandomizer {
      * This method fetches level layouts from
      * the stack
      *
-     * @return
+     * @return layout
      */
     public ImageView getLayout() {
         if (layouts.size() == 0) {

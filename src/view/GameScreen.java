@@ -59,18 +59,19 @@ public class GameScreen {
 
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
-        //gridPane.setBackground(new Background(new BackgroundImage(
-        //        new Image("file:resources/pngs/TileGrid.png"), null, null,
-        //        null, null)));
-        //ImageView borderExitImage = new ImageView(new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
-        gridPane.setBackground(new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
+        ImageView borderExitImage = new ImageView(
+                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
+        borderExitImage.setFitWidth(width);
+        borderExitImage.setFitHeight(height);
+        gridPane.setBackground(
+                new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
 
         //Load in all entities
         loadCoinHealthBar();
         loadMainCharacter();
         loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
-
-        Scene gameScene = new Scene(gridPane, width, height);
+        StackPane pane = new StackPane(gridPane, borderExitImage);
+        Scene gameScene = new Scene(pane, width, height);
         return gameScene;
     }
 
@@ -102,7 +103,8 @@ public class GameScreen {
         //Carts
         for (int i = 12; i < 15; i++) { // row
             for (int j = 1; j < 18; j++) { // col
-                if ((i == 14  && j == 6) || (i == 14 && j == 12)) { //Doesn't place cart in that one spot
+                //Doesn't place cart in that one spot
+                if ((i == 14  && j == 6) || (i == 14 && j == 12)) {
                     continue;
                 }
                 //Replace with actual image of cart

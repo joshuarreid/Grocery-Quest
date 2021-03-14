@@ -14,7 +14,6 @@ import view.GameScreen;
 import view.StartScreen;
 import view.ConfigurationScreen;
 
-import java.util.Stack;
 
 
 /**The Controller Class
@@ -38,17 +37,13 @@ public class Controller extends Application {
     private final int width = 600;
     private final int height = 600;
     private Player hero;
-//    private Board board;
-//    private PlayerMovement playerMovement;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainWindow = primaryStage;
         mainWindow.setTitle("Grocery Quest");
+        mainWindow.setResizable(false);
         gameModel = new GameModel();
-//        board = new Board(18,18);
-//        hero = new Player();
-//        this.playerMovement = new PlayerMovement(8, 15);
         initStartScreen();
     }
 
@@ -217,7 +212,7 @@ public class Controller extends Application {
         hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, screen.getBoard());
     }
 
-        /**
+    /**
      * This method launches and provides event handling for
      * the Win Screen
      */

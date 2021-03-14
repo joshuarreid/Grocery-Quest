@@ -34,7 +34,7 @@ public class Player {
      * @param difficultyLevel the chosen difficulty for the player
      */
     public Player(int health, int money, String name,
-                  String weaponInUse,int difficultyLevel) {
+                  String weaponInUse, int difficultyLevel) {
         this.weaponInUse = weaponInUse;
         this.currentSide = "Right";
         this.health = health;
@@ -98,7 +98,7 @@ public class Player {
         return weaponInUse;
     }
 
-    public ImageView getPlayerImage(){
+    public ImageView getPlayerImage() {
         return playerImage;
     }
 
@@ -133,8 +133,9 @@ public class Player {
         setWeaponInUse(weaponInUse, currentSide);
     }
 
-    public void setWeaponInUse(String weaponInUse, String side){
-        this.playerImage = new ImageView(new Image("file:resources/pngs/"+weaponInUse+"Grandma"+side+".png"));
+    public void setWeaponInUse(String weaponInUse, String side) {
+        this.playerImage = new ImageView(
+                new Image("file:resources/pngs/" + weaponInUse + "Grandma" + side + ".png"));
         playerImage.setFitWidth(35);
         playerImage.setFitHeight(35);
         playerImage.setId("player");
