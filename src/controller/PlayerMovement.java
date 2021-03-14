@@ -19,6 +19,14 @@ public class PlayerMovement {
         this.yPosition = y;
     }
 
+    public int getXPosition() {
+        return xPosition;
+    }
+
+    public int getYPosition() {
+        return yPosition;
+    }
+
     /**
      * Moves a Player's location on a given board depending on arrow key events
      *
@@ -50,26 +58,41 @@ public class PlayerMovement {
      * @param board current Board
      */
     private void handleKeys(Scene scene, Player hero, Board board) {
-        scene.setOnKeyPressed( event -> {
+        scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case UP:
+            case UP:
+                if (!board.isBlocked(yPosition - 1, xPosition)) {
+                    if (!hero.getCurrentSide().equals("Up")) {
+                        hero.setCurrentSide("Up");
+                    }
                     moveHeroBy(hero, 0, -1, board);
-                    break;
-                case DOWN:
+                }
+                break;
+            case DOWN:
+                if (!board.isBlocked(yPosition + 1, xPosition)) {
+                    if (!hero.getCurrentSide().equals("Down")) {
+                        hero.setCurrentSide("Down");
+                    }
                     moveHeroBy(hero, 0, 1, board);
-                    break;
-                case LEFT:
-                    if(!hero.getCurrentSide().equals("Left")) {
+                }
+                break;
+            case LEFT:
+                if (!board.isBlocked(yPosition, xPosition - 1)) {
+                    if (!hero.getCurrentSide().equals("Left")) {
                         hero.setCurrentSide("Left");
                     }
                     moveHeroBy(hero, -1, 0, board);
-                    break;
-                case RIGHT:
-                    if(!hero.getCurrentSide().equals("Right")) {
+                }
+                break;
+            case RIGHT:
+                if (!board.isBlocked(yPosition, xPosition + 1)) {
+                    if (!hero.getCurrentSide().equals("Right")) {
                         hero.setCurrentSide("Right");
                     }
                     moveHeroBy(hero, 1, 0, board);
-                    break;
+                }
+                break;
+            default:
             }
         });
     }
@@ -83,7 +106,9 @@ public class PlayerMovement {
      * @param board current Board
      */
     private void moveHeroBy(Player hero, int dx, int dy, Board board) {
-        if (dx == 0 && dy == 0) return;
+        if (dx == 0 && dy == 0) {
+            return;
+        }
         int x = xPosition + dx;
         int y = yPosition + dy;
         moveHeroTo(hero, x, y, board);
@@ -101,7 +126,7 @@ public class PlayerMovement {
      * @param y tentative new y or row location
      * @param board current Board
      */
-    private void moveHeroTo(Player hero, int x, int y, Board board){
+    private void moveHeroTo(Player hero, int x, int y, Board board) {
         System.out.println(board.removeObject("player", xPosition, yPosition));
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false, y, 0, x, 0);

@@ -20,8 +20,8 @@ import javafx.scene.layout.RowConstraints;
 public class Board {
     private final int maxRow;
     private final int maxColumn;
-//    private boolean win = false; //is win variable even necessary?
-//    private boolean blocked = false;
+    private boolean win = false; //is win variable even necessary?
+    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
 
@@ -36,7 +36,7 @@ public class Board {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
-        this.hiddenBoard = new String[maxRow][maxColumn];
+        this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
     }
 
     /**
@@ -48,12 +48,35 @@ public class Board {
     public void createBoard(double height, double width) {
         gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
-            RowConstraints rowConst = new RowConstraints(height/maxRow);
+
+            RowConstraints rowConst = new RowConstraints(height / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(width/maxColumn);
+            ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
+        }
+    }
+
+    public void setUpHiddenBoard() {
+        for (int row = 0; row < maxRow + 2; row++) {
+            for (int col = 0; col < maxColumn + 2; col++) {
+                if (row == 0 || row == maxRow) {
+                    if (col == maxColumn / 2
+                            || col == (maxColumn / 2) + 1
+                            || col == (maxColumn / 2) + 2) {
+                        hiddenBoard[row + 1][col] = "door";
+                    }
+                    hiddenBoard[row][col] = "wall";
+
+                } else if (col == 0 || col == maxColumn) {
+                    if (row == maxRow / 2 || row == (maxRow / 2) + 1 || row == (maxRow / 2) + 2) {
+                        hiddenBoard[row][col] = "door";
+                    }
+                    hiddenBoard[row][col] = "wall";
+
+                }
+            }
         }
     }
 
@@ -66,9 +89,14 @@ public class Board {
      * @return true if spot ahead is blocked
      */
     public boolean isBlocked(int row, int column) {
-        if (row < 1 || row > maxRow || column < 1 || column > maxColumn) { //If blocked by wall
+        if (row < 0
+                || row > maxRow - 1
+                || column < 0
+                || column > maxColumn - 1) { //If blocked by wall
             return true;
         }
+        row++;
+        column++;
         //If blocked by node except door
         return hiddenBoard[row][column] != null && !hiddenBoard[row][column].equals("door");
     }
@@ -84,35 +112,35 @@ public class Board {
      * @param id The object being placed in the hidden game board
      * @param blockPlayer If the object should block the player
      * @param firstRow Starting vertical location
-     * @param rowSpan The number of rows the node should span
+     * @param rowSpan The number of rows the node should span beyond 1
      * @param firstCol Starting horizontal location
-     * @param colSpan The number of columns the node should span
+     * @param colSpan The number of columns the node should span beyond 1
+     * @return boolean to indicate successful addition of object
      */
     public boolean addObject(Node thing, String id, boolean blockPlayer,
                           int firstRow, int rowSpan, int firstCol, int colSpan) {
-        //can probably be replaced by isBlocked method
-        try{
-            if (hiddenBoard[firstRow][firstCol] != null) { //If object already exists at specified location
-                System.out.println("There's already an object here."); //Other option: Throw an exception?
-                return false;
-            }
-        } catch (IndexOutOfBoundsException e){
-            System.out.println(e.getMessage());
+        if (isBlocked(firstRow, firstCol)) {
             return false;
         }
 
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
-            if(thing.getId() != null && thing.getId().equals("player")) {System.out.println("placed");}
+            if (thing.getId() != null && thing.getId().equals("player")) {
+                System.out.println("placed");
+            }
             if (blockPlayer) { //If object should block player
-                hiddenBoard[firstRow][firstCol] = id;
+
+                hiddenBoard[firstRow + 1][firstCol + 1] = id;
             }
         } else { //If thing occupies more than one spot
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
             if (blockPlayer) { //If object should block player
-                for (int i = firstRow, j = firstCol; i < firstCol + rowSpan && j < firstCol + colSpan; i++, j++) {
-                    hiddenBoard[firstRow][firstCol] = id;
+                for (int i = firstRow; i < (firstRow + rowSpan); i++) {
+                    for (int j = firstCol; j < (firstCol + colSpan); j++) {
+                        System.out.println("blocked: " + j + "," + i);
+                        hiddenBoard[i + 1][j + 1] = id;
+                    }
                 }
             }
         }
@@ -134,7 +162,7 @@ public class Board {
                     && node.getId() != null
                     && node.getId().equals(id)) {
                 System.out.println("found");
-                this.hiddenBoard[y][x] = null;
+                this.hiddenBoard[y + 1][x + 1] = null;
                 return this.gridPane.getChildren().remove(node);
             }
         }

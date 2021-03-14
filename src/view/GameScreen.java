@@ -39,7 +39,7 @@ public class GameScreen {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(18, 18);
+        this.board = new Board(19, 19);
     }
 
     /**
@@ -59,25 +59,19 @@ public class GameScreen {
 
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
-        //gridPane.setBackground(new Background(new BackgroundImage(
-        //        new Image("file:resources/pngs/TileGrid.png"), null, null,
-        //        null, null)));
-        //ImageView borderExitImage = new ImageView(new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
-        gridPane.setBackground(new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
+        ImageView borderExitImage = new ImageView(
+                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
+        borderExitImage.setFitWidth(width);
+        borderExitImage.setFitHeight(height);
+        gridPane.setBackground(
+                new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
 
         //Load in all entities
         loadCoinHealthBar();
         loadMainCharacter();
         loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
-
-        //Coin Health Box
-        VBox coinHealthBox = new VBox(5);
-        coinHealthBox.getChildren().addAll(healthBar, coinBar);
-
-        VBox base = new VBox(10);
-        base.getChildren().addAll(coinHealthBox, gridPane);
-        base.setAlignment(Pos.CENTER);
-        Scene gameScene = new Scene(base, width, height+100);
+        StackPane pane = new StackPane(gridPane, borderExitImage);
+        Scene gameScene = new Scene(pane, width, height);
         return gameScene;
     }
 
@@ -86,8 +80,9 @@ public class GameScreen {
      */
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
+        board.addObject(healthBar, "health", true, 0, 1, 1, 5);
         coinBar = hero.getMoneyBar();
-
+        board.addObject(coinBar, "money", true, 1, 1, 1, 5);
     }
 
     /**
@@ -95,7 +90,9 @@ public class GameScreen {
      */
     private void loadMainCharacter() {
         board.addObject(hero.getPlayerImage(),
-                "player", false, 15, 0, 8, 0);
+                "player", false,
+                hero.getPlayerMovement().getYPosition(), 0,
+                hero.getPlayerMovement().getXPosition(), 0);
     }
 
     /**
@@ -104,23 +101,24 @@ public class GameScreen {
      */
     private void loadObjects() {
         //Carts
-        for (int i = 12; i < 15; i++) {
-            for (int j = 1; j < 17; j++) {
-                if ((i == 14  && j == 6) || (i == 14 && j == 11)) { //Doesn't place cart in that one spot
+        for (int i = 12; i < 15; i++) { // row
+            for (int j = 1; j < 18; j++) { // col
+                //Doesn't place cart in that one spot
+                if ((i == 14  && j == 6) || (i == 14 && j == 12)) {
                     continue;
                 }
                 //Replace with actual image of cart
                 cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
                 cart.setFitWidth(30);
                 cart.setFitHeight(30);
-                if (j <= 6 || j >= 11) {
+                if (j <= 6 || j >= 12) {
                     board.addObject(cart, "cart", true, i, 0, j, 0);
                 }
             }
         }
 
         //Flowers
-        for (int i = 17, j = 2; j < 16; j++) {
+        for (int i = 17, j = 2; j < 16; j++) { // row 18 + col
             if (j > 5 && j < 12) {
                 continue;
             }
@@ -128,7 +126,7 @@ public class GameScreen {
             flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
             flower.setFitWidth(30);
             flower.setFitHeight(45);
-            board.addObject(flower, "flower", true, i, 0, j, 0);
+            board.addObject(flower, "flower", true, i, 2, j, 1);
         }
 
         //Textboxes using a StackPane
@@ -154,7 +152,7 @@ public class GameScreen {
         StackPane rightStackPane = new StackPane();
         rightStackPane.getChildren().addAll(rightTextBox, rightLabel);
 
-        board.addObject(leftStackPane, "text box", true, 1, 5, 1, 6);
-        board.addObject(rightStackPane, "text box", true, 1, 5, 11, 6);
+        board.addObject(leftStackPane, "text box", true, 2, 5, 1, 6);
+        board.addObject(rightStackPane, "text box", true, 2, 5, 11, 6);
     }
 }

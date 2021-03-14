@@ -22,7 +22,9 @@ public class Player {
     private String weaponInUse;    // weapon info as a string for now
     private ImageView playerImage; // current player imageview
     private String currentSide;    // side player is facing
-
+    private PlayerMovement playerMovement;
+    private PlayerMoney playerMoney;
+    private PlayerHealth playerHealth;
     /**The Player Constructor
      *
      * @param health the amount of health the player has
@@ -32,36 +34,39 @@ public class Player {
      * @param difficultyLevel the chosen difficulty for the player
      */
     public Player(int health, int money, String name,
-                  String weaponInUse,int difficultyLevel) {
+                  String weaponInUse, int difficultyLevel) {
         this.weaponInUse = weaponInUse;
         this.currentSide = "Right";
         this.health = health;
         this.money = money;
         this.name = name;
+        this.playerMovement = new PlayerMovement(9, 17);
         setWeaponInUse(weaponInUse, currentSide);
 
 
         //Sets the coin and health bars
-        switch (difficultyLevel) {
-            case 1: //Easy: 4(full) hearts + 4 magic coins
-                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
-                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
-                break;
-            case 2: //Medium: 2 hearts + 2 magic coins
-                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
-                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
-                break;
-            case 3: //Hard: 1 heart + 1 magic coin
-                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
-                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
-                break;
-            default:
-        }
-        //Basically CSS
-        moneyBar.setFitWidth(225);
-        moneyBar.setFitHeight(37.5);
-        healthBar.setFitWidth(225);
-        healthBar.setFitHeight(37.5);
+//        switch (difficultyLevel) {
+//            case 1: //Easy: 4(full) hearts + 4 magic coins
+//                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
+//                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
+//                break;
+//            case 2: //Medium: 2 hearts + 2 magic coins
+//                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
+//                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
+//                break;
+//            case 3: //Hard: 1 heart + 1 magic coin
+//                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
+//                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
+//                break;
+//            default:
+//        }
+//        //Basically CSS
+//        moneyBar.setFitWidth(225);
+//        moneyBar.setFitHeight(37.5);
+//        healthBar.setFitWidth(225);
+//        healthBar.setFitHeight(37.5);
+        playerHealth = new PlayerHealth(difficultyLevel, 150);
+        playerMoney = new PlayerMoney(difficultyLevel, 150);
     }
 
     //getters for all attributes
@@ -77,19 +82,23 @@ public class Player {
         return money;
     }
 
+    public PlayerMovement getPlayerMovement() {
+        return playerMovement;
+    }
+
     public ImageView getHealthBar() {
-        return healthBar;
+        return playerHealth.getCurrentHealthBar();
     }
 
     public ImageView getMoneyBar() {
-        return moneyBar;
+        return playerMoney.getCurrentMoneyBar();
     }
 
     public String getWeaponInUse() {
         return weaponInUse;
     }
 
-    public ImageView getPlayerImage(){
+    public ImageView getPlayerImage() {
         return playerImage;
     }
 
@@ -98,20 +107,20 @@ public class Player {
     }
 
     //setters for all attributes
-    public void setHealth(int newHealth) {
-        if ((newHealth < 0) || (newHealth > 100)) {
-            throw new IllegalArgumentException("Health values can only between 0 "
-                    + "and 100, inclusive");
-        }
-        health = newHealth;
-    }
-
-    public void setMoney(int newMoney) {
-        if (newMoney < 0) {
-            throw new IllegalArgumentException("Money values can be negative");
-        }
-        money = newMoney;
-    }
+//    public void setHealth(int newHealth) {
+//        if ((newHealth < 0) || (newHealth > 100)) {
+//            throw new IllegalArgumentException("Health values can only between 0 "
+//                    + "and 100, inclusive");
+//        }
+//        health = newHealth;
+//    }
+//
+//    public void setMoney(int newMoney) {
+//        if (newMoney < 0) {
+//            throw new IllegalArgumentException("Money values can be negative");
+//        }
+//        money = newMoney;
+//    }
 
     public void setName(String givenName) {
         if ((givenName == null) || (givenName.isEmpty()) || (isWhiteSpaceOnly(givenName))) {
@@ -124,10 +133,11 @@ public class Player {
         setWeaponInUse(weaponInUse, currentSide);
     }
 
-    public void setWeaponInUse(String weaponInUse, String side){
-        this.playerImage = new ImageView(new Image("file:resources/pngs/"+weaponInUse+"Grandma"+side+".png"));
-        playerImage.setFitWidth(60);
-        playerImage.setFitHeight(60);
+    public void setWeaponInUse(String weaponInUse, String side) {
+        this.playerImage = new ImageView(
+                new Image("file:resources/pngs/" + weaponInUse + "Grandma" + side + ".png"));
+        playerImage.setFitWidth(35);
+        playerImage.setFitHeight(35);
         playerImage.setId("player");
     }
 
