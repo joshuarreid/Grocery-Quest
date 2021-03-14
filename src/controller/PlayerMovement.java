@@ -5,8 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class PlayerMovement {
-    private int xPosition; //current x or col position
-    private int yPosition; //current y or row position
+    private static int xPosition; //current x or col position
+    private static int yPosition; //current y or row position
 
     /**
      * Constructor for player movement
@@ -19,11 +19,11 @@ public class PlayerMovement {
         this.yPosition = y;
     }
 
-    public int getXPosition() {
+    public static int getXPosition() {
         return xPosition;
     }
 
-    public int getYPosition() {
+    public static int getYPosition() {
         return yPosition;
     }
 
