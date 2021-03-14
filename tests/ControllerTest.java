@@ -256,18 +256,103 @@ public class ControllerTest extends ApplicationTest {
         press(KeyCode.RIGHT).release(KeyCode.RIGHT);
 
         //Asserting the GameState changed and player has new position
+        assertEquals("Training Room", controller.getState());
+        assertNotEquals(initYPosition, PlayerMovement.getYPosition());
+        assertNotEquals(initXPosition, PlayerMovement.getXPosition());
+    }
+
+    @Test
+    /**
+     * Testing the Exit to the left
+     *
+     */
+    public void testExit2() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing left Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //moving player to right exit
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+
+
+        //Saving position of player before Exit
+        int initYPosition = PlayerMovement.getYPosition();
+        int initXPosition = PlayerMovement.getXPosition();
+
+        //Moving into exit
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        press(KeyCode.LEFT).release(KeyCode.LEFT);
+
+        //Asserting the GameState changed and player has new position
+        assertEquals("Weapon Room", controller.getState());
+        assertNotEquals(initYPosition, PlayerMovement.getYPosition());
+        assertNotEquals(initXPosition, PlayerMovement.getXPosition());
+    }
+
+    @Test
+    /**
+     * Testing the Exit at top
+     *
+     */
+    public void testExit3() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing top Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //moving player to right exit
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+
+
+
+        //Saving position of player before Exit
+        int initYPosition = PlayerMovement.getYPosition();
+        int initXPosition = PlayerMovement.getXPosition();
+
+        //Moving into exit
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.UP).release(KeyCode.UP);
+
+        //Asserting the GameState changed and player has new position
         assertEquals("Level 1", controller.getState());
         assertNotEquals(initYPosition, PlayerMovement.getYPosition());
         assertNotEquals(initXPosition, PlayerMovement.getXPosition());
-
-
-
-
-
-
-
     }
-
 
 
 
