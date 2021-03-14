@@ -19,9 +19,9 @@ public class EndScreen {
     private Button exitButton;
 
     private static final String IDLE_BUTTON_STYLE =
-            "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
+            "-fx-background-radius: 20; -fx-background-color: #83AA51";
     private static final String HOVERED_BUTTON_STYLE =
-            "-fx-background-radius: 20; -fx-background-color: #91bfa1";
+            "-fx-background-radius: 20; -fx-background-color: #688741";
 
 
     private EndScreen() { }
@@ -68,8 +68,8 @@ public class EndScreen {
         exitButton.setStyle("-fx-background-color: #83AA51; -fx-background-radius: 30px");
         exitButton.setMinSize(190, 148);
         exitButton.setMaxSize(190, 148);
-        exitButton.setOnMouseEntered(e -> replayButton.setStyle(HOVERED_BUTTON_STYLE));
-        exitButton.setOnMouseExited(e -> replayButton.setStyle(IDLE_BUTTON_STYLE));
+        exitButton.setOnMouseEntered(e -> exitButton.setStyle(HOVERED_BUTTON_STYLE));
+        exitButton.setOnMouseExited(e -> exitButton.setStyle(IDLE_BUTTON_STYLE));
         exitButton.setId("exitButton");
 
         Label replayText = new Label("play again");

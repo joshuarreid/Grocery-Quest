@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.GameModel;
+import view.EndScreen;
 import view.GameScreen;
 import view.StartScreen;
 import view.ConfigurationScreen;
@@ -38,7 +39,7 @@ public class Controller extends Application {
     private final int height = 600;
     private Player hero;
 //    private Board board;
-    private PlayerMovement playerMovement;
+//    private PlayerMovement playerMovement;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -47,7 +48,7 @@ public class Controller extends Application {
         gameModel = new GameModel();
 //        board = new Board(18,18);
 //        hero = new Player();
-        this.playerMovement = new PlayerMovement(8, 15);
+//        this.playerMovement = new PlayerMovement(8, 15);
         initStartScreen();
     }
 
@@ -210,10 +211,10 @@ public class Controller extends Application {
      */
     private void goToGameScreen() {
         gameModel.setState("Game Screen");
-        GameScreen screen = new GameScreen(width, 700, hero);
+        GameScreen screen = new GameScreen(width, height, hero);
 
         Scene scene = screen.getScene();
-        playerMovement.moveCharacter(mainWindow, scene, hero, screen.getBoard());
+        hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, screen.getBoard());
     }
 
         /**

@@ -19,6 +19,14 @@ public class PlayerMovement {
         this.yPosition = y;
     }
 
+    public int getXPosition() {
+        return xPosition;
+    }
+
+    public int getYPosition() {
+        return yPosition;
+    }
+
     /**
      * Moves a Player's location on a given board depending on arrow key events
      *
@@ -54,11 +62,17 @@ public class PlayerMovement {
             switch (event.getCode()) {
                 case UP:
                     if(!board.isBlocked(yPosition - 1, xPosition)) {
+                        if (!hero.getCurrentSide().equals("Up")) {
+                            hero.setCurrentSide("Up");
+                        }
                         moveHeroBy(hero, 0, -1, board);
                     }
                     break;
                 case DOWN:
                     if(!board.isBlocked(yPosition + 1, xPosition)) {
+                        if (!hero.getCurrentSide().equals("Down")) {
+                            hero.setCurrentSide("Down");
+                        }
                         moveHeroBy(hero, 0, 1, board);
                     }
                     break;

@@ -70,14 +70,7 @@ public class GameScreen {
         loadMainCharacter();
         loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
 
-        //Coin Health Box
-        VBox coinHealthBox = new VBox(5);
-        coinHealthBox.getChildren().addAll(healthBar, coinBar);
-
-        VBox base = new VBox(10);
-        base.getChildren().addAll(coinHealthBox, gridPane);
-        base.setAlignment(Pos.CENTER);
-        Scene gameScene = new Scene(base, width, height+100);
+        Scene gameScene = new Scene(gridPane, width, height);
         return gameScene;
     }
 
@@ -86,8 +79,9 @@ public class GameScreen {
      */
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
+        board.addObject(healthBar, "health", true, 0, 1, 1, 5);
         coinBar = hero.getMoneyBar();
-
+        board.addObject(coinBar, "money", true, 1, 1, 1, 5);
     }
 
     /**
@@ -95,7 +89,9 @@ public class GameScreen {
      */
     private void loadMainCharacter() {
         board.addObject(hero.getPlayerImage(),
-                "player", false, 17, 0, 9, 0);
+                "player", false,
+                hero.getPlayerMovement().getYPosition(), 0,
+                hero.getPlayerMovement().getXPosition(), 0);
     }
 
     /**
@@ -120,7 +116,7 @@ public class GameScreen {
         }
 
         //Flowers
-        for (int i = 18, j = 2; j < 16; j++) { // row 18 + col
+        for (int i = 17, j = 2; j < 16; j++) { // row 18 + col
             if (j > 5 && j < 12) {
                 continue;
             }
@@ -128,7 +124,7 @@ public class GameScreen {
             flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
             flower.setFitWidth(30);
             flower.setFitHeight(45);
-            board.addObject(flower, "flower", true, i, 0, j, 0);
+            board.addObject(flower, "flower", true, i, 2, j, 1);
         }
 
         //Textboxes using a StackPane
