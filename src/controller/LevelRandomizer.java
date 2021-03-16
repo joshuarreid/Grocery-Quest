@@ -1,5 +1,10 @@
 package controller;
-import javafx.scene.image.ImageView;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.util.*;
 
@@ -9,7 +14,7 @@ import java.util.*;
  *
  */
 public class LevelRandomizer {
-    private Stack<ImageView> layouts;
+    private Stack<Background> layouts;
 
     /**
      * Constructor Method
@@ -17,14 +22,29 @@ public class LevelRandomizer {
      * this method takes a list of layouts, shuffles them
      * and puts them into the stack.
      *
-     * @param layouts layout of levels
      */
-    public LevelRandomizer(List<ImageView> layouts) {
+    public LevelRandomizer() {
+        //Color Options
+        String[] backgroundColors = new String[] {
+                "Color1",
+                "Color2",
+                "Color3",
+                "Color4",
+                "Color5",
+                "Color6",
+                "Color7",
+                "Color8"
+        };
+        //Adding background objects to stack
+        for (String color: backgroundColors) {
+            layouts.add(new Background(new BackgroundFill((Paint.valueOf("PlaceHolder")), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+
         //Randomize the level layouts list
         Collections.shuffle(layouts);
 
         //Add the level layouts to the stack
-        for (ImageView item: layouts) {
+        for (Background item: layouts) {
             this.layouts.add(item);
         }
     }
@@ -35,7 +55,7 @@ public class LevelRandomizer {
      *
      * @return layout
      */
-    public ImageView getLayout() {
+    public Background getLayout() {
         if (layouts.size() == 0) {
             throw new NoSuchElementException("Stack is empty");
         }
