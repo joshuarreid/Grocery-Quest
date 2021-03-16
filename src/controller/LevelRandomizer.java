@@ -37,7 +37,7 @@ public class LevelRandomizer {
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {
-            layouts.add(new Background(new BackgroundFill((Paint.valueOf("PlaceHolder")), CornerRadii.EMPTY, Insets.EMPTY)));
+            layouts.add(new Background(new BackgroundFill((Paint.valueOf(color)), CornerRadii.EMPTY, Insets.EMPTY)));
         }
 
         //Randomize the level layouts list
