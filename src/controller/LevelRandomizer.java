@@ -26,14 +26,14 @@ public class LevelRandomizer {
     public LevelRandomizer() {
         //Color Options
         String[] backgroundColors = new String[] {
-                "Color1",
-                "Color2",
-                "Color3",
-                "Color4",
-                "Color5",
-                "Color6",
-                "Color7",
-                "Color8"
+                "#A0D3B2",
+                "#FFC752",
+                "#C75E44",
+                "#00A8B0",
+                "#7FAB50",
+                "#334458",
+                "#CECDCD",
+                "#52AA83"
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {
