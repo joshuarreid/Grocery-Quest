@@ -102,13 +102,12 @@ class Exit {
     /**
      * exit method called when player is on exit to
      * initiate exit action.
-     * @param currentLevel the level supposed to be previous level after change
-     * @param nextLevel the level supposed to be next level after change
+     * @param futureNextLevel the level supposed to be next level after change
      * @return Background of the nextLevel
      */
-    public Background exit(Level currentLevel, Level nextLevel) {
-        setPreviousLevel(currentLevel); //updating previous level to current one
-        setNextLevel(nextLevel); //updating next level to user input
+    public Background exit(Level futureNextLevel) {
+        setPreviousLevel(getNextLevel()); //updating previous level to current one
+        setNextLevel(futureNextLevel); //updating next level to user input
         LevelRandomizer generateNextLevelGraphics = new LevelRandomizer();
         return generateNextLevelGraphics.getLayout();
     }
