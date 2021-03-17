@@ -60,6 +60,12 @@ public class PlayerMovement {
     private void handleKeys(Scene scene, Player hero, Board board) {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
+            case SPACE:
+                Exit exit = board.onExit(hero);
+                if (exit != null) { //TODO switch level
+
+                }
+                break;
             case UP:
                 if (!board.isBlocked(yPosition - 1, xPosition)) {
                     if (!hero.getCurrentSide().equals("Up")) {
@@ -134,5 +140,13 @@ public class PlayerMovement {
             xPosition = x;
             yPosition = y;
         }
+    }
+
+    public int getxPosition() {
+        return xPosition;
+    }
+
+    public int getyPosition() {
+        return yPosition;
     }
 }

@@ -31,5 +31,10 @@ public class LevelController {
         hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, levelSetup.getGameScreen().getBoard());
     }
 
+    public void levelOneScreen() {
+        gameModel.setState("Level 1");
+
+    }
+
 
 }

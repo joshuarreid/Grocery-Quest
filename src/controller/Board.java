@@ -231,4 +231,10 @@ public class Board {
         return gridPane;
     }
 
+
+    public Exit onExit(Player player) {
+        int[] playerCoordinates = player.getPlayerPosition();
+        return exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+    }
+
 }

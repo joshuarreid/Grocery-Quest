@@ -86,6 +86,14 @@ public class Player {
         return playerMovement;
     }
 
+    public int[] getPlayerPosition() {
+        int[] coordinates = new int[]{
+                playerMovement.getxPosition(),
+                playerMovement.getyPosition()
+        };
+        return coordinates;
+    }
+
     public ImageView getHealthBar() {
         return playerHealth.getCurrentHealthBar();
     }
