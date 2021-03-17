@@ -20,9 +20,9 @@ public class LoseScreen {
     private Button exitButton;
 
     private static final String IDLE_BUTTON_STYLE =
-            "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
+            "-fx-background-radius: 20; -fx-background-color: #C54741";
     private static final String HOVERED_BUTTON_STYLE =
-            "-fx-background-radius: 20; -fx-background-color: #91bfa1";
+            "-fx-background-radius: 20; -fx-background-color: #A33A3A";
 
 
     private LoseScreen() { }
@@ -83,16 +83,16 @@ public class LoseScreen {
         pane.setTop(top);
         top.getChildren().addAll(title);
         top.setSpacing(20);
-        Insets insets = new Insets(50);
+        Insets insets = new Insets(40);
         BorderPane.setMargin(top, insets);
 
         pane.setCenter(middle);
         middle.getChildren().addAll(replayButton, exitButton);
-        middle.setSpacing(30);
+        middle.setSpacing(20);
 
         pane.setBottom(bottom);
         bottom.getChildren().addAll(replayText, exitText);
-        bottom.setSpacing(60);
+        bottom.setSpacing(90);
         BorderPane.setMargin(bottom, insets);
 
         Scene loseScene = new Scene(pane, width, height);
