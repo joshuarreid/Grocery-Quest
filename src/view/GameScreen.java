@@ -2,6 +2,7 @@ package view;
 
 import controller.Board;
 import controller.Player;
+import controller.Exit;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.control.Label;
+import org.assertj.core.internal.bytebuddy.asm.Advice;
 
 public class GameScreen {
     private int width;
@@ -23,7 +25,8 @@ public class GameScreen {
     private ImageView leftTextBox;
     private ImageView rightTextBox;
     private Board board;
-
+    private int levelDeterminant;
+    private Exit[] exits;
 
     private static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 15);
@@ -35,11 +38,14 @@ public class GameScreen {
      * @param height height of window
      * @param hero player
      */
-    public GameScreen(int width, int height, Player hero) {
+    public GameScreen(int width, int height, Player hero, int levelDeterminant, Exit[] exits) {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(19, 19);
+        this.board = new Board(19, 19, exits);
+        this.levelDeterminant = levelDeterminant;
+        this.exits = exits;
+
     }
 
     /**
@@ -63,8 +69,9 @@ public class GameScreen {
                 new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
         borderExitImage.setFitWidth(width);
         borderExitImage.setFitHeight(height);
-        gridPane.setBackground(
-                new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
+//        gridPane.setBackground(
+//                new Background(new BackgroundFill((Color.PINK), CornerRadii.EMPTY, Insets.EMPTY)));
+        gridPane.setStyle("-fx-background-color: pink");
 
         //Load in all entities
         loadCoinHealthBar();

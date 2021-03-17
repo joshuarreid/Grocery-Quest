@@ -24,6 +24,8 @@ public class Board {
     private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
+    private Exit[] exits;
+    private Exit[][] exitBoard;
 
     /**
      * Fixed row and column is 18 but any amount
@@ -32,11 +34,12 @@ public class Board {
      * @param row Number of vertical lines
      * @param column Number of horizontal locations
      */
-    public Board(int row, int column) {
+    public Board(int row, int column, Exit[] exits) {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
+        this.exits = exits;
     }
 
     /**
@@ -56,6 +59,7 @@ public class Board {
             ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
+        setUpHiddenBoard();
     }
 
     public void setUpHiddenBoard() {
@@ -76,6 +80,56 @@ public class Board {
                     hiddenBoard[row][col] = "wall";
 
                 }
+            }
+        }
+        setUpExitBoard();
+    }
+
+    private void setUpExitBoard() {
+        for (int i = 0; i < this.exits.length; i++) {
+            switch (this.exits[i].getSide()) {
+                case TOP :
+//                    Exit top = new Exit(currentLevel, ExitType.TOP);
+                    exitBoard[0][(maxColumn / 2) - 1] = exits[i];
+                    exitBoard[0][maxColumn / 2] = exits[i];
+                    exitBoard[0][(maxColumn / 2) + 1] = exits[i];
+
+                    hiddenBoard[1][(maxColumn / 2)] = "exitTOP";
+                    hiddenBoard[1][(maxColumn / 2) + 1] = "exitTOP";
+                    hiddenBoard[1][(maxColumn / 2) + 2] = "exitTOP";
+                    break;
+                case BOTTOM:
+//                    Exit bottom = new Exit(currentLevel, ExitType.BOTTOM);
+                    exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
+                    exitBoard[maxRow - 1][maxColumn] = exits[i];
+                    exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
+
+                    hiddenBoard[maxRow - 2][(maxColumn / 2)] = "exitBOTTOM";
+                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 1] = "exitBOTTOM";
+                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 2] = "exitBOTTOM";
+                    break;
+                case RIGHT:
+//                    Exit right = new Exit(currentLevel, ExitType.RIGHT);
+                    exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
+                    exitBoard[(maxRow / 2)][maxColumn -1] = exits[i];
+                    exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
+
+                    hiddenBoard[maxRow / 2][maxColumn - 2] = "exitRIGHT";
+                    hiddenBoard[(maxRow / 2) + 1][maxColumn - 2] = "exitRIGHT";
+                    hiddenBoard[(maxRow / 2) + 2][maxColumn - 2] = "exitRIGHT";
+                    break;
+                case LEFT:
+//                    Exit left = new Exit(currentLevel, ExitType.LEFT);
+                    exitBoard[(maxRow / 2) - 1][0] = exits[i];
+                    exitBoard[(maxRow / 2)][0] = exits[i];
+                    exitBoard[(maxRow / 2) + 1][0] = exits[i];
+
+                    hiddenBoard[maxRow / 2][1] = "exitLEFT";
+                    hiddenBoard[(maxRow / 2) + 1][1] = "exitLEFT";
+                    hiddenBoard[(maxRow / 2) + 2][1] = "exitLEFT";
+                    break;
+                default:
+
             }
         }
     }

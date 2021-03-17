@@ -14,7 +14,7 @@ import java.util.*;
  *
  */
 public class LevelRandomizer {
-    private Stack<Background> layouts;
+    private Stack<String> layouts;
 
     /**
      * Constructor Method
@@ -25,6 +25,7 @@ public class LevelRandomizer {
      */
     public LevelRandomizer() {
         //Color Options
+        layouts = new Stack<>();
         String[] backgroundColors = new String[] {
                 "#A0D3B2",
                 "#FFC752",
@@ -37,16 +38,13 @@ public class LevelRandomizer {
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {
-            layouts.add(new Background(new BackgroundFill((Paint.valueOf(color)), CornerRadii.EMPTY, Insets.EMPTY)));
+            System.out.println(Paint.valueOf(color));
+            layouts.add(color);
         }
 
         //Randomize the level layouts list
         Collections.shuffle(layouts);
 
-        //Add the level layouts to the stack
-        for (Background item: layouts) {
-            this.layouts.add(item);
-        }
     }
 
     /**
@@ -55,7 +53,7 @@ public class LevelRandomizer {
      *
      * @return layout
      */
-    public Background getLayout() {
+    public String getLayout() {
         if (layouts.size() == 0) {
             throw new NoSuchElementException("Stack is empty");
         }

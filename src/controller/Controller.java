@@ -9,11 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.GameModel;
-import view.EndScreen;
-import view.GameScreen;
-import view.StartScreen;
-import view.ConfigurationScreen;
-
+import view.*;
 
 
 /**The Controller Class
@@ -205,11 +201,13 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
-        gameModel.setState("Game Screen");
-        GameScreen screen = new GameScreen(width, height, hero);
-
-        Scene scene = screen.getScene();
-        hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, screen.getBoard());
+        LevelController lc = new LevelController(mainWindow,gameModel,difficultyLevel,weaponChoice,hero);
+        lc.initialGameScreen();
+//        gameModel.setState("Game Screen");
+////        GameScreen screen = new GameScreen(width, height, hero);
+//
+//        Scene scene = screen.getScene();
+//        hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, screen.getBoard());
     }
 
     /**
