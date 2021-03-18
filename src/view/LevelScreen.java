@@ -19,7 +19,7 @@ public abstract class LevelScreen {
     protected Board board;
     private String background;
     private Exit[] exits;
-    private String ID;
+    private String iD;
     private Scene gameScene;
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -31,15 +31,19 @@ public abstract class LevelScreen {
      * @param width width of window
      * @param height height of window
      * @param hero player
+     * @param lr level randomizer
+     * @param exits exits on level
+     * @param iD level name
      */
-    public LevelScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, String ID) {
+    public LevelScreen(int width, int height, Player hero,
+                       LevelRandomizer lr, Exit[] exits, String iD) {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(19, 19, exits, ID);
+        this.board = new Board(19, 19, exits, iD);
         this.background = lr.getLayout();
         this.exits = exits;
-        this.ID = ID;
+        this.iD = iD;
         board.createBoard(height, width);
         //Set up gridPane
         GridPane gridPane = board.getGridPane();

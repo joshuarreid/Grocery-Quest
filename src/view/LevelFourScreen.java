@@ -6,8 +6,8 @@ import model.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
-public class LevelFourScreen extends LevelScreen{
-    public LevelFourScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits){
+public class LevelFourScreen extends LevelScreen {
+    public LevelFourScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits) {
         super(width, height, hero, lr, exits, "Level 4");
     }
 

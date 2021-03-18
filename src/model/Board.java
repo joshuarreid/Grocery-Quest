@@ -4,9 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import model.Exit;
-import model.GameModel;
-import model.Player;
 
 //**************************NOTE: 3 THINGS TO ADDRESS**********************************************
 //1. 2 potential methods: removeObject and playerMovement()
@@ -23,13 +20,13 @@ import model.Player;
 public class Board {
     private final int maxRow;
     private final int maxColumn;
-//    private boolean win = false; //is win variable even necessary?
-//    private boolean blocked = false;
+    //    private boolean win = false; //is win variable even necessary?
+    //    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
     private Exit[] exits;
     private Exit[][] exitBoard;
-    private String ID;
+    private String iD;
 
     /**
      * Fixed row and column is 18 but any amount
@@ -37,15 +34,17 @@ public class Board {
      *
      * @param row Number of vertical lines
      * @param column Number of horizontal locations
+     * @param exits array of levels exits
+     * @param iD name of the level
      */
-    public Board(int row, int column, Exit[] exits, String ID) {
+    public Board(int row, int column, Exit[] exits, String iD) {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
         this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
-        this.ID = ID;
+        this.iD = iD;
     }
 
     /**
@@ -65,33 +64,33 @@ public class Board {
             ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
-        setUpExitBoard();;
+        setUpExitBoard();
     }
 
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
-            switch (this.exits[i].getExitType(ID)) {
-                case TOP :
-                    exitBoard[0][(maxColumn / 2) - 1] = exits[i];
-                    exitBoard[0][maxColumn / 2] = exits[i];
-                    exitBoard[0][(maxColumn / 2) + 1] = exits[i];
-                    break;
-                case BOTTOM:
-                    exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
-                    exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
-                    exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
-                    break;
-                case RIGHT:
-                    exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
-                    exitBoard[(maxRow / 2)][maxColumn -1] = exits[i];
-                    exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
-                    break;
-                case LEFT:
-                    exitBoard[(maxRow / 2) - 1][0] = exits[i];
-                    exitBoard[(maxRow / 2)][0] = exits[i];
-                    exitBoard[(maxRow / 2) + 1][0] = exits[i];
-                    break;
-                default:
+            switch (this.exits[i].getExitType(iD)) {
+            case TOP :
+                exitBoard[0][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[0][maxColumn / 2] = exits[i];
+                exitBoard[0][(maxColumn / 2) + 1] = exits[i];
+                break;
+            case BOTTOM:
+                exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
+                exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
+                break;
+            case RIGHT:
+                exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
+                break;
+            case LEFT:
+                exitBoard[(maxRow / 2) - 1][0] = exits[i];
+                exitBoard[(maxRow / 2)][0] = exits[i];
+                exitBoard[(maxRow / 2) + 1][0] = exits[i];
+                break;
+            default:
 
             }
         }
@@ -151,7 +150,6 @@ public class Board {
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
                     for (int j = firstCol; j < (firstCol + colSpan); j++) {
-//                        System.out.println("blocked: " + j + "," + i);
                         hiddenBoard[i + 1][j + 1] = id;
                     }
                 }

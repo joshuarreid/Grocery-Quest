@@ -1,8 +1,5 @@
 package model;
 
-import model.ExitType;
-import model.GameModel;
-
 public class Exit {
     private ExitType side1;
     private ExitType side2;
@@ -16,8 +13,8 @@ public class Exit {
         this.screen2 = screen2;
     }
 
-    public ExitType getExitType(String ID) {
-        if(ID.equals(screen1)) {
+    public ExitType getExitType(String iD) {
+        if (iD.equals(screen1)) {
             return side1;
         } else {
             return side2;

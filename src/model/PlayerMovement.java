@@ -14,7 +14,7 @@ public class PlayerMovement {
         this.xPosition = x;
         this.yPosition = y;
     }
-//
+
     public static int getXPosition() {
         return xPosition;
     }

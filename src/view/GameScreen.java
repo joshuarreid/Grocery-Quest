@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 
-public class GameScreen extends LevelScreen{
+public class GameScreen extends LevelScreen {
 
     /**
      * Initial Game Screen Constructor
@@ -17,9 +17,11 @@ public class GameScreen extends LevelScreen{
      * @param width width of window
      * @param height height of window
      * @param hero player
+     * @param lr level randomizer
+     * @param exits array of exits in screen
      */
-    public GameScreen(int width, int height, Player hero,LevelRandomizer lr, Exit[] exits) {
-        super(width, height, hero,lr, exits, "Game Screen");
+    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits) {
+        super(width, height, hero, lr, exits, "Game Screen");
     }
 
     /**

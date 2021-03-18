@@ -17,12 +17,13 @@ public class LevelController {
     private final int height = 600;
     private Player hero;
     private int currentDeterminant;
-    LevelSetup levelSetup;
+    private LevelSetup levelSetup;
     private Scene currentScene;
     private Board currentBoard;
     private AnimationTimer timer;
 
-    public LevelController(Stage mainWindow, GameModel gameModel, int difficultyLevel, String weaponChoice, Player hero) {
+    public LevelController(Stage mainWindow, GameModel gameModel, int difficultyLevel,
+                           String weaponChoice, Player hero) {
         this.mainWindow = mainWindow;
         this.gameModel = gameModel;
         this.difficultyLevel = difficultyLevel;
@@ -190,54 +191,54 @@ public class LevelController {
     }
 
     private void getNextLevel(Exit exit) {
-        switch(exit.getAdjacentState(gameModel)) {
-            case "Game Screen":
-                initialGameScreen();
-                break;
-            case "Level 1":
-                levelOneScreen();
-                break;
-            case "Level 2":
-                levelTwoScreen();
-                break;
-            case "Level 3":
-                levelThreeScreen();
-                break;
-            case "Level 4":
-                levelFourScreen();
-                break;
-            case "Level 5":
-                levelFiveScreen();
-                break;
-            case "Level 6":
-                levelSixScreen();
-                break;
-            case "Level 7":
-                levelSevenScreen();
-                break;
-            case "Level 8":
-                levelEightScreen();
-                break;
-            case "Weapons Screen":
-                weaponsScreen();
-                break;
-            case "Training Screen":
-                trainingScreen();
-                break;
-            case "Boss Screen":
-                bossScreen();
-                break;
-            case "Vaccine Screen":
-                vaccineScreen();
-                break;
-            case "Win Screen":
-                winScreen();
-                break;
-            case "Exit Game":
-                exitGame();
-                break;
+        switch (exit.getAdjacentState(gameModel)) {
+        case "Game Screen":
+            initialGameScreen();
+            break;
+        case "Level 1":
+            levelOneScreen();
+            break;
+        case "Level 2":
+            levelTwoScreen();
+            break;
+        case "Level 3":
+            levelThreeScreen();
+            break;
+        case "Level 4":
+            levelFourScreen();
+            break;
+        case "Level 5":
+            levelFiveScreen();
+            break;
+        case "Level 6":
+            levelSixScreen();
+            break;
+        case "Level 7":
+            levelSevenScreen();
+            break;
+        case "Level 8":
+            levelEightScreen();
+            break;
+        case "Weapons Screen":
+            weaponsScreen();
+            break;
+        case "Training Screen":
+            trainingScreen();
+            break;
+        case "Boss Screen":
+            bossScreen();
+            break;
+        case "Vaccine Screen":
+            vaccineScreen();
+            break;
+        case "Win Screen":
+            winScreen();
+            break;
+        case "Exit Game":
+            exitGame();
+            break;
 
-            default:
+        default:
         }
     }
 
@@ -269,46 +270,55 @@ public class LevelController {
     private void handleKeys(Scene scene, Player hero, Board board) {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case SPACE:
-                    System.out.println("spacey boi");
-                    if (board.onExit(hero) != null) {
-                        System.out.println("inside");
-                        getNextLevel(board.onExit(hero, gameModel));
+            case SPACE:
+                System.out.println("spacey boi");
+                if (board.onExit(hero) != null) {
+                    System.out.println("inside");
+                    getNextLevel(board.onExit(hero, gameModel));
+                }
+                break;
+            case UP:
+                if (!board.isBlocked(
+                        hero.getPlayerMovement().getYPosition() - 1,
+                        hero.getPlayerMovement().getXPosition())) {
+
+                    if (!hero.getCurrentSide().equals("Up")) {
+                        hero.setCurrentSide("Up");
                     }
-                    break;
-                case UP:
-                    if (!board.isBlocked(hero.getPlayerMovement().getYPosition() - 1, hero.getPlayerMovement().getXPosition())) {
-                        if (!hero.getCurrentSide().equals("Up")) {
-                            hero.setCurrentSide("Up");
-                        }
-                        moveHeroBy(hero, 0, -1, board);
+                    moveHeroBy(hero, 0, -1, board);
+                }
+                break;
+            case DOWN:
+                if (!board.isBlocked(
+                        hero.getPlayerMovement().getYPosition() + 1,
+                        hero.getPlayerMovement().getXPosition())) {
+                    if (!hero.getCurrentSide().equals("Down")) {
+                        hero.setCurrentSide("Down");
                     }
-                    break;
-                case DOWN:
-                    if (!board.isBlocked(hero.getPlayerMovement().getYPosition() + 1, hero.getPlayerMovement().getXPosition())) {
-                        if (!hero.getCurrentSide().equals("Down")) {
-                            hero.setCurrentSide("Down");
-                        }
-                        moveHeroBy(hero, 0, 1, board);
+                    moveHeroBy(hero, 0, 1, board);
+                }
+                break;
+            case LEFT:
+                if (!board.isBlocked(
+                        hero.getPlayerMovement().getYPosition(),
+                        hero.getPlayerMovement().getXPosition() - 1)) {
+                    if (!hero.getCurrentSide().equals("Left")) {
+                        hero.setCurrentSide("Left");
                     }
-                    break;
-                case LEFT:
-                    if (!board.isBlocked(hero.getPlayerMovement().getYPosition(), hero.getPlayerMovement().getXPosition() - 1)) {
-                        if (!hero.getCurrentSide().equals("Left")) {
-                            hero.setCurrentSide("Left");
-                        }
-                        moveHeroBy(hero, -1, 0, board);
+                    moveHeroBy(hero, -1, 0, board);
+                }
+                break;
+            case RIGHT:
+                if (!board.isBlocked(
+                        hero.getPlayerMovement().getYPosition(),
+                        hero.getPlayerMovement().getXPosition() + 1)) {
+                    if (!hero.getCurrentSide().equals("Right")) {
+                        hero.setCurrentSide("Right");
                     }
-                    break;
-                case RIGHT:
-                    if (!board.isBlocked(hero.getPlayerMovement().getYPosition(), hero.getPlayerMovement().getXPosition() + 1)) {
-                        if (!hero.getCurrentSide().equals("Right")) {
-                            hero.setCurrentSide("Right");
-                        }
-                        moveHeroBy(hero, 1, 0, board);
-                    }
-                    break;
-                default:
+                    moveHeroBy(hero, 1, 0, board);
+                }
+                break;
+            default:
             }
         });
     }
@@ -343,7 +353,10 @@ public class LevelController {
      * @param board current Board
      */
     private void moveHeroTo(Player hero, int x, int y, Board board) {
-        board.removeObject("player", hero.getPlayerMovement().getXPosition(), hero.getPlayerMovement().getYPosition());
+        board.removeObject(
+                "player",
+                hero.getPlayerMovement().getXPosition(),
+                hero.getPlayerMovement().getYPosition());
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false, y, 0, x, 0);
         if (worked) {

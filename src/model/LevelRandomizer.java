@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.paint.Paint;
-
 import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.Stack;
@@ -25,19 +23,19 @@ public class LevelRandomizer {
         //Color Options
         layouts = new Stack<>();
         String[] backgroundColors = new String[] {
-                "#A0D3B2",
-                "#FFC752",
-                "#C75E44",
-                "#00A8B0",
-                "#7FAB50",
-                "#334458",
-                "#CECDCD",
-                "#52AA83",
-                "#7e7ee0",
-                "#cbc0d3",
-                "#fcd5ce",
-                "#1d81cb",
-                "#c29a59"
+            "#A0D3B2",
+            "#FFC752",
+            "#C75E44",
+            "#00A8B0",
+            "#7FAB50",
+            "#334458",
+            "#CECDCD",
+            "#52AA83",
+            "#7e7ee0",
+            "#cbc0d3",
+            "#fcd5ce",
+            "#1d81cb",
+            "#c29a59"
 
         };
         //Adding background objects to stack

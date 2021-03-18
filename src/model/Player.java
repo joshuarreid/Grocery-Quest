@@ -2,9 +2,6 @@ package model;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.PlayerHealth;
-import model.PlayerMoney;
-import model.PlayerMovement;
 
 /**The Player Class
  *
@@ -96,20 +93,20 @@ public class Player {
     }
 
     //setters for all attributes
-//    public void setHealth(int newHealth) {
-//        if ((newHealth < 0) || (newHealth > 100)) {
-//            throw new IllegalArgumentException("Health values can only between 0 "
-//                    + "and 100, inclusive");
-//        }
-//        health = newHealth;
-//    }
-//
-//    public void setMoney(int newMoney) {
-//        if (newMoney < 0) {
-//            throw new IllegalArgumentException("Money values can be negative");
-//        }
-//        money = newMoney;
-//    }
+    //    public void setHealth(int newHealth) {
+    //        if ((newHealth < 0) || (newHealth > 100)) {
+    //            throw new IllegalArgumentException("Health values can only between 0 "
+    //                    + "and 100, inclusive");
+    //        }
+    //        health = newHealth;
+    //    }
+    //
+    //    public void setMoney(int newMoney) {
+    //        if (newMoney < 0) {
+    //            throw new IllegalArgumentException("Money values can be negative");
+    //        }
+    //        money = newMoney;
+    //    }
 
     public void setName(String givenName) {
         if ((givenName == null) || (givenName.isEmpty()) || (isWhiteSpaceOnly(givenName))) {

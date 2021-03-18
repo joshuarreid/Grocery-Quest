@@ -189,13 +189,10 @@ public class Controller extends Application {
                 Level levelOne = new Level(1, difficultyLevel);
                 hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                 goToGameScreen();
-//                System.out.println("VALID!"); //Delete after previous lines implemented
             }
         });
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
-//        mainWindow.show();
-
     }
 
     /**
@@ -203,7 +200,12 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
-        LevelController lc = new LevelController(mainWindow,gameModel,difficultyLevel,weaponChoice,hero);
+        LevelController lc = new LevelController(
+                mainWindow,
+                gameModel,
+                difficultyLevel,
+                weaponChoice,
+                hero);
         lc.initialGameScreen();
     }
 
