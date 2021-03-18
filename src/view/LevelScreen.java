@@ -40,7 +40,7 @@ public abstract class LevelScreen {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(19, 19, exits);
+        this.board = new Board(19, 19, exits, ID);
         this.background = lr.getLayout();
         this.levelDeterminant = levelDeterminant;
         this.exits = exits;

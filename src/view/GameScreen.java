@@ -42,7 +42,7 @@ public class GameScreen {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(19, 19, exits);
+        this.board = new Board(19, 19, exits, "Game Screen");
         this.levelDeterminant = levelDeterminant;
         this.exits = exits;
 

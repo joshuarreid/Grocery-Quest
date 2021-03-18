@@ -26,6 +26,7 @@ public class Board {
     private GridPane gridPane;
     private Exit[] exits;
     private Exit[][] exitBoard;
+    private String ID;
 
     /**
      * Fixed row and column is 18 but any amount
@@ -34,12 +35,14 @@ public class Board {
      * @param row Number of vertical lines
      * @param column Number of horizontal locations
      */
-    public Board(int row, int column, Exit[] exits) {
+    public Board(int row, int column, Exit[] exits, String ID) {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
+        this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
+        this.ID = ID;
     }
 
     /**
@@ -63,50 +66,51 @@ public class Board {
     }
 
     public void setUpHiddenBoard() {
-        for (int row = 0; row < maxRow + 2; row++) {
-            for (int col = 0; col < maxColumn + 2; col++) {
-                if (row == 0 || row == maxRow) {
-                    if (col == maxColumn / 2
-                            || col == (maxColumn / 2) + 1
-                            || col == (maxColumn / 2) + 2) {
-                        hiddenBoard[row + 1][col] = "door";
-                    }
-                    hiddenBoard[row][col] = "wall";
-
-                } else if (col == 0 || col == maxColumn) {
-                    if (row == maxRow / 2 || row == (maxRow / 2) + 1 || row == (maxRow / 2) + 2) {
-                        hiddenBoard[row][col] = "door";
-                    }
-                    hiddenBoard[row][col] = "wall";
-
-                }
-            }
-        }
+//        for (int row = 0; row < maxRow + 2; row++) {
+//            for (int col = 0; col < maxColumn + 2; col++) {
+//                if (row == 0 || row == maxRow) {
+////                    if (col == maxColumn / 2
+////                            || col == (maxColumn / 2) + 1
+////                            || col == (maxColumn / 2) + 2) {
+////                        hiddenBoard[row + 1][col] = "door";
+////                    }
+//                    hiddenBoard[row][col] = "wall";
+//
+//                } else if (col == 0 || col == maxColumn) {
+////                    if (row == maxRow / 2 || row == (maxRow / 2) + 1 || row == (maxRow / 2) + 2) {
+////                        hiddenBoard[row][col] = "door";
+////                    }
+//                    hiddenBoard[row][col] = "wall";
+//
+//                }
+//            }
+//        }
         setUpExitBoard();
     }
 
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
-            switch (this.exits[i].getAdjacentState(g)) {
+            switch (this.exits[i].getExitType(ID)) {
                 case TOP :
 //                    Exit top = new Exit(currentLevel, ExitType.TOP);
                     exitBoard[0][(maxColumn / 2) - 1] = exits[i];
                     exitBoard[0][maxColumn / 2] = exits[i];
                     exitBoard[0][(maxColumn / 2) + 1] = exits[i];
 
-                    hiddenBoard[1][(maxColumn / 2)] = "exitTOP";
-                    hiddenBoard[1][(maxColumn / 2) + 1] = "exitTOP";
-                    hiddenBoard[1][(maxColumn / 2) + 2] = "exitTOP";
+//                    hiddenBoard[1][(maxColumn / 2)] = "exitTOP";
+//                    hiddenBoard[1][(maxColumn / 2) + 1] = "exitTOP";
+//                    hiddenBoard[1][(maxColumn / 2) + 2] = "exitTOP";
                     break;
                 case BOTTOM:
 //                    Exit bottom = new Exit(currentLevel, ExitType.BOTTOM);
+//                    System.out.println(maxRow - 1);
                     exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
                     exitBoard[maxRow - 1][maxColumn] = exits[i];
                     exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
 
-                    hiddenBoard[maxRow - 2][(maxColumn / 2)] = "exitBOTTOM";
-                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 1] = "exitBOTTOM";
-                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 2] = "exitBOTTOM";
+//                    hiddenBoard[maxRow - 2][(maxColumn / 2)] = "exitBOTTOM";
+//                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 1] = "exitBOTTOM";
+//                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 2] = "exitBOTTOM";
                     break;
                 case RIGHT:
 //                    Exit right = new Exit(currentLevel, ExitType.RIGHT);
@@ -114,9 +118,9 @@ public class Board {
                     exitBoard[(maxRow / 2)][maxColumn -1] = exits[i];
                     exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
 
-                    hiddenBoard[maxRow / 2][maxColumn - 2] = "exitRIGHT";
-                    hiddenBoard[(maxRow / 2) + 1][maxColumn - 2] = "exitRIGHT";
-                    hiddenBoard[(maxRow / 2) + 2][maxColumn - 2] = "exitRIGHT";
+//                    hiddenBoard[maxRow / 2][maxColumn - 2] = "exitRIGHT";
+//                    hiddenBoard[(maxRow / 2) + 1][maxColumn - 2] = "exitRIGHT";
+//                    hiddenBoard[(maxRow / 2) + 2][maxColumn - 2] = "exitRIGHT";
                     break;
                 case LEFT:
 //                    Exit left = new Exit(currentLevel, ExitType.LEFT);
@@ -124,9 +128,9 @@ public class Board {
                     exitBoard[(maxRow / 2)][0] = exits[i];
                     exitBoard[(maxRow / 2) + 1][0] = exits[i];
 
-                    hiddenBoard[maxRow / 2][1] = "exitLEFT";
-                    hiddenBoard[(maxRow / 2) + 1][1] = "exitLEFT";
-                    hiddenBoard[(maxRow / 2) + 2][1] = "exitLEFT";
+//                    hiddenBoard[maxRow / 2][1] = "exitLEFT";
+//                    hiddenBoard[(maxRow / 2) + 1][1] = "exitLEFT";
+//                    hiddenBoard[(maxRow / 2) + 2][1] = "exitLEFT";
                     break;
                 default:
 
@@ -180,9 +184,9 @@ public class Board {
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
-            if (thing.getId() != null && thing.getId().equals("player")) {
-                System.out.println("placed");
-            }
+//            if (thing.getId() != null && thing.getId().equals("player")) {
+//                System.out.println("placed");
+//            }
             if (blockPlayer) { //If object should block player
 
                 hiddenBoard[firstRow + 1][firstCol + 1] = id;
@@ -192,7 +196,7 @@ public class Board {
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
                     for (int j = firstCol; j < (firstCol + colSpan); j++) {
-                        System.out.println("blocked: " + j + "," + i);
+//                        System.out.println("blocked: " + j + "," + i);
                         hiddenBoard[i + 1][j + 1] = id;
                     }
                 }
@@ -215,7 +219,7 @@ public class Board {
             if (node != null
                     && node.getId() != null
                     && node.getId().equals(id)) {
-                System.out.println("found");
+//                System.out.println("found");
                 this.hiddenBoard[y + 1][x + 1] = null;
                 return this.gridPane.getChildren().remove(node);
             }

@@ -17,6 +17,14 @@ public class Exit {
         this.screen2 = screen2;
     }
 
+    public ExitType getExitType(String ID) {
+        if(ID.equals(screen1)) {
+            return side1;
+        } else {
+            return side2;
+        }
+    }
+
     public String getAdjacentState(GameModel model) {
         if (model.getState().equals(screen1)) {
             return screen2;

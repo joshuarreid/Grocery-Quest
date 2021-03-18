@@ -24,19 +24,19 @@ public class LevelSetup {
 //    Exit endRoom_WinScreen = new Exit();
 
     Exit[] initialGameScreenExits;
+    Exit[] levelOneScreenExits;
 
     private GameScreen gameScreen;
     private LevelScreen levelOne;
     public LevelSetup(int width, int height, Player hero){
         this.levelRandomizer = new LevelRandomizer();
-        initialGameScreen_level1= new Exit(ExitType.TOP, ExitType.BOTTOM,"initial game screen", "level one");
+        initialGameScreen_level1= new Exit(ExitType.TOP, ExitType.BOTTOM,"Game Screen", "Level 1");
 
         initialGameScreenExits = new Exit[]{initialGameScreen_level1};
         gameScreen = new GameScreen(width, height, hero, 1, initialGameScreenExits);
-        Exit[] LevelOneExits = []{
 
-        };
-        levelOne = new LevelOneScreen(width, height, hero, 2, levelRandomizer);
+        levelOneScreenExits = new Exit[]{initialGameScreen_level1}; // technically has another exit, but add later
+        levelOne = new LevelOneScreen(width, height, hero, 2, levelRandomizer, levelOneScreenExits);
     }
 
     public GameScreen getGameScreen() {

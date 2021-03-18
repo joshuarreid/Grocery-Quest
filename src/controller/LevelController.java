@@ -30,6 +30,7 @@ public class LevelController {
         gameModel.setState("Game Screen");
         Scene scene = levelSetup.getGameScreen().getScene();
         scene.setOnKeyPressed(event -> {
+            System.out.println("space pressed");
             if (event.getCode() == KeyCode.SPACE) {
                 if (levelSetup.getGameScreen().getBoard().onExit(hero) != null) {
                     getNextLevel(levelSetup.getGameScreen().getBoard().onExit(hero));
