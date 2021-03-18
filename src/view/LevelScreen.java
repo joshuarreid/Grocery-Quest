@@ -18,7 +18,6 @@ public abstract class LevelScreen {
     private Player hero;
     protected Board board;
     private String background;
-    private int levelDeterminant;
     private Exit[] exits;
     private String ID;
     private Scene gameScene;
@@ -33,13 +32,12 @@ public abstract class LevelScreen {
      * @param height height of window
      * @param hero player
      */
-    public LevelScreen(int width, int height, Player hero, int levelDeterminant, LevelRandomizer lr, Exit[] exits, String ID) {
+    public LevelScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, String ID) {
         this.width = width;
         this.height = height;
         this.hero = hero;
         this.board = new Board(19, 19, exits, ID);
         this.background = lr.getLayout();
-        this.levelDeterminant = levelDeterminant;
         this.exits = exits;
         this.ID = ID;
         board.createBoard(height, width);

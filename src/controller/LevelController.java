@@ -2,10 +2,8 @@ package controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import model.GameModel;
-import view.LevelScreen;
 
 public class LevelController {
     private Stage mainWindow;
@@ -54,6 +52,79 @@ public class LevelController {
 
     }
 
+    public void levelTwoScreen() {
+        timer.stop();
+        gameModel.setState("Level 2");
+        currentScene = levelSetup.getLevelTwo().getScene();
+        currentBoard = levelSetup.getLevelTwo().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void levelThreeScreen() {
+        timer.stop();
+        gameModel.setState("Level 3");
+        currentScene = levelSetup.getLevelThree().getScene();
+        currentBoard = levelSetup.getLevelThree().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void levelFourScreen() {
+        timer.stop();
+        gameModel.setState("Level 4");
+        currentScene = levelSetup.getLevelFour().getScene();
+        currentBoard = levelSetup.getLevelFour().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void levelFiveScreen() {
+        timer.stop();
+        gameModel.setState("Level 5");
+        currentScene = levelSetup.getLevelFive().getScene();
+        currentBoard = levelSetup.getLevelFive().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void levelSixScreen() {
+        timer.stop();
+        gameModel.setState("Level 6");
+        currentScene = levelSetup.getLevelSix().getScene();
+        currentBoard = levelSetup.getLevelSix().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void levelSevenScreen() {
+        timer.stop();
+        gameModel.setState("Level 7");
+        currentScene = levelSetup.getLevelSeven().getScene();
+        currentBoard = levelSetup.getLevelSeven().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void levelEightScreen() {
+        timer.stop();
+        gameModel.setState("Level 8");
+        currentScene = levelSetup.getLevelEight().getScene();
+        currentBoard = levelSetup.getLevelEight().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void weaponsScreen() {
+        timer.stop();
+        gameModel.setState("Weapons Screen");
+        currentScene = levelSetup.getWeaponsScreen().getScene();
+        currentBoard = levelSetup.getWeaponsScreen().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void trainingScreen() {
+        timer.stop();
+        gameModel.setState("Training Screen");
+        currentScene = levelSetup.getTrainingScreen().getScene();
+        currentBoard = levelSetup.getTrainingScreen().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+
     private void getNextLevel(Exit exit) {
         switch(exit.getAdjacentState(gameModel)) {
             case "Game Screen":
@@ -62,6 +133,33 @@ public class LevelController {
 
             case "Level 1":
                 levelOneScreen();
+                break;
+            case "Level 2":
+                levelTwoScreen();
+                break;
+            case "Level 3":
+                levelThreeScreen();
+                break;
+            case "Level 4":
+                levelFourScreen();
+                break;
+            case "Level 5":
+                levelFiveScreen();
+                break;
+            case "Level 6":
+                levelSixScreen();
+                break;
+            case "Level 7":
+                levelSevenScreen();
+                break;
+            case "Level 8":
+                levelEightScreen();
+                break;
+            case "Weapons Screen":
+                weaponsScreen();
+                break;
+            case "Training Screen":
+                trainingScreen();
                 break;
 
             default:

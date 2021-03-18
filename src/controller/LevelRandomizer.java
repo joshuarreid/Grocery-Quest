@@ -33,7 +33,10 @@ public class LevelRandomizer {
                 "#334458",
                 "#CECDCD",
                 "#52AA83",
-                "#7e7ee0"
+                "#7e7ee0",
+                "#cbc0d3",
+                "#fcd5ce"
+
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {

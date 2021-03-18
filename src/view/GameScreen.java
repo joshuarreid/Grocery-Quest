@@ -18,8 +18,8 @@ public class GameScreen extends LevelScreen{
      * @param height height of window
      * @param hero player
      */
-    public GameScreen(int width, int height, Player hero, int levelDeterminant, LevelRandomizer lr, Exit[] exits) {
-        super(width, height, hero, levelDeterminant, lr, exits, "Game Screen");
+    public GameScreen(int width, int height, Player hero,LevelRandomizer lr, Exit[] exits) {
+        super(width, height, hero,lr, exits, "Game Screen");
     }
 
     /**
