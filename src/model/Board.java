@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
@@ -20,10 +20,13 @@ import javafx.scene.layout.RowConstraints;
 public class Board {
     private final int maxRow;
     private final int maxColumn;
-    private boolean win = false; //is win variable even necessary?
-    private boolean blocked = false;
+    //    private boolean win = false; //is win variable even necessary?
+    //    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
+    private Exit[] exits;
+    private Exit[][] exitBoard;
+    private String iD;
 
     /**
      * Fixed row and column is 18 but any amount
@@ -31,12 +34,17 @@ public class Board {
      *
      * @param row Number of vertical lines
      * @param column Number of horizontal locations
+     * @param exits array of levels exits
+     * @param iD name of the level
      */
-    public Board(int row, int column) {
+    public Board(int row, int column, Exit[] exits, String iD) {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
+        this.exitBoard = new Exit[maxRow][maxColumn];
+        this.exits = exits;
+        this.iD = iD;
     }
 
     /**
@@ -56,26 +64,34 @@ public class Board {
             ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
+        setUpExitBoard();
     }
 
-    public void setUpHiddenBoard() {
-        for (int row = 0; row < maxRow + 2; row++) {
-            for (int col = 0; col < maxColumn + 2; col++) {
-                if (row == 0 || row == maxRow) {
-                    if (col == maxColumn / 2
-                            || col == (maxColumn / 2) + 1
-                            || col == (maxColumn / 2) + 2) {
-                        hiddenBoard[row + 1][col] = "door";
-                    }
-                    hiddenBoard[row][col] = "wall";
+    private void setUpExitBoard() {
+        for (int i = 0; i < this.exits.length; i++) {
+            switch (this.exits[i].getExitType(iD)) {
+            case TOP :
+                exitBoard[0][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[0][maxColumn / 2] = exits[i];
+                exitBoard[0][(maxColumn / 2) + 1] = exits[i];
+                break;
+            case BOTTOM:
+                exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
+                exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
+                break;
+            case RIGHT:
+                exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
+                break;
+            case LEFT:
+                exitBoard[(maxRow / 2) - 1][0] = exits[i];
+                exitBoard[(maxRow / 2)][0] = exits[i];
+                exitBoard[(maxRow / 2) + 1][0] = exits[i];
+                break;
+            default:
 
-                } else if (col == 0 || col == maxColumn) {
-                    if (row == maxRow / 2 || row == (maxRow / 2) + 1 || row == (maxRow / 2) + 2) {
-                        hiddenBoard[row][col] = "door";
-                    }
-                    hiddenBoard[row][col] = "wall";
-
-                }
             }
         }
     }
@@ -98,7 +114,7 @@ public class Board {
         row++;
         column++;
         //If blocked by node except door
-        return hiddenBoard[row][column] != null && !hiddenBoard[row][column].equals("door");
+        return hiddenBoard[row][column] != null;
     }
 
     /**
@@ -126,11 +142,7 @@ public class Board {
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
-            if (thing.getId() != null && thing.getId().equals("player")) {
-                System.out.println("placed");
-            }
             if (blockPlayer) { //If object should block player
-
                 hiddenBoard[firstRow + 1][firstCol + 1] = id;
             }
         } else { //If thing occupies more than one spot
@@ -138,7 +150,6 @@ public class Board {
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
                     for (int j = firstCol; j < (firstCol + colSpan); j++) {
-                        System.out.println("blocked: " + j + "," + i);
                         hiddenBoard[i + 1][j + 1] = id;
                     }
                 }
@@ -146,8 +157,6 @@ public class Board {
         }
         return true;
     }
-
-    //Potential method?? If player has ability to break through aisles or something
 
     /**
      *  Removes object from gridpane using their id. Removes object's id from hidden board.
@@ -161,13 +170,30 @@ public class Board {
             if (node != null
                     && node.getId() != null
                     && node.getId().equals(id)) {
-                System.out.println("found");
                 this.hiddenBoard[y + 1][x + 1] = null;
                 return this.gridPane.getChildren().remove(node);
             }
         }
         return false;
     }
+    // need to fix this method
+    //    public boolean removeObject(String id, int x, int y, int rowSpan, int colSpan) {
+    //        for (Node node : this.gridPane.getChildren()) {
+    //            if (node != null
+    //                    && node.getId() != null
+    //                    && node.getId().equals(id)) {
+    ////                this.hiddenBoard[y + 1][x + 1] = null;
+    //                for (int i = y; i < (y + rowSpan); i++) {
+    //                    for (int j = x; j < (x + colSpan); j++) {
+    //                        hiddenBoard[i + 1][j + 1] = null;
+    //                    }
+    //                }
+    //                return this.gridPane.getChildren().remove(node);
+    //            }
+    //        }
+    //        return false;
+    //    }
+
     /**
      * Gets the gridPane to be used in the initial game screen and level classes.
      *
@@ -175,6 +201,36 @@ public class Board {
      */
     public GridPane getGridPane() {
         return gridPane;
+    }
+
+
+    public Exit onExit(Player player, GameModel gameModel) {
+        int[] playerCoordinates = player.getPlayerPosition();
+        Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+
+        switch (exit.getExitType(gameModel.getState())) {
+        case TOP:
+            player.getPlayerMovement().setyPosition(maxRow - 1);
+            break;
+        case BOTTOM:
+            player.getPlayerMovement().setyPosition(0);
+            break;
+        case LEFT:
+            player.getPlayerMovement().setxPosition(maxColumn - 1);
+            break;
+        case RIGHT:
+            player.getPlayerMovement().setxPosition(0);
+            break;
+        default:
+        }
+
+        return exit;
+    }
+
+    public Exit onExit(Player player) {
+        int[] playerCoordinates = player.getPlayerPosition();
+        Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+        return exit;
     }
 
 }

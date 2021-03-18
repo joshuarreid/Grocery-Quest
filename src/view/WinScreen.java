@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class EndScreen {
+public class WinScreen {
     private int width;
     private int height;
     private Button replayButton;
@@ -24,8 +24,8 @@ public class EndScreen {
             "-fx-background-radius: 20; -fx-background-color: #688741";
 
 
-    private EndScreen() { }
-    public EndScreen(int width, int height) {
+    private WinScreen() { }
+    public WinScreen(int width, int height) {
         this.width = width;
         this.height = height;
         replayButton = new Button();

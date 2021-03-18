@@ -9,11 +9,9 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.GameModel;
-import view.EndScreen;
-import view.GameScreen;
-import view.StartScreen;
-import view.ConfigurationScreen;
-
+import model.Level;
+import model.Player;
+import view.*;
 
 
 /**The Controller Class
@@ -191,13 +189,10 @@ public class Controller extends Application {
                 Level levelOne = new Level(1, difficultyLevel);
                 hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                 goToGameScreen();
-                System.out.println("VALID!"); //Delete after previous lines implemented
             }
         });
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
-        mainWindow.show();
-
     }
 
     /**
@@ -205,52 +200,15 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
-        gameModel.setState("Game Screen");
-        GameScreen screen = new GameScreen(width, height, hero);
-
-        Scene scene = screen.getScene();
-        hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, screen.getBoard());
+        LevelController lc = new LevelController(
+                mainWindow,
+                gameModel,
+                difficultyLevel,
+                weaponChoice,
+                hero);
+        lc.initialGameScreen();
     }
 
-    /**
-     * This method launches and provides event handling for
-     * the Win Screen
-     */
-    private void initWinScreen() {
-        gameModel.setState("Win Screen");
-        EndScreen screen = new EndScreen(width, height);
-        Button replayButton = screen.getReplayButton();
-        replayButton.setOnAction(e -> {
-            initStartScreen();
-        });
-        Button exitButton = screen.getExitButton();
-        exitButton.setOnAction(e -> {
-            System.exit(0);
-        });
-        Scene scene = screen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
-    }
-    
-        /**
-     * This method launches and provides event handling for
-     * the Lose Screen
-     */
-    private void initLoseScreen() {
-        gameModel.setState("Lose Screen");
-        LoseScreen screen = new LoseScreen(width, height);
-        Button replayButton = screen.getReplayButton();
-        replayButton.setOnAction(e -> {
-            initStartScreen();
-        });
-        Button exitButton = screen.getExitButton();
-        exitButton.setOnAction(e -> {
-            System.exit(0);
-        });
-        Scene scene = screen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
-    }
     
     public String getState() {
         return gameModel.getState();

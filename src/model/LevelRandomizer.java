@@ -1,12 +1,8 @@
-package controller;
-import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+package model;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.NoSuchElementException;
+import java.util.Stack;
 
 /**
  * Class for level randomizer methods
@@ -14,7 +10,7 @@ import java.util.*;
  *
  */
 public class LevelRandomizer {
-    private Stack<Background> layouts;
+    private Stack<String> layouts;
 
     /**
      * Constructor Method
@@ -25,28 +21,31 @@ public class LevelRandomizer {
      */
     public LevelRandomizer() {
         //Color Options
+        layouts = new Stack<>();
         String[] backgroundColors = new String[] {
-                "#A0D3B2",
-                "#FFC752",
-                "#C75E44",
-                "#00A8B0",
-                "#7FAB50",
-                "#334458",
-                "#CECDCD",
-                "#52AA83"
+            "#A0D3B2",
+            "#FFC752",
+            "#C75E44",
+            "#00A8B0",
+            "#7FAB50",
+            "#334458",
+            "#CECDCD",
+            "#52AA83",
+            "#7e7ee0",
+            "#cbc0d3",
+            "#fcd5ce",
+            "#1d81cb",
+            "#c29a59"
+
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {
-            layouts.add(new Background(new BackgroundFill((Paint.valueOf(color)), CornerRadii.EMPTY, Insets.EMPTY)));
+            layouts.add(color);
         }
 
         //Randomize the level layouts list
         Collections.shuffle(layouts);
 
-        //Add the level layouts to the stack
-        for (Background item: layouts) {
-            this.layouts.add(item);
-        }
     }
 
     /**
@@ -55,7 +54,7 @@ public class LevelRandomizer {
      *
      * @return layout
      */
-    public Background getLayout() {
+    public String getLayout() {
         if (layouts.size() == 0) {
             throw new NoSuchElementException("Stack is empty");
         }

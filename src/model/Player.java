@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,28 +43,6 @@ public class Player {
         this.playerMovement = new PlayerMovement(9, 17);
         setWeaponInUse(weaponInUse, currentSide);
 
-
-        //Sets the coin and health bars
-//        switch (difficultyLevel) {
-//            case 1: //Easy: 4(full) hearts + 4 magic coins
-//                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-09.png"));
-//                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-10.png")));
-//                break;
-//            case 2: //Medium: 2 hearts + 2 magic coins
-//                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-05.png"));
-//                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-06.png")));
-//                break;
-//            case 3: //Hard: 1 heart + 1 magic coin
-//                healthBar = new ImageView(new Image("file:resources/pngs/GQHealthMoneyBars-03.png"));
-//                moneyBar = new ImageView((new Image("file:resources/pngs/GQHealthMoneyBars-04.png")));
-//                break;
-//            default:
-//        }
-//        //Basically CSS
-//        moneyBar.setFitWidth(225);
-//        moneyBar.setFitHeight(37.5);
-//        healthBar.setFitWidth(225);
-//        healthBar.setFitHeight(37.5);
         playerHealth = new PlayerHealth(difficultyLevel, 150);
         playerMoney = new PlayerMoney(difficultyLevel, 150);
     }
@@ -84,6 +62,14 @@ public class Player {
 
     public PlayerMovement getPlayerMovement() {
         return playerMovement;
+    }
+
+    public int[] getPlayerPosition() {
+        int[] coordinates = new int[]{
+                playerMovement.getXPosition(),
+                playerMovement.getYPosition()
+        };
+        return coordinates;
     }
 
     public ImageView getHealthBar() {
@@ -107,20 +93,20 @@ public class Player {
     }
 
     //setters for all attributes
-//    public void setHealth(int newHealth) {
-//        if ((newHealth < 0) || (newHealth > 100)) {
-//            throw new IllegalArgumentException("Health values can only between 0 "
-//                    + "and 100, inclusive");
-//        }
-//        health = newHealth;
-//    }
-//
-//    public void setMoney(int newMoney) {
-//        if (newMoney < 0) {
-//            throw new IllegalArgumentException("Money values can be negative");
-//        }
-//        money = newMoney;
-//    }
+    //    public void setHealth(int newHealth) {
+    //        if ((newHealth < 0) || (newHealth > 100)) {
+    //            throw new IllegalArgumentException("Health values can only between 0 "
+    //                    + "and 100, inclusive");
+    //        }
+    //        health = newHealth;
+    //    }
+    //
+    //    public void setMoney(int newMoney) {
+    //        if (newMoney < 0) {
+    //            throw new IllegalArgumentException("Money values can be negative");
+    //        }
+    //        money = newMoney;
+    //    }
 
     public void setName(String givenName) {
         if ((givenName == null) || (givenName.isEmpty()) || (isWhiteSpaceOnly(givenName))) {
