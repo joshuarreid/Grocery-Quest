@@ -82,8 +82,8 @@ public class GameScreen extends LevelScreen {
         StackPane rightStackPane = new StackPane();
         rightStackPane.getChildren().addAll(rightTextBox, rightLabel);
 
-        super.board.addObject(leftStackPane, "text box", true, 2, 5, 1, 6);
-        super.board.addObject(rightStackPane, "text box", true, 2, 5, 12, 6);
+        super.board.addObject(leftStackPane, "text box", true, 3, 5, 1, 6);
+        super.board.addObject(rightStackPane, "text box", true, 3, 5, 12, 6);
 
         Label startLabel = new Label("  start");
         startLabel.setFont(DOGICA_FONT);

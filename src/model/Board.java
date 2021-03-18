@@ -114,7 +114,7 @@ public class Board {
         row++;
         column++;
         //If blocked by node except door
-        return hiddenBoard[row][column] != null && !hiddenBoard[row][column].equals("door");
+        return hiddenBoard[row][column] != null;
     }
 
     /**
@@ -176,6 +176,23 @@ public class Board {
         }
         return false;
     }
+    // need to fix this method
+    //    public boolean removeObject(String id, int x, int y, int rowSpan, int colSpan) {
+    //        for (Node node : this.gridPane.getChildren()) {
+    //            if (node != null
+    //                    && node.getId() != null
+    //                    && node.getId().equals(id)) {
+    ////                this.hiddenBoard[y + 1][x + 1] = null;
+    //                for (int i = y; i < (y + rowSpan); i++) {
+    //                    for (int j = x; j < (x + colSpan); j++) {
+    //                        hiddenBoard[i + 1][j + 1] = null;
+    //                    }
+    //                }
+    //                return this.gridPane.getChildren().remove(node);
+    //            }
+    //        }
+    //        return false;
+    //    }
 
     /**
      * Gets the gridPane to be used in the initial game screen and level classes.

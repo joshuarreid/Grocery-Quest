@@ -19,6 +19,7 @@ public abstract class LevelScreen {
     private String iD;
     private Scene gameScene;
 
+
     protected static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 15);
 
@@ -45,26 +46,26 @@ public abstract class LevelScreen {
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
         ImageView borderExitImage = new ImageView(
-                new Image("file:resources/pngs/LevelFrame4.jpg"));
-        switch(exits.length) {
-            case 1:
-                if(exits[0].getExitType(this.iD).equals(ExitType.LEFT)) {
-                    borderExitImage = new ImageView(
-                            new Image("file:resources/pngs/LevelFrame1Left.jpg"));
-                } else {
-                    borderExitImage = new ImageView(
-                            new Image("file:resources/pngs/LevelFrame1Right.jpg"));
-                }
-            break;
-            case 2:
+                new Image("file:resources/pngs/FrameAll.png"));
+        switch (exits.length) {
+        case 1:
+            if (exits[0].getExitType(this.iD).equals(ExitType.LEFT)) {
                 borderExitImage = new ImageView(
-                        new Image("file:resources/pngs/LevelFrame2UpDown.jpg"));
+                    new Image("file:resources/pngs/FrameLeft.png"));
+            } else {
+                borderExitImage = new ImageView(
+                    new Image("file:resources/pngs/FrameRight.png"));
+            }
             break;
-            default:
+        case 2:
+            borderExitImage = new ImageView(
+                    new Image("file:resources/pngs/FrameUpDown.png"));
+            break;
+        default:
         }
 
-        borderExitImage.setFitWidth(width);
-        borderExitImage.setFitHeight(height);
+        borderExitImage.setFitWidth(width + 4);
+        borderExitImage.setFitHeight(height + 4);
         gridPane.setStyle("-fx-background-color: " + background);
 
         StackPane pane = new StackPane(gridPane, borderExitImage);
@@ -95,9 +96,9 @@ public abstract class LevelScreen {
      */
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
-        board.addObject(healthBar, "health", true, 0, 1, 1, 5);
         coinBar = hero.getMoneyBar();
-        board.addObject(coinBar, "money", true, 1, 1, 1, 5);
+        board.addObject(healthBar, "health", false, 0, 1, 1, 5);
+        board.addObject(coinBar, "money", false, 1, 1, 1, 5);
     }
 
     /**

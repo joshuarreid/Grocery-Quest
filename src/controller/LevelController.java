@@ -271,9 +271,7 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case SPACE:
-                System.out.println("spacey boi");
                 if (board.onExit(hero) != null) {
-                    System.out.println("inside");
                     getNextLevel(board.onExit(hero, gameModel));
                 }
                 break;
