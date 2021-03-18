@@ -2,6 +2,7 @@ package controller;
 
 import javafx.scene.layout.Background;
 import model.ExitType;
+import model.GameModel;
 
 public class Exit {
     private ExitType side1;
@@ -15,9 +16,15 @@ public class Exit {
         this.screen1 = screen1;
         this.screen2 = screen2;
     }
-//TODO fix later
-    public ExitType getSide() {
-        return this.side;
+
+    public String getAdjacentState(GameModel model) {
+        if (model.getState().equals(screen1)) {
+            return screen2;
+        } else {
+            return screen1;
+        }
     }
+
+
 
 }

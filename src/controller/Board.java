@@ -87,7 +87,7 @@ public class Board {
 
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
-            switch (this.exits[i].getSide()) {
+            switch (this.exits[i].getAdjacentState(g)) {
                 case TOP :
 //                    Exit top = new Exit(currentLevel, ExitType.TOP);
                     exitBoard[0][(maxColumn / 2) - 1] = exits[i];

@@ -15,6 +15,7 @@ public class LevelSetup {
 //    Exit level1_level2 = new Exit();
 //    Exit level2_level3 = new Exit();
 //    Exit level3_level4 = new Exit();
+
 //    Exit level4_level5 = new Exit();
 //    Exit level5_level6 = new Exit();
 //    Exit level6_level7 = new Exit();
@@ -28,14 +29,21 @@ public class LevelSetup {
     private LevelScreen levelOne;
     public LevelSetup(int width, int height, Player hero){
         this.levelRandomizer = new LevelRandomizer();
-        initialGameScreen_level1= new Exit(ExitType.TOP, "initial game screen", "level one");
+        initialGameScreen_level1= new Exit(ExitType.TOP, ExitType.BOTTOM,"initial game screen", "level one");
 
         initialGameScreenExits = new Exit[]{initialGameScreen_level1};
         gameScreen = new GameScreen(width, height, hero, 1, initialGameScreenExits);
+        Exit[] LevelOneExits = []{
+
+        };
         levelOne = new LevelOneScreen(width, height, hero, 2, levelRandomizer);
     }
 
     public GameScreen getGameScreen() {
         return gameScreen;
+    }
+
+    public LevelScreen getLevelOne() {
+        return levelOne;
     }
 }

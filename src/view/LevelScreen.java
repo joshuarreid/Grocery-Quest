@@ -24,6 +24,7 @@ public abstract class LevelScreen {
     private String background;
     private int levelDeterminant;
     private Exit[] exits;
+    private String ID;
 
     protected static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 15);
@@ -35,7 +36,7 @@ public abstract class LevelScreen {
      * @param height height of window
      * @param hero player
      */
-    public LevelScreen(int width, int height, Player hero, int levelDeterminant, LevelRandomizer lr, Exit[] exits) {
+    public LevelScreen(int width, int height, Player hero, int levelDeterminant, LevelRandomizer lr, Exit[] exits, String ID) {
         this.width = width;
         this.height = height;
         this.hero = hero;
@@ -43,6 +44,7 @@ public abstract class LevelScreen {
         this.background = lr.getLayout();
         this.levelDeterminant = levelDeterminant;
         this.exits = exits;
+        this.ID = ID;
     }
 
     /**
