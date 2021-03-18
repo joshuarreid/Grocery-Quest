@@ -1,9 +1,6 @@
 package view;
 
-import model.Board;
-import model.Exit;
-import model.LevelRandomizer;
-import model.Player;
+import model.*;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,7 +45,24 @@ public abstract class LevelScreen {
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
         ImageView borderExitImage = new ImageView(
-                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
+                new Image("file:resources/pngs/LevelFrame4.jpg"));
+        switch(exits.length) {
+            case 1:
+                if(exits[0].getExitType(this.iD).equals(ExitType.LEFT)) {
+                    borderExitImage = new ImageView(
+                            new Image("file:resources/pngs/LevelFrame1Left.jpg"));
+                } else {
+                    borderExitImage = new ImageView(
+                            new Image("file:resources/pngs/LevelFrame1Right.jpg"));
+                }
+            break;
+            case 2:
+                borderExitImage = new ImageView(
+                        new Image("file:resources/pngs/LevelFrame2UpDown.jpg"));
+            break;
+            default:
+        }
+
         borderExitImage.setFitWidth(width);
         borderExitImage.setFitHeight(height);
         gridPane.setStyle("-fx-background-color: " + background);
