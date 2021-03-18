@@ -281,8 +281,8 @@ public class ControllerTest extends ApplicationTest {
         int initXPosition = PlayerMovement.getXPosition();
 
         press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Training Room", controller.getState());
-        assertNotEquals(initYPosition, PlayerMovement.getYPosition());
+        assertEquals("Training Screen", controller.getState());
+        assertEquals(initYPosition, PlayerMovement.getYPosition());
         assertNotEquals(initXPosition, PlayerMovement.getXPosition());
     }
 
@@ -318,14 +318,14 @@ public class ControllerTest extends ApplicationTest {
         int initXPosition = PlayerMovement.getXPosition();
 
         press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Weapon Room", controller.getState());
-        assertNotEquals(initYPosition, PlayerMovement.getYPosition());
+        assertEquals("Weapons Screen", controller.getState());
+        assertEquals(initYPosition, PlayerMovement.getYPosition());
         assertNotEquals(initXPosition, PlayerMovement.getXPosition());
     }
 
     @Test
     /**
-     * Testing initial game screens left exit
+     * Testing initial game screens Bottom exit
      *
      */
     public void testInitialExit4() {
@@ -345,7 +345,7 @@ public class ControllerTest extends ApplicationTest {
 
 
         press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Start Screen", controller.getState());
+        assertEquals("Inside", controller.getState());
     }
 
 
