@@ -1,12 +1,10 @@
 package controller;
-import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
+
 import javafx.scene.paint.Paint;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.NoSuchElementException;
+import java.util.Stack;
 
 /**
  * Class for level randomizer methods
@@ -34,7 +32,8 @@ public class LevelRandomizer {
                 "#7FAB50",
                 "#334458",
                 "#CECDCD",
-                "#52AA83"
+                "#52AA83",
+                "#7e7ee0"
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {

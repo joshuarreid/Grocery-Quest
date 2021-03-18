@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import model.GameModel;
 
 //**************************NOTE: 3 THINGS TO ADDRESS**********************************************
 //1. 2 potential methods: removeObject and playerMovement()
@@ -20,8 +21,8 @@ import javafx.scene.layout.RowConstraints;
 public class Board {
     private final int maxRow;
     private final int maxColumn;
-    private boolean win = false; //is win variable even necessary?
-    private boolean blocked = false;
+//    private boolean win = false; //is win variable even necessary?
+//    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
     private Exit[] exits;
@@ -62,75 +63,31 @@ public class Board {
             ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
-        setUpHiddenBoard();
-    }
-
-    public void setUpHiddenBoard() {
-//        for (int row = 0; row < maxRow + 2; row++) {
-//            for (int col = 0; col < maxColumn + 2; col++) {
-//                if (row == 0 || row == maxRow) {
-////                    if (col == maxColumn / 2
-////                            || col == (maxColumn / 2) + 1
-////                            || col == (maxColumn / 2) + 2) {
-////                        hiddenBoard[row + 1][col] = "door";
-////                    }
-//                    hiddenBoard[row][col] = "wall";
-//
-//                } else if (col == 0 || col == maxColumn) {
-////                    if (row == maxRow / 2 || row == (maxRow / 2) + 1 || row == (maxRow / 2) + 2) {
-////                        hiddenBoard[row][col] = "door";
-////                    }
-//                    hiddenBoard[row][col] = "wall";
-//
-//                }
-//            }
-//        }
-        setUpExitBoard();
+        setUpExitBoard();;
     }
 
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
             switch (this.exits[i].getExitType(ID)) {
                 case TOP :
-//                    Exit top = new Exit(currentLevel, ExitType.TOP);
                     exitBoard[0][(maxColumn / 2) - 1] = exits[i];
                     exitBoard[0][maxColumn / 2] = exits[i];
                     exitBoard[0][(maxColumn / 2) + 1] = exits[i];
-
-//                    hiddenBoard[1][(maxColumn / 2)] = "exitTOP";
-//                    hiddenBoard[1][(maxColumn / 2) + 1] = "exitTOP";
-//                    hiddenBoard[1][(maxColumn / 2) + 2] = "exitTOP";
                     break;
                 case BOTTOM:
-//                    Exit bottom = new Exit(currentLevel, ExitType.BOTTOM);
-//                    System.out.println(maxRow - 1);
                     exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
                     exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
                     exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
-
-//                    hiddenBoard[maxRow - 2][(maxColumn / 2)] = "exitBOTTOM";
-//                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 1] = "exitBOTTOM";
-//                    hiddenBoard[maxRow - 2][(maxColumn / 2) + 2] = "exitBOTTOM";
                     break;
                 case RIGHT:
-//                    Exit right = new Exit(currentLevel, ExitType.RIGHT);
                     exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
                     exitBoard[(maxRow / 2)][maxColumn -1] = exits[i];
                     exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
-
-//                    hiddenBoard[maxRow / 2][maxColumn - 2] = "exitRIGHT";
-//                    hiddenBoard[(maxRow / 2) + 1][maxColumn - 2] = "exitRIGHT";
-//                    hiddenBoard[(maxRow / 2) + 2][maxColumn - 2] = "exitRIGHT";
                     break;
                 case LEFT:
-//                    Exit left = new Exit(currentLevel, ExitType.LEFT);
                     exitBoard[(maxRow / 2) - 1][0] = exits[i];
                     exitBoard[(maxRow / 2)][0] = exits[i];
                     exitBoard[(maxRow / 2) + 1][0] = exits[i];
-
-//                    hiddenBoard[maxRow / 2][1] = "exitLEFT";
-//                    hiddenBoard[(maxRow / 2) + 1][1] = "exitLEFT";
-//                    hiddenBoard[(maxRow / 2) + 2][1] = "exitLEFT";
                     break;
                 default:
 
@@ -184,11 +141,7 @@ public class Board {
         if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
             thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
-//            if (thing.getId() != null && thing.getId().equals("player")) {
-//                System.out.println("placed");
-//            }
             if (blockPlayer) { //If object should block player
-
                 hiddenBoard[firstRow + 1][firstCol + 1] = id;
             }
         } else { //If thing occupies more than one spot
@@ -205,8 +158,6 @@ public class Board {
         return true;
     }
 
-    //Potential method?? If player has ability to break through aisles or something
-
     /**
      *  Removes object from gridpane using their id. Removes object's id from hidden board.
      * @param id id of the object being removed
@@ -219,13 +170,13 @@ public class Board {
             if (node != null
                     && node.getId() != null
                     && node.getId().equals(id)) {
-//                System.out.println("found");
                 this.hiddenBoard[y + 1][x + 1] = null;
                 return this.gridPane.getChildren().remove(node);
             }
         }
         return false;
     }
+
     /**
      * Gets the gridPane to be used in the initial game screen and level classes.
      *
@@ -236,9 +187,33 @@ public class Board {
     }
 
 
+    public Exit onExit(Player player, GameModel gameModel) {
+        int[] playerCoordinates = player.getPlayerPosition();
+        Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+
+        switch (exit.getExitType(gameModel.getState())) {
+        case TOP:
+            player.getPlayerMovement().setyPosition(maxRow - 1);
+            break;
+        case BOTTOM:
+            player.getPlayerMovement().setyPosition(0);
+            break;
+        case LEFT:
+            player.getPlayerMovement().setxPosition(maxColumn - 1);
+            break;
+        case RIGHT:
+            player.getPlayerMovement().setxPosition(0);
+            break;
+        default:
+        }
+
+        return exit;
+    }
+
     public Exit onExit(Player player) {
         int[] playerCoordinates = player.getPlayerPosition();
-        return exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+        Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+        return exit;
     }
 
 }

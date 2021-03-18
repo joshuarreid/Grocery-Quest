@@ -42,17 +42,6 @@ public class LevelController {
         gameModel.setState("Game Screen");
         currentScene = levelSetup.getGameScreen().getScene();
         currentBoard = levelSetup.getGameScreen().getBoard();
-//        Scene scene = levelSetup.getGameScreen().getScene();
-//        scene.setOnKeyPressed(event -> {
-//            System.out.println("space pressed");
-//            if (event.getCode() == KeyCode.SPACE) {
-//                if (levelSetup.getGameScreen().getBoard().onExit(hero) != null) {
-//                    getNextLevel(levelSetup.getGameScreen().getBoard().onExit(hero));
-//                }
-//            }
-//
-//        });
-//        hero.getPlayerMovement().moveCharacter(mainWindow, currentScene, hero, currentBoard);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -61,16 +50,6 @@ public class LevelController {
         gameModel.setState("Level 1");
         currentScene = levelSetup.getLevelOne().getScene();
         currentBoard = levelSetup.getLevelOne().getBoard();
-//        Scene scene = levelSetup.getLevelOne().getScene();
-//        scene.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.SPACE) {
-//                if (levelSetup.getLevelOne().getBoard().onExit(hero) != null) {
-//                    getNextLevel(levelSetup.getLevelOne().getBoard().onExit(hero));
-//                }
-//            }
-//
-//        });
-//        hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, levelSetup.getGameScreen().getBoard());
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
 
     }
@@ -107,14 +86,6 @@ public class LevelController {
     public void moveCharacter(Stage mainWindow, Scene scene, Player hero, Board board) {
         System.out.println(gameModel.getState());
         mainWindow.setScene(scene);
-//        mainWindow.show();
-
-//        AnimationTimer timer = new AnimationTimer() {
-//            @Override
-//            public void handle(long now) {
-//                handleKeys(scene, hero, board);
-//            }
-//        };
         timer.start();
 
     }
@@ -133,7 +104,7 @@ public class LevelController {
                 case SPACE:
                     System.out.println("spacey boi");
                     if (board.onExit(hero) != null) {
-                        getNextLevel(board.onExit(hero));
+                        getNextLevel(board.onExit(hero, gameModel));
                     }
                     break;
                 case UP:
@@ -207,8 +178,6 @@ public class LevelController {
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false, y, 0, x, 0);
         if (worked) {
-//            xPosition = x;
-//            yPosition = y;
             hero.getPlayerMovement().setxPosition(x);
             hero.getPlayerMovement().setyPosition(y);
         }

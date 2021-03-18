@@ -203,11 +203,6 @@ public class Controller extends Application {
     private void goToGameScreen() {
         LevelController lc = new LevelController(mainWindow,gameModel,difficultyLevel,weaponChoice,hero);
         lc.initialGameScreen();
-//        gameModel.setState("Game Screen");
-////        GameScreen screen = new GameScreen(width, height, hero);
-//
-//        Scene scene = screen.getScene();
-//        hero.getPlayerMovement().moveCharacter(mainWindow, scene, hero, screen.getBoard());
     }
 
     /**

@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.scene.layout.Background;
 import model.ExitType;
 import model.GameModel;
 

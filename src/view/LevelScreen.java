@@ -4,14 +4,10 @@ import controller.Board;
 import controller.Exit;
 import controller.LevelRandomizer;
 import controller.Player;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public abstract class LevelScreen {
@@ -55,12 +51,7 @@ public abstract class LevelScreen {
         borderExitImage.setFitHeight(height);
         gridPane.setStyle("-fx-background-color: " + background);
 
-//        //Load in all entities
-//        loadCoinHealthBar();
-//        loadMainCharacter();
-//        loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
         StackPane pane = new StackPane(gridPane, borderExitImage);
-        pane.setAlignment(Pos.CENTER);
         gameScene = new Scene(pane, width, height);
     }
 
@@ -80,22 +71,6 @@ public abstract class LevelScreen {
         loadCoinHealthBar();
         loadMainCharacter();
         loadObjects();
-
-//        //Set up gridPane
-//        GridPane gridPane = board.getGridPane();
-//        ImageView borderExitImage = new ImageView(
-//                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
-//        borderExitImage.setFitWidth(width);
-//        borderExitImage.setFitHeight(height);
-//        gridPane.setStyle("-fx-background-color: " + background);
-//
-//        //Load in all entities
-//        loadCoinHealthBar();
-//        loadMainCharacter();
-//        loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
-//        StackPane pane = new StackPane(gridPane, borderExitImage);
-//        pane.setAlignment(Pos.CENTER);
-//        Scene gameScene = new Scene(pane, width, height);
         return gameScene;
     }
 
