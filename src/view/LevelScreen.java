@@ -25,6 +25,7 @@ public abstract class LevelScreen {
     private int levelDeterminant;
     private Exit[] exits;
     private String ID;
+    private Scene gameScene;
 
     protected static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 15);
@@ -45,6 +46,22 @@ public abstract class LevelScreen {
         this.levelDeterminant = levelDeterminant;
         this.exits = exits;
         this.ID = ID;
+        board.createBoard(height, width);
+        //Set up gridPane
+        GridPane gridPane = board.getGridPane();
+        ImageView borderExitImage = new ImageView(
+                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
+        borderExitImage.setFitWidth(width);
+        borderExitImage.setFitHeight(height);
+        gridPane.setStyle("-fx-background-color: " + background);
+
+//        //Load in all entities
+//        loadCoinHealthBar();
+//        loadMainCharacter();
+//        loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
+        StackPane pane = new StackPane(gridPane, borderExitImage);
+        pane.setAlignment(Pos.CENTER);
+        gameScene = new Scene(pane, width, height);
     }
 
     /**
@@ -60,22 +77,25 @@ public abstract class LevelScreen {
      * @return the scene
      */
     public Scene getScene() {
-        board.createBoard(height, width);
-
-        //Set up gridPane
-        GridPane gridPane = board.getGridPane();
-        ImageView borderExitImage = new ImageView(
-                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
-        borderExitImage.setFitWidth(width);
-        borderExitImage.setFitHeight(height);
-        gridPane.setStyle("-fx-background-color: " + background);
-
-        //Load in all entities
         loadCoinHealthBar();
         loadMainCharacter();
-        loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
-        StackPane pane = new StackPane(gridPane, borderExitImage);
-        Scene gameScene = new Scene(pane, width, height);
+        loadObjects();
+
+//        //Set up gridPane
+//        GridPane gridPane = board.getGridPane();
+//        ImageView borderExitImage = new ImageView(
+//                new Image("file:resources/pngs/LevelFrame4Exits-01.png"));
+//        borderExitImage.setFitWidth(width);
+//        borderExitImage.setFitHeight(height);
+//        gridPane.setStyle("-fx-background-color: " + background);
+//
+//        //Load in all entities
+//        loadCoinHealthBar();
+//        loadMainCharacter();
+//        loadObjects(); //Load all objects: Carts, Flowers, Text Boxes
+//        StackPane pane = new StackPane(gridPane, borderExitImage);
+//        pane.setAlignment(Pos.CENTER);
+//        Scene gameScene = new Scene(pane, width, height);
         return gameScene;
     }
 

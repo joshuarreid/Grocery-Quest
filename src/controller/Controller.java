@@ -192,7 +192,7 @@ public class Controller extends Application {
         });
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
-        mainWindow.show();
+//        mainWindow.show();
 
     }
 

@@ -19,6 +19,7 @@ public class LevelController {
     LevelSetup levelSetup;
     private Scene currentScene;
     private Board currentBoard;
+    private AnimationTimer timer;
 
     public LevelController(Stage mainWindow, GameModel gameModel, int difficultyLevel, String weaponChoice, Player hero) {
         this.mainWindow = mainWindow;
@@ -28,9 +29,16 @@ public class LevelController {
         this.hero = hero;
         this.currentDeterminant = 1;
         this.levelSetup = new LevelSetup(width, height, hero);
+        timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                handleKeys(currentScene, hero, currentBoard);
+            }
+        };
     }
 
     public void initialGameScreen() {
+        timer.stop();
         gameModel.setState("Game Screen");
         currentScene = levelSetup.getGameScreen().getScene();
         currentBoard = levelSetup.getGameScreen().getBoard();
@@ -49,6 +57,7 @@ public class LevelController {
     }
 
     public void levelOneScreen() {
+        timer.stop();
         gameModel.setState("Level 1");
         currentScene = levelSetup.getLevelOne().getScene();
         currentBoard = levelSetup.getLevelOne().getBoard();
@@ -98,14 +107,14 @@ public class LevelController {
     public void moveCharacter(Stage mainWindow, Scene scene, Player hero, Board board) {
         System.out.println(gameModel.getState());
         mainWindow.setScene(scene);
-        mainWindow.show();
+//        mainWindow.show();
 
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                handleKeys(scene, hero, board);
-            }
-        };
+//        AnimationTimer timer = new AnimationTimer() {
+//            @Override
+//            public void handle(long now) {
+//                handleKeys(scene, hero, board);
+//            }
+//        };
         timer.start();
 
     }
