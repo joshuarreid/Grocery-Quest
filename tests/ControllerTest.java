@@ -215,12 +215,47 @@ public class ControllerTest extends ApplicationTest {
         assertEquals(initXPosition, PlayerMovement.getXPosition());
     }
 
+
     @Test
     /**
-     * Testing the Exit to the right
+     * Testing initial game screens top exit
      *
      */
-    public void testExit1() {
+    public void testInitialExit1() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Top Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //Moving player to first exit
+        int stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+
+        //Saving position of player before Exit
+        int initYPosition = PlayerMovement.getYPosition();
+        int initXPosition = PlayerMovement.getXPosition();
+
+        //Asserting the GameState changed and player has new position
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
+        assertNotEquals(initYPosition, PlayerMovement.getYPosition());
+        assertEquals(initXPosition, PlayerMovement.getXPosition());
+    }
+
+
+
+    @Test
+    /**
+     *
+     * Testing initial game screens right exit
+     *
+     */
+    public void testInitialExit2() {
         clickOn("#startButton");
         clickOn("#nameField").write("Testing Right Exit");
         clickOn("#thermometerSwordButton");
@@ -228,34 +263,24 @@ public class ControllerTest extends ApplicationTest {
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //moving player to right exit
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+        //Moving player to right exit
+        int stepCounter = 1;
+        while(stepCounter <= 8) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
 
+        stepCounter = 1;
+        while(stepCounter <= 10) {
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+            stepCounter++;
+        }
 
         //Saving position of player before Exit
         int initYPosition = PlayerMovement.getYPosition();
         int initXPosition = PlayerMovement.getXPosition();
 
-        //Moving into exit
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
-
-        //Asserting the GameState changed and player has new position
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
         assertEquals("Training Room", controller.getState());
         assertNotEquals(initYPosition, PlayerMovement.getYPosition());
         assertNotEquals(initXPosition, PlayerMovement.getXPosition());
@@ -263,45 +288,36 @@ public class ControllerTest extends ApplicationTest {
 
     @Test
     /**
-     * Testing the Exit to the left
+     *
+     * Testing initial game screens left exit
      *
      */
-    public void testExit2() {
+    public void testInitialExit3() {
         clickOn("#startButton");
-        clickOn("#nameField").write("Testing left Exit");
+        clickOn("#nameField").write("Testing Left Exit");
         clickOn("#thermometerSwordButton");
         clickOn("#easyButton");
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //moving player to right exit
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
+        //Moving player to right exit
+        int stepCounter = 1;
+        while(stepCounter <= 8) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
 
+        stepCounter = 1;
+        while(stepCounter <= 10) {
+            press(KeyCode.LEFT).release(KeyCode.LEFT);
+            stepCounter++;
+        }
 
         //Saving position of player before Exit
         int initYPosition = PlayerMovement.getYPosition();
         int initXPosition = PlayerMovement.getXPosition();
 
-        //Moving into exit
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-        press(KeyCode.LEFT).release(KeyCode.LEFT);
-
-        //Asserting the GameState changed and player has new position
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
         assertEquals("Weapon Room", controller.getState());
         assertNotEquals(initYPosition, PlayerMovement.getYPosition());
         assertNotEquals(initXPosition, PlayerMovement.getXPosition());
@@ -309,55 +325,228 @@ public class ControllerTest extends ApplicationTest {
 
     @Test
     /**
-     * Testing the Exit at top
+     * Testing initial game screens left exit
      *
      */
-    public void testExit3() {
+    public void testInitialExit4() {
         clickOn("#startButton");
-        clickOn("#nameField").write("Testing top Exit");
+        clickOn("#nameField").write("Testing Bottom Exit");
         clickOn("#thermometerSwordButton");
         clickOn("#easyButton");
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //moving player to right exit
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
+        //Moving player to bottom exit
+        int stepCounter = 1;
+        while(stepCounter <= 3) {
+            press(KeyCode.DOWN).release(KeyCode.DOWN);
+            stepCounter++;
+        }
 
 
-
-        //Saving position of player before Exit
-        int initYPosition = PlayerMovement.getYPosition();
-        int initXPosition = PlayerMovement.getXPosition();
-
-        //Moving into exit
-        press(KeyCode.UP).release(KeyCode.UP);
-        press(KeyCode.UP).release(KeyCode.UP);
-
-        //Asserting the GameState changed and player has new position
-        assertEquals("Level 1", controller.getState());
-        assertNotEquals(initYPosition, PlayerMovement.getYPosition());
-        assertNotEquals(initXPosition, PlayerMovement.getXPosition());
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Start Screen", controller.getState());
     }
 
 
+    @Test
+    /**
+     * Testing top exit on Level 2
+     *
+     */
+    public void testLevel2Exit() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Second Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
 
+        //Moving player to first exit
+        int stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
 
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
 
+        //Moving player to second exit
+        stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 2", controller.getState());
+    }
 
+    @Test
+    /**
+     * Testing top exit on Level 3
+     *
+     */
+    public void testLevel3Exit() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Third Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
 
+        //Moving player to first exit
+        int stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
+
+        //Moving player to second exit
+        stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 2", controller.getState());
+
+        //Moving player to third exit
+        stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 3", controller.getState());
+    }
+
+    @Test
+    /**
+     * Testing revisiting exit on Level 1
+     *
+     */
+    public void testRevisitLevel1() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Third Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //Moving player to first exit
+        int stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
+
+        //Moving back
+        stepCounter = 1;
+        while(stepCounter <= 3) {
+            press(KeyCode.DOWN).release(KeyCode.DOWN);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Game Screen", controller.getState());
+    }
+
+    @Test
+    /**
+     * Testing revisiting exit on Level 2
+     *
+     */
+    public void testRevisitLevel2() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Third Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //Moving player to first exit
+        int stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
+
+        //Moving player to second exit
+        stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 2", controller.getState());
+
+        //Moving back
+        stepCounter = 1;
+        while(stepCounter <= 3) {
+            press(KeyCode.DOWN).release(KeyCode.DOWN);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
+    }
+
+    @Test
+    /**
+     * Testing revisiting exit on Level 3
+     *
+     */
+    public void testRevisitLevel3() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Third Exit");
+        clickOn("#thermometerSwordButton");
+        clickOn("#easyButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //Moving player to first exit
+        int stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 1", controller.getState());
+
+        //Moving player to second exit
+        stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 2", controller.getState());
+
+        //Moving player to third exit
+        stepCounter = 1;
+        while(stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 3", controller.getState());
+
+        //Moving back
+        stepCounter = 1;
+        while(stepCounter <= 3) {
+            press(KeyCode.DOWN).release(KeyCode.DOWN);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 2", controller.getState());
+    }
 }
