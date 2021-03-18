@@ -33,7 +33,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -67,13 +67,13 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to right exit
         int stepCounter = 1;
-        while(stepCounter <= 8) {
+        while (stepCounter <= 8) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
 
         stepCounter = 1;
-        while(stepCounter <= 10) {
+        while (stepCounter <= 10) {
             press(KeyCode.RIGHT).release(KeyCode.RIGHT);
             stepCounter++;
         }
@@ -104,13 +104,13 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to right exit
         int stepCounter = 1;
-        while(stepCounter <= 8) {
+        while (stepCounter <= 8) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
 
         stepCounter = 1;
-        while(stepCounter <= 10) {
+        while (stepCounter <= 10) {
             press(KeyCode.LEFT).release(KeyCode.LEFT);
             stepCounter++;
         }
@@ -140,7 +140,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to bottom exit
         int stepCounter = 1;
-        while(stepCounter <= 3) {
+        while (stepCounter <= 3) {
             press(KeyCode.DOWN).release(KeyCode.DOWN);
             stepCounter++;
         }
@@ -166,7 +166,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -176,7 +176,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to second exit
         stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -199,7 +199,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -209,7 +209,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to second exit
         stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -218,7 +218,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to third exit
         stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -241,7 +241,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -251,7 +251,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving back
         stepCounter = 1;
-        while(stepCounter <= 3) {
+        while (stepCounter <= 3) {
             press(KeyCode.DOWN).release(KeyCode.DOWN);
             stepCounter++;
         }
@@ -274,7 +274,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -284,7 +284,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to second exit
         stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -293,7 +293,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving back
         stepCounter = 1;
-        while(stepCounter <= 3) {
+        while (stepCounter <= 3) {
             press(KeyCode.DOWN).release(KeyCode.DOWN);
             stepCounter++;
         }
@@ -316,7 +316,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -326,7 +326,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to second exit
         stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -335,7 +335,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to third exit
         stepCounter = 1;
-        while(stepCounter <= 18) {
+        while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
@@ -344,7 +344,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving back
         stepCounter = 1;
-        while(stepCounter <= 3) {
+        while (stepCounter <= 3) {
             press(KeyCode.DOWN).release(KeyCode.DOWN);
             stepCounter++;
         }
