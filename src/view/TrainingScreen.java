@@ -3,6 +3,8 @@ package view;
 import controller.Exit;
 import controller.LevelRandomizer;
 import controller.Player;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 
 public class TrainingScreen extends LevelScreen{
     public TrainingScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits){
@@ -11,5 +13,9 @@ public class TrainingScreen extends LevelScreen{
 
     @Override
     void loadObjects() {
+        Label levelLabel = new Label("training room\n     ");
+        levelLabel.setFont(DOGICA_FONT);
+        levelLabel.setAlignment(Pos.CENTER);
+        super.board.addObject(levelLabel, "Training Label", false, 0, 2, 13, 5);
     }
 }

@@ -35,12 +35,13 @@ public class LevelRandomizer {
                 "#52AA83",
                 "#7e7ee0",
                 "#cbc0d3",
-                "#fcd5ce"
+                "#fcd5ce",
+                "#1d81cb",
+                "#c29a59"
 
         };
         //Adding background objects to stack
         for (String color: backgroundColors) {
-            System.out.println(Paint.valueOf(color));
             layouts.add(color);
         }
 

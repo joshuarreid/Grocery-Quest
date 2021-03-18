@@ -81,6 +81,16 @@ public class GameScreen extends LevelScreen{
         rightStackPane.getChildren().addAll(rightTextBox, rightLabel);
 
         super.board.addObject(leftStackPane, "text box", true, 2, 5, 1, 6);
-        super.board.addObject(rightStackPane, "text box", true, 2, 5, 11, 6);
+        super.board.addObject(rightStackPane, "text box", true, 2, 5, 12, 6);
+
+        Label startLabel = new Label("  start");
+        startLabel.setFont(DOGICA_FONT);
+        startLabel.setAlignment(Pos.CENTER);
+        super.board.addObject(startLabel, "start", false, 0, 1, 8, 3);
+
+        Label exitLabel = new Label("   exit");
+        exitLabel.setFont(DOGICA_FONT);
+        exitLabel.setAlignment(Pos.CENTER);
+        super.board.addObject(exitLabel, "exit", false, 18, 1, 8, 3);
     }
 }

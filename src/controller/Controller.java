@@ -187,7 +187,7 @@ public class Controller extends Application {
                 Level levelOne = new Level(1, difficultyLevel);
                 hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                 goToGameScreen();
-                System.out.println("VALID!"); //Delete after previous lines implemented
+//                System.out.println("VALID!"); //Delete after previous lines implemented
             }
         });
         Scene scene = screen.getScene();
@@ -205,45 +205,6 @@ public class Controller extends Application {
         lc.initialGameScreen();
     }
 
-    /**
-     * This method launches and provides event handling for
-     * the Win Screen
-     */
-    private void initWinScreen() {
-        gameModel.setState("Win Screen");
-        EndScreen screen = new EndScreen(width, height);
-        Button replayButton = screen.getReplayButton();
-        replayButton.setOnAction(e -> {
-            initStartScreen();
-        });
-        Button exitButton = screen.getExitButton();
-        exitButton.setOnAction(e -> {
-            System.exit(0);
-        });
-        Scene scene = screen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
-    }
-    
-        /**
-     * This method launches and provides event handling for
-     * the Lose Screen
-     */
-    private void initLoseScreen() {
-        gameModel.setState("Lose Screen");
-        LoseScreen screen = new LoseScreen(width, height);
-        Button replayButton = screen.getReplayButton();
-        replayButton.setOnAction(e -> {
-            initStartScreen();
-        });
-        Button exitButton = screen.getExitButton();
-        exitButton.setOnAction(e -> {
-            System.exit(0);
-        });
-        Scene scene = screen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
-    }
     
     public String getState() {
         return gameModel.getState();

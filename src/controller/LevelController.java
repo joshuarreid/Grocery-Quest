@@ -2,8 +2,11 @@ package controller;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.GameModel;
+import view.WinScreen;
+import view.LoseScreen;
 
 public class LevelController {
     private Stage mainWindow;
@@ -124,13 +127,73 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    public void bossScreen() {
+        timer.stop();
+        gameModel.setState("Boss Screen");
+        currentScene = levelSetup.getBossScreen().getScene();
+        currentBoard = levelSetup.getBossScreen().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    public void vaccineScreen() {
+        timer.stop();
+        gameModel.setState("Vaccine Screen");
+        currentScene = levelSetup.getVaccineScreen().getScene();
+        currentBoard = levelSetup.getVaccineScreen().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    /**
+     * This method launches and provides event handling for
+     * the Win Screen
+     */
+    private void winScreen() {
+        timer.stop();
+        gameModel.setState("Win Screen");
+        WinScreen screen = new WinScreen(width, height);
+        Button replayButton = screen.getReplayButton();
+        replayButton.setOnAction(e -> {
+            initialGameScreen();
+        });
+        Button exitButton = screen.getExitButton();
+        exitButton.setOnAction(e -> {
+            System.exit(0);
+        });
+        Scene scene = screen.getScene();
+        mainWindow.setScene(scene);
+    }
+
+    /**
+     * This method launches and provides event handling for
+     * the Lose Screen
+     */
+    private void loseScreen() {
+        timer.stop();
+        gameModel.setState("Lose Screen");
+        LoseScreen screen = new LoseScreen(width, height);
+        Button replayButton = screen.getReplayButton();
+        replayButton.setOnAction(e -> {
+            initialGameScreen();
+        });
+        Button exitButton = screen.getExitButton();
+        exitButton.setOnAction(e -> {
+            System.exit(0);
+        });
+        Scene scene = screen.getScene();
+        mainWindow.setScene(scene);
+    }
+
+    private void exitGame() {
+        timer.stop();
+        gameModel.setState("Lose Screen");
+        System.exit(0);
+    }
 
     private void getNextLevel(Exit exit) {
         switch(exit.getAdjacentState(gameModel)) {
             case "Game Screen":
                 initialGameScreen();
                 break;
-
             case "Level 1":
                 levelOneScreen();
                 break;
@@ -161,18 +224,25 @@ public class LevelController {
             case "Training Screen":
                 trainingScreen();
                 break;
+            case "Boss Screen":
+                bossScreen();
+                break;
+            case "Vaccine Screen":
+                vaccineScreen();
+                break;
+            case "Win Screen":
+                winScreen();
+                break;
+            case "Exit Game":
+                exitGame();
+                break;
 
             default:
         }
     }
 
 
-
-
-
-
-
-    ///// Player movement
+    //Player movement ----------------------------------------------------------------------
     /**
      * Moves a Player's location on a given board depending on arrow key events
      *
@@ -202,6 +272,7 @@ public class LevelController {
                 case SPACE:
                     System.out.println("spacey boi");
                     if (board.onExit(hero) != null) {
+                        System.out.println("inside");
                         getNextLevel(board.onExit(hero, gameModel));
                     }
                     break;
@@ -272,7 +343,7 @@ public class LevelController {
      * @param board current Board
      */
     private void moveHeroTo(Player hero, int x, int y, Board board) {
-        System.out.println(board.removeObject("player", hero.getPlayerMovement().getXPosition(), hero.getPlayerMovement().getYPosition()));
+        board.removeObject("player", hero.getPlayerMovement().getXPosition(), hero.getPlayerMovement().getYPosition());
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false, y, 0, x, 0);
         if (worked) {

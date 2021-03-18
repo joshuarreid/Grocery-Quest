@@ -80,7 +80,6 @@ public class Board {
                     exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
                     break;
                 case RIGHT:
-                    //TODO fix left and right exits
                     exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
                     exitBoard[(maxRow / 2)][maxColumn -1] = exits[i];
                     exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];

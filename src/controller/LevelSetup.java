@@ -9,7 +9,7 @@ public class LevelSetup {
     //Exit bridges: screen1_screen2
     Exit intialGameScreen_weaponsScreen;
     Exit intialGameScreen_trainingScreen;
-//    Exit intialGameScreen_exitGame = new Exit();
+    Exit intialGameScreen_exitGame;
     Exit initialGameScreen_level1;
 
     Exit level1_level2;
@@ -20,8 +20,9 @@ public class LevelSetup {
     Exit level5_level6;
     Exit level6_level7;
     Exit level7_level8;
-//    Exit level8_endRoom = new Exit();
-//    Exit endRoom_WinScreen = new Exit();
+    Exit level8_bossScreen;
+    Exit bossScreen_vaccineScreen;
+    Exit vaccineScreen_winScreen;
 
     // Arrays storing Exits for each screen
     Exit[] initialGameScreenExits;
@@ -35,6 +36,8 @@ public class LevelSetup {
     Exit[] levelEightScreenExits;
     Exit[] weaponsScreenExits;
     Exit[] trainingScreenExits;
+    Exit[] bossScreenExits;
+    Exit[] vaccineScreenExits;
 
     //screens
     private LevelScreen gameScreen;
@@ -48,6 +51,8 @@ public class LevelSetup {
     private LevelScreen levelEight;
     private LevelScreen weaponsScreen;
     private LevelScreen trainingScreen;
+    private LevelScreen bossScreen;
+    private LevelScreen vaccineScreen;
 
 
     public LevelSetup(int width, int height, Player hero){
@@ -55,7 +60,10 @@ public class LevelSetup {
         this.levelRandomizer = new LevelRandomizer();
 
         //initialize all exits
-        initialGameScreen_level1= new Exit(ExitType.TOP, ExitType.BOTTOM,"Game Screen", "Level 1");
+        initialGameScreen_level1 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Game Screen", "Level 1");
+        intialGameScreen_weaponsScreen = new Exit(ExitType.LEFT, ExitType.RIGHT,"Game Screen", "Weapons Screen");
+        intialGameScreen_trainingScreen = new Exit(ExitType.RIGHT, ExitType.LEFT,"Game Screen", "Training Screen");
+        intialGameScreen_exitGame = new Exit(ExitType.BOTTOM, ExitType.TOP,"Game Screen", "Exit Game");
         level1_level2 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 1", "Level 2");
         level2_level3 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 2", "Level 3");
         level3_level4 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 3", "Level 4");
@@ -63,11 +71,15 @@ public class LevelSetup {
         level5_level6 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 5", "Level 6");
         level6_level7 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 6", "Level 7");
         level7_level8 = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 7", "Level 8");
-        intialGameScreen_weaponsScreen = new Exit(ExitType.LEFT, ExitType.RIGHT,"Game Screen", "Weapons Screen");
-        intialGameScreen_trainingScreen = new Exit(ExitType.RIGHT, ExitType.LEFT,"Game Screen", "Training Screen");
-
+        level8_bossScreen = new Exit(ExitType.TOP, ExitType.BOTTOM,"Level 8", "Boss Screen");
+        bossScreen_vaccineScreen = new Exit(ExitType.TOP, ExitType.BOTTOM,"Boss Screen", "Vaccine Screen");
+        vaccineScreen_winScreen = new Exit(ExitType.TOP, ExitType.BOTTOM,"Vaccine Screen", "Win Screen");
         //initialize all exit arrays
-        initialGameScreenExits = new Exit[]{initialGameScreen_level1};
+        initialGameScreenExits = new Exit[]{
+                initialGameScreen_level1,
+                intialGameScreen_weaponsScreen,
+                intialGameScreen_trainingScreen,
+                intialGameScreen_exitGame};
         levelOneScreenExits = new Exit[]{initialGameScreen_level1, level1_level2};
         levelTwoScreenExits = new Exit[]{level1_level2, level2_level3};
         levelThreeScreenExits = new Exit[]{level2_level3, level3_level4};
@@ -75,9 +87,11 @@ public class LevelSetup {
         levelFiveScreenExits = new Exit[]{level4_level5, level5_level6};
         levelSixScreenExits = new Exit[]{level5_level6, level6_level7};
         levelSevenScreenExits = new Exit[]{level6_level7, level7_level8};
-        levelEightScreenExits = new Exit[]{level7_level8};
+        levelEightScreenExits = new Exit[]{level7_level8, level8_bossScreen};
         weaponsScreenExits = new Exit[]{intialGameScreen_weaponsScreen};
         trainingScreenExits = new Exit[]{intialGameScreen_trainingScreen};
+        bossScreenExits = new Exit[]{level8_bossScreen, bossScreen_vaccineScreen};
+        vaccineScreenExits = new Exit[]{bossScreen_vaccineScreen, vaccineScreen_winScreen};
 
 
         //initialize all screens
@@ -92,6 +106,8 @@ public class LevelSetup {
         levelEight = new LevelEightScreen(width, height, hero, levelRandomizer, levelEightScreenExits);
         weaponsScreen = new WeaponsScreen(width, height, hero, levelRandomizer, weaponsScreenExits);
         trainingScreen = new TrainingScreen(width, height, hero, levelRandomizer,trainingScreenExits);
+        bossScreen = new BossScreen(width, height, hero, levelRandomizer,bossScreenExits);
+        vaccineScreen = new VaccineScreen(width, height, hero, levelRandomizer,vaccineScreenExits);
     }
 
     public LevelScreen getGameScreen() {
@@ -136,5 +152,13 @@ public class LevelSetup {
 
     public LevelScreen getTrainingScreen() {
         return trainingScreen;
+    }
+
+    public LevelScreen getBossScreen() {
+        return bossScreen;
+    }
+
+    public LevelScreen getVaccineScreen() {
+        return vaccineScreen;
     }
 }
