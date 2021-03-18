@@ -20,7 +20,7 @@ public abstract class LevelScreen {
     private ImageView coinBar;
     private ImageView healthBar;
     private Player hero;
-    private Board board;
+    protected Board board;
     private String background;
     private int levelDeterminant;
     private Exit[] exits;

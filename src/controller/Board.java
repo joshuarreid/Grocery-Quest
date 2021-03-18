@@ -105,7 +105,7 @@ public class Board {
 //                    Exit bottom = new Exit(currentLevel, ExitType.BOTTOM);
 //                    System.out.println(maxRow - 1);
                     exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
-                    exitBoard[maxRow - 1][maxColumn] = exits[i];
+                    exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
                     exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
 
 //                    hiddenBoard[maxRow - 2][(maxColumn / 2)] = "exitBOTTOM";

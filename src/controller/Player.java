@@ -88,8 +88,8 @@ public class Player {
 
     public int[] getPlayerPosition() {
         int[] coordinates = new int[]{
-                playerMovement.getxPosition(),
-                playerMovement.getyPosition()
+                playerMovement.getXPosition(),
+                playerMovement.getYPosition()
         };
         return coordinates;
     }
