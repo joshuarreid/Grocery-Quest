@@ -1,10 +1,12 @@
-package controller;
+package model;
 
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import model.Exit;
 import model.GameModel;
+import model.Player;
 
 //**************************NOTE: 3 THINGS TO ADDRESS**********************************************
 //1. 2 potential methods: removeObject and playerMovement()

@@ -4,7 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.GameModel;
+import model.*;
 import view.WinScreen;
 import view.LoseScreen;
 

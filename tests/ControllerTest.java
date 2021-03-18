@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.*;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
-import controller.PlayerMovement;
+import model.PlayerMovement;
 
 
 

@@ -9,6 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.GameModel;
+import model.Level;
+import model.Player;
 import view.*;
 
 

@@ -1,8 +1,8 @@
 package view;
 
-import controller.Exit;
-import controller.LevelRandomizer;
-import controller.Player;
+import model.Exit;
+import model.LevelRandomizer;
+import model.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 

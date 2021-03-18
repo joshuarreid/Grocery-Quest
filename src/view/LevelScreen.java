@@ -1,9 +1,9 @@
 package view;
 
-import controller.Board;
-import controller.Exit;
-import controller.LevelRandomizer;
-import controller.Player;
+import model.Board;
+import model.Exit;
+import model.LevelRandomizer;
+import model.Player;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

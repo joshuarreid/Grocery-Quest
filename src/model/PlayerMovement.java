@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 public class PlayerMovement {
     private static int xPosition; //current x or col position

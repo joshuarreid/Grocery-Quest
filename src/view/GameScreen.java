@@ -1,8 +1,8 @@
 package view;
 
-import controller.LevelRandomizer;
-import controller.Player;
-import controller.Exit;
+import model.LevelRandomizer;
+import model.Player;
+import model.Exit;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

@@ -1,6 +1,9 @@
-package controller;
+package model;
 
+import model.Exit;
 import model.ExitType;
+import model.LevelRandomizer;
+import model.Player;
 import view.*;
 
 public class LevelSetup {

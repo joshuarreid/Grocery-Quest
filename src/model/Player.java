@@ -1,7 +1,10 @@
-package controller;
+package model;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.PlayerHealth;
+import model.PlayerMoney;
+import model.PlayerMovement;
 
 /**The Player Class
  *
