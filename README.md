@@ -8,7 +8,7 @@
 - Joshua Ryan Reid
 
 ## Workflow
-- make a branch off of develop named <yourName>/<small-description-of-what-you-are-working-on>
+- make a branch off of develop named yourName/small-description-of-what-you-are-working-on
 - merge working code to develop
 - run checkstyle before merging to develop!
 - at the end of each milestone, develop with be merged with master
