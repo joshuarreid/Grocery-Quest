@@ -9,9 +9,9 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.GameModel;
-import view.GameScreen;
-import view.StartScreen;
-import view.ConfigurationScreen;
+import model.Level;
+import model.Player;
+import view.*;
 
 
 /**The Controller Class
@@ -34,11 +34,13 @@ public class Controller extends Application {
     private String weaponChoice;
     private final int width = 600;
     private final int height = 600;
+    private Player hero;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         mainWindow = primaryStage;
         mainWindow.setTitle("Grocery Quest");
+        mainWindow.setResizable(false);
         gameModel = new GameModel();
         initStartScreen();
     }
@@ -101,7 +103,7 @@ public class Controller extends Application {
 
         //If player clicks the wipe crossbow button
         wipeCrossbowButton.setOnAction(e -> {
-            weaponChoice = "wipe crossbow";
+            weaponChoice = "Crossbow";
             wipeCrossbowButton.setEffect(new DropShadow(2.0, Color.BLACK));
             disinfectantSprayButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -109,7 +111,7 @@ public class Controller extends Application {
 
         //If player clicks the disinfectant spray button
         disinfectantSprayButton.setOnAction(e -> {
-            weaponChoice = "disinfectant spray";
+            weaponChoice = "Spray";
             disinfectantSprayButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -117,7 +119,7 @@ public class Controller extends Application {
 
         //If player clicks the thermometer sword button
         thermometerSwordButton.setOnAction(e -> {
-            weaponChoice = "thermometer sword";
+            weaponChoice = "Sword";
             thermometerSwordButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             disinfectantSprayButton.setEffect(null);
@@ -151,7 +153,7 @@ public class Controller extends Application {
                     gameModel.setState("Configuration Screen");
                 } else {
                     Level levelOne = new Level(1, difficultyLevel);
-                    Player player = new Player(100, 0, name, weaponChoice);
+                    hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                     goToGameScreen();
                     System.out.println("VALID!"); //Delete after previous lines implemented
                 }
@@ -185,15 +187,12 @@ public class Controller extends Application {
                 gameModel.setState("Configuration Screen");
             } else {
                 Level levelOne = new Level(1, difficultyLevel);
-                Player player = new Player(100, 0, name, weaponChoice);
+                hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
                 goToGameScreen();
-                System.out.println("VALID!"); //Delete after previous lines implemented
             }
         });
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
-        mainWindow.show();
-
     }
 
     /**
@@ -201,33 +200,15 @@ public class Controller extends Application {
      * the Game Screen
      */
     private void goToGameScreen() {
-        gameModel.setState("Game Screen");
-        GameScreen screen = new GameScreen(width, height, difficultyLevel, weaponChoice);
-        
-        Scene scene = screen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
+        LevelController lc = new LevelController(
+                mainWindow,
+                gameModel,
+                difficultyLevel,
+                weaponChoice,
+                hero);
+        lc.initialGameScreen();
     }
 
-        /**
-     * This method launches and provides event handling for
-     * the Win Screen
-     */
-    private void initWinScreen() {
-        gameModel.setState("Win Screen");
-        EndScreen screen = new EndScreen(width, height);
-        Button replayButton = screen.getReplayButton();
-        replayButton.setOnAction(e -> {
-            initStartScreen();
-        });
-        Button exitButton = screen.getExitButton();
-        exitButton.setOnAction(e -> {
-            System.exit(0);
-        });
-        Scene scene = screen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
-    }
     
     public String getState() {
         return gameModel.getState();

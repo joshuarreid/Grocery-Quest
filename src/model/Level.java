@@ -1,4 +1,4 @@
-package controller;
+package model;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
@@ -77,6 +77,8 @@ public class Level {
     public static void spawnMob(Pane pane, int spawnLocation) {
         return;
     }
+
+
 
     public int getLevelNumber() {
         return levelNumber;

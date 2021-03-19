@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 /**The AntiMasker Class
  *

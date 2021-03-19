@@ -103,6 +103,8 @@ public class LoseScreen {
     public Button getReplayButton() {
         return replayButton;
     }
-    public Button getExitButton() { return exitButton; }
+    public Button getExitButton() {
+        return exitButton;
+    }
 
 }

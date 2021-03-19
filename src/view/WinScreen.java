@@ -12,20 +12,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class EndScreen {
+public class WinScreen {
     private int width;
     private int height;
     private Button replayButton;
     private Button exitButton;
 
     private static final String IDLE_BUTTON_STYLE =
-            "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
+            "-fx-background-radius: 20; -fx-background-color: #83AA51";
     private static final String HOVERED_BUTTON_STYLE =
-            "-fx-background-radius: 20; -fx-background-color: #91bfa1";
+            "-fx-background-radius: 20; -fx-background-color: #688741";
 
 
-    private EndScreen() { }
-    public EndScreen(int width, int height) {
+    private WinScreen() { }
+    public WinScreen(int width, int height) {
         this.width = width;
         this.height = height;
         replayButton = new Button();
@@ -68,8 +68,8 @@ public class EndScreen {
         exitButton.setStyle("-fx-background-color: #83AA51; -fx-background-radius: 30px");
         exitButton.setMinSize(190, 148);
         exitButton.setMaxSize(190, 148);
-        exitButton.setOnMouseEntered(e -> replayButton.setStyle(HOVERED_BUTTON_STYLE));
-        exitButton.setOnMouseExited(e -> replayButton.setStyle(IDLE_BUTTON_STYLE));
+        exitButton.setOnMouseEntered(e -> exitButton.setStyle(HOVERED_BUTTON_STYLE));
+        exitButton.setOnMouseExited(e -> exitButton.setStyle(IDLE_BUTTON_STYLE));
         exitButton.setId("exitButton");
 
         Label replayText = new Label("play again");
@@ -100,9 +100,12 @@ public class EndScreen {
     }
 
     public Button getReplayButton() {
+
         return replayButton;
     }
-    public Button getExitButton() { return exitButton; }
+    public Button getExitButton() {
+        return exitButton;
+    }
 
 }
 
