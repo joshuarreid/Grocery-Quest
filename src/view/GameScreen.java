@@ -1,7 +1,6 @@
 package view;
 
 import model.LevelRandomizer;
-import model.Monster;
 import model.Player;
 import model.Exit;
 import javafx.geometry.Pos;
@@ -21,8 +20,8 @@ public class GameScreen extends LevelScreen {
      * @param lr level randomizer
      * @param exits array of exits in screen
      */
-    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, Monster[] monsters) {
-        super(width, height, hero, lr, exits, "Game Screen", monsters);
+    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits) {
+        super(width, height, hero, lr, exits, "Game Screen");
     }
 
     /**

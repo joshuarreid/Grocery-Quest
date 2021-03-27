@@ -38,18 +38,6 @@ public class LevelSetup {
     private Exit[] bossScreenExits;
     private Exit[] vaccineScreenExits;
 
-    // Monster arrays
-    private Monster[] levelOneMonsters;
-    private Monster[] levelTwoMonsters;
-    private Monster[] levelThreeMonsters;
-    private Monster[] levelFourMonsters;
-    private Monster[] levelFiveMonsters;
-    private Monster[] levelSixMonsters;
-    private Monster[] levelSevenMonsters;
-    private Monster[] levelEightMonsters;
-    private Monster[] bossMonsters;
-
-
     //screens
     private LevelScreen gameScreen;
     private LevelScreen levelOne;
@@ -110,42 +98,26 @@ public class LevelSetup {
         bossScreenExits = new Exit[]{level8BossScreen, bossScreenVaccineScreen};
         vaccineScreenExits = new Exit[]{bossScreenVaccineScreen, vaccineScreenWinScreen};
 
-        // initialize monster arrays
-        levelOneMonsters = new Monster[]{
-                new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster1"),
-                new Monster( MonsterType.MAANTIMASKER, "Down", 1,9, 11,"monster2"),
-                new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,9, 13,"monster3"),
-                new Monster( MonsterType.TRUMP, "Down", 1,9, 15,"monster4"),
-                new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,4, 17,"monster5")};
-        levelTwoMonsters = new Monster[0];
-        levelThreeMonsters = new Monster[0];
-        levelFourMonsters = new Monster[0];
-        levelFiveMonsters = new Monster[0];
-        levelSixMonsters = new Monster[0];
-        levelSevenMonsters = new Monster[0];
-        levelEightMonsters = new Monster[0];
-        bossMonsters = new Monster[0];
-
 
         //initialize all screens
-        gameScreen = new GameScreen(width, height, hero, levelRandomizer, initialGameScreenExits, new Monster[0]);
-        levelOne = new LevelOneScreen(width, height, hero, levelRandomizer, levelOneScreenExits, levelOneMonsters);
-        levelTwo = new LevelTwoScreen(width, height, hero, levelRandomizer, levelTwoScreenExits, levelTwoMonsters);
+        gameScreen = new GameScreen(width, height, hero, levelRandomizer, initialGameScreenExits);
+        levelOne = new LevelOneScreen(width, height, hero, levelRandomizer, levelOneScreenExits);
+        levelTwo = new LevelTwoScreen(width, height, hero, levelRandomizer, levelTwoScreenExits);
         levelThree =
-                new LevelThreeScreen(width, height, hero, levelRandomizer, levelThreeScreenExits, levelThreeMonsters);
-        levelFour = new LevelFourScreen(width, height, hero, levelRandomizer, levelFourScreenExits, levelFourMonsters);
-        levelFive = new LevelFiveScreen(width, height, hero, levelRandomizer, levelFiveScreenExits, levelFiveMonsters);
-        levelSix = new LevelSixScreen(width, height, hero, levelRandomizer, levelSixScreenExits, levelSixMonsters);
+                new LevelThreeScreen(width, height, hero, levelRandomizer, levelThreeScreenExits);
+        levelFour = new LevelFourScreen(width, height, hero, levelRandomizer, levelFourScreenExits);
+        levelFive = new LevelFiveScreen(width, height, hero, levelRandomizer, levelFiveScreenExits);
+        levelSix = new LevelSixScreen(width, height, hero, levelRandomizer, levelSixScreenExits);
         levelSeven =
-                new LevelSevenScreen(width, height, hero, levelRandomizer, levelSevenScreenExits, levelSevenMonsters);
+                new LevelSevenScreen(width, height, hero, levelRandomizer, levelSevenScreenExits);
         levelEight =
-                new LevelEightScreen(width, height, hero, levelRandomizer, levelEightScreenExits, levelEightMonsters);
+                new LevelEightScreen(width, height, hero, levelRandomizer, levelEightScreenExits);
         weaponsScreen =
-                new WeaponsScreen(width, height, hero, levelRandomizer, weaponsScreenExits, new Monster[0]);
+                new WeaponsScreen(width, height, hero, levelRandomizer, weaponsScreenExits);
         trainingScreen =
-                new TrainingScreen(width, height, hero, levelRandomizer, trainingScreenExits, new Monster[0]);
-        bossScreen = new BossScreen(width, height, hero, levelRandomizer, bossScreenExits, bossMonsters);
-        vaccineScreen = new VaccineScreen(width, height, hero, levelRandomizer, vaccineScreenExits, new Monster[0]);
+                new TrainingScreen(width, height, hero, levelRandomizer, trainingScreenExits);
+        bossScreen = new BossScreen(width, height, hero, levelRandomizer, bossScreenExits);
+        vaccineScreen = new VaccineScreen(width, height, hero, levelRandomizer, vaccineScreenExits);
     }
 
     public LevelScreen getGameScreen() {

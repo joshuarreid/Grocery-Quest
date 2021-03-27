@@ -90,8 +90,6 @@ public class Player {
     }
 
     public ImageView getPlayerImage() {
-        setWeaponInUse(this.weaponInUse,  this.currentSide);
-
         return playerImage;
     }
 

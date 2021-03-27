@@ -340,7 +340,6 @@ public class LevelController {
                 }
                 break;
             case UP:
-
                 if (!hero.getCurrentSide().equals("Up")) {
                     hero.setCurrentSide("Up");
                 }
@@ -356,13 +355,11 @@ public class LevelController {
                 if (!hero.getCurrentSide().equals("Down")) {
                     hero.setCurrentSide("Down");
                 }
-
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition() + 1,
                         hero.getPlayerMovement().getXPosition())) {
                     moveHeroBy(hero, 0, 1, board);
                 } else {
-
                     switchHeroSide(hero, board);
                 }
                 break;
@@ -375,7 +372,6 @@ public class LevelController {
                         hero.getPlayerMovement().getXPosition() - 1)) {
                     moveHeroBy(hero, -1, 0, board);
                 } else {
-
                     switchHeroSide(hero, board);
                 }
                 break;
@@ -389,7 +385,6 @@ public class LevelController {
                     moveHeroBy(hero, 1, 0, board);
                 } else {
                     switchHeroSide(hero, board);
-
                 }
                 break;
             default:
@@ -438,7 +433,6 @@ public class LevelController {
             hero.getPlayerMovement().setyPosition(y);
         }
     }
-
 
     /**
      *  switches hero side when not actually moving position
