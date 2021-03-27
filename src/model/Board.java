@@ -176,6 +176,14 @@ public class Board {
         }
         return false;
     }
+
+    public String getMonster(int row, int col) {
+        if (hiddenBoard[row][col] != null && hiddenBoard[row][col].substring(0, 7).equals("monster")) {
+            return hiddenBoard[row][col];
+        }
+        return null;
+    }
+
     // need to fix this method
     //    public boolean removeObject(String id, int x, int y, int rowSpan, int colSpan) {
     //        for (Node node : this.gridPane.getChildren()) {

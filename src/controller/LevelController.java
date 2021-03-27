@@ -287,8 +287,8 @@ public class LevelController {
                         hero.getPlayerMovement().getYPosition() - 1,
                         hero.getPlayerMovement().getXPosition())) {
 
-                    if (!hero.getCurrentSide().equals("Up")) {
-                        hero.setCurrentSide("Up");
+                    if (!hero.getCurrentSide().equals("up")) {
+                        hero.setCurrentSide("up");
                     }
                     moveHeroBy(hero, 0, -1, board);
                 }
@@ -297,8 +297,8 @@ public class LevelController {
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition() + 1,
                         hero.getPlayerMovement().getXPosition())) {
-                    if (!hero.getCurrentSide().equals("Down")) {
-                        hero.setCurrentSide("Down");
+                    if (!hero.getCurrentSide().equals("down")) {
+                        hero.setCurrentSide("down");
                     }
                     moveHeroBy(hero, 0, 1, board);
                 }
@@ -307,8 +307,8 @@ public class LevelController {
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition(),
                         hero.getPlayerMovement().getXPosition() - 1)) {
-                    if (!hero.getCurrentSide().equals("Left")) {
-                        hero.setCurrentSide("Left");
+                    if (!hero.getCurrentSide().equals("left")) {
+                        hero.setCurrentSide("left");
                     }
                     moveHeroBy(hero, -1, 0, board);
                 }
@@ -317,10 +317,17 @@ public class LevelController {
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition(),
                         hero.getPlayerMovement().getXPosition() + 1)) {
-                    if (!hero.getCurrentSide().equals("Right")) {
-                        hero.setCurrentSide("Right");
+                    if (!hero.getCurrentSide().equals("right")) {
+                        hero.setCurrentSide("right");
                     }
                     moveHeroBy(hero, 1, 0, board);
+                }
+                break;
+            case Z:
+                String monsterId = checkMonster(board, hero);
+                System.out.println("Hellow world");
+                if (monsterId != null) {
+                    //board.getMonster(monsterId).removeHealth(weaponPower);
                 }
                 break;
             default:
@@ -374,6 +381,22 @@ public class LevelController {
         if (playerHealth.getPlayerHealthLevel() == 0) {
             loseScreen();
         }
+    }
+
+    private String checkMonster(Board board, Player hero) {
+        String monsterId = null;
+        int row = hero.getPlayerPosition()[1];
+        int col = hero.getPlayerPosition()[0];
+        if (hero.getCurrentSide().equals("up")) {
+            monsterId = board.getMonster(row + 1, col);
+        } else if (hero.getCurrentSide().equals("right")) {
+            monsterId = board.getMonster(row, col + 1);
+        } else if (hero.getCurrentSide().equals("down")) {
+            monsterId = board.getMonster(row - 1, col);
+        } else if (hero.getCurrentSide().equals("left")) {
+            monsterId = board.getMonster(row, col - 1);
+        }
+        return monsterId;
     }
 
     private void updateLevelScreen() {
