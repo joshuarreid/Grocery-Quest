@@ -37,7 +37,6 @@ public class GameScreen extends LevelScreen {
                 if ((i == 14  && j == 6) || (i == 14 && j == 12)) {
                     continue;
                 }
-                //Replace with actual image of cart
                 ImageView cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
                 cart.setFitWidth(30);
                 cart.setFitHeight(30);
@@ -52,7 +51,6 @@ public class GameScreen extends LevelScreen {
             if (j > 5 && j < 12) {
                 continue;
             }
-            //Replace with actual image of flowers
             ImageView flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
             flower.setFitWidth(30);
             flower.setFitHeight(45);

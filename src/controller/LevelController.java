@@ -35,10 +35,12 @@ public class LevelController {
             @Override
             public void handle(long now) {
                 handleKeys(currentScene, hero, currentBoard);
+                handleCombat(hero.getPlayerHealth());
             }
         };
     }
 
+    //TODO: make initial game screen specifically for replaying game after lose screen, redirect to config screen
     public void initialGameScreen() {
         timer.stop();
         gameModel.setState("Game Screen");
@@ -361,6 +363,18 @@ public class LevelController {
             hero.getPlayerMovement().setxPosition(x);
             hero.getPlayerMovement().setyPosition(y);
         }
+    }
+
+    private void handleCombat(PlayerHealth playerHealth) { //}, PlayerMoney playerMoney) {
+        if (playerHealth.getPlayerHealthLevel() == 0) {
+            loseScreen();
+        }
+    }
+
+    private void updateLevelScreen() {
+        currentScene = levelSetup.getGameScreen().updateScene();
+        currentBoard = levelSetup.getGameScreen().getBoard();
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
 

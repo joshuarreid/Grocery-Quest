@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import model.GameModel;
 import model.Level;
 import model.Player;
+import model.PlayerHealth;
 import view.*;
 
 
