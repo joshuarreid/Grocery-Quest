@@ -18,7 +18,7 @@ public abstract class LevelScreen {
     private Exit[] exits;
     private String iD;
     private Scene gameScene;
-    private PlayerHealth playerHealth;
+//    private Monster[] monsters;
 
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -39,11 +39,11 @@ public abstract class LevelScreen {
         this.width = width;
         this.height = height;
         this.hero = hero;
-        this.board = new Board(19, 19, exits, iD);
-        this.background = lr.getLayout();
         this.exits = exits;
+        this.board = new Board(19, 19, this.exits, iD);
+        this.background = lr.getLayout();
         this.iD = iD;
-        board.createBoard(height, width);
+        board.createBoard(this.height, this.width);
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
         ImageView borderExitImage = new ImageView(
@@ -119,6 +119,13 @@ public abstract class LevelScreen {
                 hero.getPlayerMovement().getYPosition(), 0,
                 hero.getPlayerMovement().getXPosition(), 0);
     }
+
+//    /**
+//     * Adds monsters to the board
+//     */
+//    private void loadMonsters() {
+//
+//    }
 
     /**
      * Loads in all other objects
