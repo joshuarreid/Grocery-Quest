@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+//import model.*;
 import model.*;
 import view.WinScreen;
 import view.LoseScreen;
@@ -22,6 +23,15 @@ public class LevelController {
     private Board currentBoard;
     private AnimationTimer timer;
 
+    /**
+     * Level Controller constructor
+     *
+     * @param mainWindow main stage
+     * @param gameModel current gameModel
+     * @param difficultyLevel current difficulty level
+     * @param weaponChoice current weapon choice
+     * @param hero current Player
+     */
     public LevelController(Stage mainWindow, GameModel gameModel, int difficultyLevel,
                            String weaponChoice, Player hero) {
         this.mainWindow = mainWindow;
@@ -41,6 +51,10 @@ public class LevelController {
     }
 
     //TODO: make initial game screen specifically for replaying game after lose screen, redirect to config screen
+
+    /**
+     * Method displays initial game screen
+     */
     public void initialGameScreen() {
         timer.stop();
         gameModel.setState("Game Screen");
@@ -49,6 +63,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level one screen
+     */
     public void levelOneScreen() {
         timer.stop();
         gameModel.setState("Level 1");
@@ -58,6 +75,9 @@ public class LevelController {
 
     }
 
+    /**
+     * Method displays level two screen
+     */
     public void levelTwoScreen() {
         timer.stop();
         gameModel.setState("Level 2");
@@ -66,6 +86,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level three screen
+     */
     public void levelThreeScreen() {
         timer.stop();
         gameModel.setState("Level 3");
@@ -74,6 +97,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level four screen
+     */
     public void levelFourScreen() {
         timer.stop();
         gameModel.setState("Level 4");
@@ -82,6 +108,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level five screen
+     */
     public void levelFiveScreen() {
         timer.stop();
         gameModel.setState("Level 5");
@@ -90,6 +119,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level six screen
+     */
     public void levelSixScreen() {
         timer.stop();
         gameModel.setState("Level 6");
@@ -98,6 +130,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level seven screen
+     */
     public void levelSevenScreen() {
         timer.stop();
         gameModel.setState("Level 7");
@@ -106,6 +141,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays level eight screen
+     */
     public void levelEightScreen() {
         timer.stop();
         gameModel.setState("Level 8");
@@ -114,6 +152,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays weapons screen
+     */
     public void weaponsScreen() {
         timer.stop();
         gameModel.setState("Weapons Screen");
@@ -122,6 +163,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays training screen
+     */
     public void trainingScreen() {
         timer.stop();
         gameModel.setState("Training Screen");
@@ -130,6 +174,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays boss screen
+     */
     public void bossScreen() {
         timer.stop();
         gameModel.setState("Boss Screen");
@@ -138,6 +185,9 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method displays vaccine screen
+     */
     public void vaccineScreen() {
         timer.stop();
         gameModel.setState("Vaccine Screen");
@@ -186,12 +236,20 @@ public class LevelController {
         mainWindow.setScene(scene);
     }
 
+    //TODO clarify what is going on here
+    /**
+     * Method exits game
+     */
     private void exitGame() {
         timer.stop();
         gameModel.setState("Lose Screen");
         System.exit(0);
     }
 
+    /**
+     * launches the appropriate next screen based of of exit and current state
+     * @param exit exit that is being used
+     */
     private void getNextLevel(Exit exit) {
         switch (exit.getAdjacentState(gameModel)) {
         case "Game Screen":
@@ -273,7 +331,7 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case SPACE:
-                if (board.onExit(hero) != null) {
+                if (board.onExit(hero) != null && board.onExit(hero).getIsOpen() == true) {
                     getNextLevel(board.onExit(hero, gameModel));
                 }
                 break;

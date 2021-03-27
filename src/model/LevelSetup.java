@@ -60,25 +60,25 @@ public class LevelSetup {
 
         //initialize all exits
         initialGameScreenLevel1 =
-                new Exit(ExitType.TOP, ExitType.BOTTOM, "Game Screen", "Level 1");
+                new Exit(ExitType.TOP, ExitType.BOTTOM, "Game Screen", "Level 1", true);
         intialGameScreenWeaponsScreen =
-                new Exit(ExitType.LEFT, ExitType.RIGHT, "Game Screen", "Weapons Screen");
+                new Exit(ExitType.LEFT, ExitType.RIGHT, "Game Screen", "Weapons Screen", true);
         intialGameScreenTrainingScreen =
-                new Exit(ExitType.RIGHT, ExitType.LEFT, "Game Screen", "Training Screen");
+                new Exit(ExitType.RIGHT, ExitType.LEFT, "Game Screen", "Training Screen", true);
         intialGameScreenExitGame =
-                new Exit(ExitType.BOTTOM, ExitType.TOP, "Game Screen", "Exit Game");
-        level1Level2 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 1", "Level 2");
-        level2Level3 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 2", "Level 3");
-        level3Level4 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 3", "Level 4");
-        level4Level5 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 4", "Level 5");
-        level5Level6 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 5", "Level 6");
-        level6Level7 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 6", "Level 7");
-        level7Level8 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 7", "Level 8");
-        level8BossScreen = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 8", "Boss Screen");
+                new Exit(ExitType.BOTTOM, ExitType.TOP, "Game Screen", "Exit Game", true);
+        level1Level2 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 1", "Level 2", false);
+        level2Level3 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 2", "Level 3", false);
+        level3Level4 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 3", "Level 4", false);
+        level4Level5 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 4", "Level 5", false);
+        level5Level6 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 5", "Level 6", false);
+        level6Level7 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 6", "Level 7", false);
+        level7Level8 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 7", "Level 8", false);
+        level8BossScreen = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 8", "Boss Screen", false);
         bossScreenVaccineScreen =
-                new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen");
+                new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen", false);
         vaccineScreenWinScreen =
-                new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen");
+                new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", true);
         //initialize all exit arrays
         initialGameScreenExits = new Exit[]{
             initialGameScreenLevel1,
