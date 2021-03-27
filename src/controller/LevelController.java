@@ -340,44 +340,51 @@ public class LevelController {
                 }
                 break;
             case UP:
+                if (!hero.getCurrentSide().equals("Up")) {
+                    hero.setCurrentSide("Up");
+                }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition() - 1,
                         hero.getPlayerMovement().getXPosition())) {
-
-                    if (!hero.getCurrentSide().equals("Up")) {
-                        hero.setCurrentSide("Up");
-                    }
                     moveHeroBy(hero, 0, -1, board);
+                } else {
+                    switchHeroSide(hero, board);
                 }
                 break;
             case DOWN:
+                if (!hero.getCurrentSide().equals("Down")) {
+                    hero.setCurrentSide("Down");
+                }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition() + 1,
                         hero.getPlayerMovement().getXPosition())) {
-                    if (!hero.getCurrentSide().equals("Down")) {
-                        hero.setCurrentSide("Down");
-                    }
                     moveHeroBy(hero, 0, 1, board);
+                } else {
+                    switchHeroSide(hero, board);
                 }
                 break;
             case LEFT:
+                if (!hero.getCurrentSide().equals("Left")) {
+                    hero.setCurrentSide("Left");
+                }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition(),
                         hero.getPlayerMovement().getXPosition() - 1)) {
-                    if (!hero.getCurrentSide().equals("Left")) {
-                        hero.setCurrentSide("Left");
-                    }
                     moveHeroBy(hero, -1, 0, board);
+                } else {
+                    switchHeroSide(hero, board);
                 }
                 break;
             case RIGHT:
+                if (!hero.getCurrentSide().equals("Right")) {
+                    hero.setCurrentSide("Right");
+                }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition(),
                         hero.getPlayerMovement().getXPosition() + 1)) {
-                    if (!hero.getCurrentSide().equals("Right")) {
-                        hero.setCurrentSide("Right");
-                    }
                     moveHeroBy(hero, 1, 0, board);
+                } else {
+                    switchHeroSide(hero, board);
                 }
                 break;
             default:
@@ -425,6 +432,22 @@ public class LevelController {
             hero.getPlayerMovement().setxPosition(x);
             hero.getPlayerMovement().setyPosition(y);
         }
+    }
+
+    /**
+     *  switches hero side when not actually moving position
+     * @param hero current player
+     * @param board current board
+     */
+    private void switchHeroSide(Player hero, Board board){
+        board.removeObject(
+                "player",
+                hero.getPlayerMovement().getXPosition(),
+                hero.getPlayerMovement().getYPosition());
+        boolean worked = board.addObject(hero.getPlayerImage(),
+                "player", false,
+                hero.getPlayerMovement().getYPosition(), 0,
+                hero.getPlayerMovement().getXPosition(), 0);
     }
 
     private void handleCombat(PlayerHealth playerHealth) { //}, PlayerMoney playerMoney) {
