@@ -18,6 +18,7 @@ public abstract class LevelScreen {
     private Exit[] exits;
     private String iD;
     private Scene gameScene;
+    private PlayerHealth playerHealth;
 
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -79,6 +80,7 @@ public abstract class LevelScreen {
     public Board getBoard() {
         return this.board;
     }
+
     /**
      * Gets the scene for the stage.
      *
@@ -91,12 +93,19 @@ public abstract class LevelScreen {
         return gameScene;
     }
 
+    public Scene updateScene() {
+        loadCoinHealthBar();
+        return gameScene;
+    }
+
     /**
      * loads hero's health and money
      */
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
         coinBar = hero.getMoneyBar();
+        board.removeObject("health", 1, 1);
+        board.removeObject("money", 1, 0);
         board.addObject(healthBar, "health", false, 0, 1, 1, 5);
         board.addObject(coinBar, "money", false, 1, 1, 1, 5);
     }

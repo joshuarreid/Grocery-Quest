@@ -25,6 +25,7 @@ public class Player {
     private PlayerMovement playerMovement;
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
+
     /**The Player Constructor
      *
      * @param health the amount of health the player has
@@ -74,6 +75,10 @@ public class Player {
 
     public ImageView getHealthBar() {
         return playerHealth.getCurrentHealthBar();
+    }
+
+    public PlayerHealth getPlayerHealth() {
+        return playerHealth;
     }
 
     public ImageView getMoneyBar() {

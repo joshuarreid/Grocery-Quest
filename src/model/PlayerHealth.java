@@ -27,7 +27,7 @@ public class PlayerHealth {
         this.barWidth = width;
     }
 
-    public ImageView hit(int power) {
+    public ImageView removeHealth(int power) {
         int change = power * healthHitChange;
         if (healthLevel < change) {
             this.healthLevel = 0;
@@ -48,6 +48,8 @@ public class PlayerHealth {
     public ImageView getCurrentHealthBar() {
         return barSettings(HEALTHBARS[healthLevel]);
     }
+
+    public int getPlayerHealthLevel() { return healthLevel; }
 
     private ImageView barSettings(ImageView bar) {
         bar.setFitWidth(barWidth);

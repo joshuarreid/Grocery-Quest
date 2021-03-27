@@ -26,7 +26,7 @@ public class PlayerMoney {
         this.barWidth = width;
     }
 
-    public ImageView hit(int power) {
+    public ImageView removeMoney(int power) {
         int change = power * moneyHitChange;
         if (moneyLevel < change) {
             this.moneyLevel = 0;
