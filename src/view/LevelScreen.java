@@ -124,20 +124,10 @@ public abstract class LevelScreen {
                 hero.getPlayerMovement().getXPosition(), 0);
     }
 
+    /**
+     * adds monsters to the board
+     */
     private void loadMonsters() {
-//        for(Monster monster: monsters) {
-//            if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
-//            board.addObject(monster.getMonsterAndHealth(),
-//                    monster.getId(), true,
-//                    monster.getY(), 1,
-//                    monster.getX(), 1);
-//            } else {
-//                board.addObject(monster.getMonsterAndHealth(),
-//                        monster.getId(), true,
-//                        monster.getY(), 3,
-//                        monster.getX(), 5);
-//            }
-//        }
         monsters.forEach(monster -> {
             if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
                 board.addObject(monster.getMonsterAndHealth(),

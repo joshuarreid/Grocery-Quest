@@ -40,16 +40,7 @@ public class LevelSetup {
     private Exit[] bossScreenExits;
     private Exit[] vaccineScreenExits;
 
-    // Monster arrays
-//    private Monster[] levelOneMonsters;
-//    private Monster[] levelTwoMonsters;
-//    private Monster[] levelThreeMonsters;
-//    private Monster[] levelFourMonsters;
-//    private Monster[] levelFiveMonsters;
-//    private Monster[] levelSixMonsters;
-//    private Monster[] levelSevenMonsters;
-//    private Monster[] levelEightMonsters;
-//    private Monster[] bossMonsters;
+    // Monster arrayslists
     private ArrayList<Monster> levelOneMonsters;
     private ArrayList<Monster> levelTwoMonsters;
     private ArrayList<Monster> levelThreeMonsters;
