@@ -26,7 +26,8 @@ public class Player {
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
 
-    /**The Player Constructor
+    /**
+     * The Player Constructor
      *
      * @param health the amount of health the player has
      * @param money the amount of currency the player has
