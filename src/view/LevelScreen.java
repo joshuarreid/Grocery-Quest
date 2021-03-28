@@ -9,6 +9,12 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
+/**
+ * The LevelScreen Class
+ *
+ * The LevelScreen Class is responsible for placing and updating
+ * all objects on the Level Screen.
+ */
 public abstract class LevelScreen {
     private int width;
     private int height;
@@ -77,17 +83,16 @@ public abstract class LevelScreen {
     }
 
     /**
-     * Getter for board
-     * @return board
+     *
+     * @return the current board
      */
     public Board getBoard() {
         return this.board;
     }
 
     /**
-     * Gets the scene for the stage.
      *
-     * @return the scene
+     * @return the current scene
      */
     public Scene getScene() {
         loadCoinHealthBar();
@@ -97,10 +102,20 @@ public abstract class LevelScreen {
         return gameScene;
     }
 
+    /**
+     *
+     * @return the monsters list
+     */
     public ArrayList<Monster> getMonstersList() {
         return monsters;
     }
 
+    /**
+     * Updates the scene
+     *
+     * @param monster the monster the player is attacking
+     * @return the updated scene
+     */
     public Scene updateScene(Monster monster) {
         loadCoinHealthBar();
         updateMonster(monster);
@@ -108,7 +123,7 @@ public abstract class LevelScreen {
     }
 
     /**
-     * loads hero's health and money
+     * loads hero's health and money bar
      */
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
@@ -130,7 +145,7 @@ public abstract class LevelScreen {
     }
 
     /**
-     * adds monsters to the board
+     * Adds monsters to the board
      */
     private void loadMonsters() {
 
@@ -151,18 +166,25 @@ public abstract class LevelScreen {
         });
     }
 
+    /**
+     * Updates the monster's imageview when the monster has lost
+     * health and/or removes the monster from the board if the
+     * monster has died
+     *
+     * @param monster the monster the player is attacking
+     */
     private void updateMonster(Monster monster) {
-        if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
+        if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) { //If regular enemy
             board.removeObject(monster.getId(), monster.getRow(), 0, monster.getCol(), 0);
-            if (monster.getMonsterHealth().getHealthLevel() > 0) {
+            if (monster.getMonsterHealth().getHealthLevel() > 0) { //If health > 0, add updated imageview
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getRow(), 1,
                         monster.getCol(), 1);
             }
-        } else {
+        } else { //If boss
             board.removeObject(monster.getId(), monster.getRow(), 3, monster.getCol(), 5);
-            if (monster.getMonsterHealth().getHealthLevel() > 0) {
+            if (monster.getMonsterHealth().getHealthLevel() > 0) { //If health > 0, add updated imageview
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getRow(), 3,
