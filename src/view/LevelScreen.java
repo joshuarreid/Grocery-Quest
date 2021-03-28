@@ -161,12 +161,12 @@ public abstract class LevelScreen {
                         monster.getCol(), 1);
             }
         } else {
-            board.removeObject(monster.getId(), monster.getRow(), 5, monster.getCol(), 3);
+            board.removeObject(monster.getId(), monster.getRow(), 3, monster.getCol(), 5);
             if (monster.getMonsterHealth().getHealthLevel() > 0) {
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
-                        monster.getRow(), 5,
-                        monster.getCol(), 3);
+                        monster.getRow(), 3,
+                        monster.getCol(), 5);
             }
         }
     }
