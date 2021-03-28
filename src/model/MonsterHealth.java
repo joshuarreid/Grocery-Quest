@@ -21,7 +21,7 @@ public class MonsterHealth {
         this.barWidth = width;
     }
 
-    public ImageView hit(int weaponHit) {
+    public ImageView removeHealth(int weaponHit) {
         int change = weaponHit * healthHitChange;
         if (healthLevel < change) {
             this.healthLevel = 0;
@@ -31,9 +31,19 @@ public class MonsterHealth {
         return barSettings(HEALTHBARS[healthLevel]);
     }
 
+    public ImageView addHealth(int amount) {
+        int newHealth = this.healthLevel + amount;
+        if (newHealth > 10) {
+            this.healthLevel = 10;
+        }
+        return barSettings(HEALTHBARS[healthLevel]);
+    }
+
     public ImageView getCurrentHealthBar() {
         return barSettings(HEALTHBARS[healthLevel]);
     }
+
+    public int getHealthLevel() { return healthLevel; }
 
     private ImageView barSettings(ImageView bar) {
         bar.setFitWidth(barWidth);

@@ -14,19 +14,19 @@ public class Monster {
     private ImageView healthBar; // potentially dont need
     private MonsterHealth monsterHealth;
     private int healthHitChange;
-    private int x;
-    private int y;
+    private int row;
+    private int col;
     private String id;
     private VBox monsterAndHealth;
 
-    public Monster(MonsterType monsterType, String currentSide, int healthHitChange, int x, int y, String iD) {
+    public Monster(MonsterType monsterType, String currentSide, int healthHitChange, int row, int col, String iD) {
         this.health = 5;
         this.monsterType = monsterType;
         this.currentSide = currentSide;
         this.healthHitChange = healthHitChange;
         this.monsterHealth = new MonsterHealth(4, this.healthHitChange, 30);
-        this.x = x;
-        this.y = y;
+        this.row = row;
+        this.col = col;
         this.id = iD;
 
         switch(monsterType) {
@@ -70,19 +70,19 @@ public class Monster {
     }
 
     public ImageView weaponHit(int weaponHit) {
-        return monsterHealth.hit(weaponHit);
+        return monsterHealth.removeHealth(weaponHit);
     }
 
     public String getId() {
         return this.id;
     }
 
-    public int getY() {
-        return this.y;
+    public int getRow() {
+        return this.row;
     }
 
-    public int getX() {
-        return this.x;
+    public int getCol() {
+        return this.col;
     }
 
     public ImageView getMonsterImage() {
@@ -96,4 +96,13 @@ public class Monster {
     public VBox getMonsterAndHealth() {
         return monsterAndHealth;
     }
+
+    public ImageView getHealthBar() {
+        return monsterHealth.getCurrentHealthBar();
+    }
+
+    public MonsterHealth getMonsterHealth() {
+        return monsterHealth;
+    }
+
 }

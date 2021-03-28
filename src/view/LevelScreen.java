@@ -97,8 +97,13 @@ public abstract class LevelScreen {
         return gameScene;
     }
 
+    public ArrayList<Monster> getMonstersList() {
+        return monsters;
+    }
+
     public Scene updateScene() {
         loadCoinHealthBar();
+        loadMonsters();
         return gameScene;
     }
 
@@ -132,13 +137,13 @@ public abstract class LevelScreen {
             if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
-                        monster.getY(), 1,
-                        monster.getX(), 1);
+                        monster.getRow(), 1,
+                        monster.getCol(), 1);
             } else {
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
-                        monster.getY(), 3,
-                        monster.getX(), 5);
+                        monster.getRow(), 5,
+                        monster.getCol(), 3);
             }
         } );
     }

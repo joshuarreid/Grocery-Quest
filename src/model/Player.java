@@ -53,14 +53,6 @@ public class Player {
         return name;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
     public PlayerMovement getPlayerMovement() {
         return playerMovement;
     }

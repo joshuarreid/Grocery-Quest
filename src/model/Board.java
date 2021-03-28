@@ -178,8 +178,10 @@ public class Board {
     }
 
     public String getMonster(int row, int col) {
-        if (hiddenBoard[row][col] != null && hiddenBoard[row][col].substring(0, 7).equals("monster")) {
-            return hiddenBoard[row][col];
+        if (hiddenBoard[row + 1][col + 1] != null) {
+            if (hiddenBoard[row + 1][col + 1].substring(0, 7).equals("monster")) {
+                return hiddenBoard[row + 1][col + 1];
+            }
         }
         return null;
     }

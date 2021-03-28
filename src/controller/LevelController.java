@@ -4,12 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.Board;
-import model.GameModel;
-import model.LevelSetup;
-import model.Player;
-import model.Exit;
-import model.PlayerHealth;
+import model.*;
 import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
@@ -355,8 +350,8 @@ public class LevelController {
                 }
                 break;
             case UP:
-                if (!hero.getCurrentSide().equals("Up")) {
-                    hero.setCurrentSide("Up");
+                if (!hero.getCurrentSide().equals("up")) {
+                    hero.setCurrentSide("up");
                 }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition() - 1,
@@ -367,8 +362,8 @@ public class LevelController {
                 }
                 break;
             case DOWN:
-                if (!hero.getCurrentSide().equals("Down")) {
-                    hero.setCurrentSide("Down");
+                if (!hero.getCurrentSide().equals("down")) {
+                    hero.setCurrentSide("down");
                 }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition() + 1,
@@ -379,8 +374,8 @@ public class LevelController {
                 }
                 break;
             case LEFT:
-                if (!hero.getCurrentSide().equals("Left")) {
-                    hero.setCurrentSide("Left");
+                if (!hero.getCurrentSide().equals("left")) {
+                    hero.setCurrentSide("left");
                 }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition(),
@@ -391,8 +386,8 @@ public class LevelController {
                 }
                 break;
             case RIGHT:
-                if (!hero.getCurrentSide().equals("Right")) {
-                    hero.setCurrentSide("Right");
+                if (!hero.getCurrentSide().equals("right")) {
+                    hero.setCurrentSide("right");
                 }
                 if (!board.isBlocked(
                         hero.getPlayerMovement().getYPosition(),
@@ -404,8 +399,19 @@ public class LevelController {
                 break;
             case Z:
                 String monsterId = checkMonster(board, hero);
-                System.out.println("Hellow world");
+                System.out.println("Hello world");
                 if (monsterId != null) {
+                    int length = currentLevelScreen.getMonstersList().size();
+                    for (int i = 0; i < length; i++) {
+                        Monster monster = currentLevelScreen.getMonstersList().get(i);
+                        if (monsterId.equals(monster.getId())) {
+                            System.out.println("Before: " + monster.getMonsterHealth().getHealthLevel());
+                            monster.getMonsterHealth().removeHealth(1);
+                            System.out.println("After: " + monster.getMonsterHealth().getHealthLevel());
+                            updateLevelScreen();
+                            break;
+                        }
+                    }
                     //obtain Monster array
                     //search for monster using loop
                     //deal damage to that monster
@@ -487,11 +493,11 @@ public class LevelController {
         int row = hero.getPlayerPosition()[1];
         int col = hero.getPlayerPosition()[0];
         if (hero.getCurrentSide().equals("up")) {
-            monsterId = board.getMonster(row + 1, col);
+            monsterId = board.getMonster(row - 1, col);
         } else if (hero.getCurrentSide().equals("right")) {
             monsterId = board.getMonster(row, col + 1);
         } else if (hero.getCurrentSide().equals("down")) {
-            monsterId = board.getMonster(row - 1, col);
+            monsterId = board.getMonster(row + 1, col);
         } else if (hero.getCurrentSide().equals("left")) {
             monsterId = board.getMonster(row, col - 1);
         }
@@ -499,8 +505,8 @@ public class LevelController {
     }
 
     private void updateLevelScreen() {
-        currentScene = levelSetup.getGameScreen().updateScene();
-        currentBoard = levelSetup.getGameScreen().getBoard();
+        currentLevelScreen.updateScene();
+        currentBoard = currentLevelScreen.getBoard();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 

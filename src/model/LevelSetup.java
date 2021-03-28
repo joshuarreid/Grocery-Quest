@@ -114,10 +114,10 @@ public class LevelSetup {
         // initialize monster arrays
         levelOneMonsters = new ArrayList<Monster>();
         levelOneMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster1"));
-        levelOneMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,9, 11,"monster2"));
-        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,9, 13,"monster3"));
-        levelOneMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,9, 15,"monster4"));
-        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,1, 3,"monster5"));
+        levelOneMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,11, 9,"monster2"));
+        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,13, 9,"monster3"));
+        levelOneMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,15, 9,"monster4"));
+        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,3, 1,"monster5"));
 
         levelTwoMonsters = new ArrayList<Monster>();
 
