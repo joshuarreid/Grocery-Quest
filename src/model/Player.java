@@ -37,7 +37,7 @@ public class Player {
     public Player(int health, int money, String name,
                   String weaponInUse, int difficultyLevel) {
         this.weaponInUse = weaponInUse;
-        this.currentSide = "Right";
+        this.currentSide = "right";
         this.health = health;
         this.money = money;
         this.name = name;

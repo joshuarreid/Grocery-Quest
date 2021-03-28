@@ -104,7 +104,7 @@ public class Controller extends Application {
 
         //If player clicks the wipe crossbow button
         wipeCrossbowButton.setOnAction(e -> {
-            weaponChoice = "Crossbow";
+            weaponChoice = "crossbow";
             wipeCrossbowButton.setEffect(new DropShadow(2.0, Color.BLACK));
             disinfectantSprayButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -112,7 +112,7 @@ public class Controller extends Application {
 
         //If player clicks the disinfectant spray button
         disinfectantSprayButton.setOnAction(e -> {
-            weaponChoice = "Spray";
+            weaponChoice = "spray";
             disinfectantSprayButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -120,7 +120,7 @@ public class Controller extends Application {
 
         //If player clicks the thermometer sword button
         thermometerSwordButton.setOnAction(e -> {
-            weaponChoice = "Sword";
+            weaponChoice = "sword";
             thermometerSwordButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             disinfectantSprayButton.setEffect(null);

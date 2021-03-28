@@ -387,6 +387,13 @@ public class LevelController {
                     switchHeroSide(hero, board);
                 }
                 break;
+            case Z:
+                String monsterId = checkMonster(board, hero);
+                System.out.println("Hellow world");
+                if (monsterId != null) {
+                    //board.getMonster(monsterId).removeHealth(weaponPower);
+                }
+                break;
             default:
             }
         });
@@ -454,6 +461,22 @@ public class LevelController {
         if (playerHealth.getPlayerHealthLevel() == 0) {
             loseScreen();
         }
+    }
+
+    private String checkMonster(Board board, Player hero) {
+        String monsterId = null;
+        int row = hero.getPlayerPosition()[1];
+        int col = hero.getPlayerPosition()[0];
+        if (hero.getCurrentSide().equals("up")) {
+            monsterId = board.getMonster(row + 1, col);
+        } else if (hero.getCurrentSide().equals("right")) {
+            monsterId = board.getMonster(row, col + 1);
+        } else if (hero.getCurrentSide().equals("down")) {
+            monsterId = board.getMonster(row - 1, col);
+        } else if (hero.getCurrentSide().equals("left")) {
+            monsterId = board.getMonster(row, col - 1);
+        }
+        return monsterId;
     }
 
     private void updateLevelScreen() {
