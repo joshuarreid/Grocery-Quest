@@ -4,6 +4,10 @@ import view.*;
 
 import java.util.ArrayList;
 
+/**
+ * The LevelSetup Class sets up the entire levels and has getter
+ * methods to return a certain level if needed.
+ */
 public class LevelSetup {
     private LevelRandomizer levelRandomizer;
 
@@ -66,7 +70,13 @@ public class LevelSetup {
     private LevelScreen bossScreen;
     private LevelScreen vaccineScreen;
 
-
+    /**
+     * The LevelSetup Constructor
+     *
+     * @param width the width of the stage
+     * @param height the height of the stage
+     * @param hero the hero to use
+     */
     public LevelSetup(int width, int height, Player hero) {
 
         this.levelRandomizer = new LevelRandomizer();
@@ -92,7 +102,8 @@ public class LevelSetup {
                 new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen", false);
         vaccineScreenWinScreen =
                 new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", true);
-        //initialize all exit arrays
+
+        //Initialize all exit arrays
         initialGameScreenExits = new Exit[]{
             initialGameScreenLevel1,
             intialGameScreenWeaponsScreen,
@@ -157,54 +168,106 @@ public class LevelSetup {
         vaccineScreen = new VaccineScreen(width, height, hero, levelRandomizer, vaccineScreenExits, new ArrayList<Monster>());
     }
 
+    /**
+     *
+     * @return Initial Game Screen
+     */
     public LevelScreen getGameScreen() {
         return gameScreen;
     }
 
+    /**
+     *
+     * @return Level One Screen
+     */
     public LevelScreen getLevelOne() {
         return levelOne;
     }
 
+    /**
+     *
+     * @return Level Two Screen
+     */
     public LevelScreen getLevelTwo() {
         return levelTwo;
     }
 
+    /**
+     *
+     * @return Level Three Screen
+     */
     public LevelScreen getLevelThree() {
         return levelThree;
     }
 
+    /**
+     *
+     * @return Level Four Screen
+     */
     public LevelScreen getLevelFour() {
         return levelFour;
     }
 
+    /**
+     *
+     * @return Level Five Screen
+     */
     public LevelScreen getLevelFive() {
         return levelFive;
     }
 
+    /**
+     *
+     * @return Level Six Screen
+     */
     public LevelScreen getLevelSix() {
         return levelSix;
     }
 
+    /**
+     *
+     * @return Level Seven Screen
+     */
     public LevelScreen getLevelSeven() {
         return levelSeven;
     }
 
+    /**
+     *
+     * @return Level Eight Screen
+     */
     public LevelScreen getLevelEight() {
         return levelEight;
     }
 
+    /**
+     *
+     * @return Weapon Screen
+     */
     public LevelScreen getWeaponsScreen() {
         return weaponsScreen;
     }
 
+    /**
+     *
+     * @return Training Screen
+     */
     public LevelScreen getTrainingScreen() {
         return trainingScreen;
     }
 
+    /**
+     *
+     * @return Boss Screen
+     */
     public LevelScreen getBossScreen() {
         return bossScreen;
     }
 
+    /**
+     *
+     * @return Vaccine Screen
+     */
     public LevelScreen getVaccineScreen() {
         return vaccineScreen;
     }
