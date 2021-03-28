@@ -10,6 +10,7 @@ import model.LevelSetup;
 import model.Player;
 import model.Exit;
 import model.PlayerHealth;
+import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
 
@@ -25,6 +26,7 @@ public class LevelController {
     private LevelSetup levelSetup;
     private Scene currentScene;
     private Board currentBoard;
+    private LevelScreen currentLevelScreen;
     private AnimationTimer timer;
 
     /**
@@ -64,6 +66,7 @@ public class LevelController {
         gameModel.setState("Game Screen");
         currentScene = levelSetup.getGameScreen().getScene();
         currentBoard = levelSetup.getGameScreen().getBoard();
+        currentLevelScreen = levelSetup.getGameScreen();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -75,6 +78,7 @@ public class LevelController {
         gameModel.setState("Level 1");
         currentScene = levelSetup.getLevelOne().getScene();
         currentBoard = levelSetup.getLevelOne().getBoard();
+        currentLevelScreen = levelSetup.getLevelOne();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
 
     }
@@ -87,6 +91,7 @@ public class LevelController {
         gameModel.setState("Level 2");
         currentScene = levelSetup.getLevelTwo().getScene();
         currentBoard = levelSetup.getLevelTwo().getBoard();
+        currentLevelScreen = levelSetup.getLevelTwo();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -98,6 +103,7 @@ public class LevelController {
         gameModel.setState("Level 3");
         currentScene = levelSetup.getLevelThree().getScene();
         currentBoard = levelSetup.getLevelThree().getBoard();
+        currentLevelScreen = levelSetup.getLevelThree();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -109,6 +115,7 @@ public class LevelController {
         gameModel.setState("Level 4");
         currentScene = levelSetup.getLevelFour().getScene();
         currentBoard = levelSetup.getLevelFour().getBoard();
+        currentLevelScreen = levelSetup.getLevelFour();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -120,6 +127,7 @@ public class LevelController {
         gameModel.setState("Level 5");
         currentScene = levelSetup.getLevelFive().getScene();
         currentBoard = levelSetup.getLevelFive().getBoard();
+        currentLevelScreen = levelSetup.getLevelFive();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -131,6 +139,7 @@ public class LevelController {
         gameModel.setState("Level 6");
         currentScene = levelSetup.getLevelSix().getScene();
         currentBoard = levelSetup.getLevelSix().getBoard();
+        currentLevelScreen = levelSetup.getLevelSix();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -142,6 +151,7 @@ public class LevelController {
         gameModel.setState("Level 7");
         currentScene = levelSetup.getLevelSeven().getScene();
         currentBoard = levelSetup.getLevelSeven().getBoard();
+        currentLevelScreen = levelSetup.getLevelSeven();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -153,6 +163,7 @@ public class LevelController {
         gameModel.setState("Level 8");
         currentScene = levelSetup.getLevelEight().getScene();
         currentBoard = levelSetup.getLevelEight().getBoard();
+        currentLevelScreen = levelSetup.getLevelEight();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -164,6 +175,7 @@ public class LevelController {
         gameModel.setState("Weapons Screen");
         currentScene = levelSetup.getWeaponsScreen().getScene();
         currentBoard = levelSetup.getWeaponsScreen().getBoard();
+        currentLevelScreen = levelSetup.getWeaponsScreen();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -175,6 +187,7 @@ public class LevelController {
         gameModel.setState("Training Screen");
         currentScene = levelSetup.getTrainingScreen().getScene();
         currentBoard = levelSetup.getTrainingScreen().getBoard();
+        currentLevelScreen = levelSetup.getTrainingScreen();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -186,6 +199,7 @@ public class LevelController {
         gameModel.setState("Boss Screen");
         currentScene = levelSetup.getBossScreen().getScene();
         currentBoard = levelSetup.getBossScreen().getBoard();
+        currentLevelScreen = levelSetup.getBossScreen();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -197,6 +211,7 @@ public class LevelController {
         gameModel.setState("Vaccine Screen");
         currentScene = levelSetup.getVaccineScreen().getScene();
         currentBoard = levelSetup.getVaccineScreen().getBoard();
+        currentLevelScreen = levelSetup.getVaccineScreen();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -240,7 +255,7 @@ public class LevelController {
         mainWindow.setScene(scene);
     }
 
-    //TODO clarify what is going on here
+    //TODO clarify what is going on here. New entry: Is this a joke? It exits the game. -Josh
     /**
      * Method exits game
      */
@@ -391,7 +406,11 @@ public class LevelController {
                 String monsterId = checkMonster(board, hero);
                 System.out.println("Hellow world");
                 if (monsterId != null) {
+                    //obtain Monster array
+                    //search for monster using loop
+                    //deal damage to that monster
                     //board.getMonster(monsterId).removeHealth(weaponPower);
+                    //currentLevelScreen.
                 }
                 break;
             default:
