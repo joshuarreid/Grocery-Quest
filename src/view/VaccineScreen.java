@@ -2,13 +2,14 @@ package view;
 
 import model.Exit;
 import model.LevelRandomizer;
+import model.Monster;
 import model.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class VaccineScreen extends LevelScreen {
-    public VaccineScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits) {
-        super(width, height, hero, lr, exits, "Vaccine Screen");
+    public VaccineScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, Monster[] monsters) {
+        super(width, height, hero, lr, exits, "Vaccine Screen", monsters);
     }
 
     @Override
