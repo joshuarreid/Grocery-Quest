@@ -2,6 +2,8 @@ package model;
 
 import view.*;
 
+import java.util.ArrayList;
+
 public class LevelSetup {
     private LevelRandomizer levelRandomizer;
 
@@ -39,15 +41,24 @@ public class LevelSetup {
     private Exit[] vaccineScreenExits;
 
     // Monster arrays
-    private Monster[] levelOneMonsters;
-    private Monster[] levelTwoMonsters;
-    private Monster[] levelThreeMonsters;
-    private Monster[] levelFourMonsters;
-    private Monster[] levelFiveMonsters;
-    private Monster[] levelSixMonsters;
-    private Monster[] levelSevenMonsters;
-    private Monster[] levelEightMonsters;
-    private Monster[] bossMonsters;
+//    private Monster[] levelOneMonsters;
+//    private Monster[] levelTwoMonsters;
+//    private Monster[] levelThreeMonsters;
+//    private Monster[] levelFourMonsters;
+//    private Monster[] levelFiveMonsters;
+//    private Monster[] levelSixMonsters;
+//    private Monster[] levelSevenMonsters;
+//    private Monster[] levelEightMonsters;
+//    private Monster[] bossMonsters;
+    private ArrayList<Monster> levelOneMonsters;
+    private ArrayList<Monster> levelTwoMonsters;
+    private ArrayList<Monster> levelThreeMonsters;
+    private ArrayList<Monster> levelFourMonsters;
+    private ArrayList<Monster> levelFiveMonsters;
+    private ArrayList<Monster> levelSixMonsters;
+    private ArrayList<Monster> levelSevenMonsters;
+    private ArrayList<Monster> levelEightMonsters;
+    private ArrayList<Monster> bossMonsters;
 
     //screens
     private LevelScreen gameScreen;
@@ -110,24 +121,32 @@ public class LevelSetup {
         vaccineScreenExits = new Exit[]{bossScreenVaccineScreen, vaccineScreenWinScreen};
 
         // initialize monster arrays
-        levelOneMonsters = new Monster[]{
-                new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster1"),
-                new Monster( MonsterType.MAANTIMASKER, "Down", 1,9, 11,"monster2"),
-                new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,9, 13,"monster3"),
-                new Monster( MonsterType.TRUMP, "Down", 1,9, 15,"monster4"),
-                new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,1, 3,"monster5")};
-        levelTwoMonsters = new Monster[0];
-        levelThreeMonsters = new Monster[0];
-        levelFourMonsters = new Monster[0];
-        levelFiveMonsters = new Monster[0];
-        levelSixMonsters = new Monster[0];
-        levelSevenMonsters = new Monster[0];
-        levelEightMonsters = new Monster[0];
-        bossMonsters = new Monster[0];
+        levelOneMonsters = new ArrayList<Monster>();
+        levelOneMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster1"));
+        levelOneMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,9, 11,"monster2"));
+        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,9, 13,"monster3"));
+        levelOneMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,9, 15,"monster4"));
+        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,1, 3,"monster5"));
+
+        levelTwoMonsters = new ArrayList<Monster>();
+
+        levelThreeMonsters = new ArrayList<Monster>();
+
+        levelFourMonsters = new ArrayList<Monster>();
+
+        levelFiveMonsters = new ArrayList<Monster>();
+
+        levelSixMonsters = new ArrayList<Monster>();
+
+        levelSevenMonsters = new ArrayList<Monster>();
+
+        levelEightMonsters = new ArrayList<Monster>();
+
+        bossMonsters = new ArrayList<Monster>();
 
 
         //initialize all screens
-        gameScreen = new GameScreen(width, height, hero, levelRandomizer, initialGameScreenExits, new Monster[0]);
+        gameScreen = new GameScreen(width, height, hero, levelRandomizer, initialGameScreenExits, new ArrayList<Monster>());
         levelOne = new LevelOneScreen(width, height, hero, levelRandomizer, levelOneScreenExits, levelOneMonsters);
         levelTwo = new LevelTwoScreen(width, height, hero, levelRandomizer, levelTwoScreenExits, levelTwoMonsters);
         levelThree =
@@ -140,11 +159,11 @@ public class LevelSetup {
         levelEight =
                 new LevelEightScreen(width, height, hero, levelRandomizer, levelEightScreenExits, levelEightMonsters);
         weaponsScreen =
-                new WeaponsScreen(width, height, hero, levelRandomizer, weaponsScreenExits, new Monster[0]);
+                new WeaponsScreen(width, height, hero, levelRandomizer, weaponsScreenExits, new ArrayList<Monster>());
         trainingScreen =
-                new TrainingScreen(width, height, hero, levelRandomizer, trainingScreenExits, new Monster[0]);
+                new TrainingScreen(width, height, hero, levelRandomizer, trainingScreenExits, new ArrayList<Monster>());
         bossScreen = new BossScreen(width, height, hero, levelRandomizer, bossScreenExits, bossMonsters);
-        vaccineScreen = new VaccineScreen(width, height, hero, levelRandomizer, vaccineScreenExits, new Monster[0]);
+        vaccineScreen = new VaccineScreen(width, height, hero, levelRandomizer, vaccineScreenExits, new ArrayList<Monster>());
     }
 
     public LevelScreen getGameScreen() {

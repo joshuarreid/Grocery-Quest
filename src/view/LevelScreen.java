@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+
 public abstract class LevelScreen {
     private int width;
     private int height;
@@ -18,7 +20,7 @@ public abstract class LevelScreen {
     private Exit[] exits;
     private String iD;
     private Scene gameScene;
-    private Monster[] monsters;
+    private ArrayList<Monster> monsters;
 
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -35,7 +37,7 @@ public abstract class LevelScreen {
      * @param iD level name
      */
     public LevelScreen(int width, int height, Player hero,
-                       LevelRandomizer lr, Exit[] exits, String iD, Monster[] monsters) {
+                       LevelRandomizer lr, Exit[] exits, String iD, ArrayList<Monster> monsters) {
         this.width = width;
         this.height = height;
         this.hero = hero;
@@ -123,20 +125,32 @@ public abstract class LevelScreen {
     }
 
     private void loadMonsters() {
-        for(Monster monster: monsters) {
+//        for(Monster monster: monsters) {
+//            if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
+//            board.addObject(monster.getMonsterAndHealth(),
+//                    monster.getId(), true,
+//                    monster.getY(), 1,
+//                    monster.getX(), 1);
+//            } else {
+//                board.addObject(monster.getMonsterAndHealth(),
+//                        monster.getId(), true,
+//                        monster.getY(), 3,
+//                        monster.getX(), 5);
+//            }
+//        }
+        monsters.forEach(monster -> {
             if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
-            board.addObject(monster.getMonsterAndHealth(),
-                    monster.getId(), true,
-                    monster.getY(), 1,
-                    monster.getX(), 1);
+                board.addObject(monster.getMonsterAndHealth(),
+                        monster.getId(), true,
+                        monster.getY(), 1,
+                        monster.getX(), 1);
             } else {
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getY(), 3,
                         monster.getX(), 5);
             }
-        }
-
+        } );
     }
 
     /**
