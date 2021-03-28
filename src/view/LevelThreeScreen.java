@@ -4,13 +4,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Exit;
 import model.LevelRandomizer;
+import model.Monster;
 import model.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class LevelThreeScreen extends LevelScreen {
-    public LevelThreeScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits) {
-        super(width, height, hero, lr, exits, "Level 3");
+    public LevelThreeScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, Monster[] monsters) {
+        super(width, height, hero, lr, exits, "Level 3", monsters);
     }
 
     @Override

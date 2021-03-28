@@ -18,7 +18,7 @@ public abstract class LevelScreen {
     private Exit[] exits;
     private String iD;
     private Scene gameScene;
-//    private Monster[] monsters;
+    private Monster[] monsters;
 
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -35,7 +35,7 @@ public abstract class LevelScreen {
      * @param iD level name
      */
     public LevelScreen(int width, int height, Player hero,
-                       LevelRandomizer lr, Exit[] exits, String iD) {
+                       LevelRandomizer lr, Exit[] exits, String iD, Monster[] monsters) {
         this.width = width;
         this.height = height;
         this.hero = hero;
@@ -43,6 +43,7 @@ public abstract class LevelScreen {
         this.board = new Board(19, 19, this.exits, iD);
         this.background = lr.getLayout();
         this.iD = iD;
+        this.monsters = monsters;
         board.createBoard(this.height, this.width);
         //Set up gridPane
         GridPane gridPane = board.getGridPane();
@@ -89,6 +90,7 @@ public abstract class LevelScreen {
     public Scene getScene() {
         loadCoinHealthBar();
         loadMainCharacter();
+        loadMonsters();
         loadObjects();
         return gameScene;
     }
@@ -120,12 +122,22 @@ public abstract class LevelScreen {
                 hero.getPlayerMovement().getXPosition(), 0);
     }
 
-//    /**
-//     * Adds monsters to the board
-//     */
-//    private void loadMonsters() {
-//
-//    }
+    private void loadMonsters() {
+        for(Monster monster: monsters) {
+            if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
+            board.addObject(monster.getMonsterImage(),
+                    monster.getId(), true,
+                    monster.getY(), 0,
+                    monster.getX(), 0);
+            } else {
+                board.addObject(monster.getMonsterImage(),
+                        monster.getId(), true,
+                        monster.getY(), 3,
+                        monster.getX(), 5);
+            }
+        }
+
+    }
 
     /**
      * Loads in all other objects
