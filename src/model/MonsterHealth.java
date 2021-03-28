@@ -7,7 +7,7 @@ public class MonsterHealth {
     private int healthLevel; //current health level
     private int healthHitChange;
     private final double barWidth;
-    private static final ImageView[] HEALTHBARS = {
+    private final ImageView[] HEALTHBARS = {
             new ImageView(new Image("file:resources/pngs/EnemyHealthBar0.png")),
             new ImageView(new Image("file:resources/pngs/EnemyHealthBar1.png")),
             new ImageView(new Image("file:resources/pngs/EnemyHealthBar2.png")),

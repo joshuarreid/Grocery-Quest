@@ -125,12 +125,12 @@ public abstract class LevelScreen {
     private void loadMonsters() {
         for(Monster monster: monsters) {
             if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
-            board.addObject(monster.getMonsterImage(),
+            board.addObject(monster.getMonsterAndHealth(),
                     monster.getId(), true,
-                    monster.getY(), 0,
-                    monster.getX(), 0);
+                    monster.getY(), 1,
+                    monster.getX(), 1);
             } else {
-                board.addObject(monster.getMonsterImage(),
+                board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getY(), 3,
                         monster.getX(), 5);
