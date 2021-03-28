@@ -2,7 +2,8 @@ package model;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 
-/**The Level Class
+/**
+ * The Level Class
  *
  * levelNumber - what the current level is Ex. Level 1
  * numberOfMobs - The number of mobs that the current level has
@@ -17,7 +18,8 @@ public class Level {
     private ArrayList<AntiMasker> mobList;
 
 
-    /** Constructor for Level
+    /**
+     * Constructor for Level
      *
      * @param level the current level
      * @param difficulty the chosen difficulty
@@ -78,20 +80,34 @@ public class Level {
         return;
     }
 
-
-
+    /**
+     *
+     * @return levelNumber
+     */
     public int getLevelNumber() {
         return levelNumber;
     }
 
+    /**
+     *
+     * @return numberOfMobs
+     */
     public int getNumberOfMobs() {
         return numberOfMobs;
     }
 
+    /**
+     *
+     * @return true if store is available, false otherwise
+     */
     public boolean isStoreAvailable() {
         return storeAvailable;
     }
 
+    /**
+     *
+     * @return list of mobs
+     */
     public ArrayList<AntiMasker> getMobList() {
         return mobList;
     }
