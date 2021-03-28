@@ -360,7 +360,7 @@ public class LevelController {
                 if (board.onExit(hero) != null && currentLevelScreen.getMonstersList().size() == 0) {
                     board.onExit(hero).setIsOpen(true);
                 }
-                if (board.onExit(hero) != null && board.onExit(hero).getIsOpen() == true) {
+                if (board.onExit(hero) != null && board.onExit(hero).getIsOpen()) {
                     getNextLevel(board.onExit(hero, gameModel));
                 }
                 break;
@@ -500,7 +500,7 @@ public class LevelController {
      * @param playerHealth the current playerHealth object
      */
     private void handleCombat(PlayerHealth playerHealth) {
-        if (playerHealth.getPlayerHealthLevel() == 0) {
+        if (playerHealth.getHealthLevel() == 0) {
             loseScreen();
         }
     }

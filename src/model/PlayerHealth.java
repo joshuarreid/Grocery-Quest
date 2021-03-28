@@ -48,7 +48,7 @@ public class PlayerHealth {
      * visually
      *
      * @param power damage that the player should incur
-     * @return the updated "dcreased" imageview
+     * @return the updated "dcreased" health bar imageview
      */
     public ImageView removeHealth(int power) {
         int change = power * healthHitChange;
@@ -65,7 +65,7 @@ public class PlayerHealth {
      * visually
      *
      * @param amount the amount to increase by
-     * @return the updated "increased" imageview
+     * @return the updated "increased" health bar imageview
      */
     public ImageView addHealth(int amount) {
         int newHealth = this.healthLevel + amount;
@@ -87,7 +87,7 @@ public class PlayerHealth {
      *
      * @return the health level
      */
-    public int getPlayerHealthLevel() { return healthLevel; }
+    public int getHealthLevel() { return healthLevel; }
 
     /**
      * Sets some attributes to the health bar
