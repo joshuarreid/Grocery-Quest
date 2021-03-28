@@ -1,13 +1,32 @@
 package model;
 
+/**
+ * The GameModel Class
+ *
+ * The GameModel CLass keeps track of what level the player is on.
+ */
 public class GameModel {
     private String state;
+
+    /**
+     * GameModel Constructor
+     */
     public GameModel() {
         this.state = "None";
     }
+
+    /**
+     *
+     * @param state state to set
+     */
     public void setState(String state) {
         this.state = state;
     }
+
+    /**
+     *
+     * @return state
+     */
     public String getState() {
         return state;
     }
