@@ -38,6 +38,12 @@ public class Controller extends Application {
     private Player hero;
 
     @Override
+    /**
+     * Creates the stage and starts the game
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception
+     */
     public void start(Stage primaryStage) throws Exception {
         mainWindow = primaryStage;
         mainWindow.setTitle("Grocery Quest");
@@ -210,13 +216,19 @@ public class Controller extends Application {
         lc.initialGameScreen();
     }
 
-    
+    /**
+     *
+     * @return state of the gameModel
+     */
     public String getState() {
         return gameModel.getState();
     }
 
-
-
+    /**
+     * Launches the application
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }
