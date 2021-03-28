@@ -114,27 +114,72 @@ public class LevelSetup {
         // initialize monster arrays
         levelOneMonsters = new ArrayList<Monster>();
         levelOneMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster1"));
-        levelOneMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,11, 9,"monster2"));
-        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,13, 9,"monster3"));
-        levelOneMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,15, 9,"monster4"));
-        levelOneMonsters.add(new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,3, 1,"monster5"));
+        levelOneMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,11, 15,"monster2"));
+        levelOneMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,4, 4,"monster3"));
 
         levelTwoMonsters = new ArrayList<Monster>();
+        levelTwoMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,7, 5,"monster1"));
+        levelTwoMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,11, 8,"monster2"));
+        levelTwoMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,14, 4,"monster3"));
+        levelTwoMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,16, 16,"monster4"));
 
         levelThreeMonsters = new ArrayList<Monster>();
+        levelThreeMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,2, 8,"monster1"));
+        levelThreeMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,8, 8,"monster2"));
+        levelThreeMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,8, 9,"monster3"));
+        levelThreeMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,11, 16,"monster4"));
+        levelThreeMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,14, 4,"monster5"));
 
         levelFourMonsters = new ArrayList<Monster>();
+        levelFourMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,4, 4,"monster1"));
+        levelFourMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,2, 9,"monster2"));
+        levelFourMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster3"));
+        levelFourMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,3, 14,"monster4"));
+        levelFourMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,14, 6,"monster5"));
+        levelFourMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,11, 13,"monster6"));
 
         levelFiveMonsters = new ArrayList<Monster>();
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,9, 12,"monster1"));
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,14, 6,"monster2"));
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,9, 12,"monster3"));
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,7, 9,"monster4"));
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,17, 16,"monster5"));
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,4, 4,"monster6"));
+        levelFiveMonsters.add(new Monster( MonsterType.TRUMP, "Down", 1,4, 12,"monster7"));
 
         levelSixMonsters = new ArrayList<Monster>();
+        levelSixMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 5,"monster1"));
+        levelSixMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,14, 9,"monster2"));
+        levelSixMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,6, 10,"monster3"));
+        levelSixMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,10, 10,"monster4"));
+        levelSixMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,14, 16,"monster5"));
+        levelSixMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,4, 2,"monster6"));
 
         levelSevenMonsters = new ArrayList<Monster>();
+        levelSevenMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 9,"monster1"));
+        levelSevenMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,10, 5,"monster2"));
+        levelSevenMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,6, 5,"monster3"));
+        levelSevenMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,2, 8,"monster4"));
+        levelSevenMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,5, 17,"monster5"));
+        levelSevenMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,10, 13,"monster6"));
 
         levelEightMonsters = new ArrayList<Monster>();
+        levelEightMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,14, 9,"monster1"));
+        levelEightMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,12, 4,"monster2"));
+        levelEightMonsters.add(new Monster( MonsterType.FAANTIMASKER, "Down", 1,9, 11,"monster3"));
+        levelEightMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,6, 15,"monster4"));
+        levelEightMonsters.add(new Monster( MonsterType.MAANTIMASKER, "Down", 1,3, 6,"monster5"));
 
         bossMonsters = new ArrayList<Monster>();
-
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSLARGE, "Down", 1,3, 8,"monster1"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,4, 9,"monster2"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,2, 16,"monster3"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,13, 9,"monster4"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,9, 3,"monster5"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,10, 3,"monster6"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,7, 7,"monster7"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,16, 2,"monster8"));
+        bossMonsters.add(new Monster( MonsterType.COVIDBOSSSMALL, "Down", 1,5, 12,"monster9"));
 
         //initialize all screens
         gameScreen = new GameScreen(width, height, hero, levelRandomizer, initialGameScreenExits, new ArrayList<Monster>());
