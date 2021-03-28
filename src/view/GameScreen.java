@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 
+import java.util.ArrayList;
+
 public class GameScreen extends LevelScreen {
 
     /**
@@ -21,7 +23,7 @@ public class GameScreen extends LevelScreen {
      * @param lr level randomizer
      * @param exits array of exits in screen
      */
-    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, Monster[] monsters) {
+    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
         super(width, height, hero, lr, exits, "Game Screen", monsters);
     }
 

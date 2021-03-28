@@ -7,8 +7,10 @@ import model.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
+import java.util.ArrayList;
+
 public class TrainingScreen extends LevelScreen {
-    public TrainingScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, Monster[] monsters) {
+    public TrainingScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
         super(width, height, hero, lr, exits, "Training Screen", monsters);
     }
 
