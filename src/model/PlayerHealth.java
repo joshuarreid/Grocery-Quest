@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
  * The PlayerHealth Class
  *
  * The PlayerHealth Class is responsible for keeping track of the
- * health of the player internally and visually.
+ * player's health internally and visually.
  *
  * healthLevel - the player's current health level
  * healthHitChange - how much the health should decrease depending on the difficulty of the level
