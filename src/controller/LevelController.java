@@ -345,6 +345,9 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case SPACE:
+                if (currentLevelScreen.getMonstersList().size() == 0) {
+                    board.onExit(hero).setIsOpen(true);
+                }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen() == true) {
                     getNextLevel(board.onExit(hero, gameModel));
                 }
