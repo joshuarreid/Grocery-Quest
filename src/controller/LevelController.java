@@ -16,6 +16,13 @@ import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
 
+/**
+ * The LevelController Class
+ * 
+ * The LevelController Class is responsible for all actions that occur
+ * on each level the player is on. This ranges from moving the player 
+ * to player combat.  
+ */
 public class LevelController {
     private Stage mainWindow;
     private GameModel gameModel;
@@ -59,9 +66,8 @@ public class LevelController {
     }
 
     //TODO: make initial game screen specifically for replaying game after lose screen, redirect to config screen
-
     /**
-     * Method displays initial game screen
+     * Displays Initial Game Screen
      */
     public void initialGameScreen() {
         timer.stop();
@@ -73,7 +79,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level one screen
+     * Displays Level One Screen
      */
     public void levelOneScreen() {
         timer.stop();
@@ -86,7 +92,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level two screen
+     * Displays Level Two Screen
      */
     public void levelTwoScreen() {
         timer.stop();
@@ -98,7 +104,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level three screen
+     * Displays Level Three Screen
      */
     public void levelThreeScreen() {
         timer.stop();
@@ -110,7 +116,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level four screen
+     * Displays Level Four Screen
      */
     public void levelFourScreen() {
         timer.stop();
@@ -122,7 +128,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level five screen
+     * Displays Level Five Screen
      */
     public void levelFiveScreen() {
         timer.stop();
@@ -134,7 +140,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level six screen
+     * Displays Level Six Screen
      */
     public void levelSixScreen() {
         timer.stop();
@@ -146,7 +152,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level seven screen
+     * Displays Level Seven Screen
      */
     public void levelSevenScreen() {
         timer.stop();
@@ -158,7 +164,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays level eight screen
+     * Displays Level Eight Screen
      */
     public void levelEightScreen() {
         timer.stop();
@@ -170,7 +176,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays weapons screen
+     * Displays Weapons Screen
      */
     public void weaponsScreen() {
         timer.stop();
@@ -182,7 +188,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays training screen
+     * Displays Training Screen
      */
     public void trainingScreen() {
         timer.stop();
@@ -194,7 +200,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays boss screen
+     * Displays Boss Screen
      */
     public void bossScreen() {
         timer.stop();
@@ -206,7 +212,7 @@ public class LevelController {
     }
 
     /**
-     * Method displays vaccine screen
+     * Displays Vaccine Screen
      */
     public void vaccineScreen() {
         timer.stop();
@@ -218,8 +224,7 @@ public class LevelController {
     }
 
     /**
-     * This method launches and provides event handling for
-     * the Win Screen
+     * Launches and provides event handling for the Win Screen
      */
     private void winScreen() {
         timer.stop();
@@ -238,8 +243,7 @@ public class LevelController {
     }
 
     /**
-     * This method launches and provides event handling for
-     * the Lose Screen
+     * Launches and provides event handling for the Lose Screen
      */
     private void loseScreen() {
         timer.stop();
@@ -259,7 +263,7 @@ public class LevelController {
 
     //TODO clarify what is going on here. New entry: Is this a joke? It exits the game. -Josh
     /**
-     * Method exits game
+     * Exits the game
      */
     private void exitGame() {
         timer.stop();
@@ -269,6 +273,7 @@ public class LevelController {
 
     /**
      * launches the appropriate next screen based of of exit and current state
+     *
      * @param exit exit that is being used
      */
     private void getNextLevel(Exit exit) {
@@ -351,7 +356,7 @@ public class LevelController {
     private void handleKeys(Scene scene, Player hero, Board board) {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-            case SPACE:
+            case SPACE: //Go to next or previous level
                 if (board.onExit(hero) != null && currentLevelScreen.getMonstersList().size() == 0) {
                     board.onExit(hero).setIsOpen(true);
                 }
@@ -359,7 +364,7 @@ public class LevelController {
                     getNextLevel(board.onExit(hero, gameModel));
                 }
                 break;
-            case UP:
+            case UP: //Move up
                 if (!hero.getCurrentSide().equals("up")) {
                     hero.setCurrentSide("up");
                 }
@@ -371,7 +376,7 @@ public class LevelController {
                     switchHeroSide(hero, board);
                 }
                 break;
-            case DOWN:
+            case DOWN: //Move down
                 if (!hero.getCurrentSide().equals("down")) {
                     hero.setCurrentSide("down");
                 }
@@ -383,7 +388,7 @@ public class LevelController {
                     switchHeroSide(hero, board);
                 }
                 break;
-            case LEFT:
+            case LEFT: //Move left
                 if (!hero.getCurrentSide().equals("left")) {
                     hero.setCurrentSide("left");
                 }
@@ -395,7 +400,7 @@ public class LevelController {
                     switchHeroSide(hero, board);
                 }
                 break;
-            case RIGHT:
+            case RIGHT: //Move right
                 if (!hero.getCurrentSide().equals("right")) {
                     hero.setCurrentSide("right");
                 }
@@ -407,29 +412,26 @@ public class LevelController {
                     switchHeroSide(hero, board);
                 }
                 break;
-            case Z:
-                String monsterId = checkMonster(board, hero);
-                System.out.println("Hello world");
-                if (monsterId != null) {
+            case Z: //Attack
+                String monsterId = checkMonster(board, hero); //Obtain id of monster
+                if (monsterId != null) { //If monster exists in front of the player
                     int length = currentLevelScreen.getMonstersList().size();
-                    for (int i = 0; i < length; i++) {
+                    for (int i = 0; i < length; i++) { //Look for monster object using id in ArrayList
                         Monster monster = currentLevelScreen.getMonstersList().get(i);
-                        if (monsterId.equals(monster.getId())) {
-                            System.out.println("Before: " + monster.getMonsterHealth().getHealthLevel());
-                            monster.getMonsterHealth().removeHealth(1);
-                            System.out.println("After: " + monster.getMonsterHealth().getHealthLevel());
-                            if (monster.getMonsterHealth().getHealthLevel() == 0) {
-                                currentLevelScreen.getMonstersList().remove(i);
+                        if (monsterId.equals(monster.getId())) { //If found
+                            monster.getMonsterHealth().removeHealth(1); //Deal damage to monster
+                            if (monster.getMonsterHealth().getHealthLevel() == 0) { //If monster has no health
+                                currentLevelScreen.getMonstersList().remove(i); //Remove it from game
                             }
-                            updateLevelScreen(monster);
+                            updateLevelScreen(monster); //Update all objects visually
                             break;
-                        }
-                    }
-                }
+                        } //if
+                    } //for
+                } //if
                 break;
             default:
-            }
-        });
+            } //switch
+        }); //scene.setOnKeyPressed
     }
 
     /**
@@ -475,7 +477,8 @@ public class LevelController {
     }
 
     /**
-     *  switches hero side when not actually moving position
+     * Switches hero side when not actually moving position
+     *
      * @param hero current player
      * @param board current board
      */
@@ -490,28 +493,47 @@ public class LevelController {
                 hero.getPlayerMovement().getXPosition(), 0);
     }
 
-    private void handleCombat(PlayerHealth playerHealth) { //}, PlayerMoney playerMoney) {
+    /**
+     * Checks if the player has no health, in which case, the
+     * player has lost the game
+     *
+     * @param playerHealth the current playerHealth object
+     */
+    private void handleCombat(PlayerHealth playerHealth) {
         if (playerHealth.getPlayerHealthLevel() == 0) {
             loseScreen();
         }
     }
 
+    /**
+     * Checks if there is a monster in front of the player
+     *
+     * @param board the current board
+     * @param hero the hero
+     * @return the monsterId of the monster in front of the player
+     */
     private String checkMonster(Board board, Player hero) {
         String monsterId = null;
-        int row = hero.getPlayerPosition()[1];
-        int col = hero.getPlayerPosition()[0];
-        if (hero.getCurrentSide().equals("up")) {
+        int row = hero.getPlayerPosition()[1]; //hero's row position
+        int col = hero.getPlayerPosition()[0]; //hero's column position
+        if (hero.getCurrentSide().equals("up")) { //Check up
             monsterId = board.getMonster(row - 1, col);
-        } else if (hero.getCurrentSide().equals("right")) {
+        } else if (hero.getCurrentSide().equals("right")) { //Check right
             monsterId = board.getMonster(row, col + 1);
-        } else if (hero.getCurrentSide().equals("down")) {
+        } else if (hero.getCurrentSide().equals("down")) { //Check down
             monsterId = board.getMonster(row + 1, col);
-        } else if (hero.getCurrentSide().equals("left")) {
+        } else if (hero.getCurrentSide().equals("left")) { //Check left
             monsterId = board.getMonster(row, col - 1);
         }
         return monsterId;
     }
 
+    /**
+     * Updates the current level screen if something needs to
+     * change visually
+     *
+     * @param monster the monster the player is attacking
+     */
     private void updateLevelScreen(Monster monster) {
         currentLevelScreen.updateScene(monster);
         currentBoard = currentLevelScreen.getBoard();

@@ -5,6 +5,8 @@ import view.*;
 import java.util.ArrayList;
 
 /**
+ * The LevelSetup Class
+ *
  * The LevelSetup Class sets up the entire levels and has getter
  * methods to return a certain level if needed.
  */
