@@ -5,13 +5,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-//**************************NOTE: 3 THINGS TO ADDRESS**********************************************
-//1. 2 potential methods: removeObject and playerMovement()
-//2. Is win, a global boolean variable, necessary?
-//3. When one of you guys, yes you, not the player, accidentally adds an object at a location
-//that already has an object, do you want a print statement or throw an exception? Right now,
-//there's a print statement because if we go the other way, we'd need to make a custom exception.
-
 /**The Board Class
  *
  * Represents the coordinate system - GridPane that the user
@@ -20,8 +13,6 @@ import javafx.scene.layout.RowConstraints;
 public class Board {
     private final int maxRow;
     private final int maxColumn;
-    //    private boolean win = false; //is win variable even necessary?
-    //    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
     private Exit[] exits;
@@ -67,6 +58,10 @@ public class Board {
         setUpExitBoard();
     }
 
+    //TODO:  I have no idea what the below method does. Can someone clarify thr javadoc? -Josh
+    /**
+     * Sets up exit board.
+     */
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
             switch (this.exits[i].getExitType(iD)) {
@@ -91,7 +86,6 @@ public class Board {
                 exitBoard[(maxRow / 2) + 1][0] = exits[i];
                 break;
             default:
-
             }
         }
     }
@@ -162,8 +156,10 @@ public class Board {
      *  Removes object from gridpane using their id. Removes object's id from hidden board.
      * @param id id of the object being removed
      * @param row row location of object
+     * @param rowSpan how many rows the object should span
      * @param col column location of object
-     * @return boolean to indicate status of removal (true if removed)
+     * @param colSpan how many columns the object should span
+     * @return true if removed, false otherwise
      */
     public boolean removeObject(String id, int row, int rowSpan, int col, int colSpan) {
         for (Node node : this.gridPane.getChildren()) {
@@ -185,6 +181,12 @@ public class Board {
         return false;
     }
 
+    /**
+     *
+     * @param row row location of potential monster
+     * @param col column location of potential monster
+     * @return monster's id at position, null if no monster exists there
+     */
     public String getMonster(int row, int col) {
         if (hiddenBoard[row + 1][col + 1] != null) {
             if (hiddenBoard[row + 1][col + 1].substring(0, 7).equals("monster")) {
@@ -213,15 +215,21 @@ public class Board {
     //    }
 
     /**
-     * Gets the gridPane to be used in the initial game screen and level classes.
      *
-     * @return the gridPane
+     * @return the gridPane to be used in the initial game
+     * screen and level classes.
      */
     public GridPane getGridPane() {
         return gridPane;
     }
 
-
+    //TODO: I'm also not sure about this method. Could someone clarify the javadoc? -Josh
+    /**
+     *
+     * @param player the player
+     * @param gameModel the gameModel
+     * @return
+     */
     public Exit onExit(Player player, GameModel gameModel) {
         int[] playerCoordinates = player.getPlayerPosition();
         Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
@@ -241,10 +249,15 @@ public class Board {
             break;
         default:
         }
-
         return exit;
     }
 
+    //TODO: This one too.
+    /**
+     *
+     * @param player the player
+     * @return the new exit?
+     */
     public Exit onExit(Player player) {
         int[] playerCoordinates = player.getPlayerPosition();
         Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
