@@ -161,16 +161,24 @@ public class Board {
     /**
      *  Removes object from gridpane using their id. Removes object's id from hidden board.
      * @param id id of the object being removed
-     * @param x column location of object
-     * @param y row location of object
+     * @param row row location of object
+     * @param col column location of object
      * @return boolean to indicate status of removal (true if removed)
      */
-    public boolean removeObject(String id, int x, int y) {
+    public boolean removeObject(String id, int row, int rowSpan, int col, int colSpan) {
         for (Node node : this.gridPane.getChildren()) {
             if (node != null
                     && node.getId() != null
                     && node.getId().equals(id)) {
-                this.hiddenBoard[y + 1][x + 1] = null;
+                if (rowSpan == 0 && colSpan == 0) {
+                    this.hiddenBoard[row + 1][col + 1] = null;
+                } else {
+                    for (int i = row; i < (row + rowSpan); i++) {
+                        for (int j = col; j < (col + colSpan); j++) {
+                            hiddenBoard[i + 1][j + 1] = null;
+                        }
+                    }
+                }
                 return this.gridPane.getChildren().remove(node);
             }
         }

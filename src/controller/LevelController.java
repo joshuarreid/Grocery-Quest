@@ -408,15 +408,13 @@ public class LevelController {
                             System.out.println("Before: " + monster.getMonsterHealth().getHealthLevel());
                             monster.getMonsterHealth().removeHealth(1);
                             System.out.println("After: " + monster.getMonsterHealth().getHealthLevel());
-                            updateLevelScreen();
+                            if (monster.getMonsterHealth().getHealthLevel() == 0) {
+                                currentLevelScreen.getMonstersList().remove(i);
+                            }
+                            updateLevelScreen(monster);
                             break;
                         }
                     }
-                    //obtain Monster array
-                    //search for monster using loop
-                    //deal damage to that monster
-                    //board.getMonster(monsterId).removeHealth(weaponPower);
-                    //currentLevelScreen.
                 }
                 break;
             default:
@@ -456,8 +454,8 @@ public class LevelController {
     private void moveHeroTo(Player hero, int x, int y, Board board) {
         board.removeObject(
                 "player",
-                hero.getPlayerMovement().getXPosition(),
-                hero.getPlayerMovement().getYPosition());
+                hero.getPlayerMovement().getXPosition(), 0,
+                hero.getPlayerMovement().getYPosition(), 0);
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false, y, 0, x, 0);
         if (worked) {
@@ -474,8 +472,8 @@ public class LevelController {
     private void switchHeroSide(Player hero, Board board){
         board.removeObject(
                 "player",
-                hero.getPlayerMovement().getXPosition(),
-                hero.getPlayerMovement().getYPosition());
+                hero.getPlayerMovement().getXPosition(), 0,
+                hero.getPlayerMovement().getYPosition(), 0);
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false,
                 hero.getPlayerMovement().getYPosition(), 0,
@@ -504,8 +502,8 @@ public class LevelController {
         return monsterId;
     }
 
-    private void updateLevelScreen() {
-        currentLevelScreen.updateScene();
+    private void updateLevelScreen(Monster monster) {
+        currentLevelScreen.updateScene(monster);
         currentBoard = currentLevelScreen.getBoard();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }

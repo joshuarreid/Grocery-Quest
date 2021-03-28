@@ -94,6 +94,10 @@ public class Monster {
     }
 
     public VBox getMonsterAndHealth() {
+        monsterAndHealth = new VBox();
+        monsterAndHealth.getChildren().addAll(monsterHealth.getCurrentHealthBar(), monsterImage);
+        monsterAndHealth.setId(id);
+        monsterAndHealth.setAlignment(Pos.CENTER);
         return monsterAndHealth;
     }
 

@@ -101,9 +101,9 @@ public abstract class LevelScreen {
         return monsters;
     }
 
-    public Scene updateScene() {
+    public Scene updateScene(Monster monster) {
         loadCoinHealthBar();
-        loadMonsters();
+        updateMonster(monster);
         return gameScene;
     }
 
@@ -113,8 +113,8 @@ public abstract class LevelScreen {
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
         coinBar = hero.getMoneyBar();
-        board.removeObject("health", 1, 1);
-        board.removeObject("money", 1, 0);
+        board.removeObject("health", 1, 0,  1, 0);
+        board.removeObject("money", 1, 0, 0, 0);
         board.addObject(healthBar, "health", false, 0, 1, 1, 5);
         board.addObject(coinBar, "money", false, 1, 1, 1, 5);
     }
@@ -145,7 +145,27 @@ public abstract class LevelScreen {
                         monster.getRow(), 5,
                         monster.getCol(), 3);
             }
-        } );
+        });
+    }
+
+    private void updateMonster(Monster monster) {
+        if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
+            board.removeObject(monster.getId(), monster.getRow(), 0, monster.getCol(), 0);
+            if (monster.getMonsterHealth().getHealthLevel() > 0) {
+                board.addObject(monster.getMonsterAndHealth(),
+                        monster.getId(), true,
+                        monster.getRow(), 1,
+                        monster.getCol(), 1);
+            }
+        } else {
+            board.removeObject(monster.getId(), monster.getRow(), 5, monster.getCol(), 3);
+            if (monster.getMonsterHealth().getHealthLevel() > 0) {
+                board.addObject(monster.getMonsterAndHealth(),
+                        monster.getId(), true,
+                        monster.getRow(), 5,
+                        monster.getCol(), 3);
+            }
+        }
     }
 
     /**
