@@ -1,8 +1,10 @@
 package model;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 public class Monster {
     private int health;
@@ -15,13 +17,14 @@ public class Monster {
     private int x;
     private int y;
     private String id;
+    private VBox monsterAndHealth;
 
     public Monster(MonsterType monsterType, String currentSide, int healthHitChange, int x, int y, String iD) {
         this.health = 5;
         this.monsterType = monsterType;
         this.currentSide = currentSide;
         this.healthHitChange = healthHitChange;
-        this.monsterHealth = new MonsterHealth(10, this.healthHitChange, 50);
+        this.monsterHealth = new MonsterHealth(4, this.healthHitChange, 30);
         this.x = x;
         this.y = y;
         this.id = iD;
@@ -50,14 +53,19 @@ public class Monster {
 
         if(monsterType != MonsterType.COVIDBOSSLARGE) {
             this.monsterImage.setId(iD);
-            this.monsterImage.setFitWidth(35);
-            this.monsterImage.setFitHeight(35);
+            this.monsterImage.setFitWidth(30);
+            this.monsterImage.setFitHeight(30);
         } else {
             this.monsterImage.setId(iD);
             this.monsterImage.setFitWidth(140);
             this.monsterImage.setFitHeight(105);
 
         }
+
+        monsterAndHealth = new VBox();
+        monsterAndHealth.getChildren().addAll(monsterHealth.getCurrentHealthBar(), monsterImage);
+        monsterAndHealth.setId(id);
+        monsterAndHealth.setAlignment(Pos.CENTER);
 
     }
 
@@ -83,5 +91,9 @@ public class Monster {
 
     public MonsterType getMonsterType() {
         return this.monsterType;
+    }
+
+    public VBox getMonsterAndHealth() {
+        return monsterAndHealth;
     }
 }
