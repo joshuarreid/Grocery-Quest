@@ -133,17 +133,20 @@ public abstract class LevelScreen {
      * adds monsters to the board
      */
     private void loadMonsters() {
+
         monsters.forEach(monster -> {
             if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) {
+                board.removeObject(monster.getId(), monster.getRow(), 1, monster.getCol(), 1);
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getRow(), 1,
                         monster.getCol(), 1);
             } else {
+                board.removeObject(monster.getId(), monster.getRow(), 3, monster.getCol(), 5);
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
-                        monster.getRow(), 5,
-                        monster.getCol(), 3);
+                        monster.getRow(), 3,
+                        monster.getCol(), 5);
             }
         });
     }

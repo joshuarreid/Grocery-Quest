@@ -4,7 +4,14 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import model.*;
+//import model.*;
+import model.Board;
+import model.GameModel;
+import model.LevelSetup;
+import model.Player;
+import model.PlayerHealth;
+import model.Exit;
+import model.Monster;
 import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
@@ -345,7 +352,7 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case SPACE:
-                if (currentLevelScreen.getMonstersList().size() == 0) {
+                if (board.onExit(hero) != null && currentLevelScreen.getMonstersList().size() == 0) {
                     board.onExit(hero).setIsOpen(true);
                 }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen() == true) {
