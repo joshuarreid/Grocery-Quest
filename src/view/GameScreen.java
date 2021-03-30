@@ -94,6 +94,11 @@ public class GameScreen extends LevelScreen {
         Label exitLabel = new Label("   exit");
         exitLabel.setFont(DOGICA_FONT);
         exitLabel.setAlignment(Pos.CENTER);
-        super.board.addObject(exitLabel, "exit", false, 17, 1, 8, 3);
+        super.board.addObject(exitLabel, "exit", false, 18, 1, 8, 3);
+
+        Label spaceBarInstr = new Label("press space to move between rooms");
+        spaceBarInstr.setFont(DOGICA_FONT);
+        spaceBarInstr.setAlignment(Pos.CENTER);
+        super.board.addObject(spaceBarInstr, "spaceBarInstr", false, 9, 1, 3, 16);
     }
 }
