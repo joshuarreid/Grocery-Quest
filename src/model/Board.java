@@ -66,24 +66,24 @@ public class Board {
         for (int i = 0; i < this.exits.length; i++) {
             switch (this.exits[i].getExitType(iD)) {
             case TOP :
-                exitBoard[0][(maxColumn / 2)] = exits[i]; //exitBoard[0][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[0][(maxColumn / 2) - 1] = exits[i];
                 exitBoard[0][maxColumn / 2] = exits[i];
-                exitBoard[0][(maxColumn / 2)] = exits[i]; //exitBoard[0][(maxColumn / 2) + 1] = exits[i];
+                exitBoard[0][(maxColumn / 2) + 1] = exits[i];
                 break;
             case BOTTOM:
-                exitBoard[maxRow - 1][(maxColumn / 2)] = exits[i]; // exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
                 exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
-                exitBoard[maxRow - 1][(maxColumn / 2)] = exits[i]; //exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
+                exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
                 break;
             case RIGHT:
-                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i]; //exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
-                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i]; //exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i];
-                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i]; //exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
                 break;
             case LEFT:
-                exitBoard[(maxRow / 2)][0] = exits[i]; //exitBoard[(maxRow / 2) - 1][0] = exits[i];
+                exitBoard[(maxRow / 2) - 1][0] = exits[i];
                 exitBoard[(maxRow / 2)][0] = exits[i];
-                exitBoard[(maxRow / 2)][0] = exits[i]; //exitBoard[(maxRow / 2) + 1][0] = exits[i];
+                exitBoard[(maxRow / 2) + 1][0] = exits[i];
                 break;
             default:
             }
