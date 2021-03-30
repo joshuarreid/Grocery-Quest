@@ -34,17 +34,17 @@ public class GameScreen extends LevelScreen {
     @Override
     void loadObjects() {
         //Carts
-        for (int i = 12; i < 15; i++) { // row
-            for (int j = 1; j < 18; j++) { // col
+        for (int i = 13; i < 16; i++) {
+            for (int j = 1; j < 18; j++) {
                 //Doesn't place cart in that one spot
-                if ((i == 14  && j == 6) || (i == 14 && j == 12)) {
+                if ((i == 15  && j == 6) || (i == 15 && j == 12)) {
                     continue;
                 }
                 ImageView cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
                 cart.setFitWidth(30);
                 cart.setFitHeight(30);
                 if (j <= 6 || j >= 12) {
-                    super.board.addObject(cart, "cart", true, i, 0, j, 0);
+                    super.board.addObject(cart, "cart", true, i, 1, j, 1);
                 }
             }
         }
@@ -94,6 +94,6 @@ public class GameScreen extends LevelScreen {
         Label exitLabel = new Label("   exit");
         exitLabel.setFont(DOGICA_FONT);
         exitLabel.setAlignment(Pos.CENTER);
-        super.board.addObject(exitLabel, "exit", false, 18, 1, 8, 3);
+        super.board.addObject(exitLabel, "exit", false, 17, 1, 8, 3);
     }
 }

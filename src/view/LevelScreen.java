@@ -128,8 +128,8 @@ public abstract class LevelScreen {
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
         coinBar = hero.getMoneyBar();
-        board.removeObject("health", 1, 0,  1, 0);
-        board.removeObject("money", 1, 0, 0, 0);
+        board.removeObject("health", 1, 1,  1, 1);
+        board.removeObject("money", 1, 1, 0, 1);
         board.addObject(healthBar, "health", false, 0, 1, 1, 5);
         board.addObject(coinBar, "money", false, 1, 1, 1, 5);
     }
@@ -140,8 +140,8 @@ public abstract class LevelScreen {
     private void loadMainCharacter() {
         board.addObject(hero.getPlayerImage(),
                 "player", false,
-                hero.getPlayerMovement().getYPosition(), 0,
-                hero.getPlayerMovement().getXPosition(), 0);
+                hero.getPlayerMovement().getYPosition(), 1,
+                hero.getPlayerMovement().getXPosition(), 1);
     }
 
     /**
@@ -175,7 +175,7 @@ public abstract class LevelScreen {
      */
     private void updateMonster(Monster monster) {
         if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) { //If regular enemy
-            board.removeObject(monster.getId(), monster.getRow(), 0, monster.getCol(), 0);
+            board.removeObject(monster.getId(), monster.getRow(), 1, monster.getCol(), 1);
             if (monster.getMonsterHealth().getHealthLevel() > 0) { //If health > 0, add updated imageview
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,

@@ -32,7 +32,7 @@ public class Board {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
-        this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
+        this.hiddenBoard = new String[maxRow][maxColumn];
         this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
         this.iD = iD;
@@ -66,24 +66,24 @@ public class Board {
         for (int i = 0; i < this.exits.length; i++) {
             switch (this.exits[i].getExitType(iD)) {
             case TOP :
-                exitBoard[0][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[0][(maxColumn / 2)] = exits[i]; //exitBoard[0][(maxColumn / 2) - 1] = exits[i];
                 exitBoard[0][maxColumn / 2] = exits[i];
-                exitBoard[0][(maxColumn / 2) + 1] = exits[i];
+                exitBoard[0][(maxColumn / 2)] = exits[i]; //exitBoard[0][(maxColumn / 2) + 1] = exits[i];
                 break;
             case BOTTOM:
-                exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
+                exitBoard[maxRow - 1][(maxColumn / 2)] = exits[i]; // exitBoard[maxRow - 1][(maxColumn / 2) - 1] = exits[i];
                 exitBoard[maxRow - 1][maxColumn / 2] = exits[i];
-                exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
+                exitBoard[maxRow - 1][(maxColumn / 2)] = exits[i]; //exitBoard[maxRow - 1][(maxColumn / 2) + 1] = exits[i];
                 break;
             case RIGHT:
-                exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
-                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i];
-                exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i]; //exitBoard[(maxRow / 2) - 1][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i]; //exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i];
+                exitBoard[(maxRow / 2)][maxColumn - 1] = exits[i]; //exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
                 break;
             case LEFT:
-                exitBoard[(maxRow / 2) - 1][0] = exits[i];
+                exitBoard[(maxRow / 2)][0] = exits[i]; //exitBoard[(maxRow / 2) - 1][0] = exits[i];
                 exitBoard[(maxRow / 2)][0] = exits[i];
-                exitBoard[(maxRow / 2) + 1][0] = exits[i];
+                exitBoard[(maxRow / 2)][0] = exits[i]; //exitBoard[(maxRow / 2) + 1][0] = exits[i];
                 break;
             default:
             }
@@ -105,8 +105,6 @@ public class Board {
                 || column > maxColumn - 1) { //If blocked by wall
             return true;
         }
-        row++;
-        column++;
         //If blocked by node except door
         return hiddenBoard[row][column] != null;
     }
@@ -133,18 +131,18 @@ public class Board {
             return false;
         }
 
-        if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
+        if (rowSpan == 1 && colSpan == 1) { //If thing occupies one spot
             thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
             if (blockPlayer) { //If object should block player
-                hiddenBoard[firstRow + 1][firstCol + 1] = id;
+                hiddenBoard[firstRow][firstCol] = id;
             }
         } else { //If thing occupies more than one spot
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
                     for (int j = firstCol; j < (firstCol + colSpan); j++) {
-                        hiddenBoard[i + 1][j + 1] = id;
+                        hiddenBoard[i][j] = id;
                     }
                 }
             }
@@ -163,15 +161,13 @@ public class Board {
      */
     public boolean removeObject(String id, int row, int rowSpan, int col, int colSpan) {
         for (Node node : this.gridPane.getChildren()) {
-            if (node != null
-                    && node.getId() != null
-                    && node.getId().equals(id)) {
-                if (rowSpan == 0 && colSpan == 0) {
-                    this.hiddenBoard[row + 1][col + 1] = null;
+            if (node != null && node.getId() != null && node.getId().equals(id)) {
+                if (rowSpan == 1 && colSpan == 1) {
+                    this.hiddenBoard[row][col] = null;
                 } else {
                     for (int i = row; i < (row + rowSpan); i++) {
                         for (int j = col; j < (col + colSpan); j++) {
-                            hiddenBoard[i + 1][j + 1] = null;
+                            hiddenBoard[i][j] = null;
                         }
                     }
                 }
@@ -188,9 +184,9 @@ public class Board {
      * @return monster's id at position, null if no monster exists there
      */
     public String getMonster(int row, int col) {
-        if (hiddenBoard[row + 1][col + 1] != null) {
-            if (hiddenBoard[row + 1][col + 1].substring(0, 7).equals("monster")) {
-                return hiddenBoard[row + 1][col + 1];
+        if (hiddenBoard[row][col] != null) {
+            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) {
+                return hiddenBoard[row][col];
             }
         }
         return null;
@@ -264,4 +260,7 @@ public class Board {
         return exit;
     }
 
+    public String[][] getHiddenBoard() {
+        return hiddenBoard;
+    }
 }

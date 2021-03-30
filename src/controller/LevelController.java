@@ -466,10 +466,10 @@ public class LevelController {
     private void moveHeroTo(Player hero, int x, int y, Board board) {
         board.removeObject(
                 "player",
-                hero.getPlayerMovement().getXPosition(), 0,
-                hero.getPlayerMovement().getYPosition(), 0);
+                hero.getPlayerMovement().getYPosition(), 1,
+                hero.getPlayerMovement().getXPosition(), 1);
         boolean worked = board.addObject(hero.getPlayerImage(),
-                "player", false, y, 0, x, 0);
+                "player", false, y, 1, x, 1);
         if (worked) {
             hero.getPlayerMovement().setxPosition(x);
             hero.getPlayerMovement().setyPosition(y);
@@ -485,12 +485,12 @@ public class LevelController {
     private void switchHeroSide(Player hero, Board board){
         board.removeObject(
                 "player",
-                hero.getPlayerMovement().getXPosition(), 0,
-                hero.getPlayerMovement().getYPosition(), 0);
+                hero.getPlayerMovement().getYPosition(), 1,
+                hero.getPlayerMovement().getXPosition(), 1);
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false,
-                hero.getPlayerMovement().getYPosition(), 0,
-                hero.getPlayerMovement().getXPosition(), 0);
+                hero.getPlayerMovement().getYPosition(), 1,
+                hero.getPlayerMovement().getXPosition(), 1);
     }
 
     /**
