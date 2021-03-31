@@ -232,7 +232,12 @@ public class LevelController {
         WinScreen screen = new WinScreen(width, height);
         Button replayButton = screen.getReplayButton();
         replayButton.setOnAction(e -> {
-            initialGameScreen();
+            try {
+                Controller newGame = new Controller();
+                newGame.start(mainWindow);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
         Button exitButton = screen.getExitButton();
         exitButton.setOnAction(e -> {
@@ -251,7 +256,12 @@ public class LevelController {
         LoseScreen screen = new LoseScreen(width, height);
         Button replayButton = screen.getReplayButton();
         replayButton.setOnAction(e -> {
-            initialGameScreen();
+            try {
+                Controller newGame = new Controller();
+                newGame.start(mainWindow);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
         Button exitButton = screen.getExitButton();
         exitButton.setOnAction(e -> {
@@ -259,16 +269,6 @@ public class LevelController {
         });
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
-    }
-
-    //TODO clarify what is going on here. New entry: Is this a joke? It exits the game. -Josh
-    /**
-     * Exits the game
-     */
-    private void exitGame() {
-        timer.stop();
-        gameModel.setState("Lose Screen");
-        System.exit(0);
     }
 
     /**
@@ -320,10 +320,6 @@ public class LevelController {
         case "Win Screen":
             winScreen();
             break;
-        case "Exit Game":
-            exitGame();
-            break;
-
         default:
         }
     }
