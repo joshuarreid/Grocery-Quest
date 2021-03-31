@@ -102,6 +102,10 @@ public class PlayerHealth {
         return bar;
     }
 
+    public void setHealthLevel(int amount) {
+        healthLevel = amount;
+    }
+
 
     //possible methods
     //public void healthBoast(Potion potion);

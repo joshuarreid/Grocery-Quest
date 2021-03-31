@@ -30,12 +30,12 @@ public class LevelController {
     private String weaponChoice;
     private final int width = 600;
     private final int height = 600;
-    private Player hero;
+    private static Player hero;
     private int currentDeterminant;
     private LevelSetup levelSetup;
     private Scene currentScene;
-    private Board currentBoard;
-    private LevelScreen currentLevelScreen;
+    private static Board currentBoard;
+    private static LevelScreen currentLevelScreen;
     private AnimationTimer timer;
 
     /**
@@ -512,7 +512,7 @@ public class LevelController {
      * @param hero the hero
      * @return the monsterId of the monster in front of the player
      */
-    private String checkMonster(Board board, Player hero) {
+    private static String checkMonster(Board board, Player hero) {
         String monsterId = null;
         int row = hero.getPlayerPosition()[1]; //hero's row position
         int col = hero.getPlayerPosition()[0]; //hero's column position
@@ -539,6 +539,27 @@ public class LevelController {
         currentBoard = currentLevelScreen.getBoard();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
+
+    public static Monster getNearbyMonster() {
+        String monsterId = checkMonster(currentBoard, hero); //Obtain id of monster
+        if (monsterId != null) { //If monster exists in front of the player
+            int length = currentLevelScreen.getMonstersList().size();
+            for (int i = 0; i < length; i++) { //Look for monster object using id in ArrayList
+                Monster monster = currentLevelScreen.getMonstersList().get(i);
+                if (monsterId.equals(monster.getId())) { //If found
+                    return monster;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static Player getHero() {
+        return hero;
+    }
+
+
+
 
 
 }
