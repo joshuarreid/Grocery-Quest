@@ -339,7 +339,7 @@ public class LevelController {
      * @param board current Board
      */
     public void moveCharacter(Stage mainWindow, Scene scene, Player hero, Board board) {
-        System.out.println(gameModel.getState());
+//        System.out.println(gameModel.getState());
         mainWindow.setScene(scene);
         timer.start();
 
@@ -423,11 +423,15 @@ public class LevelController {
                             if (monster.getMonsterHealth().getHealthLevel() == 0) { //If monster has no health
                                 currentLevelScreen.getMonstersList().remove(i); //Remove it from game
                             }
+                            hero.getPlayerHealth().removeHealth(monster.getAttackDamage());
+                            System.out.println(hero.getPlayerHealth().getHealthLevel());
                             updateLevelScreen(monster); //Update all objects visually
                             break;
                         } //if
                     } //for
+
                 } //if
+
                 break;
             default:
             } //switch

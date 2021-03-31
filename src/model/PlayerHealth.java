@@ -47,11 +47,11 @@ public class PlayerHealth {
      * Decreases the health of the player internally and
      * visually
      *
-     * @param power damage that the player should incur
+     * @param monsterPower damage that the player should incur
      * @return the updated "dcreased" health bar imageview
      */
-    public ImageView removeHealth(int power) {
-        int change = power * healthHitChange;
+    public ImageView removeHealth(int monsterPower) {
+        int change = monsterPower * healthHitChange;
         if (healthLevel < change) {
             this.healthLevel = 0;
         } else {
