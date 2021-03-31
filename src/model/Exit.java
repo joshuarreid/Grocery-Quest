@@ -12,15 +12,15 @@ public class Exit {
     private String screen2;
     private Boolean isOpen;
 
-    //TODO: I'm not too familiar with this class. Please add Javadoc. -Josh
     /**
-     * Exit Constructor
+     * Exit Constructor:
+     * An exit is an object that represents the connection between two screens or levels
      *
-     * @param side1
-     * @param side2
-     * @param screen1
-     * @param screen2
-     * @param isOpen
+     * @param side1 the side exit is on in Screen1
+     * @param side2 the side exit is on in Screen2
+     * @param screen1 the level id of the first screen the exit is on
+     * @param screen2 the level id of the second screen the exit is on
+     * @param isOpen boolean to indicate if the exit is open (aka can player use it)
      */
     public Exit(ExitType side1, ExitType side2, String screen1, String screen2, Boolean isOpen) {
         this.side1 = side1;
@@ -31,9 +31,11 @@ public class Exit {
     }
 
     /**
+     * Method to identify what side the exit is on the current level
      *
-     * @param iD
-     * @return
+     * @param iD of the current level
+     * @return the location exit on the passed
+     *         in level in terms of an ExitType
      */
     public ExitType getExitType(String iD) {
         if (iD.equals(screen1)) {
@@ -44,10 +46,11 @@ public class Exit {
     }
 
     /**
+     * Method to get the id of the screen that
+     * the exit connects the current screen to
      *
-     *
-     * @param model
-     * @return
+     * @param model current game model
+     * @return id of screen the exit connects to
      */
     public String getAdjacentState(GameModel model) {
         if (model.getState().equals(screen1)) {

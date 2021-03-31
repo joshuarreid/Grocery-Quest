@@ -15,7 +15,8 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class WeaponsScreen extends LevelScreen {
-    public WeaponsScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
+    public WeaponsScreen(int width, int height, Player hero,
+                         LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
         super(width, height, hero, lr, exits, "Weapons Screen", monsters);
     }
 
@@ -56,7 +57,7 @@ public class WeaponsScreen extends LevelScreen {
         xkey.setFitHeight(37);
         HBox hbox = new HBox();
         hbox.getChildren().addAll(xkey);
-        hbox.setPadding(new Insets(130,50,50,50));
+        hbox.setPadding(new Insets(130, 50, 50, 50));
         hbox.setAlignment(Pos.CENTER);
         StackPane rightStackPane = new StackPane();
         rightStackPane.getChildren().addAll(rightTextBox, rightLabel, hbox);

@@ -58,9 +58,10 @@ public class Board {
         setUpExitBoard();
     }
 
-    //TODO:  I have no idea what the below method does. Can someone clarify thr javadoc? -Josh
     /**
-     * Sets up exit board.
+     * Sets up exit board:
+     * There is a board that keeps track of the locations of the exits.
+     * This method goes through the exit array and places them in the correct spot.
      */
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
@@ -162,7 +163,8 @@ public class Board {
      */
     public boolean removeObject(String id, int row, int rowSpan, int col, int colSpan) {
         for (Node node : this.gridPane.getChildren()) {
-            if (node != null && node.getId() != null && node.getId().equals(id)) { //Checks valid node on gridPane
+            //Checks valid node on gridPane
+            if (node != null && node.getId() != null && node.getId().equals(id)) {
                 if (rowSpan == 1 && colSpan == 1) {
                     this.hiddenBoard[row][col] = null;
                 } else {
@@ -186,11 +188,14 @@ public class Board {
      * @return monster's id at position, null if no monster exists there
      */
     public String getMonster(int row, int col) {
-        if (row >= maxRow || row < 0 || col >= maxColumn || col < 0) { //If checking outside the board
+        //If checking outside the board
+        if (row >= maxRow || row < 0 || col >= maxColumn || col < 0) {
             return null;
         }
-        if (hiddenBoard[row][col] != null) { //If detect a node
-            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) { //Check node if monster
+        //If detect a node
+        if (hiddenBoard[row][col] != null) {
+            //Check node if monster
+            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) {
                 return hiddenBoard[row][col];
             }
         }
@@ -224,12 +229,15 @@ public class Board {
         return gridPane;
     }
 
-    //TODO: I'm also not sure about this method. Could someone clarify the javadoc? -Josh
     /**
+     * Method that returns the exit the player is currently on
+     * and modifies the player's position according to the exit it is going through
+     * Note: this method can only be use after knowing the player is for sure on an exit, so
+     *       only use after using onExit(Player player) to check
      *
      * @param player the player
      * @param gameModel the gameModel
-     * @return
+     * @return exit player is on
      */
     public Exit onExit(Player player, GameModel gameModel) {
         int[] playerCoordinates = player.getPlayerPosition();
@@ -253,11 +261,11 @@ public class Board {
         return exit;
     }
 
-    //TODO: This one too.
     /**
+     * Method used to get the exit the player is on
      *
      * @param player the player
-     * @return the new exit?
+     * @return the exit the player is on or null if not on exit
      */
     public Exit onExit(Player player) {
         int[] playerCoordinates = player.getPlayerPosition();

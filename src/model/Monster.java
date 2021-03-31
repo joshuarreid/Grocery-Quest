@@ -36,6 +36,7 @@ public class Monster {
      * @param row the row position
      * @param col the column position
      * @param iD the id
+     * @param level id of level monster is being placed in
      */
     public Monster(MonsterType monsterType, String currentSide, int healthHitChange,
                    int row, int col, String iD, String level) {
@@ -49,75 +50,78 @@ public class Monster {
         this.id = iD;
         this.doIAttack = false;
 
-        switch(level) {
-            case"Level 1":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
+        this.attackProbabilty =
+                new boolean[]{false, false, false, false, false, false, false, false, false, false};
+
+        switch (level) {
+        case"Level 1":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case "Level 2":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case"Level 3":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case "Level 4":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case "Level 5":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case"Level 6":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case "Level 7":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case"Level 8":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 1;
+            break;
+        case"Boss Screen":
+            if (this.monsterType == MonsterType.COVIDBOSSLARGE) {
+                this.attackProbabilty[9] = true;
                 this.maxDamage = 1;
-                break;
-            case "Level 2":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
+            } else {
+                this.attackProbabilty[9] = true;
                 this.maxDamage = 1;
-                break;
-            case"Level 3":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 1;
-                break;
-            case "Level 4":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 1;
-                break;
-            case "Level 5":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 1;
-                break;
-            case"Level 6":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 1;
-                break;
-            case "Level 7":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 1;
-                break;
-            case"Level 8":
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 1;
-                break;
-            case"Boss Screen":
-                if(this.monsterType == MonsterType.COVIDBOSSLARGE) {
-                    this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                    this.maxDamage = 1;
-                } else {
-                    this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                    this.maxDamage = 1;
-                }
-                break;
-            default:
-                this.attackProbabilty = new boolean[0];
-                this.attackProbabilty = new boolean[]{false,false,false,false,false,false,false,false,false,true};
-                this.maxDamage = 0;
+            }
+            break;
+        default:
+            this.maxDamage = 0;
         }
 
         switch (monsterType) {
-            case FAANTIMASKER:
-                // resources/pngs/FAntimaskerDown.png
-                this.monsterImage = new ImageView(new Image("file:resources/pngs/FAntimasker" + currentSide + ".png"));
-                break;
-            case MAANTIMASKER:
-                //resources/pngs/MAntimaskerDown.png
-                this.monsterImage = new ImageView(new Image("file:resources/pngs/MAntimasker" + currentSide + ".png"));
-                break;
-            case COVIDBOSSLARGE:
-                this.monsterImage = new ImageView(new Image("file:resources/pngs/CovidBossLarge.png"));
-                this.maxDamage++;
-                break;
-            case COVIDBOSSSMALL:
-                this.monsterImage = new ImageView(new Image("file:resources/pngs/CovidBossSmall.png"));
-                break;
-            case TRUMP:
-                //resources/pngs/TrumpDown.png
-                this.monsterImage = new ImageView(new Image("file:resources/pngs/Trump" + currentSide + ".png"));
-                break;
-            default:
+        case FAANTIMASKER:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/FAntimasker" + currentSide + ".png"));
+            break;
+        case MAANTIMASKER:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/MAntimasker" + currentSide + ".png"));
+            break;
+        case COVIDBOSSLARGE:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/CovidBossLarge.png"));
+            this.maxDamage++;
+            break;
+        case COVIDBOSSSMALL:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/CovidBossSmall.png"));
+            break;
+        case TRUMP:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/Trump" + currentSide + ".png"));
+            break;
+        default:
         }
 
         if (monsterType != MonsterType.COVIDBOSSLARGE) {
@@ -217,16 +221,15 @@ public class Monster {
     }
 
     public int getAttackDamage() {
-        int prob = (int)Math.round(Math.random() * (9));
+        int prob = (int) Math.round(Math.random() * (9));
         System.out.println("index: " + prob);
         doIAttack = attackProbabilty[prob];
-        if(!doIAttack) {
+        if (!doIAttack) {
             return 0;
         } else {
             int num =  (int) Math.round(Math.random() * ((maxDamage)));
             System.out.println("not just a num: " + num);
             return num;
-//            return 1;
         }
     }
 

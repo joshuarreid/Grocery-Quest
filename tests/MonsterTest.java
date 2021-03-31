@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import model.Monster;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
-import model.PlayerMovement;
-
 import java.util.concurrent.TimeUnit;
 
 

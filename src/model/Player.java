@@ -177,6 +177,7 @@ public class Player {
      * Private utility method to check if a string is all whitespace
      *
      * @param str string to check
+     * @return true if string is whitespace, otherwise false
      */
     private boolean isWhiteSpaceOnly(String str) {
         for (int i = 0; i < str.length(); i++) {

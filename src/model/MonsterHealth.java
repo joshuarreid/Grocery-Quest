@@ -13,12 +13,12 @@ public class MonsterHealth {
     private int healthLevel; //current health level
     private int healthHitChange;
     private final double barWidth;
-    private final ImageView[] HEALTHBARS = {
-            new ImageView(new Image("file:resources/pngs/EnemyHealthBar0.png")),
-            new ImageView(new Image("file:resources/pngs/EnemyHealthBar1.png")),
-            new ImageView(new Image("file:resources/pngs/EnemyHealthBar2.png")),
-            new ImageView(new Image("file:resources/pngs/EnemyHealthBar3.png")),
-            new ImageView(new Image("file:resources/pngs/EnemyHealthBar4.png"))
+    private final ImageView[] healthBARS = {
+        new ImageView(new Image("file:resources/pngs/EnemyHealthBar0.png")),
+        new ImageView(new Image("file:resources/pngs/EnemyHealthBar1.png")),
+        new ImageView(new Image("file:resources/pngs/EnemyHealthBar2.png")),
+        new ImageView(new Image("file:resources/pngs/EnemyHealthBar3.png")),
+        new ImageView(new Image("file:resources/pngs/EnemyHealthBar4.png"))
     };
 
     /**
@@ -48,7 +48,7 @@ public class MonsterHealth {
         } else {
             this.healthLevel -= change;
         }
-        return barSettings(HEALTHBARS[healthLevel]);
+        return barSettings(healthBARS[healthLevel]);
     }
 
     /**
@@ -63,7 +63,7 @@ public class MonsterHealth {
         if (newHealth > 10) {
             this.healthLevel = 10;
         }
-        return barSettings(HEALTHBARS[healthLevel]);
+        return barSettings(healthBARS[healthLevel]);
     }
 
     /**
@@ -71,14 +71,16 @@ public class MonsterHealth {
      * @return the current health bar imageview
      */
     public ImageView getCurrentHealthBar() {
-        return barSettings(HEALTHBARS[healthLevel]);
+        return barSettings(healthBARS[healthLevel]);
     }
 
     /**
      *
      * @return the health level
      */
-    public int getHealthLevel() { return healthLevel; }
+    public int getHealthLevel() {
+        return healthLevel;
+    }
 
     /**
      * Sets some attributes to the health bar

@@ -10,7 +10,8 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class VaccineScreen extends LevelScreen {
-    public VaccineScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
+    public VaccineScreen(int width, int height, Player hero,
+                         LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
         super(width, height, hero, lr, exits, "Vaccine Screen", monsters);
     }
 

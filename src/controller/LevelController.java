@@ -65,7 +65,6 @@ public class LevelController {
         };
     }
 
-    //TODO: make initial game screen specifically for replaying game after lose screen, redirect to config screen
     /**
      * Displays Initial Game Screen
      */
@@ -335,7 +334,6 @@ public class LevelController {
      * @param board current Board
      */
     public void moveCharacter(Stage mainWindow, Scene scene, Player hero, Board board) {
-//        System.out.println(gameModel.getState());
         mainWindow.setScene(scene);
         timer.start();
 
@@ -353,7 +351,8 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case SPACE: //Go to next or previous level
-                if (board.onExit(hero) != null && currentLevelScreen.getMonstersList().size() == 0) {
+                if (board.onExit(hero) != null
+                        && currentLevelScreen.getMonstersList().size() == 0) {
                     board.onExit(hero).setIsOpen(true);
                 }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen()) {
@@ -409,15 +408,22 @@ public class LevelController {
                 }
                 break;
             case Z: //Attack
-                String monsterId = checkMonster(board, hero); //Obtain id of monster
-                if (monsterId != null) { //If monster exists in front of the player
+                //Obtain id of monster
+                String monsterId = checkMonster(board, hero);
+                //If monster exists in front of the player
+                if (monsterId != null) {
                     int length = currentLevelScreen.getMonstersList().size();
-                    for (int i = 0; i < length; i++) { //Look for monster object using id in ArrayList
+                    //Look for monster object using id in ArrayList
+                    for (int i = 0; i < length; i++) {
                         Monster monster = currentLevelScreen.getMonstersList().get(i);
-                        if (monsterId.equals(monster.getId())) { //If found
-                            monster.getMonsterHealth().removeHealth(1); //Deal damage to monster
-                            if (monster.getMonsterHealth().getHealthLevel() == 0) { //If monster has no health
-                                currentLevelScreen.getMonstersList().remove(i); //Remove it from game
+                        //If found
+                        if (monsterId.equals(monster.getId())) {
+                            //Deal damage to monster
+                            monster.getMonsterHealth().removeHealth(1);
+                            //If monster has no health
+                            if (monster.getMonsterHealth().getHealthLevel() == 0) {
+                                //Remove it from game
+                                currentLevelScreen.getMonstersList().remove(i);
                             }
                             hero.getPlayerHealth().removeHealth(monster.getAttackDamage());
                             System.out.println(hero.getPlayerHealth().getHealthLevel());
@@ -482,7 +488,7 @@ public class LevelController {
      * @param hero current player
      * @param board current board
      */
-    private void switchHeroSide(Player hero, Board board){
+    private void switchHeroSide(Player hero, Board board) {
         board.removeObject(
                 "player",
                 hero.getPlayerMovement().getYPosition(), 1,

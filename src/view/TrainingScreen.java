@@ -15,7 +15,8 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class TrainingScreen extends LevelScreen {
-    public TrainingScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
+    public TrainingScreen(int width, int height, Player hero,
+                          LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
         super(width, height, hero, lr, exits, "Training Screen", monsters);
     }
 
@@ -43,7 +44,7 @@ public class TrainingScreen extends LevelScreen {
         arrowkeys.setFitHeight(35);
         HBox hbox = new HBox();
         hbox.getChildren().addAll(arrowkeys, zkey);
-        hbox.setPadding(new Insets(130,50,50,50));
+        hbox.setPadding(new Insets(130, 50, 50, 50));
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(50);
         StackPane rightStackPane = new StackPane();

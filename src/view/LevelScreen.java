@@ -41,6 +41,7 @@ public abstract class LevelScreen {
      * @param lr level randomizer
      * @param exits exits on level
      * @param iD level name
+     * @param monsters ArrayList of Monsters on the level
      */
     public LevelScreen(int width, int height, Player hero,
                        LevelRandomizer lr, Exit[] exits, String iD, ArrayList<Monster> monsters) {
@@ -176,7 +177,8 @@ public abstract class LevelScreen {
     private void updateMonster(Monster monster) {
         if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) { //If regular enemy
             board.removeObject(monster.getId(), monster.getRow(), 1, monster.getCol(), 1);
-            if (monster.getMonsterHealth().getHealthLevel() > 0) { //If health > 0, add updated imageview
+            //If health > 0, add updated imageview
+            if (monster.getMonsterHealth().getHealthLevel() > 0) {
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getRow(), 1,
@@ -184,7 +186,8 @@ public abstract class LevelScreen {
             }
         } else { //If boss
             board.removeObject(monster.getId(), monster.getRow(), 3, monster.getCol(), 5);
-            if (monster.getMonsterHealth().getHealthLevel() > 0) { //If health > 0, add updated imageview
+            //If health > 0, add updated imageview
+            if (monster.getMonsterHealth().getHealthLevel() > 0) {
                 board.addObject(monster.getMonsterAndHealth(),
                         monster.getId(), true,
                         monster.getRow(), 3,

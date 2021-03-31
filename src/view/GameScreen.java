@@ -13,21 +13,12 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class GameScreen extends LevelScreen {
-
-    /**
-     * Initial Game Screen Constructor
-     *
-     * @param width width of window
-     * @param height height of window
-     * @param hero player
-     * @param lr level randomizer
-     * @param exits array of exits in screen
-     */
-    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
+    public GameScreen(int width, int height, Player hero,
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
         super(width, height, hero, lr, exits, "Game Screen", monsters);
     }
 
-    /**
+    /*
      * Loads in all other objects such as carts, text boxes,
      * and flowers.
      */

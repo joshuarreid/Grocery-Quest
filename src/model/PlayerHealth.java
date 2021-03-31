@@ -87,7 +87,9 @@ public class PlayerHealth {
      *
      * @return the health level
      */
-    public int getHealthLevel() { return healthLevel; }
+    public int getHealthLevel() {
+        return healthLevel;
+    }
 
     /**
      * Sets some attributes to the health bar
