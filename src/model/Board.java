@@ -151,7 +151,8 @@ public class Board {
     }
 
     /**
-     *  Removes object from gridpane using their id. Removes object's id from hidden board.
+     * Removes object from gridpane using their id. Removes object's id from hidden board.
+     *
      * @param id id of the object being removed
      * @param row row location of object
      * @param rowSpan how many rows the object should span
@@ -161,7 +162,7 @@ public class Board {
      */
     public boolean removeObject(String id, int row, int rowSpan, int col, int colSpan) {
         for (Node node : this.gridPane.getChildren()) {
-            if (node != null && node.getId() != null && node.getId().equals(id)) {
+            if (node != null && node.getId() != null && node.getId().equals(id)) { //Checks valid node on gridPane
                 if (rowSpan == 1 && colSpan == 1) {
                     this.hiddenBoard[row][col] = null;
                 } else {
@@ -178,14 +179,18 @@ public class Board {
     }
 
     /**
+     * Tries to get the monster at specific index
      *
      * @param row row location of potential monster
      * @param col column location of potential monster
      * @return monster's id at position, null if no monster exists there
      */
     public String getMonster(int row, int col) {
-        if (hiddenBoard[row][col] != null) {
-            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) {
+        if (row >= maxRow || row < 0 || col >= maxColumn || col < 0) { //If checking outside the board
+            return null;
+        }
+        if (hiddenBoard[row][col] != null) { //If detect a node
+            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) { //Check node if monster
                 return hiddenBoard[row][col];
             }
         }
@@ -232,16 +237,16 @@ public class Board {
 
         switch (exit.getExitType(gameModel.getState())) {
         case TOP:
-            player.getPlayerMovement().setyPosition(maxRow - 1);
+            player.getPlayerMovement().setYPosition(maxRow - 1);
             break;
         case BOTTOM:
-            player.getPlayerMovement().setyPosition(0);
+            player.getPlayerMovement().setYPosition(0);
             break;
         case LEFT:
-            player.getPlayerMovement().setxPosition(maxColumn - 1);
+            player.getPlayerMovement().setXPosition(maxColumn - 1);
             break;
         case RIGHT:
-            player.getPlayerMovement().setxPosition(0);
+            player.getPlayerMovement().setXPosition(0);
             break;
         default:
         }
@@ -258,9 +263,5 @@ public class Board {
         int[] playerCoordinates = player.getPlayerPosition();
         Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
         return exit;
-    }
-
-    public String[][] getHiddenBoard() {
-        return hiddenBoard;
     }
 }

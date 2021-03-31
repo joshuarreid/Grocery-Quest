@@ -471,8 +471,8 @@ public class LevelController {
         boolean worked = board.addObject(hero.getPlayerImage(),
                 "player", false, y, 1, x, 1);
         if (worked) {
-            hero.getPlayerMovement().setxPosition(x);
-            hero.getPlayerMovement().setyPosition(y);
+            hero.getPlayerMovement().setXPosition(x);
+            hero.getPlayerMovement().setYPosition(y);
         }
     }
 
@@ -540,6 +540,11 @@ public class LevelController {
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
+    /**
+     * Method used in MonsterTest.
+     *
+     * @return the nearby monster
+     */
     public static Monster getNearbyMonster() {
         String monsterId = checkMonster(currentBoard, hero); //Obtain id of monster
         if (monsterId != null) { //If monster exists in front of the player
@@ -554,6 +559,11 @@ public class LevelController {
         return null;
     }
 
+    /**
+     * Method used in MonsterTest.
+     *
+     * @return the hero
+     */
     public static Player getHero() {
         return hero;
     }

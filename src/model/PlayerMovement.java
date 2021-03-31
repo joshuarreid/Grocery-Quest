@@ -44,7 +44,7 @@ public class PlayerMovement {
      *
      * @param newXPos new x or col position to move to
      */
-    public void setxPosition(int newXPos) {
+    public void setXPosition(int newXPos) {
         xPosition = newXPos;
     }
 
@@ -52,7 +52,7 @@ public class PlayerMovement {
      *
      * @param newYPos new y or row position to move to
      */
-    public void setyPosition(int newYPos) {
+    public void setYPosition(int newYPos) {
         yPosition = newYPos;
     }
 

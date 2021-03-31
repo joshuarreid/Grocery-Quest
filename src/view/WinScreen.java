@@ -23,8 +23,6 @@ public class WinScreen {
     private static final String HOVERED_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #688741";
 
-
-    private WinScreen() { }
     public WinScreen(int width, int height) {
         this.width = width;
         this.height = height;
@@ -100,9 +98,9 @@ public class WinScreen {
     }
 
     public Button getReplayButton() {
-
         return replayButton;
     }
+
     public Button getExitButton() {
         return exitButton;
     }
