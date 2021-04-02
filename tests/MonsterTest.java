@@ -199,7 +199,7 @@ public class MonsterTest extends ApplicationTest {
      */
     public void testMonsterAttack() throws InterruptedException {
         clickOn("#startButton");
-        clickOn("#nameField").write("Testing Player Death");
+        clickOn("#nameField").write("Testing Monster Attack");
         clickOn("#thermometerSwordButton");
         clickOn("#easyButton");
         clickOn("#readyButton");
@@ -219,7 +219,19 @@ public class MonsterTest extends ApplicationTest {
             stepCounter++;
         }
 
-        //Awaiting Implementation of Monster Attack
+        //Getting monster
+        Monster monster = LevelController.getNearbyMonster();
+
+
+        press(KeyCode.Z).release(KeyCode.Z);
+        assertNotNull(monster.getAttackDamage());
+        press(KeyCode.Z).release(KeyCode.Z);
+        assertNotNull(monster.getAttackDamage());
+        press(KeyCode.Z).release(KeyCode.Z);
+        assertNotNull(monster.getAttackDamage());
+        TimeUnit.SECONDS.sleep(1);
+
+
     }
 
 
@@ -260,6 +272,7 @@ public class MonsterTest extends ApplicationTest {
         assertNull(LevelController.getNearbyMonster());
         TimeUnit.SECONDS.sleep(1);
     }
+
 
     @Test
     /**
