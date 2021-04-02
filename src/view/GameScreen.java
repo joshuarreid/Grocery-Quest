@@ -1,6 +1,7 @@
 package view;
 
 import model.LevelRandomizer;
+import model.Monster;
 import model.Player;
 import model.Exit;
 import javafx.geometry.Pos;
@@ -9,40 +10,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 
-public class GameScreen extends LevelScreen {
+import java.util.ArrayList;
 
-    /**
-     * Initial Game Screen Constructor
-     *
-     * @param width width of window
-     * @param height height of window
-     * @param hero player
-     * @param lr level randomizer
-     * @param exits array of exits in screen
-     */
-    public GameScreen(int width, int height, Player hero, LevelRandomizer lr, Exit[] exits) {
-        super(width, height, hero, lr, exits, "Game Screen");
+public class GameScreen extends LevelScreen {
+    public GameScreen(int width, int height, Player hero,
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
+        super(width, height, hero, lr, exits, "Game Screen", monsters);
     }
 
-    /**
+    /*
      * Loads in all other objects such as carts, text boxes,
      * and flowers.
      */
     @Override
     void loadObjects() {
         //Carts
-        for (int i = 12; i < 15; i++) { // row
-            for (int j = 1; j < 18; j++) { // col
+        for (int i = 13; i < 16; i++) {
+            for (int j = 1; j < 18; j++) {
                 //Doesn't place cart in that one spot
-                if ((i == 14  && j == 6) || (i == 14 && j == 12)) {
+                if ((i == 15  && j == 6) || (i == 15 && j == 12)) {
                     continue;
                 }
-                //Replace with actual image of cart
                 ImageView cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
                 cart.setFitWidth(30);
                 cart.setFitHeight(30);
                 if (j <= 6 || j >= 12) {
-                    super.board.addObject(cart, "cart", true, i, 0, j, 0);
+                    super.board.addObject(cart, "cart", true, i, 1, j, 1);
                 }
             }
         }
@@ -52,7 +45,6 @@ public class GameScreen extends LevelScreen {
             if (j > 5 && j < 12) {
                 continue;
             }
-            //Replace with actual image of flowers
             ImageView flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
             flower.setFitWidth(30);
             flower.setFitHeight(45);
@@ -94,5 +86,10 @@ public class GameScreen extends LevelScreen {
         exitLabel.setFont(DOGICA_FONT);
         exitLabel.setAlignment(Pos.CENTER);
         super.board.addObject(exitLabel, "exit", false, 18, 1, 8, 3);
+
+        Label spaceBarInstr = new Label("press space to move between rooms");
+        spaceBarInstr.setFont(DOGICA_FONT);
+        spaceBarInstr.setAlignment(Pos.CENTER);
+        super.board.addObject(spaceBarInstr, "spaceBarInstr", false, 9, 1, 3, 16);
     }
 }

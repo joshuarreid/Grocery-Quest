@@ -5,13 +5,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-//**************************NOTE: 3 THINGS TO ADDRESS**********************************************
-//1. 2 potential methods: removeObject and playerMovement()
-//2. Is win, a global boolean variable, necessary?
-//3. When one of you guys, yes you, not the player, accidentally adds an object at a location
-//that already has an object, do you want a print statement or throw an exception? Right now,
-//there's a print statement because if we go the other way, we'd need to make a custom exception.
-
 /**The Board Class
  *
  * Represents the coordinate system - GridPane that the user
@@ -20,8 +13,6 @@ import javafx.scene.layout.RowConstraints;
 public class Board {
     private final int maxRow;
     private final int maxColumn;
-    //    private boolean win = false; //is win variable even necessary?
-    //    private boolean blocked = false;
     private String[][] hiddenBoard;
     private GridPane gridPane;
     private Exit[] exits;
@@ -41,7 +32,7 @@ public class Board {
         this.maxRow = row;
         this.maxColumn = column;
         this.gridPane = new GridPane();
-        this.hiddenBoard = new String[maxRow + 2][maxColumn + 2];
+        this.hiddenBoard = new String[maxRow][maxColumn];
         this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
         this.iD = iD;
@@ -67,6 +58,11 @@ public class Board {
         setUpExitBoard();
     }
 
+    /**
+     * Sets up exit board:
+     * There is a board that keeps track of the locations of the exits.
+     * This method goes through the exit array and places them in the correct spot.
+     */
     private void setUpExitBoard() {
         for (int i = 0; i < this.exits.length; i++) {
             switch (this.exits[i].getExitType(iD)) {
@@ -91,7 +87,6 @@ public class Board {
                 exitBoard[(maxRow / 2) + 1][0] = exits[i];
                 break;
             default:
-
             }
         }
     }
@@ -111,8 +106,6 @@ public class Board {
                 || column > maxColumn - 1) { //If blocked by wall
             return true;
         }
-        row++;
-        column++;
         //If blocked by node except door
         return hiddenBoard[row][column] != null;
     }
@@ -139,18 +132,18 @@ public class Board {
             return false;
         }
 
-        if (rowSpan == 0 && colSpan == 0) { //If thing occupies one spot
+        if (rowSpan == 1 && colSpan == 1) { //If thing occupies one spot
             thing.setId(id);
             gridPane.add(thing, firstCol, firstRow);
             if (blockPlayer) { //If object should block player
-                hiddenBoard[firstRow + 1][firstCol + 1] = id;
+                hiddenBoard[firstRow][firstCol] = id;
             }
         } else { //If thing occupies more than one spot
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
                     for (int j = firstCol; j < (firstCol + colSpan); j++) {
-                        hiddenBoard[i + 1][j + 1] = id;
+                        hiddenBoard[i][j] = id;
                     }
                 }
             }
@@ -159,23 +152,56 @@ public class Board {
     }
 
     /**
-     *  Removes object from gridpane using their id. Removes object's id from hidden board.
+     * Removes object from gridpane using their id. Removes object's id from hidden board.
+     *
      * @param id id of the object being removed
-     * @param x column location of object
-     * @param y row location of object
-     * @return boolean to indicate status of removal (true if removed)
+     * @param row row location of object
+     * @param rowSpan how many rows the object should span
+     * @param col column location of object
+     * @param colSpan how many columns the object should span
+     * @return true if removed, false otherwise
      */
-    public boolean removeObject(String id, int x, int y) {
+    public boolean removeObject(String id, int row, int rowSpan, int col, int colSpan) {
         for (Node node : this.gridPane.getChildren()) {
-            if (node != null
-                    && node.getId() != null
-                    && node.getId().equals(id)) {
-                this.hiddenBoard[y + 1][x + 1] = null;
+            //Checks valid node on gridPane
+            if (node != null && node.getId() != null && node.getId().equals(id)) {
+                if (rowSpan == 1 && colSpan == 1) {
+                    this.hiddenBoard[row][col] = null;
+                } else {
+                    for (int i = row; i < (row + rowSpan); i++) {
+                        for (int j = col; j < (col + colSpan); j++) {
+                            hiddenBoard[i][j] = null;
+                        }
+                    }
+                }
                 return this.gridPane.getChildren().remove(node);
             }
         }
         return false;
     }
+
+    /**
+     * Tries to get the monster at specific index
+     *
+     * @param row row location of potential monster
+     * @param col column location of potential monster
+     * @return monster's id at position, null if no monster exists there
+     */
+    public String getMonster(int row, int col) {
+        //If checking outside the board
+        if (row >= maxRow || row < 0 || col >= maxColumn || col < 0) {
+            return null;
+        }
+        //If detect a node
+        if (hiddenBoard[row][col] != null) {
+            //Check node if monster
+            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) {
+                return hiddenBoard[row][col];
+            }
+        }
+        return null;
+    }
+
     // need to fix this method
     //    public boolean removeObject(String id, int x, int y, int rowSpan, int colSpan) {
     //        for (Node node : this.gridPane.getChildren()) {
@@ -195,42 +221,55 @@ public class Board {
     //    }
 
     /**
-     * Gets the gridPane to be used in the initial game screen and level classes.
      *
-     * @return the gridPane
+     * @return the gridPane to be used in the initial game
+     * screen and level classes.
      */
     public GridPane getGridPane() {
         return gridPane;
     }
 
-
+    /**
+     * Method that returns the exit the player is currently on
+     * and modifies the player's position according to the exit it is going through
+     * Note: this method can only be use after knowing the player is for sure on an exit, so
+     *       only use after using onExit(Player player) to check
+     *
+     * @param player the player
+     * @param gameModel the gameModel
+     * @return exit player is on
+     */
     public Exit onExit(Player player, GameModel gameModel) {
         int[] playerCoordinates = player.getPlayerPosition();
         Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
 
         switch (exit.getExitType(gameModel.getState())) {
         case TOP:
-            player.getPlayerMovement().setyPosition(maxRow - 1);
+            player.getPlayerMovement().setYPosition(maxRow - 1);
             break;
         case BOTTOM:
-            player.getPlayerMovement().setyPosition(0);
+            player.getPlayerMovement().setYPosition(0);
             break;
         case LEFT:
-            player.getPlayerMovement().setxPosition(maxColumn - 1);
+            player.getPlayerMovement().setXPosition(maxColumn - 1);
             break;
         case RIGHT:
-            player.getPlayerMovement().setxPosition(0);
+            player.getPlayerMovement().setXPosition(0);
             break;
         default:
         }
-
         return exit;
     }
 
+    /**
+     * Method used to get the exit the player is on
+     *
+     * @param player the player
+     * @return the exit the player is on or null if not on exit
+     */
     public Exit onExit(Player player) {
         int[] playerCoordinates = player.getPlayerPosition();
         Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
         return exit;
     }
-
 }

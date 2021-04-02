@@ -15,6 +15,10 @@ public class AntiMasker {
     private double damage;
 
     //TODO discuss and implement default values of health, speed, and damage
+
+    /**
+     * AntiMasker Constructor
+     */
     public AntiMasker() {
         this.health = 10;
         this.speed = 1;

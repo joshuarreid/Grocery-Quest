@@ -37,6 +37,12 @@ public class Controller extends Application {
     private Player hero;
 
     @Override
+    /**
+     * Creates the stage and starts the game
+     *
+     * @param primaryStage the primary stage
+     * @throws Exception
+     */
     public void start(Stage primaryStage) throws Exception {
         mainWindow = primaryStage;
         mainWindow.setTitle("Grocery Quest");
@@ -103,7 +109,7 @@ public class Controller extends Application {
 
         //If player clicks the wipe crossbow button
         wipeCrossbowButton.setOnAction(e -> {
-            weaponChoice = "Crossbow";
+            weaponChoice = "crossbow";
             wipeCrossbowButton.setEffect(new DropShadow(2.0, Color.BLACK));
             disinfectantSprayButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -111,7 +117,7 @@ public class Controller extends Application {
 
         //If player clicks the disinfectant spray button
         disinfectantSprayButton.setOnAction(e -> {
-            weaponChoice = "Spray";
+            weaponChoice = "spray";
             disinfectantSprayButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -119,7 +125,7 @@ public class Controller extends Application {
 
         //If player clicks the thermometer sword button
         thermometerSwordButton.setOnAction(e -> {
-            weaponChoice = "Sword";
+            weaponChoice = "sword";
             thermometerSwordButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             disinfectantSprayButton.setEffect(null);
@@ -209,13 +215,19 @@ public class Controller extends Application {
         lc.initialGameScreen();
     }
 
-    
+    /**
+     *
+     * @return state of the gameModel
+     */
     public String getState() {
         return gameModel.getState();
     }
 
-
-
+    /**
+     * Launches the application
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

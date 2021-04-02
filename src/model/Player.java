@@ -25,7 +25,9 @@ public class Player {
     private PlayerMovement playerMovement;
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
-    /**The Player Constructor
+
+    /**
+     * The Player Constructor
      *
      * @param health the amount of health the player has
      * @param money the amount of currency the player has
@@ -36,7 +38,7 @@ public class Player {
     public Player(int health, int money, String name,
                   String weaponInUse, int difficultyLevel) {
         this.weaponInUse = weaponInUse;
-        this.currentSide = "Right";
+        this.currentSide = "right";
         this.health = health;
         this.money = money;
         this.name = name;
@@ -47,23 +49,26 @@ public class Player {
         playerMoney = new PlayerMoney(difficultyLevel, 150);
     }
 
-    //getters for all attributes
+    /**
+     *
+     * @return the player's name
+     */
     public String getName() {
         return name;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
+    /**
+     *
+     * @return playerMovement object
+     */
     public PlayerMovement getPlayerMovement() {
         return playerMovement;
     }
 
+    /**
+     *
+     * @return the player's position as an array
+     */
     public int[] getPlayerPosition() {
         int[] coordinates = new int[]{
                 playerMovement.getXPosition(),
@@ -72,22 +77,50 @@ public class Player {
         return coordinates;
     }
 
+    /**
+     *
+     * @return the player's current healthbar imageview
+     */
     public ImageView getHealthBar() {
         return playerHealth.getCurrentHealthBar();
     }
 
+    /**
+     *
+     * @return playerHealth object
+     */
+    public PlayerHealth getPlayerHealth() {
+        return playerHealth;
+    }
+
+    /**
+     *
+     * @return the player's current moneyBar imageview
+     */
     public ImageView getMoneyBar() {
         return playerMoney.getCurrentMoneyBar();
     }
 
+    /**
+     *
+     * @return the player's weapon
+     */
     public String getWeaponInUse() {
         return weaponInUse;
     }
 
+    /**
+     *
+     * @return the player's imageview
+     */
     public ImageView getPlayerImage() {
         return playerImage;
     }
 
+    /**
+     *
+     * @return the direction in which the player is facing
+     */
     public String getCurrentSide() {
         return currentSide;
     }
@@ -108,17 +141,30 @@ public class Player {
     //        money = newMoney;
     //    }
 
+    /**
+     *
+     * @param givenName name to set
+     */
     public void setName(String givenName) {
         if ((givenName == null) || (givenName.isEmpty()) || (isWhiteSpaceOnly(givenName))) {
             throw new IllegalArgumentException("Name cannot be null, empty or whitespace only");
         }
     }
 
+    /**
+     *
+     * @param currentSide direction the player should face
+     */
     public void setCurrentSide(String currentSide) {
         this.currentSide = currentSide;
         setWeaponInUse(weaponInUse, currentSide);
     }
 
+    /**
+     *
+     * @param weaponInUse weapon the player must use
+     * @param side direction the player should face
+     */
     public void setWeaponInUse(String weaponInUse, String side) {
         this.playerImage = new ImageView(
                 new Image("file:resources/pngs/" + weaponInUse + "Grandma" + side + ".png"));
@@ -127,7 +173,12 @@ public class Player {
         playerImage.setId("player");
     }
 
-    //private utility method to check if a string is all whitespace
+    /**
+     * Private utility method to check if a string is all whitespace
+     *
+     * @param str string to check
+     * @return true if string is whitespace, otherwise false
+     */
     private boolean isWhiteSpaceOnly(String str) {
         for (int i = 0; i < str.length(); i++) {
             if (!Character.isWhitespace(str.charAt(i))) {
