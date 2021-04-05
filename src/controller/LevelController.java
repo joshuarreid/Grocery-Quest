@@ -435,6 +435,9 @@ public class LevelController {
                 } //if
 
                 break;
+            case X: //Use item
+
+
             default:
             } //switch
         }); //scene.setOnKeyPressed

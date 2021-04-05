@@ -24,6 +24,8 @@ public class GameScreen extends LevelScreen {
      */
     @Override
     void loadObjects() {
+        ImageView tempCart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
+        super.board.addObject(tempCart, "tempCart", false, 10, 1, 10, 1);
         //Carts
         for (int i = 13; i < 16; i++) {
             for (int j = 1; j < 18; j++) {

@@ -3,6 +3,8 @@ package model;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.List;
+
 /**The Player Class
  *
  * The Player class is responsible for creating a Player object
@@ -25,6 +27,11 @@ public class Player {
     private PlayerMovement playerMovement;
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
+    /*
+    inventory needs to be stored in player since player an object that's passed through each level and therefore does
+    not need for inventory to be created again and again in each level.
+     */
+    private List<String> inventoryList;
 
     /**
      * The Player Constructor
@@ -36,7 +43,7 @@ public class Player {
      * @param difficultyLevel the chosen difficulty for the player
      */
     public Player(int health, int money, String name,
-                  String weaponInUse, int difficultyLevel) {
+                  String weaponInUse, int difficultyLevel, List<String> inventoryList) {
         this.weaponInUse = weaponInUse;
         this.currentSide = "right";
         this.health = health;
@@ -44,6 +51,7 @@ public class Player {
         this.name = name;
         this.playerMovement = new PlayerMovement(9, 17);
         setWeaponInUse(weaponInUse, currentSide);
+        this.inventoryList = inventoryList;
 
         playerHealth = new PlayerHealth(difficultyLevel, 150);
         playerMoney = new PlayerMoney(difficultyLevel, 150);
@@ -75,6 +83,36 @@ public class Player {
                 playerMovement.getYPosition()
         };
         return coordinates;
+    }
+
+    /**
+     *
+     * @return the player's inventory list
+     */
+    public List<String> getInventoryList() {
+        return inventoryList;
+    }
+
+    //TODO: Possible implementation for picking up multiple of the same item
+    /**
+     * Player picks up the item and adds the item to inventory list
+     *
+     * @param id the id of the item to pick up
+     * @return true if added, false otherwise
+     */
+    public boolean pickUpItem(String id) {
+        return inventoryList.add(id);
+    }
+
+    //TODO: If player can pick up multiple of the same item, then need to subtract from total number
+    /**
+     * Player uses item, and the item is removed from the inventory
+     *
+     * @param id the id of the item to use
+     * @return true if removed, false otherwise
+     */
+    public boolean useItem(String id) {
+        return inventoryList.remove(id);
     }
 
     /**

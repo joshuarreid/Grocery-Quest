@@ -1,5 +1,6 @@
 package view;
 
+import javafx.scene.Node;
 import model.*;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -8,6 +9,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The LevelScreen Class
@@ -27,6 +30,7 @@ public abstract class LevelScreen {
     private String iD;
     private Scene gameScene;
     private ArrayList<Monster> monsters;
+    private Inventory inventory;
 
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -53,9 +57,13 @@ public abstract class LevelScreen {
         this.background = lr.getLayout();
         this.iD = iD;
         this.monsters = monsters;
+        //Set up inventory
+        inventory = new Inventory(12, 1);
+        inventory.createInventory(height, 100);
+        GridPane inventoryGridPane = inventory.getGridPane();
         board.createBoard(this.height, this.width);
         //Set up gridPane
-        GridPane gridPane = board.getGridPane();
+        GridPane boardGridPane = board.getGridPane();
         ImageView borderExitImage = new ImageView(
                 new Image("file:resources/pngs/FrameAll.png"));
         switch (exits.length) {
@@ -77,10 +85,13 @@ public abstract class LevelScreen {
 
         borderExitImage.setFitWidth(width + 4);
         borderExitImage.setFitHeight(height + 4);
-        gridPane.setStyle("-fx-background-color: " + background);
+        boardGridPane.setStyle("-fx-background-color: " + background);
 
-        StackPane pane = new StackPane(gridPane, borderExitImage);
-        gameScene = new Scene(pane, width, height);
+        inventoryGridPane.setStyle("-fx-background-image:url" + "(file:resources/pngs/InventoryBar-01.png");
+
+        StackPane pane = new StackPane(boardGridPane, borderExitImage);
+        HBox hBox = new HBox(pane, inventoryGridPane);
+        gameScene = new Scene(hBox, width, height);
     }
 
     /**
@@ -93,11 +104,18 @@ public abstract class LevelScreen {
 
     /**
      *
+     * @return the current inventory
+     */
+    public Inventory getInventory() { return inventory; }
+
+    /**
+     *
      * @return the current scene
      */
     public Scene getScene() {
         loadCoinHealthBar();
         loadMainCharacter();
+        loadInventory();
         loadMonsters();
         loadObjects();
         return gameScene;
@@ -119,8 +137,30 @@ public abstract class LevelScreen {
      */
     public Scene updateScene(Monster monster) {
         loadCoinHealthBar();
+        loadInventory();
         updateMonster(monster);
         return gameScene;
+    }
+
+    /**
+     * Loads the inventory
+     */
+    private void loadInventory() {
+        if (hero.getInventoryList().size() > 0) {
+            List<Node> imgViewList = new LinkedList<>();
+            Node node;
+            for (String id : hero.getInventoryList()) {
+                node = inventory.removeObject(id);
+                if (node != null) {
+                    imgViewList.add(node);
+                }
+            }
+            int row = 0;
+            for (String id: hero.getInventoryList()) {
+                inventory.addObject(imgViewList.get(row), id, row, 1);
+                row++;
+            }
+        }
     }
 
     /**
