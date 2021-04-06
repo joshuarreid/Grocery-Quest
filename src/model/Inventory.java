@@ -1,5 +1,7 @@
 package model;
 
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -58,15 +60,14 @@ public class Inventory {
      * @param id The object being placed in the hidden game board
      * @param row Starting vertical location
      * @param col Starting horizontal location
-     * @return boolean to indicate successful addition of object
+     //@return boolean to indicate successful addition of object
      */
-    public boolean addObject(Node thing, String id, int row, int col) {
-        if (hiddenInventory.get(row) == null) {
-            gridPane.add(thing, col, row);
-            hiddenInventory.add(id);
-            return true;
-        }
-        return false;
+    public void addObject(Node thing, String id, int row, int col) {
+        thing.setId(id);
+        gridPane.add(thing, col, row);
+        gridPane.setHalignment(thing, HPos.CENTER);
+        gridPane.setValignment(thing, VPos.CENTER);
+        hiddenInventory.add(id);
     }
 
     /**
@@ -75,7 +76,7 @@ public class Inventory {
      * @param id id of the object being removed
      * @return removed node, null otherwise
      */
-    public Node removeObject(String id) {
+    public String removeObject(String id) {
         for (Node node : this.gridPane.getChildren()) {
             //Checks valid node on gridPane
             if (node != null && node.getId() != null && node.getId().equals(id)) {
@@ -83,7 +84,7 @@ public class Inventory {
                 if (index >= 0) { //If to-be removed object's id is found, remove it
                     hiddenInventory.remove(index);
                     gridPane.getChildren().remove(node);
-                    return node;
+                    return node.getId();
                 } else { //If to-be removed object's id is NOT found, return null
                     return null;
                 }
