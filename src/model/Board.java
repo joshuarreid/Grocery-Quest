@@ -14,6 +14,7 @@ public class Board {
     private final int maxRow;
     private final int maxColumn;
     private String[][] hiddenBoard;
+    private String[][] itemBoard;
     private GridPane gridPane;
     private Exit[] exits;
     private Exit[][] exitBoard;
@@ -33,6 +34,7 @@ public class Board {
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow][maxColumn];
+        this.itemBoard = new String[maxRow][maxColumn];
         this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
         this.iD = iD;
@@ -97,7 +99,7 @@ public class Board {
      *
      * @param row The vertical location of the spot ahead.
      * @param column The horizontal location of the spot ahead.
-     * @return true if spot ahead is blocked
+     * @return true if spot ahead is blocked, false otherwise
      */
     public boolean isBlocked(int row, int column) {
         if (row < 0
@@ -108,6 +110,17 @@ public class Board {
         }
         //If blocked by node except door
         return hiddenBoard[row][column] != null;
+    }
+
+    /**
+     * Determines whether an item exists on the specified spot
+     *
+     * @param row row
+     * @param col column
+     * @return true if an item exists, false otherwise
+     */
+    public boolean hasItem(int row, int col) {
+        return itemBoard[row][col] != null;
     }
 
     /**
@@ -137,8 +150,11 @@ public class Board {
             gridPane.add(thing, firstCol, firstRow);
             if (blockPlayer) { //If object should block player
                 hiddenBoard[firstRow][firstCol] = id;
+            } else if (id.substring(0, 4).equals("item")) {
+                itemBoard[firstRow][firstCol] = id;
             }
         } else { //If thing occupies more than one spot
+            thing.setId(id);
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
@@ -166,7 +182,11 @@ public class Board {
             //Checks valid node on gridPane
             if (node != null && node.getId() != null && node.getId().equals(id)) {
                 if (rowSpan == 1 && colSpan == 1) {
-                    this.hiddenBoard[row][col] = null;
+                    if (id.substring(0, 4).equals("item")) {
+                        itemBoard[row][col] = null;
+                    } else {
+                        this.hiddenBoard[row][col] = null;
+                    }
                 } else {
                     for (int i = row; i < (row + rowSpan); i++) {
                         for (int j = col; j < (col + colSpan); j++) {
@@ -227,6 +247,18 @@ public class Board {
      */
     public GridPane getGridPane() {
         return gridPane;
+    }
+
+    public String[][] getItemBoard() { return itemBoard; }
+
+    /**
+     *
+     * @param row row
+     * @param col column
+     * @return the item at the postion
+     */
+    public String getItem(int row, int col) {
+        return itemBoard[row][col];
     }
 
     /**

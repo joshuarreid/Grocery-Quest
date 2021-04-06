@@ -33,7 +33,7 @@ public class WeaponsScreen extends LevelScreen {
         crossBow.setFitHeight(30);
         super.board.addObject(crossBow, "crossBow", true, 6, 1, 11, 1);
 
-        ImageView spray = new ImageView(new Image("file:resources/pngs/DisenfectantSpray.png"));
+        ImageView spray = new ImageView(new Image("file:resources/pngs/DisinfectantSpray.png"));
         spray.setFitWidth(30);
         spray.setFitHeight(30);
         super.board.addObject(spray, "spray", true, 9, 1, 11, 1);

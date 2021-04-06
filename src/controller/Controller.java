@@ -9,9 +9,13 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.GameModel;
+import model.Inventory;
 import model.Level;
 import model.Player;
 import view.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**The Controller Class
@@ -82,6 +86,7 @@ public class Controller extends Application {
         Button disinfectantSprayButton = screen.getDisinfectantSprayButton();
         Button thermometerSwordButton = screen.getThermometerSwordButton();
         TextField nameField = screen.getNameField();
+        List<String> tempList = new LinkedList<>();
 
         //If player clicks the easy difficulty button
         easyButton.setOnAction(e -> {
@@ -109,7 +114,7 @@ public class Controller extends Application {
 
         //If player clicks the wipe crossbow button
         wipeCrossbowButton.setOnAction(e -> {
-            weaponChoice = "crossbow";
+            weaponChoice = "WipeCrossbow";
             wipeCrossbowButton.setEffect(new DropShadow(2.0, Color.BLACK));
             disinfectantSprayButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -117,7 +122,7 @@ public class Controller extends Application {
 
         //If player clicks the disinfectant spray button
         disinfectantSprayButton.setOnAction(e -> {
-            weaponChoice = "spray";
+            weaponChoice = "DisinfectantSpray";
             disinfectantSprayButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             thermometerSwordButton.setEffect(null);
@@ -125,7 +130,7 @@ public class Controller extends Application {
 
         //If player clicks the thermometer sword button
         thermometerSwordButton.setOnAction(e -> {
-            weaponChoice = "sword";
+            weaponChoice = "ThermometerSword";
             thermometerSwordButton.setEffect(new DropShadow(2.0, Color.BLACK));
             wipeCrossbowButton.setEffect(null);
             disinfectantSprayButton.setEffect(null);
@@ -159,7 +164,7 @@ public class Controller extends Application {
                     gameModel.setState("Configuration Screen");
                 } else {
                     Level levelOne = new Level(1, difficultyLevel);
-                    hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
+                    hero = new Player(100, 0, name, weaponChoice, difficultyLevel, tempList);
                     goToGameScreen();
                     System.out.println("VALID!"); //Delete after previous lines implemented
                 }
@@ -193,7 +198,7 @@ public class Controller extends Application {
                 gameModel.setState("Configuration Screen");
             } else {
                 Level levelOne = new Level(1, difficultyLevel);
-                hero = new Player(100, 0, name, weaponChoice, difficultyLevel);
+                hero = new Player(100, 0, name, weaponChoice, difficultyLevel, tempList);
                 goToGameScreen();
             }
         });
