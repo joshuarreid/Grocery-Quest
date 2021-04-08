@@ -95,8 +95,8 @@ public abstract class LevelScreen {
         default:
         }
 
-        borderExitImage.setFitWidth(width + 4);
-        borderExitImage.setFitHeight(height + 4);
+        borderExitImage.setFitWidth(width - 40);
+        borderExitImage.setFitHeight(height + 10);
         boardGridPane.setStyle("-fx-background-color: " + background);
 
         //****DON'T DELETE THIS: NEEDED IN CASE WE WANT A BACKGROUND IMAGE FOR INVENTORY*****
