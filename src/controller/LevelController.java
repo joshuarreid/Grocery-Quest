@@ -271,6 +271,13 @@ public class LevelController {
     }
 
     /**
+     * Exits game on game screen
+     */
+    private void exitGame() {
+        System.exit(0);
+    }
+
+    /**
      * launches the appropriate next screen based of of exit and current state
      *
      * @param exit exit that is being used
@@ -318,6 +325,9 @@ public class LevelController {
             break;
         case "Win Screen":
             winScreen();
+            break;
+        case "Exit Game":
+            exitGame();
             break;
         default:
         }
