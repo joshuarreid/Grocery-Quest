@@ -28,8 +28,8 @@ public class Player {
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
     /*
-    inventory needs to be stored in player since player an object that's passed through each level and therefore does
-    not need for inventory to be created again and again in each level.
+    inventory needs to be stored in player since player an object that's passed through each level
+    and therefore does not need for inventory to be created again and again in each level.
      */
     private List<String> inventoryList;
 
@@ -41,6 +41,7 @@ public class Player {
      * @param name The chosen name for the player
      * @param weaponInUse the chosen weapon for the player
      * @param difficultyLevel the chosen difficulty for the player
+     * @param inventoryList Player's item inventory
      */
     public Player(int health, int money, String name,
                   String weaponInUse, int difficultyLevel, List<String> inventoryList) {

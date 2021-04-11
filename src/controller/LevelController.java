@@ -327,7 +327,7 @@ public class LevelController {
             winScreen();
             break;
         case "Exit Game":
-               exitGame();
+            exitGame();
             break;
         default:
         }

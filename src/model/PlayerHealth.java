@@ -121,7 +121,7 @@ public class PlayerHealth {
     }
 
     public ImageView updateCurrentHealthBar() {
-        if(this.healthLevel <= 10 ) {
+        if (this.healthLevel <= 10) {
             return HEALTHBARS[healthLevel];
         } else {
             return HEALTHBARS[10];

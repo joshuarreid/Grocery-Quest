@@ -1,8 +1,5 @@
 package model;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class Potion extends Collectable {
     private int hp;
 
@@ -11,9 +8,13 @@ public class Potion extends Collectable {
         this.hp = hp;
     }
 
+    /**
+     * Potions add health to Players
+     * @param hero the Player using the item
+     */
     @Override
     void action(Player hero) { // consume
-        if(this.quantity > 0) {
+        if (this.quantity > 0) {
             this.quantity--;
             hero.getPlayerHealth().addHealth(this.hp);
         }

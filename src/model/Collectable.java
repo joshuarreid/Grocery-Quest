@@ -3,11 +3,16 @@ package model;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Class for items that have the ability to be collected by player
+ */
 public abstract class Collectable {
     private ImageView image;
     private String id;
     private int row;
     private int col;
+    // whenever on board this quantity can only be 1,
+    // but in inventory, quantity can be more than one
     protected int quantity;
     private boolean collected; //false == on board, true == in inventory
 
@@ -24,6 +29,10 @@ public abstract class Collectable {
         this.image.setId(id);
     }
 
+    /**
+     *  Every collectable has an action that is done when used
+     * @param hero the Player using the item
+     */
     abstract void action(Player hero);
 
     public ImageView getImage() {
