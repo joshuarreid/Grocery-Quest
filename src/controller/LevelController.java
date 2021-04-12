@@ -362,13 +362,19 @@ public class LevelController {
             int deltaY = 0;
             int deltaX = 0;
             switch (event.getCode()) {
-            case SPACE: //Go to next or previous level
+            case SPACE: //Go to next or previous level or pick up item
                 if (board.onExit(hero) != null
                         && currentLevelScreen.getMonstersList().size() == 0) {
                     board.onExit(hero).setIsOpen(true);
                 }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen()) {
                     getNextLevel(board.onExit(hero, gameModel));
+                }
+                deltaY = hero.getPlayerMovement().getYPosition();
+                deltaX = hero.getPlayerMovement().getXPosition();
+                if (board.hasItem(deltaY, deltaX)) {
+                    hero.pickUpItem(board.getItem(deltaY, deltaX));
+                    updateLevelScreen(true, null);
                 }
                 break;
             case UP: //Move up
@@ -377,13 +383,7 @@ public class LevelController {
                 }
                 deltaY = hero.getPlayerMovement().getYPosition() - 1;
                 deltaX = hero.getPlayerMovement().getXPosition();
-                if (!board.isBlocked(
-                        deltaY,
-                        deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
+                if (!board.isBlocked(deltaY, deltaX)) {
                     moveHeroBy(hero, 0, -1, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -396,10 +396,6 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition() + 1;
                 deltaX = hero.getPlayerMovement().getXPosition();
                 if (!board.isBlocked(deltaY, deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
                     moveHeroBy(hero, 0, 1, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -412,10 +408,6 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition();
                 deltaX = hero.getPlayerMovement().getXPosition() - 1;
                 if (!board.isBlocked(deltaY, deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
                     moveHeroBy(hero, -1, 0, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -428,10 +420,6 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition();
                 deltaX = hero.getPlayerMovement().getXPosition() + 1;
                 if (!board.isBlocked(deltaY, deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
                     moveHeroBy(hero, 1, 0, board);
                 } else {
                     switchHeroSide(hero, board);

@@ -1,6 +1,5 @@
 package view;
 
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import model.Board;
+import model.Collectable;
 import model.Exit;
 import model.ExitType;
 import model.Inventory;
@@ -170,44 +170,19 @@ public abstract class LevelScreen {
             //the inventory. The item is then removed from the board. The string is combined with a
             //filepath to convert it back into an imageview. This imageview is added back into
             //the inventory.
-            for (String id : hero.getInventoryList()) {
-                String nodeId = inventory.removeObject(id);
-                if (nodeId == null) {
-                    nodeId = id;
-                }
-                System.out.println("nodeId: " + nodeId);
-                if (nodeId != null) {
-                    if (update) {
-                        int row = 0;
-                        int col = 0;
-                        for (int i = 0; i < 19; i++) { //Looking for row and column of picked up item
-                            for (int j = 0; j < 19; j++) {
-                                if (board.getItemBoard()[i][j] != null && board.getItemBoard()[i][j].equals(nodeId)) {
-                                    System.out.println("nodeId: " + nodeId);
-                                    row = i;
-                                    col = j;
-                                }
-                            }
-                        }
-                        board.removeObject(nodeId, row, 1, col, 1);
-                        System.out.println("Object was removed");
-                    }
-                    if (nodeId.substring(0, 4).equals("item")) {
-                        System.out.println("I got trimmed!!");
-                        nodeId = nodeId.substring(0, nodeId.indexOf('_'));
-                    }
-                    System.out.println("Added back to imgeView list");
-                    ImageView tempImgView = new ImageView(new Image("file:resources/pngs/" + nodeId + ".png"));
-                    tempImgView.setFitWidth(30);
-                    tempImgView.setFitHeight(30);
-                    imgViewList.add(tempImgView);
+            boolean condition = false;
+            for (Collectable collectable: hero.getInventoryList()) {
+                condition = inventory.removeObject(collectable);
+                if (update) {
+                    condition = board.removeCollectable(collectable);
+                    System.out.println("Object was removed from , condiyion: " + condition);
                 }
             }
-            int row = 0;
-            for (String id: hero.getInventoryList()) {
-                System.out.println("Added to inventory");
-                inventory.addObject(imgViewList.get(row), id, row, 0);
-                row++;
+            int i = 0;
+            for (Collectable collectable: hero.getInventoryList()) {
+                System.out.println("Added to inventory, condition: " + condition);
+                inventory.addObject(collectable, i, 0);
+                i++;
             }
         }
     }

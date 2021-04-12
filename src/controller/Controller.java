@@ -8,10 +8,12 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import model.Collectable;
 import model.GameModel;
 import model.Level;
 import model.Player;
-import view.*;
+import view.ConfigurationScreen;
+import view.StartScreen;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -85,7 +87,7 @@ public class Controller extends Application {
         Button disinfectantSprayButton = screen.getDisinfectantSprayButton();
         Button thermometerSwordButton = screen.getThermometerSwordButton();
         TextField nameField = screen.getNameField();
-        List<String> tempList = new LinkedList<>();
+        List<Collectable> tempList = new LinkedList<>();
 
         //If player clicks the easy difficulty button
         easyButton.setOnAction(e -> {

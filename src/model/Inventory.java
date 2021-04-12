@@ -17,7 +17,7 @@ import java.util.List;
 public class Inventory {
     private final int maxRow;
     private final int maxColumn;
-    private List<String> hiddenInventory;
+    private List<Collectable> hiddenInventory;
     private GridPane gridPane;
 
     /**
@@ -56,41 +56,48 @@ public class Inventory {
     /**
      * Adds object to Inventory gridPane
      *
-     * @param thing The object that is being placed in the gridPane
-     * @param id The object being placed in the hidden game board
+     * @param collectable The object being placed in the hidden game board
      * @param row Starting vertical location
      * @param col Starting horizontal location
      //@return boolean to indicate successful addition of object
      */
-    public void addObject(Node thing, String id, int row, int col) {
-        thing.setId(id);
-        gridPane.add(thing, col, row);
-        gridPane.setHalignment(thing, HPos.CENTER);
-        gridPane.setValignment(thing, VPos.CENTER);
-        hiddenInventory.add(id);
+    public void addObject(Collectable collectable, int row, int col) {
+        collectable.getImage().setId(collectable.getId());
+        gridPane.add(collectable.getImage(), col, row);
+        gridPane.setHalignment(collectable.getImage(), HPos.CENTER);
+        gridPane.setValignment(collectable.getImage(), VPos.CENTER);
+        hiddenInventory.add(collectable);
     }
 
     /**
      * Removes object from gridpane using their id. Removes object's id from hidden inventory.
      *
-     * @param id id of the object being removed
-     * @return removed node, null otherwise
+     * @param collectable object being removed
+     * @return true if removed, false otherwie
      */
-    public String removeObject(String id) {
+    public boolean removeObject(Collectable collectable) {
         for (Node node : this.gridPane.getChildren()) {
             //Checks valid node on gridPane
-            if (node != null && node.getId() != null && node.getId().equals(id)) {
-                int index = hiddenInventory.indexOf(id);
+            if (node != null && node.getId() != null && node.getId().equals(collectable.getId())) {
+                //*****TODO: Any way to make this more efficient? Getting the index of a certain object by searching by attributes in an object list
+                int count = 0;
+                int index = 0;
+                for (Collectable value: hiddenInventory) {
+                    if (value.getId().equals(collectable.getId())) {
+                        index = count;
+                        break;
+                    }
+                    count++;
+                }
+                //*********************************
                 if (index >= 0) { //If to-be removed object's id is found, remove it
                     hiddenInventory.remove(index);
                     gridPane.getChildren().remove(node);
-                    return node.getId();
-                } else { //If to-be removed object's id is NOT found, return null
-                    return null;
+                    return true;
                 }
             }
         }
-        return null;
+        return false;
     }
 
     /**
