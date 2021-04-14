@@ -28,6 +28,7 @@ public class Player {
     private PlayerMovement playerMovement;
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
+    private Weapon weapon;
     /*
     inventory needs to be stored in player since player an object that's passed through each level
     and therefore does not need for inventory to be created again and again in each level.
