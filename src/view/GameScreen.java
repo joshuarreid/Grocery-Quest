@@ -32,20 +32,15 @@ public class GameScreen extends LevelScreen {
      */
     @Override
     void loadObjects() {
+
+        //TODO: Need to move this not in game screen
         String weaponString = super.hero.getWeaponInUse();
         weaponString = weaponString + "_1";
-        Weapon mainWeapon = new Weapon(weaponString, 0, 0, true, 1);
+        Weapon mainWeapon = new Weapon(weaponString, 0, 0, true);
         if (super.hero.getInventoryList().size() == 0) {
             super.hero.pickUpItem(mainWeapon);
             super.inventory.addObject(mainWeapon, mainWeapon.getRow(), mainWeapon.getCol());
         }
-
-        //TODO: Delete two blocks of code below after hardcoding items in levelSetup
-//        N95 n95Mask1 = new N95("N95Mask_1", 10, 10, false, 1, 5);
-//        super.board.addCollectable(n95Mask1);
-//
-//        N95 n95Mask2 = new N95("N95Mask_2", 10, 12, false, 1, 5);
-//        super.board.addCollectable(n95Mask2);
 
         //Carts
         for (int i = 13; i < 16; i++) {

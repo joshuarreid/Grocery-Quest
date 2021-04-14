@@ -100,7 +100,10 @@ public abstract class LevelScreen {
         borderExitImage.setFitWidth(width - 40);
         borderExitImage.setFitHeight(height + 10);
         boardGridPane.setStyle("-fx-background-color: " + background);
-
+        ImageView whiteGrid = new ImageView(
+                new Image("file:resources/pngs/WhiteGrid.jpg"));
+        whiteGrid.setFitWidth(width - 40);
+        whiteGrid.setFitHeight(height + 10);
         //****DON'T DELETE THIS: NEEDED IN CASE WE WANT A BACKGROUND IMAGE FOR INVENTORY*****
         //inventoryGridPane.setStyle("-fx-background-image: url('" + "file:resources/pngs/InventoryBar-01.png" + "');"
         //        + "-fx-background-size: 90 600;"); //width height
@@ -196,7 +199,7 @@ public abstract class LevelScreen {
                 condition = inventory.removeObject(collectable);
                 if (update) {
                     condition = board.removeCollectable(collectable);
-                    System.out.println("Object was removed from , condiyion: " + condition);
+                    System.out.println("Object was removed from , condition: " + condition);
                 }
             }
             int i = 0;

@@ -453,8 +453,23 @@ public class LevelSetup {
 
     private void initializeItemLevelOneArrayLists() {
         levelOneItems = new ArrayList<Collectable>();
-        levelOneItems.add(new N95("N95Mask_1", 10, 10, false, 1, 5));
-        levelOneItems.add(new N95("N95Mask_2", 10, 12, false, 1, 5));
+        // examples for claudia to use
+        //potions
+        levelOneItems.add(new N95("N95Mask_1", 10, 10, false, 1, 10));
+        levelOneItems.add(new N95("N95Mask_2", 10, 12, false, 1, 10));
+        levelOneItems.add(new Potion("CannedSoup_1", 10, 11, false, 1, 2));
+        levelOneItems.add(new Potion("CannedSoup_2", 11, 11, false, 1, 2));
+        levelOneItems.add(new Potion("ToiletPaper_1", 12, 11, false, 1, 5));
+        levelOneItems.add(new Potion("ToiletPaper_2", 13, 11, false, 1, 5));
+
+        //weapons
+        levelOneItems.add(new Weapon("DisinfectantSpray_1", 12, 10, false));
+        levelOneItems.add(new Weapon("FireDisinfectantSpray_1", 13, 10, false));
+        levelOneItems.add(new Weapon("WipeCrossBow_1", 14, 6, false));
+        levelOneItems.add(new Weapon("FireWipeCrossBow_1", 15, 6, false));
+        levelOneItems.add(new Weapon("ThermometerSword_1", 14, 7, false));
+        levelOneItems.add(new Weapon("FireThermometerSword_1", 15, 7, false));
+
     }
 
     private void initializeItemLevelTwoArrayLists() {

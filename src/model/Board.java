@@ -177,7 +177,7 @@ public class Board {
         int row = collectable.getRow();
         int col = collectable.getCol();
         String collectableId = collectable.getId();
-        ImageView imgView = collectable.getImage();
+        Node imgView = collectable.getImage();
         imgView.setId(collectableId);
         itemBoard[row][col] = collectable;
         gridPane.add(imgView, col, row);

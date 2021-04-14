@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**The Player Class
  *
@@ -102,7 +103,21 @@ public class Player {
      * @return true if added, false otherwise
      */
     public boolean pickUpItem(Collectable collectable) {
-        return inventoryList.add(collectable);
+        String currItem = collectable.getId().substring(0,collectable.getId().indexOf("_"));
+        AtomicBoolean inList = new AtomicBoolean(false);
+        inventoryList.forEach((item) -> {
+            String itemID = item.getId().substring(0, item.getId().indexOf("_"));
+            if(itemID.compareTo(currItem) == 0) {
+                item.setQuantity(item.getQuantity() + 1);
+                inList.set(true);
+            }
+        });
+
+        if(!inList.get()) {
+            return inventoryList.add(collectable);
+        } else {
+            return inList.get();
+        }
     }
 
     //TODO: If player can pick up multiple of the same item, then need to subtract from total number

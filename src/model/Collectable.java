@@ -1,7 +1,12 @@
 package model;
 
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 
 /**
  * Class for items that have the ability to be collected by player
@@ -15,7 +20,10 @@ public abstract class Collectable {
     // but in inventory, quantity can be more than one
     protected int quantity;
     private boolean collected; //false == on board, true == in inventory
+    private Node moreThanOne;
 
+    protected static final Font DOGICA_FONT = Font.loadFont(
+            "file:resources/dogica/TTF/dogicapixel.ttf", 15);
     public Collectable(String id, int row, int col, boolean collected, int quantity) {
         this.id = id;
         this.row = row;
@@ -35,8 +43,12 @@ public abstract class Collectable {
      */
     abstract void action(Player hero);
 
-    public ImageView getImage() {
-        return imageView;
+    public Node getImage() {
+        if(this.quantity > 1) {
+            return moreThanOne;
+        } else {
+            return imageView;
+        }
     }
 
     public String getId() {
@@ -68,7 +80,15 @@ public abstract class Collectable {
     }
 
     public void setQuantity(int quantity) {
+
         this.quantity = quantity;
+        if(quantity > 1) {
+            Label quantityLabel = new Label("" + quantity);
+            quantityLabel.setFont(DOGICA_FONT);
+            quantityLabel.setAlignment(Pos.CENTER);
+
+            moreThanOne = new StackPane(this.imageView,quantityLabel);
+        }
     }
 
     public void setCollected(boolean collected) {
