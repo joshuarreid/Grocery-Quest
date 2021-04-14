@@ -39,6 +39,7 @@ public abstract class LevelScreen {
     private String iD;
     private Scene gameScene;
     private ArrayList<Monster> monsters;
+    private ArrayList<Collectable> items;
     protected Inventory inventory;
 
 
@@ -57,7 +58,8 @@ public abstract class LevelScreen {
      * @param monsters ArrayList of Monsters on the level
      */
     public LevelScreen(int width, int height, Player hero,
-                       LevelRandomizer lr, Exit[] exits, String iD, ArrayList<Monster> monsters) {
+                       LevelRandomizer lr, Exit[] exits, String iD,
+                       ArrayList<Monster> monsters, ArrayList<Collectable> items) {
         this.width = 600;
         this.height = height;
         this.hero = hero;
@@ -66,7 +68,7 @@ public abstract class LevelScreen {
         this.background = lr.getLayout();
         this.iD = iD;
         this.monsters = monsters;
-
+        this.items = items;
 
         //Set up inventory
         inventory = new Inventory(12, 1);
@@ -102,13 +104,16 @@ public abstract class LevelScreen {
         //****DON'T DELETE THIS: NEEDED IN CASE WE WANT A BACKGROUND IMAGE FOR INVENTORY*****
         //inventoryGridPane.setStyle("-fx-background-image: url('" + "file:resources/pngs/InventoryBar-01.png" + "');"
         //        + "-fx-background-size: 90 600;"); //width height
-        inventoryGridPane.setStyle("-fx-background-color: tan");
+//        inventoryGridPane.setStyle("-fx-background-color: tan");
+        ImageView borderInventory = new ImageView(
+                new Image("file:resources/pngs/InventoryBar2.png"));
+        borderInventory.setFitWidth(50);
+        borderInventory.setFitHeight(height + 10);
 
-        StackPane inventoryPane = new StackPane(inventoryGridPane);
-
-        StackPane pane = new StackPane(boardGridPane); //, borderExitImage);
+        StackPane inventoryPane = new StackPane(borderInventory, inventoryGridPane);
+        StackPane pane = new StackPane(boardGridPane,borderExitImage); //, borderExitImage);
         HBox hBox = new HBox(pane, inventoryPane);
-        gameScene = new Scene(hBox, width, height);
+        gameScene = new Scene(hBox, 660, 610);
     }
 
     /**
@@ -128,6 +133,7 @@ public abstract class LevelScreen {
         loadMainCharacter();
         loadInventory(false);
         loadMonsters();
+        loadItems();
         loadObjects();
         return gameScene;
     }
@@ -152,6 +158,21 @@ public abstract class LevelScreen {
         loadCoinHealthBar();
         loadInventory(update);
         updateMonster(monster);
+        loadItems();
+        return gameScene;
+    }
+
+    /**
+     * Updates the scene. Has boolean parameters to avoid loading stuff
+     * that doesn't need to be loaded again.
+     *
+     * @param update if inventory needs to be updated
+     * @return the updated scene
+     */
+    public Scene updateScene(boolean update) {
+        loadCoinHealthBar();
+        loadInventory(update);
+        loadItems();
         return gameScene;
     }
 
@@ -261,6 +282,18 @@ public abstract class LevelScreen {
                 }
             }
         }
+    }
+
+    /**
+     * Load items
+     */
+    private void loadItems() {
+        items.forEach((item) -> {
+            board.removeCollectable(item);
+            if(!item.isCollected()) {
+                board.addCollectable(item);
+            }
+        });
     }
 
     /**

@@ -52,11 +52,11 @@ public class Board {
         gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
 
-            RowConstraints rowConst = new RowConstraints(height / maxRow);
+            RowConstraints rowConst = new RowConstraints(600.0 / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
+            ColumnConstraints colConst = new ColumnConstraints(600.0 / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
         setUpExitBoard();
@@ -292,7 +292,9 @@ public class Board {
      * @return the item at the postion
      */
     public Collectable getItem(int row, int col) {
-        return itemBoard[row][col];
+        Collectable item = itemBoard[row][col];
+        itemBoard[row][col] = null;
+        return item;
     }
 
     /**

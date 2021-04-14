@@ -40,13 +40,13 @@ public class Inventory {
      * @param width width of screen
      */
     public void createInventory(double height, double width) {
-        gridPane.setGridLinesVisible(true);
+//        gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
-            RowConstraints rowConst = new RowConstraints(height / maxRow);
+            RowConstraints rowConst = new RowConstraints(601.0 / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
+            ColumnConstraints colConst = new ColumnConstraints(50.0/ maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
     }

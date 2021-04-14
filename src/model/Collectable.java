@@ -24,8 +24,8 @@ public abstract class Collectable {
         this.collected = collected;
         this.imageView = new ImageView(new Image("file:resources/pngs/"
                 + id.substring(0, id.indexOf("_")) + ".png"));
-        this.imageView.setFitWidth(35);
-        this.imageView.setFitHeight(35);
+        this.imageView.setFitWidth(30);
+        this.imageView.setFitHeight(30);
         this.imageView.setId(id);
     }
 

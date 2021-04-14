@@ -57,6 +57,17 @@ public class LevelSetup {
     private ArrayList<Monster> levelEightMonsters;
     private ArrayList<Monster> bossMonsters;
 
+    // item arraysLists
+    private ArrayList<Collectable> levelOneItems;
+    private ArrayList<Collectable> levelTwoItems;
+    private ArrayList<Collectable> levelThreeItems;
+    private ArrayList<Collectable> levelFourItems;
+    private ArrayList<Collectable> levelFiveItems;
+    private ArrayList<Collectable> levelSixItems;
+    private ArrayList<Collectable> levelSevenItems;
+    private ArrayList<Collectable> levelEightItems;
+    private ArrayList<Collectable> bossItems;
+
     //screens
     private LevelScreen gameScreen;
     private LevelScreen levelOne;
@@ -92,40 +103,43 @@ public class LevelSetup {
         // initialize monster arrays
         initializeMonsterArrayLists();
 
+        // initialize all items
+        initializeItemArrayLists();
+
         //initialize all screens
         gameScreen = new GameScreen(width, height, hero,
-                levelRandomizer, initialGameScreenExits, new ArrayList<Monster>());
+                levelRandomizer, initialGameScreenExits, new ArrayList<Monster>(), new ArrayList<Collectable>());
         levelOne = new LevelOneScreen(width, height, hero,
-                levelRandomizer, levelOneScreenExits, levelOneMonsters);
+                levelRandomizer, levelOneScreenExits, levelOneMonsters, levelOneItems);
         levelTwo = new LevelTwoScreen(width, height, hero,
-                levelRandomizer, levelTwoScreenExits, levelTwoMonsters);
+                levelRandomizer, levelTwoScreenExits, levelTwoMonsters, levelTwoItems);
         levelThree =
                 new LevelThreeScreen(width, height, hero,
-                        levelRandomizer, levelThreeScreenExits, levelThreeMonsters);
+                        levelRandomizer, levelThreeScreenExits, levelThreeMonsters, levelThreeItems);
         levelFour = new LevelFourScreen(width, height, hero,
-                levelRandomizer, levelFourScreenExits, levelFourMonsters);
+                levelRandomizer, levelFourScreenExits, levelFourMonsters, levelFourItems);
         levelFive = new LevelFiveScreen(width, height, hero,
-                levelRandomizer, levelFiveScreenExits, levelFiveMonsters);
+                levelRandomizer, levelFiveScreenExits, levelFiveMonsters, levelFiveItems);
         levelSix = new LevelSixScreen(width, height, hero,
-                levelRandomizer, levelSixScreenExits, levelSixMonsters);
+                levelRandomizer, levelSixScreenExits, levelSixMonsters, levelSixItems);
         levelSeven =
                 new LevelSevenScreen(width, height, hero,
-                        levelRandomizer, levelSevenScreenExits, levelSevenMonsters);
+                        levelRandomizer, levelSevenScreenExits, levelSevenMonsters, levelSevenItems);
         levelEight =
                 new LevelEightScreen(width, height, hero,
-                        levelRandomizer, levelEightScreenExits, levelEightMonsters);
+                        levelRandomizer, levelEightScreenExits, levelEightMonsters, levelEightItems);
         weaponsScreen =
                 new WeaponsScreen(width, height, hero,
-                        levelRandomizer, weaponsScreenExits, new ArrayList<Monster>());
+                        levelRandomizer, weaponsScreenExits, new ArrayList<Monster>(), new ArrayList<Collectable>());
         trainingScreen =
                 new TrainingScreen(width, height, hero,
-                        levelRandomizer, trainingScreenExits, new ArrayList<Monster>());
+                        levelRandomizer, trainingScreenExits, new ArrayList<Monster>(), new ArrayList<Collectable>());
         bossScreen =
                 new BossScreen(width, height, hero,
-                        levelRandomizer, bossScreenExits, bossMonsters);
+                        levelRandomizer, bossScreenExits, bossMonsters, bossItems);
         vaccineScreen =
                 new VaccineScreen(width, height, hero,
-                        levelRandomizer, vaccineScreenExits, new ArrayList<Monster>());
+                        levelRandomizer, vaccineScreenExits, new ArrayList<Monster>(), new ArrayList<Collectable>());
     }
 
     private void initializeExits() {
@@ -423,6 +437,56 @@ public class LevelSetup {
                 new Monster(MonsterType.COVIDBOSSSMALL, "Down",
                         1, 5, 15,
                         "monster9", "Boss Screen"));
+    }
+
+    private void initializeItemArrayLists() {
+        initializeItemLevelOneArrayLists();
+        initializeItemLevelTwoArrayLists();
+        initializeItemLevelThreeArrayLists();
+        initializeItemLevelFourArrayLists();
+        initializeItemLevelFiveArrayLists();
+        initializeItemLevelSixArrayLists();
+        initializeItemLevelSevenArrayLists();
+        initializeItemLevelEightArrayLists();
+        initializeItemBossArrayLists();
+    }
+
+    private void initializeItemLevelOneArrayLists() {
+        levelOneItems = new ArrayList<Collectable>();
+        levelOneItems.add(new N95("N95Mask_1", 10, 10, false, 1, 5));
+        levelOneItems.add(new N95("N95Mask_2", 10, 12, false, 1, 5));
+    }
+
+    private void initializeItemLevelTwoArrayLists() {
+        levelTwoItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemLevelThreeArrayLists() {
+        levelThreeItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemLevelFourArrayLists() {
+        levelFourItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemLevelFiveArrayLists() {
+        levelFiveItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemLevelSixArrayLists() {
+        levelSixItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemLevelSevenArrayLists() {
+        levelSevenItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemLevelEightArrayLists() {
+        levelEightItems = new ArrayList<Collectable>();
+    }
+
+    private void initializeItemBossArrayLists() {
+        bossItems = new ArrayList<Collectable>();
     }
 
     /**

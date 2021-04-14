@@ -5,10 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import model.Exit;
-import model.LevelRandomizer;
-import model.Monster;
-import model.Player;
+import model.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
@@ -16,8 +13,8 @@ import java.util.ArrayList;
 
 public class WeaponsScreen extends LevelScreen {
     public WeaponsScreen(int width, int height, Player hero,
-                         LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
-        super(width, height, hero, lr, exits, "Weapons Screen", monsters);
+                         LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
+        super(width, height, hero, lr, exits, "Weapons Screen", monsters, items);
     }
 
     @Override

@@ -22,8 +22,8 @@ public class GameScreen extends LevelScreen {
      * @param monsters monsters list
      */
     public GameScreen(int width, int height, Player hero,
-                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
-        super(width, height, hero, lr, exits, "Game Screen", monsters);
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
+        super(width, height, hero, lr, exits, "Game Screen", monsters, items);
     }
 
     /*
@@ -41,11 +41,11 @@ public class GameScreen extends LevelScreen {
         }
 
         //TODO: Delete two blocks of code below after hardcoding items in levelSetup
-        N95 n95Mask1 = new N95("N95Mask_1", 10, 10, false, 1, 5);
-        super.board.addCollectable(n95Mask1);
-
-        N95 n95Mask2 = new N95("N95Mask_2", 10, 12, false, 1, 5);
-        super.board.addCollectable(n95Mask2);
+//        N95 n95Mask1 = new N95("N95Mask_1", 10, 10, false, 1, 5);
+//        super.board.addCollectable(n95Mask1);
+//
+//        N95 n95Mask2 = new N95("N95Mask_2", 10, 12, false, 1, 5);
+//        super.board.addCollectable(n95Mask2);
 
         //Carts
         for (int i = 13; i < 16; i++) {

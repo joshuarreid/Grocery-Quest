@@ -5,13 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 //import model.*;
-import model.Board;
-import model.GameModel;
-import model.LevelSetup;
-import model.Player;
-import model.PlayerHealth;
-import model.Exit;
-import model.Monster;
+import model.*;
 import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
@@ -373,7 +367,9 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition();
                 deltaX = hero.getPlayerMovement().getXPosition();
                 if (board.hasItem(deltaY, deltaX)) {
-                    hero.pickUpItem(board.getItem(deltaY, deltaX));
+                    Collectable currItem = board.getItem(deltaY, deltaX);
+                    hero.pickUpItem(currItem);
+                    currItem.setCollected(true);
                     updateLevelScreen(true, null);
                 }
                 break;
@@ -454,8 +450,9 @@ public class LevelController {
 
                 break;
             case X: //Use item
-
-
+                break;
+            case C: //next item
+                break;
             default:
             } //switch
         }); //scene.setOnKeyPressed
@@ -563,7 +560,11 @@ public class LevelController {
      * @param monster the monster the player is attacking
      */
     private void updateLevelScreen(boolean update, Monster monster) {
-        currentLevelScreen.updateScene(update, monster);
+        if(monster != null) {
+            currentLevelScreen.updateScene(update, monster);
+        } else {
+            currentLevelScreen.updateScene(update);
+        }
         currentBoard = currentLevelScreen.getBoard();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
