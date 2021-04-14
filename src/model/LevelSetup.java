@@ -453,51 +453,74 @@ public class LevelSetup {
 
     private void initializeItemLevelOneArrayLists() {
         levelOneItems = new ArrayList<Collectable>();
-        // examples for claudia to use
         //potions
-        levelOneItems.add(new N95("N95Mask_1", 10, 10, false, 1, 10));
-        levelOneItems.add(new N95("N95Mask_2", 10, 12, false, 1, 10));
-        levelOneItems.add(new Potion("CannedSoup_1", 10, 11, false, 1, 2));
-        levelOneItems.add(new Potion("CannedSoup_2", 11, 11, false, 1, 2));
-        levelOneItems.add(new Potion("ToiletPaper_1", 12, 11, false, 1, 5));
-        levelOneItems.add(new Potion("ToiletPaper_2", 13, 11, false, 1, 5));
-
+        levelOneItems.add(new Potion("CannedSoup_1", 10, 11, false, 1, 1));
+        //levelOneItems.add(new Potion("CannedSoup_2", 5, 2, false, 1, 1));
+        levelOneItems.add(new Potion("ToiletPaper_1", 1, 14, false, 1, 2));
         //weapons
-        levelOneItems.add(new Weapon("DisinfectantSpray_1", 12, 10, false));
-        levelOneItems.add(new Weapon("FireDisinfectantSpray_1", 13, 10, false));
-        levelOneItems.add(new Weapon("WipeCrossBow_1", 14, 6, false));
-        levelOneItems.add(new Weapon("FireWipeCrossBow_1", 15, 6, false));
-        levelOneItems.add(new Weapon("ThermometerSword_1", 14, 7, false));
-        levelOneItems.add(new Weapon("FireThermometerSword_1", 15, 7, false));
+        //levelOneItems.add(new Weapon("DisinfectantSpray_1", 12, 10, false));
+        //levelOneItems.add(new Weapon("FireDisinfectantSpray_1", 13, 10, false));
+        //levelOneItems.add(new Weapon("WipeCrossBow_1", 14, 6, false));
+        //levelOneItems.add(new Weapon("FireWipeCrossBow_1", 15, 6, false));
+        //levelOneItems.add(new Weapon("ThermometerSword_1", 14, 7, false));
+        //levelOneItems.add(new Weapon("FireThermometerSword_1", 15, 7, false));
 
     }
 
     private void initializeItemLevelTwoArrayLists() {
         levelTwoItems = new ArrayList<Collectable>();
+        //potions
+        levelTwoItems.add(new Potion("CannedSoup_1", 15, 3, false, 1, 1));
+        //levelTwoItems.add(new Potion("CannedSoup_2", 5, 15, false, 1, 2));
+        levelTwoItems.add(new Potion("ToiletPaper_1", 14, 6, false, 1, 2));
+        levelTwoItems.add(new N95("N95Mask_1", 10, 10, false, 1, 10));
     }
 
     private void initializeItemLevelThreeArrayLists() {
+        //Will become a challenge level
         levelThreeItems = new ArrayList<Collectable>();
+        //potions
+        levelThreeItems.add(new Potion("CannedSoup_1", 5,3,false, 1, 1));
+        //weapons
+        levelThreeItems.add(new Weapon("ThermometerSword_1", 14, 7, false));
     }
 
     private void initializeItemLevelFourArrayLists() {
         levelFourItems = new ArrayList<Collectable>();
+        //potions
+        levelFourItems.add(new Potion("ToiletPaper_1", 3, 16, false, 1, 2));
+        levelFourItems.add(new Potion("CannedSoup_1", 14,5,false, 1, 1));
+        //weapons
+        levelFourItems.add(new Weapon("DisinfectantSpray_1", 4, 7, false));
     }
 
     private void initializeItemLevelFiveArrayLists() {
         levelFiveItems = new ArrayList<Collectable>();
+        //TRUMP Challenge Level, random fire weapon will appear on completion of challenge
     }
 
     private void initializeItemLevelSixArrayLists() {
         levelSixItems = new ArrayList<Collectable>();
+        //potions
+        levelSixItems.add(new Potion("HandSanitizer_1", 13,2,false, 1,3));
+        levelSixItems.add(new Potion("ToiletPaper_1", 5, 14, false, 1, 2));
+
     }
 
     private void initializeItemLevelSevenArrayLists() {
+        //Will become a challenge level of small covid monsters
         levelSevenItems = new ArrayList<Collectable>();
+        //potions
+        levelSevenItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
+        levelSevenItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
     }
 
     private void initializeItemLevelEightArrayLists() {
         levelEightItems = new ArrayList<Collectable>();
+        //potions
+        levelEightItems.add(new Potion("HandSanitizer_1", 15,14,false, 1,3));
+        //weapons
+        levelEightItems.add(new Weapon("FireWipeCrossBow_1", 1, 8, false));
     }
 
     private void initializeItemBossArrayLists() {
