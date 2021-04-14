@@ -1,6 +1,5 @@
 package view;
 
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import model.Board;
+import model.Collectable;
 import model.Exit;
 import model.ExitType;
 import model.Inventory;
@@ -39,6 +39,7 @@ public abstract class LevelScreen {
     private String iD;
     private Scene gameScene;
     private ArrayList<Monster> monsters;
+    private ArrayList<Collectable> items;
     protected Inventory inventory;
 
 
@@ -57,7 +58,8 @@ public abstract class LevelScreen {
      * @param monsters ArrayList of Monsters on the level
      */
     public LevelScreen(int width, int height, Player hero,
-                       LevelRandomizer lr, Exit[] exits, String iD, ArrayList<Monster> monsters) {
+                       LevelRandomizer lr, Exit[] exits, String iD,
+                       ArrayList<Monster> monsters, ArrayList<Collectable> items) {
         this.width = 600;
         this.height = height;
         this.hero = hero;
@@ -66,7 +68,7 @@ public abstract class LevelScreen {
         this.background = lr.getLayout();
         this.iD = iD;
         this.monsters = monsters;
-
+        this.items = items;
 
         //Set up inventory
         inventory = new Inventory(12, 1);
@@ -102,13 +104,16 @@ public abstract class LevelScreen {
         //****DON'T DELETE THIS: NEEDED IN CASE WE WANT A BACKGROUND IMAGE FOR INVENTORY*****
         //inventoryGridPane.setStyle("-fx-background-image: url('" + "file:resources/pngs/InventoryBar-01.png" + "');"
         //        + "-fx-background-size: 90 600;"); //width height
-        inventoryGridPane.setStyle("-fx-background-color: tan");
+//        inventoryGridPane.setStyle("-fx-background-color: tan");
+        ImageView borderInventory = new ImageView(
+                new Image("file:resources/pngs/InventoryBar2.png"));
+        borderInventory.setFitWidth(50);
+        borderInventory.setFitHeight(height + 10);
 
-        StackPane inventoryPane = new StackPane(inventoryGridPane);
-
-        StackPane pane = new StackPane(boardGridPane); //, borderExitImage);
+        StackPane inventoryPane = new StackPane(borderInventory, inventoryGridPane);
+        StackPane pane = new StackPane(boardGridPane,borderExitImage); //, borderExitImage);
         HBox hBox = new HBox(pane, inventoryPane);
-        gameScene = new Scene(hBox, width, height);
+        gameScene = new Scene(hBox, 660, 610);
     }
 
     /**
@@ -128,6 +133,7 @@ public abstract class LevelScreen {
         loadMainCharacter();
         loadInventory(false);
         loadMonsters();
+        loadItems();
         loadObjects();
         return gameScene;
     }
@@ -152,6 +158,21 @@ public abstract class LevelScreen {
         loadCoinHealthBar();
         loadInventory(update);
         updateMonster(monster);
+        loadItems();
+        return gameScene;
+    }
+
+    /**
+     * Updates the scene. Has boolean parameters to avoid loading stuff
+     * that doesn't need to be loaded again.
+     *
+     * @param update if inventory needs to be updated
+     * @return the updated scene
+     */
+    public Scene updateScene(boolean update) {
+        loadCoinHealthBar();
+        loadInventory(update);
+        loadItems();
         return gameScene;
     }
 
@@ -170,44 +191,19 @@ public abstract class LevelScreen {
             //the inventory. The item is then removed from the board. The string is combined with a
             //filepath to convert it back into an imageview. This imageview is added back into
             //the inventory.
-            for (String id : hero.getInventoryList()) {
-                String nodeId = inventory.removeObject(id);
-                if (nodeId == null) {
-                    nodeId = id;
-                }
-                System.out.println("nodeId: " + nodeId);
-                if (nodeId != null) {
-                    if (update) {
-                        int row = 0;
-                        int col = 0;
-                        for (int i = 0; i < 19; i++) { //Looking for row and column of picked up item
-                            for (int j = 0; j < 19; j++) {
-                                if (board.getItemBoard()[i][j] != null && board.getItemBoard()[i][j].equals(nodeId)) {
-                                    System.out.println("nodeId: " + nodeId);
-                                    row = i;
-                                    col = j;
-                                }
-                            }
-                        }
-                        board.removeObject(nodeId, row, 1, col, 1);
-                        System.out.println("Object was removed");
-                    }
-                    if (nodeId.substring(0, 4).equals("item")) {
-                        System.out.println("I got trimmed!!");
-                        nodeId = nodeId.substring(0, nodeId.indexOf('_'));
-                    }
-                    System.out.println("Added back to imgeView list");
-                    ImageView tempImgView = new ImageView(new Image("file:resources/pngs/" + nodeId + ".png"));
-                    tempImgView.setFitWidth(30);
-                    tempImgView.setFitHeight(30);
-                    imgViewList.add(tempImgView);
+            boolean condition = false;
+            for (Collectable collectable: hero.getInventoryList()) {
+                condition = inventory.removeObject(collectable);
+                if (update) {
+                    condition = board.removeCollectable(collectable);
+                    System.out.println("Object was removed from , condiyion: " + condition);
                 }
             }
-            int row = 0;
-            for (String id: hero.getInventoryList()) {
-                System.out.println("Added to inventory");
-                inventory.addObject(imgViewList.get(row), id, row, 0);
-                row++;
+            int i = 0;
+            for (Collectable collectable: hero.getInventoryList()) {
+                System.out.println("Added to inventory, condition: " + condition);
+                inventory.addObject(collectable, i, 0);
+                i++;
             }
         }
     }
@@ -286,6 +282,18 @@ public abstract class LevelScreen {
                 }
             }
         }
+    }
+
+    /**
+     * Load items
+     */
+    private void loadItems() {
+        items.forEach((item) -> {
+            board.removeCollectable(item);
+            if(!item.isCollected()) {
+                board.addCollectable(item);
+            }
+        });
     }
 
     /**

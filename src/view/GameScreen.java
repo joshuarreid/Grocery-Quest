@@ -1,10 +1,7 @@
 package view;
 
 import javafx.scene.layout.StackPane;
-import model.LevelRandomizer;
-import model.Monster;
-import model.Player;
-import model.Exit;
+import model.*;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,8 +22,8 @@ public class GameScreen extends LevelScreen {
      * @param monsters monsters list
      */
     public GameScreen(int width, int height, Player hero,
-                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
-        super(width, height, hero, lr, exits, "Game Screen", monsters);
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
+        super(width, height, hero, lr, exits, "Game Screen", monsters, items);
     }
 
     /*
@@ -36,24 +33,19 @@ public class GameScreen extends LevelScreen {
     @Override
     void loadObjects() {
         String weaponString = super.hero.getWeaponInUse();
-        ImageView playerWeaponImgView = new ImageView(new Image("file:resources/pngs/" + weaponString + ".png"));
-        playerWeaponImgView.setFitWidth(30);
-        playerWeaponImgView.setFitHeight(30);
+        weaponString = weaponString + "_1";
+        Weapon mainWeapon = new Weapon(weaponString, 0, 0, true, 1);
         if (super.hero.getInventoryList().size() == 0) {
-            super.hero.pickUpItem(weaponString);
-            super.inventory.addObject(playerWeaponImgView, weaponString, 0, 0);
+            super.hero.pickUpItem(mainWeapon);
+            super.inventory.addObject(mainWeapon, mainWeapon.getRow(), mainWeapon.getCol());
         }
 
         //TODO: Delete two blocks of code below after hardcoding items in levelSetup
-        ImageView tempCart2 = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
-        tempCart2.setFitWidth(30);
-        tempCart2.setFitHeight(30);
-        super.board.addObject(tempCart2, "itemPotion_1", false, 10, 1, 10, 1);
-
-        ImageView tempCart3 = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
-        tempCart3.setFitWidth(30);
-        tempCart3.setFitHeight(30);
-        super.board.addObject(tempCart3, "itemPotion_2", false, 11, 1, 11, 1);
+//        N95 n95Mask1 = new N95("N95Mask_1", 10, 10, false, 1, 5);
+//        super.board.addCollectable(n95Mask1);
+//
+//        N95 n95Mask2 = new N95("N95Mask_2", 10, 12, false, 1, 5);
+//        super.board.addCollectable(n95Mask2);
 
         //Carts
         for (int i = 13; i < 16; i++) {

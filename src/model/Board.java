@@ -5,6 +5,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import javafx.scene.image.ImageView;
+
 /**The Board Class
  *
  * Represents the coordinate system - GridPane that the user
@@ -14,7 +16,7 @@ public class Board {
     private final int maxRow;
     private final int maxColumn;
     private String[][] hiddenBoard;
-    private String[][] itemBoard;
+    private Collectable[][] itemBoard;
     private GridPane gridPane;
     private Exit[] exits;
     private Exit[][] exitBoard;
@@ -34,7 +36,7 @@ public class Board {
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow][maxColumn];
-        this.itemBoard = new String[maxRow][maxColumn];
+        this.itemBoard = new Collectable[maxRow][maxColumn];
         this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
         this.iD = iD;
@@ -50,11 +52,11 @@ public class Board {
         gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
 
-            RowConstraints rowConst = new RowConstraints(height / maxRow);
+            RowConstraints rowConst = new RowConstraints(600.0 / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
+            ColumnConstraints colConst = new ColumnConstraints(600.0 / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
         setUpExitBoard();
@@ -150,8 +152,6 @@ public class Board {
             gridPane.add(thing, firstCol, firstRow);
             if (blockPlayer) { //If object should block player
                 hiddenBoard[firstRow][firstCol] = id;
-            } else if (id.substring(0, 4).equals("item")) {
-                itemBoard[firstRow][firstCol] = id;
             }
         } else { //If thing occupies more than one spot
             thing.setId(id);
@@ -164,6 +164,23 @@ public class Board {
                 }
             }
         }
+        return true;
+    }
+
+    /**
+     * Adds only collectables to the gridpane
+     *
+     * @param collectable collectable to be added
+     * @return true when added
+     */
+    public boolean addCollectable(Collectable collectable) {
+        int row = collectable.getRow();
+        int col = collectable.getCol();
+        String collectableId = collectable.getId();
+        ImageView imgView = collectable.getImage();
+        imgView.setId(collectableId);
+        itemBoard[row][col] = collectable;
+        gridPane.add(imgView, col, row);
         return true;
     }
 
@@ -194,6 +211,23 @@ public class Board {
                         }
                     }
                 }
+                return this.gridPane.getChildren().remove(node);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Only removes collectables from the gridpane
+     *
+     * @param collectable collectable to be removed
+     * @return true if removed, false otherwise
+     */
+    public boolean removeCollectable(Collectable collectable) {
+        for (Node node : this.gridPane.getChildren()) {
+            //Checks valid node on gridPane
+            if (node != null && node.getId() != null && node.getId().equals(collectable.getId())) {
+                itemBoard[collectable.getRow()][collectable.getCol()] = null;
                 return this.gridPane.getChildren().remove(node);
             }
         }
@@ -249,7 +283,7 @@ public class Board {
         return gridPane;
     }
 
-    public String[][] getItemBoard() { return itemBoard; }
+    public Collectable[][] getItemBoard() { return itemBoard; }
 
     /**
      *
@@ -257,8 +291,10 @@ public class Board {
      * @param col column
      * @return the item at the postion
      */
-    public String getItem(int row, int col) {
-        return itemBoard[row][col];
+    public Collectable getItem(int row, int col) {
+        Collectable item = itemBoard[row][col];
+        itemBoard[row][col] = null;
+        return item;
     }
 
     /**

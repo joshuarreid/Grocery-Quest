@@ -31,7 +31,7 @@ public class Player {
     inventory needs to be stored in player since player an object that's passed through each level
     and therefore does not need for inventory to be created again and again in each level.
      */
-    private List<String> inventoryList;
+    private List<Collectable> inventoryList;
 
     /**
      * The Player Constructor
@@ -44,7 +44,7 @@ public class Player {
      * @param inventoryList Player's item inventory
      */
     public Player(int health, int money, String name,
-                  String weaponInUse, int difficultyLevel, List<String> inventoryList) {
+                  String weaponInUse, int difficultyLevel, List<Collectable> inventoryList) {
         this.weaponInUse = weaponInUse;
         this.currentSide = "right";
         this.health = health;
@@ -90,7 +90,7 @@ public class Player {
      *
      * @return the player's inventory list
      */
-    public List<String> getInventoryList() {
+    public List<Collectable> getInventoryList() {
         return inventoryList;
     }
 
@@ -98,22 +98,22 @@ public class Player {
     /**
      * Player picks up the item and adds the item to inventory list
      *
-     * @param id the id of the item to pick up
+     * @param collectable the id of the item to pick up
      * @return true if added, false otherwise
      */
-    public boolean pickUpItem(String id) {
-        return inventoryList.add(id);
+    public boolean pickUpItem(Collectable collectable) {
+        return inventoryList.add(collectable);
     }
 
     //TODO: If player can pick up multiple of the same item, then need to subtract from total number
     /**
      * Player uses item, and the item is removed from the inventory
      *
-     * @param id the id of the item to use
+     * @param collectable the id of the item to use
      * @return true if removed, false otherwise
      */
-    public boolean useItem(String id) {
-        return inventoryList.remove(id);
+    public boolean useItem(Collectable collectable) {
+        return inventoryList.remove(collectable);
     }
 
     /**

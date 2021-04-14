@@ -5,13 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 //import model.*;
-import model.Board;
-import model.GameModel;
-import model.LevelSetup;
-import model.Player;
-import model.PlayerHealth;
-import model.Exit;
-import model.Monster;
+import model.*;
 import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
@@ -362,13 +356,21 @@ public class LevelController {
             int deltaY = 0;
             int deltaX = 0;
             switch (event.getCode()) {
-            case SPACE: //Go to next or previous level
+            case SPACE: //Go to next or previous level or pick up item
                 if (board.onExit(hero) != null
                         && currentLevelScreen.getMonstersList().size() == 0) {
                     board.onExit(hero).setIsOpen(true);
                 }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen()) {
                     getNextLevel(board.onExit(hero, gameModel));
+                }
+                deltaY = hero.getPlayerMovement().getYPosition();
+                deltaX = hero.getPlayerMovement().getXPosition();
+                if (board.hasItem(deltaY, deltaX)) {
+                    Collectable currItem = board.getItem(deltaY, deltaX);
+                    hero.pickUpItem(currItem);
+                    currItem.setCollected(true);
+                    updateLevelScreen(true, null);
                 }
                 break;
             case UP: //Move up
@@ -377,13 +379,7 @@ public class LevelController {
                 }
                 deltaY = hero.getPlayerMovement().getYPosition() - 1;
                 deltaX = hero.getPlayerMovement().getXPosition();
-                if (!board.isBlocked(
-                        deltaY,
-                        deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
+                if (!board.isBlocked(deltaY, deltaX)) {
                     moveHeroBy(hero, 0, -1, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -396,10 +392,6 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition() + 1;
                 deltaX = hero.getPlayerMovement().getXPosition();
                 if (!board.isBlocked(deltaY, deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
                     moveHeroBy(hero, 0, 1, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -412,10 +404,6 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition();
                 deltaX = hero.getPlayerMovement().getXPosition() - 1;
                 if (!board.isBlocked(deltaY, deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
                     moveHeroBy(hero, -1, 0, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -428,10 +416,6 @@ public class LevelController {
                 deltaY = hero.getPlayerMovement().getYPosition();
                 deltaX = hero.getPlayerMovement().getXPosition() + 1;
                 if (!board.isBlocked(deltaY, deltaX)) {
-                    if (board.hasItem(deltaY, deltaX)) {
-                        hero.pickUpItem(board.getItem(deltaY, deltaX));
-                        updateLevelScreen(true, null);
-                    }
                     moveHeroBy(hero, 1, 0, board);
                 } else {
                     switchHeroSide(hero, board);
@@ -466,8 +450,9 @@ public class LevelController {
 
                 break;
             case X: //Use item
-
-
+                break;
+            case C: //next item
+                break;
             default:
             } //switch
         }); //scene.setOnKeyPressed
@@ -575,7 +560,11 @@ public class LevelController {
      * @param monster the monster the player is attacking
      */
     private void updateLevelScreen(boolean update, Monster monster) {
-        currentLevelScreen.updateScene(update, monster);
+        if(monster != null) {
+            currentLevelScreen.updateScene(update, monster);
+        } else {
+            currentLevelScreen.updateScene(update);
+        }
         currentBoard = currentLevelScreen.getBoard();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }

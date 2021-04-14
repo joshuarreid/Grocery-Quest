@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
  * Class for items that have the ability to be collected by player
  */
 public abstract class Collectable {
-    private ImageView image;
+    private ImageView imageView;
     private String id;
     private int row;
     private int col;
@@ -22,11 +22,11 @@ public abstract class Collectable {
         this.col = col;
         this.quantity = quantity;
         this.collected = collected;
-        this.image = new ImageView(new Image("file:resources/pngs/"
+        this.imageView = new ImageView(new Image("file:resources/pngs/"
                 + id.substring(0, id.indexOf("_")) + ".png"));
-        this.image.setFitWidth(35);
-        this.image.setFitHeight(35);
-        this.image.setId(id);
+        this.imageView.setFitWidth(30);
+        this.imageView.setFitHeight(30);
+        this.imageView.setId(id);
     }
 
     /**
@@ -36,7 +36,7 @@ public abstract class Collectable {
     abstract void action(Player hero);
 
     public ImageView getImage() {
-        return image;
+        return imageView;
     }
 
     public String getId() {
