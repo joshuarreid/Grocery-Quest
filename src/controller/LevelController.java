@@ -31,6 +31,7 @@ public class LevelController {
     private static Board currentBoard;
     private static LevelScreen currentLevelScreen;
     private AnimationTimer timer;
+    private int currentSelectedItem;
 
     /**
      * Level Controller constructor
@@ -50,6 +51,7 @@ public class LevelController {
         this.hero = hero;
         this.currentDeterminant = 1;
         this.levelSetup = new LevelSetup(width, height, hero);
+        this.currentSelectedItem = 0;
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -450,8 +452,21 @@ public class LevelController {
 
                 break;
             case X: //Use item
+                hero.getInventoryList().get(currentSelectedItem).action(hero);
+                if(hero.getInventoryList().get(currentSelectedItem).getQuantity() == 0) {
+                    currentLevelScreen.getInventory().removeObject(hero.getInventoryList().get(currentSelectedItem));
+                    hero.getInventoryList().remove(currentSelectedItem);
+                    currentSelectedItem = (currentSelectedItem - 1) % hero.getInventoryList().size();
+                    hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                }
+                switchHeroSide(hero, board);
+                updateLevelScreen(false, null);
                 break;
             case C: //next item
+                hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                currentSelectedItem = (currentSelectedItem + 1) % hero.getInventoryList().size();
+                hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                updateLevelScreen(false, null);
                 break;
             default:
             } //switch

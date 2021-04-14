@@ -21,6 +21,8 @@ public abstract class Collectable {
     protected int quantity;
     private boolean collected; //false == on board, true == in inventory
     private Node moreThanOne;
+    private boolean selected;
+    private Node selectedImg;
 
     protected static final Font DOGICA_FONT = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 15);
@@ -35,20 +37,25 @@ public abstract class Collectable {
         this.imageView.setFitWidth(30);
         this.imageView.setFitHeight(30);
         this.imageView.setId(id);
+        this.selected = false;
     }
 
     /**
      *  Every collectable has an action that is done when used
      * @param hero the Player using the item
      */
-    abstract void action(Player hero);
+    public abstract void action(Player hero);
 
     public Node getImage() {
-        if(this.quantity > 1) {
-            return moreThanOne;
-        } else {
-            return imageView;
+        if(this.selected) {
+            return this.selectedImg;
         }
+        else if (this.quantity > 1) {
+            return this.moreThanOne;
+        } else {
+            return this.imageView;
+        }
+
     }
 
     public String getId() {
@@ -80,18 +87,47 @@ public abstract class Collectable {
     }
 
     public void setQuantity(int quantity) {
-
         this.quantity = quantity;
+
         if(quantity > 1) {
             Label quantityLabel = new Label("" + quantity);
             quantityLabel.setFont(DOGICA_FONT);
             quantityLabel.setAlignment(Pos.CENTER);
+            moreThanOne = new StackPane(this.imageView, quantityLabel);
+            if(this.selected){
+                ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
+                selectedSquare.setFitWidth(30);
+                selectedSquare.setFitHeight(30);
 
-            moreThanOne = new StackPane(this.imageView,quantityLabel);
+                selectedImg = new StackPane(selectedSquare, this.imageView, quantityLabel);
+            }
+        } else {
+            if(this.selected){
+                ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
+                selectedSquare.setFitWidth(30);
+                selectedSquare.setFitHeight(30);
+
+                selectedImg = new StackPane(selectedSquare, this.imageView);
+            }
         }
+
     }
 
     public void setCollected(boolean collected) {
         this.collected = collected;
+    }
+
+    public void changeSelected() {
+         this.selected = !this.selected;
+         if(this.selected) {
+             ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
+             selectedSquare.setFitWidth(30);
+             selectedSquare.setFitHeight(30);
+             if(quantity > 1) {
+                 this.selectedImg = new StackPane(selectedSquare, this.moreThanOne);
+             } else {
+                 this.selectedImg = new StackPane(selectedSquare, this.imageView);
+             }
+         }
     }
 }

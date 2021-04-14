@@ -52,7 +52,7 @@ public class Player {
         this.money = money;
         this.name = name;
         this.playerMovement = new PlayerMovement(9, 17);
-        setWeaponInUse(weaponInUse, currentSide);
+        setWeaponInUse(weaponInUse);
         this.inventoryList = inventoryList;
 
         playerHealth = new PlayerHealth(difficultyLevel, 150);
@@ -211,17 +211,17 @@ public class Player {
      */
     public void setCurrentSide(String currentSide) {
         this.currentSide = currentSide;
-        setWeaponInUse(weaponInUse, currentSide);
+        setWeaponInUse(weaponInUse);
     }
 
     /**
      *
      * @param weaponInUse weapon the player must use
-     * @param side direction the player should face
      */
-    public void setWeaponInUse(String weaponInUse, String side) {
+    public void setWeaponInUse(String weaponInUse) {
+        this.weaponInUse = weaponInUse;
         this.playerImage = new ImageView(
-                new Image("file:resources/pngs/" + weaponInUse + "Grandma" + side + ".png"));
+                new Image("file:resources/pngs/" + this.weaponInUse + "Grandma" + this.currentSide + ".png"));
         playerImage.setFitWidth(35);
         playerImage.setFitHeight(35);
         playerImage.setId("player");

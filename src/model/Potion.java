@@ -13,10 +13,11 @@ public class Potion extends Collectable {
      * @param hero the Player using the item
      */
     @Override
-    void action(Player hero) { // consume
+    public void action(Player hero) { // consume
         if (this.quantity > 0) {
-            this.quantity--;
+            this.setQuantity(this.getQuantity() - 1);
             hero.getPlayerHealth().addHealth(this.hp);
+            System.out.println("Health added hehehehe");
         }
     }
 }

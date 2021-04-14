@@ -68,8 +68,8 @@ public class PlayerHealth {
      * @return the updated "increased" health bar imageview
      */
     public ImageView addHealth(int amount) {
-        int newHealth = this.healthLevel + amount;
-        if (newHealth > 10) {
+        this.healthLevel = this.healthLevel + amount;
+        if (this.healthLevel > 10) {
             this.healthLevel = 10;
         }
         return barSettings(updateCurrentHealthBar());

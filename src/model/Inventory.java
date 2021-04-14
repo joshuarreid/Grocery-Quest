@@ -19,6 +19,7 @@ public class Inventory {
     private final int maxColumn;
     private List<Collectable> hiddenInventory;
     private GridPane gridPane;
+    int currentItem; // row
 
     /**
      * Inventory Constructor
@@ -31,6 +32,7 @@ public class Inventory {
         maxColumn = column;
         this.gridPane = new GridPane();
         hiddenInventory = new LinkedList<>();
+        this.currentItem = 0;
     }
 
     /**
@@ -98,6 +100,29 @@ public class Inventory {
             }
         }
         return false;
+    }
+
+// trying this out
+    public void clearInventory() {
+        for (Node node : this.gridPane.getChildren()) {
+            //Checks valid node on gridPane
+            if (node != null) {
+                int count = 0;
+                int index = 0;
+                for (Collectable value: hiddenInventory) {
+                    if (value.getId().equals(node.getId())) {
+                        index = count;
+                        break;
+                    }
+                    count++;
+                }
+                //*********************************
+                if (index >= 0) { //If to-be removed object's id is found, remove it
+                    hiddenInventory.remove(index);
+                    gridPane.getChildren().remove(node);
+                }
+            }
+        }
     }
 
     /**

@@ -18,7 +18,9 @@ public class Weapon extends Collectable{
      * @param hero the Player using the item
      */
     @Override
-    void action(Player hero) {
-        System.out.print("use weapon");
+    public void action(Player hero) {
+        System.out.println(super.getId().substring(0, super.getId().indexOf("_")));
+        hero.setWeaponInUse(super.getId().substring(0, super.getId().indexOf("_")));
+//        System.out.print("switch weapon");
     }
 }

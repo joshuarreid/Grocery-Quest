@@ -16,7 +16,8 @@ public class N95 extends Potion{
      * @param hero the Player using the item
      */
     @Override
-    void action(Player hero) {
+    public void action(Player hero) {
         hero.getPlayerHealth().addHealthProtection(10);
+        this.setQuantity(this.getQuantity() - 1);
     }
 }

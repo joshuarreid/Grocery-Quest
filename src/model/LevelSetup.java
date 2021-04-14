@@ -459,8 +459,10 @@ public class LevelSetup {
         levelOneItems.add(new N95("N95Mask_2", 10, 12, false, 1, 10));
         levelOneItems.add(new Potion("CannedSoup_1", 10, 11, false, 1, 2));
         levelOneItems.add(new Potion("CannedSoup_2", 11, 11, false, 1, 2));
-        levelOneItems.add(new Potion("ToiletPaper_1", 12, 11, false, 1, 5));
-        levelOneItems.add(new Potion("ToiletPaper_2", 13, 11, false, 1, 5));
+        levelOneItems.add(new Potion("ToiletPaper_1", 12, 11, false, 1, 3));
+        levelOneItems.add(new Potion("ToiletPaper_2", 13, 11, false, 1, 3));
+        levelOneItems.add(new Potion("HandSanitizer_1", 14, 8, false, 1, 4));
+        levelOneItems.add(new Potion("HandSanitizer_2", 15, 8, false, 1, 4));
 
         //weapons
         levelOneItems.add(new Weapon("DisinfectantSpray_1", 12, 10, false));
