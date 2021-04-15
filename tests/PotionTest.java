@@ -4,6 +4,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.*;
 
+import model.HandSanitizer;
 import model.Level;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
@@ -112,6 +113,40 @@ public class PotionTest extends ApplicationTest {
         press(KeyCode.C).release(KeyCode.C);
         press(KeyCode.X).release(KeyCode.X);
         assertNotEquals(health, LevelController.getHero().getPlayerHealth().getHealthLevel());
+    }
+
+    @Test
+    /**
+     *
+     * Testing that the attack potion adds to player's weapon's attack when
+     * consumed
+     *
+     */
+    public void testAttackPotion() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing Attack Potion");
+        clickOn("#thermometerSwordButton");
+        clickOn("#hardButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        //creating hand sanitizer object
+        HandSanitizer potion = new HandSanitizer(
+                "HandSanitizer_1",
+                0,
+                0,
+                true,
+                1
+        );
+
+        //added hand sanitizer to inventory
+        LevelController.getHero().getInventoryList().add(potion);
+
+
+        int weaponDamage = LevelController.getHero().getWeapon().getDamage();
+        press(KeyCode.C).release(KeyCode.C);
+        press(KeyCode.X).release(KeyCode.X);
+        assertNotEquals(weaponDamage, LevelController.getHero().getWeapon().getDamage());
     }
 
 
