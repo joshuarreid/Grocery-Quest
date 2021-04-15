@@ -54,6 +54,10 @@ public class Monster {
                 new boolean[]{false, false, false, false, false, false, false, false, false, false};
 
         switch (level) {
+        case "Training Screen":
+            this.attackProbabilty[9] = true;
+            this.maxDamage = 0;
+            break;
         case"Level 1":
             this.attackProbabilty[9] = true;
             this.maxDamage = 1;
