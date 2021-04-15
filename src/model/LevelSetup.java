@@ -85,6 +85,8 @@ public class LevelSetup {
     private LevelScreen bossScreen;
     private LevelScreen vaccineScreen;
 
+    //player
+    private Player hero;
     /**
      * The LevelSetup Constructor
      *
@@ -93,7 +95,7 @@ public class LevelSetup {
      * @param hero the hero to use
      */
     public LevelSetup(int width, int height, Player hero) {
-
+        this.hero = hero;
         this.levelRandomizer = new LevelRandomizer();
 
         //initialize all exits
@@ -464,9 +466,22 @@ public class LevelSetup {
 
     private void initializeWeaponsArrayLists() {
         weaponsItems = new ArrayList<Collectable>();
-        weaponsItems.add(new Weapon("DisinfectantSpray_1", 9, 11, false));
-        weaponsItems.add(new Weapon("WipeCrossBow_1", 6, 11, false));
-        weaponsItems.add(new Weapon("ThermometerSword_1", 12, 11, false));
+        System.out.println(hero.getWeaponInUse());
+        switch(hero.getWeaponInUse()){
+        case "DisinfectantSpray":
+            weaponsItems.add(new Weapon("WipeCrossbow_1", 6, 11, false));
+            weaponsItems.add(new Weapon("ThermometerSword_1", 12, 11, false));
+            break;
+        case "WipeCrossbow":
+            weaponsItems.add(new Weapon("DisinfectantSpray_1", 9, 11, false));
+            weaponsItems.add(new Weapon("ThermometerSword_1", 12, 11, false));
+            break;
+        case "ThermometerSword":
+            weaponsItems.add(new Weapon("DisinfectantSpray_1", 9, 11, false));
+            weaponsItems.add(new Weapon("WipeCrossBow_1", 6, 11, false));
+            break;
+        default:
+        }
     }
 
     private void initializeItemLevelOneArrayLists() {
@@ -510,7 +525,7 @@ public class LevelSetup {
         levelFourItems.add(new Potion("ToiletPaper_1", 3, 16, false, 1, 2));
         levelFourItems.add(new Potion("CannedSoup_1", 14,5,false, 1, 1));
         //weapons
-        levelFourItems.add(new Weapon("DisinfectantSpray_1", 4, 7, false));
+        levelFourItems.add(new Weapon("FireDisinfectantSpray_1", 4, 7, false));
     }
 
     private void initializeItemLevelFiveArrayLists() {

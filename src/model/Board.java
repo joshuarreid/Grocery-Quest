@@ -49,7 +49,7 @@ public class Board {
      * @param width width of screen
      */
     public void createBoard(double height, double width) {
-        gridPane.setGridLinesVisible(true);
+        gridPane.setGridLinesVisible(false);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
 
             RowConstraints rowConst = new RowConstraints(600.0 / maxRow);

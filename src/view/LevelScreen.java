@@ -28,8 +28,8 @@ import java.util.List;
  * all objects on the Level Screen.
  */
 public abstract class LevelScreen {
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
     private ImageView coinBar;
     private ImageView healthBar;
     protected Player hero;
@@ -135,13 +135,16 @@ public abstract class LevelScreen {
      *
      * @return the current scene
      */
-    public Scene getScene() {
+    public Scene getScene(boolean initalEntrance) {
+        if(initalEntrance) {
+            loadWhiteGrid();
+            loadObjects();
+        }
         loadCoinHealthBar();
         loadMainCharacter();
         loadInventory(false);
         loadMonsters();
         loadItems();
-        loadObjects();
         return gameScene;
     }
 
@@ -306,6 +309,16 @@ public abstract class LevelScreen {
 
     public ArrayList<Collectable> getItems() {
         return items;
+    }
+
+    protected void loadWhiteGrid() {
+            ImageView whiteGrid = new ImageView(
+                    new Image("file:resources/pngs/WhiteGrid.png"));
+            whiteGrid.setFitWidth(610);
+            whiteGrid.setFitHeight(610);
+            whiteGrid.toBack();
+            board.addObject(whiteGrid, "grid", false, 0, 19, 0, 19);
+
     }
 
     /**
