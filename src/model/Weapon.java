@@ -20,7 +20,14 @@ public class Weapon extends Collectable{
     @Override
     public void action(Player hero) {
         System.out.println(super.getId().substring(0, super.getId().indexOf("_")));
-        hero.setWeaponInUse(super.getId().substring(0, super.getId().indexOf("_")));
-//        System.out.print("switch weapon");
+        hero.setWeaponInUse(this);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

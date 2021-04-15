@@ -523,7 +523,7 @@ public class LevelSetup {
     private void initializeItemLevelSixArrayLists() {
         levelSixItems = new ArrayList<Collectable>();
         //potions
-        //levelSixItems.add(new Potion("HandSanitizer_1", 13,2,false, 1,3));
+        levelSixItems.add(new HandSanitizer("HandSanitizer_1", 13,2,false, 1));
         levelSixItems.add(new Potion("ToiletPaper_1", 5, 14, false, 1, 2));
 
     }
@@ -539,7 +539,7 @@ public class LevelSetup {
     private void initializeItemLevelEightArrayLists() {
         levelEightItems = new ArrayList<Collectable>();
         //potions
-        levelEightItems.add(new Potion("HandSanitizer_1", 15,14,false, 1,3));
+        levelEightItems.add(new HandSanitizer("HandSanitizer_1", 15,14,false, 1));
         //weapons
         levelEightItems.add(new Weapon("FireWipeCrossBow_1", 1, 8, false));
     }

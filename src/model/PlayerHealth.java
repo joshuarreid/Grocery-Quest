@@ -18,6 +18,7 @@ public class PlayerHealth {
     private int healthLevel;
     private int healthHitChange;
     private final double barWidth;
+    private boolean overTen = false; // set to true only when N95 is used. Once at 10, set back to false
     private static final ImageView[] HEALTHBARS = {
         new ImageView(new Image("file:resources/pngs/HealthBar0.png")),
         new ImageView(new Image("file:resources/pngs/HealthBar1.png")),
@@ -57,6 +58,10 @@ public class PlayerHealth {
         } else {
             this.healthLevel -= change;
         }
+
+        if(this.overTen && this.healthLevel <= 10) {
+            this.overTen = false;
+        }
         return barSettings(updateCurrentHealthBar());
     }
 
@@ -84,6 +89,7 @@ public class PlayerHealth {
      */
     public ImageView addHealthProtection(int amount) {
         this.healthLevel += amount;
+        this.overTen = true;
         return barSettings(updateCurrentHealthBar());
     }
 

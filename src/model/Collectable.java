@@ -25,12 +25,11 @@ public abstract class Collectable {
     private Node selectedImg;
 
     protected static final Font DOGICA_FONT = Font.loadFont(
-            "file:resources/dogica/TTF/dogicapixel.ttf", 15);
+            "file:resources/dogica/TTF/dogicapixelbold.ttf", 15);
     public Collectable(String id, int row, int col, boolean collected, int quantity) {
         this.id = id;
         this.row = row;
         this.col = col;
-        this.quantity = quantity;
         this.collected = collected;
         this.imageView = new ImageView(new Image("file:resources/pngs/"
                 + id.substring(0, id.indexOf("_")) + ".png"));
@@ -38,6 +37,7 @@ public abstract class Collectable {
         this.imageView.setFitHeight(30);
         this.imageView.setId(id);
         this.selected = false;
+        setQuantity(quantity);
     }
 
     /**
@@ -96,16 +96,16 @@ public abstract class Collectable {
             moreThanOne = new StackPane(this.imageView, quantityLabel);
             if(this.selected){
                 ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
-                selectedSquare.setFitWidth(30);
-                selectedSquare.setFitHeight(30);
+                selectedSquare.setFitWidth(46);
+                selectedSquare.setFitHeight(46);
 
                 selectedImg = new StackPane(selectedSquare, this.imageView, quantityLabel);
             }
         } else {
             if(this.selected){
                 ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
-                selectedSquare.setFitWidth(30);
-                selectedSquare.setFitHeight(30);
+                selectedSquare.setFitWidth(46);
+                selectedSquare.setFitHeight(46);
 
                 selectedImg = new StackPane(selectedSquare, this.imageView);
             }
@@ -121,8 +121,8 @@ public abstract class Collectable {
          this.selected = !this.selected;
          if(this.selected) {
              ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
-             selectedSquare.setFitWidth(30);
-             selectedSquare.setFitHeight(30);
+             selectedSquare.setFitWidth(46);
+             selectedSquare.setFitHeight(46);
              if(quantity > 1) {
                  this.selectedImg = new StackPane(selectedSquare, this.moreThanOne);
              } else {

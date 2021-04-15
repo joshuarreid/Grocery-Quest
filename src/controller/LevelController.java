@@ -10,6 +10,8 @@ import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
 
+import java.util.Random;
+
 /**
  * The LevelController Class
  * 
@@ -32,6 +34,7 @@ public class LevelController {
     private static LevelScreen currentLevelScreen;
     private AnimationTimer timer;
     private int currentSelectedItem;
+    private ItemRandomizer itemRandomizer;
 
     /**
      * Level Controller constructor
@@ -52,6 +55,7 @@ public class LevelController {
         this.currentDeterminant = 1;
         this.levelSetup = new LevelSetup(width, height, hero);
         this.currentSelectedItem = 0;
+        this.itemRandomizer = new ItemRandomizer();
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -357,6 +361,8 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             int deltaY = 0;
             int deltaX = 0;
+            boolean[] randomItemChance = {false,false,true,true,true};
+            int prob = (int) Math.round(Math.random() * (randomItemChance.length - 1));
             switch (event.getCode()) {
             case SPACE: //Go to next or previous level or pick up item
                 if (board.onExit(hero) != null
@@ -435,14 +441,20 @@ public class LevelController {
                         //If found
                         if (monsterId.equals(monster.getId())) {
                             //Deal damage to monster
-                            monster.getMonsterHealth().removeHealth(1);
+                            monster.getMonsterHealth().removeHealth(hero.getWeapon().getDamage());
                             //If monster has no health
                             if (monster.getMonsterHealth().getHealthLevel() == 0) {
                                 //Remove it from game
                                 currentLevelScreen.getMonstersList().remove(i);
+                                if(randomItemChance[prob]) {
+                                    currentLevelScreen.getItems().add(
+                                            itemRandomizer.randomItem(monster.getRow(), monster.getCol())
+                                    );
+                                    prob = (int) Math.round(Math.random() * (randomItemChance.length - 1));
+                                }
                             }
                             hero.getPlayerHealth().removeHealth(monster.getAttackDamage());
-                            System.out.println(hero.getPlayerHealth().getHealthLevel());
+//                            System.out.println(hero.getPlayerHealth().getHealthLevel());
                             updateLevelScreen(false, monster); //Update all objects visually
                             break;
                         } //if

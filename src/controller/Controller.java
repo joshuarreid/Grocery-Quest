@@ -165,7 +165,7 @@ public class Controller extends Application {
                     gameModel.setState("Configuration Screen");
                 } else {
                     Level levelOne = new Level(1, difficultyLevel);
-                    hero = new Player(100, 0, name, weaponChoice, difficultyLevel, tempList);
+                    hero = new Player(name, weaponChoice, difficultyLevel, tempList);
                     goToGameScreen();
                     System.out.println("VALID!"); //Delete after previous lines implemented
                 }
@@ -199,7 +199,7 @@ public class Controller extends Application {
                 gameModel.setState("Configuration Screen");
             } else {
                 Level levelOne = new Level(1, difficultyLevel);
-                hero = new Player(100, 0, name, weaponChoice, difficultyLevel, tempList);
+                hero = new Player(name, weaponChoice, difficultyLevel, tempList);
                 goToGameScreen();
             }
         });
