@@ -4,6 +4,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.*;
 
+import model.HandSanitizer;
 import model.Level;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
@@ -162,6 +163,33 @@ public class InventoryTest extends ApplicationTest {
         press(KeyCode.SPACE).release(KeyCode.SPACE);
         assertEquals(LevelController.getHero().getInventoryList().size(), 3);
         assertEquals(LevelController.getHero().getInventoryList().get(2).getId(), "ToiletPaper_1");
+    }
+
+    @Test
+    /**
+     *
+     * Testing that same items stack in inventory
+     *
+     */
+    public void testAddToInventory3() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing add to inventory");
+        clickOn("#thermometerSwordButton");
+        clickOn("#hardButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        HandSanitizer potion = new HandSanitizer(
+                "HandSanitizer_1",
+                0,
+                0,
+                true,
+                1
+        );
+
+        LevelController.getHero().getInventoryList().add(potion);
+        LevelController.getHero().getInventoryList().add(potion);
+        assertEquals(LevelController.getHero().getInventoryList().size(), 3);
     }
 
 
