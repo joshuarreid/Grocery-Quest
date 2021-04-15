@@ -60,38 +60,77 @@ public class Monster {
             break;
         case "Level 2":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
             this.maxDamage = 1;
             break;
         case"Level 3":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
             this.maxDamage = 1;
             break;
         case "Level 4":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
             this.maxDamage = 1;
             break;
         case "Level 5":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
+            this.attackProbabilty[5] = true;
             this.maxDamage = 1;
             break;
         case"Level 6":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
+            this.attackProbabilty[5] = true;
+            this.attackProbabilty[4] = true;
             this.maxDamage = 1;
             break;
         case "Level 7":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
+            this.attackProbabilty[5] = true;
+            this.attackProbabilty[4] = true;
+            this.attackProbabilty[3] = true;
             this.maxDamage = 1;
             break;
         case"Level 8":
             this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
+            this.attackProbabilty[5] = true;
+            this.attackProbabilty[4] = true;
+            this.attackProbabilty[3] = true;
+            this.attackProbabilty[2] = true;
             this.maxDamage = 1;
             break;
         case"Boss Screen":
             if (this.monsterType == MonsterType.COVIDBOSSLARGE) {
                 this.attackProbabilty[9] = true;
-                this.maxDamage = 1;
+                this.attackProbabilty[8] = true;
+                this.attackProbabilty[7] = true;
+                this.attackProbabilty[6] = true;
+                this.attackProbabilty[5] = true;
+                this.maxDamage = 2;
             } else {
                 this.attackProbabilty[9] = true;
+                this.attackProbabilty[8] = true;
+                this.attackProbabilty[7] = true;
+                this.attackProbabilty[6] = true;
+                this.attackProbabilty[5] = true;
+                this.attackProbabilty[4] = true;
+                this.attackProbabilty[3] = true;
+                this.attackProbabilty[2] = true;
                 this.maxDamage = 1;
             }
             break;

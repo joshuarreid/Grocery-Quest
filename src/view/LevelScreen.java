@@ -304,6 +304,10 @@ public abstract class LevelScreen {
         });
     }
 
+    public ArrayList<Collectable> getItems() {
+        return items;
+    }
+
     /**
      * Loads in all other objects
      */

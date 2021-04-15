@@ -33,16 +33,6 @@ public class GameScreen extends LevelScreen {
     @Override
     void loadObjects() {
 
-        //TODO: Need to move this not in game screen
-        String weaponString = super.hero.getWeaponInUse();
-        weaponString = weaponString + "_1";
-        Weapon mainWeapon = new Weapon(weaponString, 0, 0, true);
-        mainWeapon.changeSelected();
-        if (super.hero.getInventoryList().size() == 0) {
-            super.hero.pickUpItem(mainWeapon);
-            super.inventory.addObject(mainWeapon, mainWeapon.getRow(), mainWeapon.getCol());
-        }
-
         //Carts
         for (int i = 13; i < 16; i++) {
             for (int j = 1; j < 18; j++) {
