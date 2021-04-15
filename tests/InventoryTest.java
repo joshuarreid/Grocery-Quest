@@ -165,6 +165,46 @@ public class InventoryTest extends ApplicationTest {
     }
 
 
+    @Test
+    /**
+     *
+     * Testing that the player can consume/remove items from
+     * inventory
+     *
+     */
+    public void testRemoveFromInventory() {
+        clickOn("#startButton");
+        clickOn("#nameField").write("Testing remove from inventory");
+        clickOn("#thermometerSwordButton");
+        clickOn("#hardButton");
+        clickOn("#readyButton");
+        assertEquals("Game Screen", controller.getState());
+
+        int stepCounter = 1;
+        while (stepCounter <= 18) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        stepCounter = 1;
+        while (stepCounter <= 8) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        stepCounter = 1;
+        while (stepCounter <= 2) {
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+            stepCounter++;
+        }
+
+
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        press(KeyCode.C).release(KeyCode.C);
+        press(KeyCode.X).release(KeyCode.X);
+        assertEquals(LevelController.getHero().getInventoryList().size(), 1);
+    }
+
+
 
 
 
