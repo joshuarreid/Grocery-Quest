@@ -36,6 +36,19 @@ public class LevelController {
     private int currentSelectedItem;
     private ItemRandomizer itemRandomizer;
 
+    private boolean gameScreenInitialEntrance;
+    private boolean levelOneInitialEntrance;
+    private boolean levelTwoInitialEntrance;
+    private boolean levelThreeInitialEntrance;
+    private boolean levelFourInitialEntrance;
+    private boolean levelFiveInitialEntrance;
+    private boolean levelSixInitialEntrance;
+    private boolean levelSevenInitialEntrance;
+    private boolean levelEightInitialEntrance;
+    private boolean bossInitialEntrance;
+    private boolean vaccineInitialEntrance;
+    private boolean trainingInitialEntrance;
+    private boolean weaponsInitialEntrance;
     /**
      * Level Controller constructor
      *
@@ -56,6 +69,21 @@ public class LevelController {
         this.levelSetup = new LevelSetup(width, height, hero);
         this.currentSelectedItem = 0;
         this.itemRandomizer = new ItemRandomizer();
+
+        gameScreenInitialEntrance = true;
+        levelOneInitialEntrance = true;
+        levelTwoInitialEntrance = true;
+        levelThreeInitialEntrance = true;
+        levelFourInitialEntrance = true;
+        levelFiveInitialEntrance = true;
+        levelSixInitialEntrance = true;
+        levelSevenInitialEntrance = true;
+        levelEightInitialEntrance = true;
+        bossInitialEntrance = true;
+        vaccineInitialEntrance = true;
+        trainingInitialEntrance = true;
+        weaponsInitialEntrance = true;
+
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -71,9 +99,10 @@ public class LevelController {
     public void initialGameScreen() {
         timer.stop();
         gameModel.setState("Game Screen");
-        currentScene = levelSetup.getGameScreen().getScene();
+        currentScene = levelSetup.getGameScreen().getScene(gameScreenInitialEntrance);
         currentBoard = levelSetup.getGameScreen().getBoard();
         currentLevelScreen = levelSetup.getGameScreen();
+        gameScreenInitialEntrance = (gameScreenInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -83,9 +112,10 @@ public class LevelController {
     public void levelOneScreen() {
         timer.stop();
         gameModel.setState("Level 1");
-        currentScene = levelSetup.getLevelOne().getScene();
+        currentScene = levelSetup.getLevelOne().getScene(levelOneInitialEntrance);
         currentBoard = levelSetup.getLevelOne().getBoard();
         currentLevelScreen = levelSetup.getLevelOne();
+        levelOneInitialEntrance = (levelOneInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
 
     }
@@ -96,9 +126,10 @@ public class LevelController {
     public void levelTwoScreen() {
         timer.stop();
         gameModel.setState("Level 2");
-        currentScene = levelSetup.getLevelTwo().getScene();
+        currentScene = levelSetup.getLevelTwo().getScene(levelTwoInitialEntrance);
         currentBoard = levelSetup.getLevelTwo().getBoard();
         currentLevelScreen = levelSetup.getLevelTwo();
+        levelTwoInitialEntrance = (levelTwoInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -108,9 +139,10 @@ public class LevelController {
     public void levelThreeScreen() {
         timer.stop();
         gameModel.setState("Level 3");
-        currentScene = levelSetup.getLevelThree().getScene();
+        currentScene = levelSetup.getLevelThree().getScene(levelThreeInitialEntrance);
         currentBoard = levelSetup.getLevelThree().getBoard();
         currentLevelScreen = levelSetup.getLevelThree();
+        levelThreeInitialEntrance = (levelThreeInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -120,9 +152,10 @@ public class LevelController {
     public void levelFourScreen() {
         timer.stop();
         gameModel.setState("Level 4");
-        currentScene = levelSetup.getLevelFour().getScene();
+        currentScene = levelSetup.getLevelFour().getScene(levelFourInitialEntrance);
         currentBoard = levelSetup.getLevelFour().getBoard();
         currentLevelScreen = levelSetup.getLevelFour();
+        levelFourInitialEntrance = (levelFourInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -132,9 +165,10 @@ public class LevelController {
     public void levelFiveScreen() {
         timer.stop();
         gameModel.setState("Level 5");
-        currentScene = levelSetup.getLevelFive().getScene();
+        currentScene = levelSetup.getLevelFive().getScene(levelFiveInitialEntrance);
         currentBoard = levelSetup.getLevelFive().getBoard();
         currentLevelScreen = levelSetup.getLevelFive();
+        levelFiveInitialEntrance = (levelFiveInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -144,9 +178,10 @@ public class LevelController {
     public void levelSixScreen() {
         timer.stop();
         gameModel.setState("Level 6");
-        currentScene = levelSetup.getLevelSix().getScene();
+        currentScene = levelSetup.getLevelSix().getScene(levelSixInitialEntrance);
         currentBoard = levelSetup.getLevelSix().getBoard();
         currentLevelScreen = levelSetup.getLevelSix();
+        levelSixInitialEntrance = (levelSixInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -156,9 +191,10 @@ public class LevelController {
     public void levelSevenScreen() {
         timer.stop();
         gameModel.setState("Level 7");
-        currentScene = levelSetup.getLevelSeven().getScene();
+        currentScene = levelSetup.getLevelSeven().getScene(levelSevenInitialEntrance);
         currentBoard = levelSetup.getLevelSeven().getBoard();
         currentLevelScreen = levelSetup.getLevelSeven();
+        levelSevenInitialEntrance = (levelSevenInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -168,9 +204,10 @@ public class LevelController {
     public void levelEightScreen() {
         timer.stop();
         gameModel.setState("Level 8");
-        currentScene = levelSetup.getLevelEight().getScene();
+        currentScene = levelSetup.getLevelEight().getScene(levelEightInitialEntrance);
         currentBoard = levelSetup.getLevelEight().getBoard();
         currentLevelScreen = levelSetup.getLevelEight();
+        levelEightInitialEntrance = (levelEightInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -180,9 +217,10 @@ public class LevelController {
     public void weaponsScreen() {
         timer.stop();
         gameModel.setState("Weapons Screen");
-        currentScene = levelSetup.getWeaponsScreen().getScene();
+        currentScene = levelSetup.getWeaponsScreen().getScene(weaponsInitialEntrance);
         currentBoard = levelSetup.getWeaponsScreen().getBoard();
         currentLevelScreen = levelSetup.getWeaponsScreen();
+        weaponsInitialEntrance = (weaponsInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -192,9 +230,10 @@ public class LevelController {
     public void trainingScreen() {
         timer.stop();
         gameModel.setState("Training Screen");
-        currentScene = levelSetup.getTrainingScreen().getScene();
+        currentScene = levelSetup.getTrainingScreen().getScene(trainingInitialEntrance);
         currentBoard = levelSetup.getTrainingScreen().getBoard();
         currentLevelScreen = levelSetup.getTrainingScreen();
+        trainingInitialEntrance = (trainingInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -204,9 +243,10 @@ public class LevelController {
     public void bossScreen() {
         timer.stop();
         gameModel.setState("Boss Screen");
-        currentScene = levelSetup.getBossScreen().getScene();
+        currentScene = levelSetup.getBossScreen().getScene(bossInitialEntrance);
         currentBoard = levelSetup.getBossScreen().getBoard();
         currentLevelScreen = levelSetup.getBossScreen();
+        bossInitialEntrance = (bossInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -216,9 +256,10 @@ public class LevelController {
     public void vaccineScreen() {
         timer.stop();
         gameModel.setState("Vaccine Screen");
-        currentScene = levelSetup.getVaccineScreen().getScene();
+        currentScene = levelSetup.getVaccineScreen().getScene(vaccineInitialEntrance);
         currentBoard = levelSetup.getVaccineScreen().getBoard();
         currentLevelScreen = levelSetup.getVaccineScreen();
+        vaccineInitialEntrance = (vaccineInitialEntrance? false:false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -469,15 +510,15 @@ public class LevelController {
                     currentLevelScreen.getInventory().removeObject(hero.getInventoryList().get(currentSelectedItem));
                     hero.getInventoryList().remove(currentSelectedItem);
                     currentSelectedItem = (currentSelectedItem - 1) % hero.getInventoryList().size();
-                    hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                    hero.getInventoryList().get(currentSelectedItem).changeSelected(true);
                 }
                 switchHeroSide(hero, board);
                 updateLevelScreen(false, null);
                 break;
             case C: //next item
-                hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                hero.getInventoryList().get(currentSelectedItem).changeSelected(false);
                 currentSelectedItem = (currentSelectedItem + 1) % hero.getInventoryList().size();
-                hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                hero.getInventoryList().get(currentSelectedItem).changeSelected(true);
                 updateLevelScreen(false, null);
                 break;
             default:

@@ -93,13 +93,13 @@ public abstract class Collectable {
             Label quantityLabel = new Label("" + quantity);
             quantityLabel.setFont(DOGICA_FONT);
             quantityLabel.setAlignment(Pos.CENTER);
-            moreThanOne = new StackPane(this.imageView, quantityLabel);
+            this.moreThanOne = new StackPane(this.imageView, quantityLabel);
             if(this.selected){
                 ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
                 selectedSquare.setFitWidth(46);
                 selectedSquare.setFitHeight(46);
 
-                selectedImg = new StackPane(selectedSquare, this.imageView, quantityLabel);
+                selectedImg = new StackPane(selectedSquare, this.moreThanOne);
             }
         } else {
             if(this.selected){
@@ -117,8 +117,8 @@ public abstract class Collectable {
         this.collected = collected;
     }
 
-    public void changeSelected() {
-         this.selected = !this.selected;
+    public void changeSelected(boolean change) {
+         this.selected = change;
          if(this.selected) {
              ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
              selectedSquare.setFitWidth(46);

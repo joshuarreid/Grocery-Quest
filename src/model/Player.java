@@ -47,7 +47,7 @@ public class Player {
         this.playerMovement = new PlayerMovement(9, 17);
         this.inventoryList = inventoryList;
         this.weapon = new Weapon(this.weaponInUse + "_1", 0,0,true);
-        this.weapon.changeSelected();
+        this.weapon.changeSelected(true);
         setWeaponInUse(this.weapon);
         this.pickUpItem(this.weapon);
         playerHealth = new PlayerHealth(difficultyLevel, 150);
