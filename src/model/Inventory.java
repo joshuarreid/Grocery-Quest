@@ -19,7 +19,7 @@ public class Inventory {
     private final int maxColumn;
     private List<Collectable> hiddenInventory;
     private GridPane gridPane;
-    int currentItem; // row
+    private int currentItem; // row
 
     /**
      * Inventory Constructor
@@ -42,13 +42,13 @@ public class Inventory {
      * @param width width of screen
      */
     public void createInventory(double height, double width) {
-//        gridPane.setGridLinesVisible(true);
+        //gridPane.setGridLinesVisible(true);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
             RowConstraints rowConst = new RowConstraints(601.0 / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(50.0/ maxColumn);
+            ColumnConstraints colConst = new ColumnConstraints(50.0 / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
     }
@@ -81,7 +81,9 @@ public class Inventory {
         for (Node node : this.gridPane.getChildren()) {
             //Checks valid node on gridPane
             if (node != null && node.getId() != null && node.getId().equals(collectable.getId())) {
-                //*****TODO: Any way to make this more efficient? Getting the index of a certain object by searching by attributes in an object list
+                //*****to-do: Any way to make this more efficient?
+                // Getting the index of a certain object by
+                // searching by attributes in an object list
                 int count = 0;
                 int index = 0;
                 for (Collectable value: hiddenInventory) {
@@ -102,7 +104,7 @@ public class Inventory {
         return false;
     }
 
-// trying this out
+    // trying this out, probably deleting
     public void clearInventory() {
         for (Node node : this.gridPane.getChildren()) {
             //Checks valid node on gridPane

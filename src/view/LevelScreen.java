@@ -49,19 +49,18 @@ public abstract class LevelScreen {
     /**
      * Initial Game Screen Constructor
      *
-     * @param width width of window
-     * @param height height of window
      * @param hero player
      * @param lr level randomizer
      * @param exits exits on level
      * @param iD level name
      * @param monsters ArrayList of Monsters on the level
+     * @param items items on level
      */
-    public LevelScreen(int width, int height, Player hero,
+    public LevelScreen(Player hero,
                        LevelRandomizer lr, Exit[] exits, String iD,
                        ArrayList<Monster> monsters, ArrayList<Collectable> items) {
-        this.width = 600;
-        this.height = height;
+        this.width = 650;
+        this.height = 600;
         this.hero = hero;
         this.exits = exits;
         this.board = new Board(19, 19, this.exits, iD);
@@ -104,9 +103,6 @@ public abstract class LevelScreen {
                 new Image("file:resources/pngs/WhiteGrid.png"));
         whiteGrid.setFitWidth(width - 40);
         whiteGrid.setFitHeight(height + 10);
-        //****DON'T DELETE THIS: NEEDED IN CASE WE WANT A BACKGROUND IMAGE FOR INVENTORY*****
-        //inventoryGridPane.setStyle("-fx-background-image: url('" + "file:resources/pngs/InventoryBar-01.png" + "');"
-        //        + "-fx-background-size: 90 600;"); //width height
         inventoryGridPane.setStyle("-fx-background-color: tan");
         ImageView borderInventory = new ImageView(
                 new Image("file:resources/pngs/InventoryOutline.png"));
@@ -114,7 +110,7 @@ public abstract class LevelScreen {
         borderInventory.setFitHeight(height + 10);
 
         StackPane inventoryPane = new StackPane(inventoryGridPane, borderInventory);
-        StackPane pane = new StackPane(boardGridPane,borderExitImage); //, borderExitImage);
+        StackPane pane = new StackPane(boardGridPane, borderExitImage); //, borderExitImage);
         HBox hBox = new HBox(pane, inventoryPane);
         gameScene = new Scene(hBox, 660, 610);
     }
@@ -133,10 +129,11 @@ public abstract class LevelScreen {
 
     /**
      *
+     * @param initialEntrance is the call the first time the player is on the level screen?
      * @return the current scene
      */
-    public Scene getScene(boolean initalEntrance) {
-        if(initalEntrance) {
+    public Scene getScene(boolean initialEntrance) {
+        if (initialEntrance) {
             loadWhiteGrid();
             loadObjects();
         }
@@ -145,7 +142,6 @@ public abstract class LevelScreen {
         loadInventory(false);
         loadMonsters();
         loadItems();
-//        loadObjects();
         return gameScene;
     }
 
@@ -203,17 +199,14 @@ public abstract class LevelScreen {
             //filepath to convert it back into an imageview. This imageview is added back into
             //the inventory.
             boolean condition = false;
-//            inventory.clearInventory();
             for (Collectable collectable: hero.getInventoryList()) {
                 condition = inventory.removeObject(collectable);
                 if (update) {
                     condition = board.removeCollectable(collectable);
-//                    System.out.println("Object was removed from  board, condition: " + condition);
                 }
             }
             int i = 0;
             for (Collectable collectable: hero.getInventoryList()) {
-//                System.out.println("Added to inventory, condition: " + condition);
                 inventory.addObject(collectable, i, 0);
                 i++;
             }
@@ -302,7 +295,7 @@ public abstract class LevelScreen {
     private void loadItems() {
         items.forEach((item) -> {
             board.removeCollectable(item);
-            if(!item.isCollected()) {
+            if (!item.isCollected()) {
                 board.addCollectable(item);
             }
         });
@@ -313,12 +306,12 @@ public abstract class LevelScreen {
     }
 
     protected void loadWhiteGrid() {
-            ImageView whiteGrid = new ImageView(
-                    new Image("file:resources/pngs/WhiteGrid.png"));
-            whiteGrid.setFitWidth(610);
-            whiteGrid.setFitHeight(610);
-            whiteGrid.toBack();
-            board.addObject(whiteGrid, "grid", false, 0, 19, 0, 19);
+        ImageView whiteGrid = new ImageView(
+                new Image("file:resources/pngs/WhiteGrid.png"));
+        whiteGrid.setFitWidth(610);
+        whiteGrid.setFitHeight(610);
+        whiteGrid.toBack();
+        board.addObject(whiteGrid, "grid", false, 0, 19, 0, 19);
 
     }
 

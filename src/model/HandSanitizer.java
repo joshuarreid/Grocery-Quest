@@ -1,7 +1,7 @@
 package model;
 
-public class HandSanitizer extends Potion{
-    int weaponPowerIncrease;
+public class HandSanitizer extends Potion {
+    private int weaponPowerIncrease;
     public HandSanitizer(String id, int row, int col, boolean collected, int quantity) {
         super(id, row, col, collected, quantity, 0);
         this.weaponPowerIncrease = 1;

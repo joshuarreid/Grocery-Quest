@@ -46,7 +46,7 @@ public class Player {
         this.name = name;
         this.playerMovement = new PlayerMovement(9, 17);
         this.inventoryList = inventoryList;
-        this.weapon = new Weapon(this.weaponInUse + "_1", 0,0,true);
+        this.weapon = new Weapon(this.weaponInUse + "_1", 0, 0, true);
         this.weapon.changeSelected(true);
         setWeaponInUse(this.weapon);
         this.pickUpItem(this.weapon);
@@ -90,7 +90,7 @@ public class Player {
         return inventoryList;
     }
 
-    //TODO: Possible implementation for picking up multiple of the same item
+    //to-do: Possible implementation for picking up multiple of the same item
     /**
      * Player picks up the item and adds the item to inventory list
      *
@@ -98,24 +98,25 @@ public class Player {
      * @return true if added, false otherwise
      */
     public boolean pickUpItem(Collectable collectable) {
-        String currItem = collectable.getId().substring(0,collectable.getId().indexOf("_"));
+        String currItem = collectable.getId().substring(0, collectable.getId().indexOf("_"));
         AtomicBoolean inList = new AtomicBoolean(false);
         inventoryList.forEach((item) -> {
             String itemID = item.getId().substring(0, item.getId().indexOf("_"));
-            if(itemID.compareTo(currItem) == 0) {
+            if (itemID.compareTo(currItem) == 0) {
                 item.setQuantity(item.getQuantity() + 1);
                 inList.set(true);
             }
         });
 
-        if(!inList.get()) {
+        if (!inList.get()) {
             return inventoryList.add(collectable);
         } else {
             return inList.get();
         }
     }
 
-    //TODO: If player can pick up multiple of the same item, then need to subtract from total number
+    //to-do: If player can pick up multiple of the same item,
+    //       then need to subtract from total number
     /**
      * Player uses item, and the item is removed from the inventory
      *
@@ -217,7 +218,11 @@ public class Player {
         this.weapon = weapon;
         this.weaponInUse = weapon.getId().substring(0, weapon.getId().indexOf("_"));
         this.playerImage = new ImageView(
-                new Image("file:resources/pngs/" + this.weaponInUse + "Grandma" + this.currentSide + ".png"));
+                new Image("file:resources/pngs/"
+                        + this.weaponInUse
+                        + "Grandma"
+                        + this.currentSide
+                        + ".png"));
         playerImage.setFitWidth(35);
         playerImage.setFitHeight(35);
         playerImage.setId("player");

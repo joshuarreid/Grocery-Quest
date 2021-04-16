@@ -11,19 +11,10 @@ import java.util.ArrayList;
 
 public class GameScreen extends LevelScreen {
 
-    /**
-     * GameScreen Constructor
-     *
-     * @param width width
-     * @param height height
-     * @param hero player hero
-     * @param lr lr
-     * @param exits exits
-     * @param monsters monsters list
-     */
-    public GameScreen(int width, int height, Player hero,
-                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
-        super(width, height, hero, lr, exits, "Game Screen", monsters, items);
+    public GameScreen(Player hero,
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                      ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Game Screen", monsters, items);
     }
 
     /*

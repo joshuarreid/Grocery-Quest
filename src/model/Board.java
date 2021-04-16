@@ -5,7 +5,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
-import javafx.scene.image.ImageView;
 
 /**The Board Class
  *
@@ -283,7 +282,9 @@ public class Board {
         return gridPane;
     }
 
-    public Collectable[][] getItemBoard() { return itemBoard; }
+    public Collectable[][] getItemBoard() {
+        return itemBoard;
+    }
 
     /**
      *

@@ -7,9 +7,10 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class BossScreen extends LevelScreen {
-    public BossScreen(int width, int height, Player hero,
-                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
-        super(width, height, hero, lr, exits, "Boss Screen", monsters, items);
+    public BossScreen(Player hero,
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                      ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Boss Screen", monsters, items);
     }
 
     @Override

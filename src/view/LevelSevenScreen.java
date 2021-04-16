@@ -9,9 +9,10 @@ import javafx.scene.control.Label;
 import java.util.ArrayList;
 
 public class LevelSevenScreen extends LevelScreen {
-    public LevelSevenScreen(int width, int height, Player hero,
-                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
-        super(width, height, hero, lr, exits, "Level 7", monsters, items);
+    public LevelSevenScreen(Player hero,
+                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                            ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Level 7", monsters, items);
     }
 
     @Override

@@ -5,12 +5,8 @@ import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import model.HandSanitizer;
-import model.Level;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
-import model.PlayerMovement;
-
-
 
 public class InventoryTest extends ApplicationTest {
     private Controller controller;
@@ -36,8 +32,10 @@ public class InventoryTest extends ApplicationTest {
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        assertEquals(LevelController.getHero().getInventoryList().get(0).getId(), "ThermometerSword_1");
-        assertEquals(LevelController.getHero().getInventoryList().size(), 1);
+        assertEquals(LevelController.getHero()
+                .getInventoryList().get(0).getId(), "ThermometerSword_1");
+        assertEquals(LevelController.getHero()
+                .getInventoryList().size(), 1);
     }
 
     @Test
@@ -54,8 +52,10 @@ public class InventoryTest extends ApplicationTest {
         clickOn("#hardButton");
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
-        assertEquals(LevelController.getHero().getInventoryList().get(0).getId(), "DisinfectantSpray_1");
-        assertEquals(LevelController.getHero().getInventoryList().size(), 1);
+        assertEquals(LevelController.getHero()
+                .getInventoryList().get(0).getId(), "DisinfectantSpray_1");
+        assertEquals(LevelController.getHero()
+                .getInventoryList().size(), 1);
     }
 
     @Test

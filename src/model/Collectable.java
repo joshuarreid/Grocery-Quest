@@ -47,10 +47,9 @@ public abstract class Collectable {
     public abstract void action(Player hero);
 
     public Node getImage() {
-        if(this.selected) {
+        if (this.selected) {
             return this.selectedImg;
-        }
-        else if (this.quantity > 1) {
+        } else if (this.quantity > 1) {
             return this.moreThanOne;
         } else {
             return this.imageView;
@@ -89,21 +88,23 @@ public abstract class Collectable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
 
-        if(quantity > 1) {
+        if (quantity > 1) {
             Label quantityLabel = new Label("" + quantity);
             quantityLabel.setFont(DOGICA_FONT);
             quantityLabel.setAlignment(Pos.CENTER);
             this.moreThanOne = new StackPane(this.imageView, quantityLabel);
-            if(this.selected){
-                ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
+            if (this.selected) {
+                ImageView selectedSquare = new ImageView(
+                        new Image("file:resources/pngs/SelectedInventorySquare.png"));
                 selectedSquare.setFitWidth(46);
                 selectedSquare.setFitHeight(46);
 
                 selectedImg = new StackPane(selectedSquare, this.moreThanOne);
             }
         } else {
-            if(this.selected){
-                ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
+            if (this.selected) {
+                ImageView selectedSquare = new ImageView(
+                        new Image("file:resources/pngs/SelectedInventorySquare.png"));
                 selectedSquare.setFitWidth(46);
                 selectedSquare.setFitHeight(46);
 
@@ -118,16 +119,17 @@ public abstract class Collectable {
     }
 
     public void changeSelected(boolean change) {
-         this.selected = change;
-         if(this.selected) {
-             ImageView selectedSquare = new ImageView(new Image("file:resources/pngs/SelectedInventorySquare.png"));
-             selectedSquare.setFitWidth(46);
-             selectedSquare.setFitHeight(46);
-             if(quantity > 1) {
-                 this.selectedImg = new StackPane(selectedSquare, this.moreThanOne);
-             } else {
-                 this.selectedImg = new StackPane(selectedSquare, this.imageView);
-             }
-         }
+        this.selected = change;
+        if (this.selected) {
+            ImageView selectedSquare = new ImageView(
+                    new Image("file:resources/pngs/SelectedInventorySquare.png"));
+            selectedSquare.setFitWidth(46);
+            selectedSquare.setFitHeight(46);
+            if (quantity > 1) {
+                this.selectedImg = new StackPane(selectedSquare, this.moreThanOne);
+            } else {
+                this.selectedImg = new StackPane(selectedSquare, this.imageView);
+            }
+        }
     }
 }

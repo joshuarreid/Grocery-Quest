@@ -5,12 +5,8 @@ import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.*;
 
 import model.HandSanitizer;
-import model.Level;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.junit.jupiter.api.Test;
-import model.PlayerMovement;
-
-
 
 public class PotionTest extends ApplicationTest {
     private Controller controller;

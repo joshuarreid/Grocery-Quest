@@ -4,13 +4,12 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-//import model.*;
+
 import model.*;
 import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
 
-import java.util.Random;
 
 /**
  * The LevelController Class
@@ -102,7 +101,7 @@ public class LevelController {
         currentScene = levelSetup.getGameScreen().getScene(gameScreenInitialEntrance);
         currentBoard = levelSetup.getGameScreen().getBoard();
         currentLevelScreen = levelSetup.getGameScreen();
-        gameScreenInitialEntrance = (gameScreenInitialEntrance? false:false);
+        gameScreenInitialEntrance = (gameScreenInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -115,7 +114,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelOne().getScene(levelOneInitialEntrance);
         currentBoard = levelSetup.getLevelOne().getBoard();
         currentLevelScreen = levelSetup.getLevelOne();
-        levelOneInitialEntrance = (levelOneInitialEntrance? false:false);
+        levelOneInitialEntrance = (levelOneInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
 
     }
@@ -129,7 +128,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelTwo().getScene(levelTwoInitialEntrance);
         currentBoard = levelSetup.getLevelTwo().getBoard();
         currentLevelScreen = levelSetup.getLevelTwo();
-        levelTwoInitialEntrance = (levelTwoInitialEntrance? false:false);
+        levelTwoInitialEntrance = (levelTwoInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -142,7 +141,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelThree().getScene(levelThreeInitialEntrance);
         currentBoard = levelSetup.getLevelThree().getBoard();
         currentLevelScreen = levelSetup.getLevelThree();
-        levelThreeInitialEntrance = (levelThreeInitialEntrance? false:false);
+        levelThreeInitialEntrance = (levelThreeInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -155,7 +154,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelFour().getScene(levelFourInitialEntrance);
         currentBoard = levelSetup.getLevelFour().getBoard();
         currentLevelScreen = levelSetup.getLevelFour();
-        levelFourInitialEntrance = (levelFourInitialEntrance? false:false);
+        levelFourInitialEntrance = (levelFourInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -168,7 +167,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelFive().getScene(levelFiveInitialEntrance);
         currentBoard = levelSetup.getLevelFive().getBoard();
         currentLevelScreen = levelSetup.getLevelFive();
-        levelFiveInitialEntrance = (levelFiveInitialEntrance? false:false);
+        levelFiveInitialEntrance = (levelFiveInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -181,7 +180,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelSix().getScene(levelSixInitialEntrance);
         currentBoard = levelSetup.getLevelSix().getBoard();
         currentLevelScreen = levelSetup.getLevelSix();
-        levelSixInitialEntrance = (levelSixInitialEntrance? false:false);
+        levelSixInitialEntrance = (levelSixInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -194,7 +193,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelSeven().getScene(levelSevenInitialEntrance);
         currentBoard = levelSetup.getLevelSeven().getBoard();
         currentLevelScreen = levelSetup.getLevelSeven();
-        levelSevenInitialEntrance = (levelSevenInitialEntrance? false:false);
+        levelSevenInitialEntrance = (levelSevenInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -207,7 +206,7 @@ public class LevelController {
         currentScene = levelSetup.getLevelEight().getScene(levelEightInitialEntrance);
         currentBoard = levelSetup.getLevelEight().getBoard();
         currentLevelScreen = levelSetup.getLevelEight();
-        levelEightInitialEntrance = (levelEightInitialEntrance? false:false);
+        levelEightInitialEntrance = (levelEightInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -220,7 +219,7 @@ public class LevelController {
         currentScene = levelSetup.getWeaponsScreen().getScene(weaponsInitialEntrance);
         currentBoard = levelSetup.getWeaponsScreen().getBoard();
         currentLevelScreen = levelSetup.getWeaponsScreen();
-        weaponsInitialEntrance = (weaponsInitialEntrance? false:false);
+        weaponsInitialEntrance = (weaponsInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -233,7 +232,7 @@ public class LevelController {
         currentScene = levelSetup.getTrainingScreen().getScene(trainingInitialEntrance);
         currentBoard = levelSetup.getTrainingScreen().getBoard();
         currentLevelScreen = levelSetup.getTrainingScreen();
-        trainingInitialEntrance = (trainingInitialEntrance? false:false);
+        trainingInitialEntrance = (trainingInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -246,7 +245,7 @@ public class LevelController {
         currentScene = levelSetup.getBossScreen().getScene(bossInitialEntrance);
         currentBoard = levelSetup.getBossScreen().getBoard();
         currentLevelScreen = levelSetup.getBossScreen();
-        bossInitialEntrance = (bossInitialEntrance? false:false);
+        bossInitialEntrance = (bossInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -259,7 +258,7 @@ public class LevelController {
         currentScene = levelSetup.getVaccineScreen().getScene(vaccineInitialEntrance);
         currentBoard = levelSetup.getVaccineScreen().getBoard();
         currentLevelScreen = levelSetup.getVaccineScreen();
-        vaccineInitialEntrance = (vaccineInitialEntrance? false:false);
+        vaccineInitialEntrance = (vaccineInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -402,7 +401,7 @@ public class LevelController {
         scene.setOnKeyPressed(event -> {
             int deltaY = 0;
             int deltaX = 0;
-            boolean[] randomItemChance = {false,false,true,true,true};
+            boolean[] randomItemChance = {false, false, true, true, true};
             int prob = (int) Math.round(Math.random() * (randomItemChance.length - 1));
             switch (event.getCode()) {
             case SPACE: //Go to next or previous level or pick up item
@@ -487,15 +486,17 @@ public class LevelController {
                             if (monster.getMonsterHealth().getHealthLevel() == 0) {
                                 //Remove it from game
                                 currentLevelScreen.getMonstersList().remove(i);
-                                if(randomItemChance[prob]) {
+                                if (randomItemChance[prob]) {
                                     currentLevelScreen.getItems().add(
-                                            itemRandomizer.randomItem(monster.getRow(), monster.getCol())
+                                            itemRandomizer.randomItem(
+                                                    monster.getRow(), monster.getCol())
                                     );
-                                    prob = (int) Math.round(Math.random() * (randomItemChance.length - 1));
+                                    prob = (int) Math.round(Math.random()
+                                            * (randomItemChance.length - 1));
                                 }
                             }
                             hero.getPlayerHealth().removeHealth(monster.getAttackDamage());
-//                            System.out.println(hero.getPlayerHealth().getHealthLevel());
+                            //System.out.println(hero.getPlayerHealth().getHealthLevel());
                             updateLevelScreen(false, monster); //Update all objects visually
                             break;
                         } //if
@@ -506,10 +507,12 @@ public class LevelController {
                 break;
             case X: //Use item
                 hero.getInventoryList().get(currentSelectedItem).action(hero);
-                if(hero.getInventoryList().get(currentSelectedItem).getQuantity() == 0) {
-                    currentLevelScreen.getInventory().removeObject(hero.getInventoryList().get(currentSelectedItem));
+                if (hero.getInventoryList().get(currentSelectedItem).getQuantity() == 0) {
+                    currentLevelScreen.getInventory()
+                            .removeObject(hero.getInventoryList().get(currentSelectedItem));
                     hero.getInventoryList().remove(currentSelectedItem);
-                    currentSelectedItem = (currentSelectedItem - 1) % hero.getInventoryList().size();
+                    currentSelectedItem = (currentSelectedItem - 1)
+                            % hero.getInventoryList().size();
                     hero.getInventoryList().get(currentSelectedItem).changeSelected(true);
                 }
                 switchHeroSide(hero, board);
@@ -628,7 +631,7 @@ public class LevelController {
      * @param monster the monster the player is attacking
      */
     private void updateLevelScreen(boolean update, Monster monster) {
-        if(monster != null) {
+        if (monster != null) {
             currentLevelScreen.updateScene(update, monster);
         } else {
             currentLevelScreen.updateScene(update);

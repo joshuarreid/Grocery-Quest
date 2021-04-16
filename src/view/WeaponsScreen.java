@@ -15,9 +15,10 @@ import java.util.ArrayList;
 public class WeaponsScreen extends LevelScreen {
     private static final Font DOGICA_FONT_MY = Font.loadFont(
             "file:resources/dogica/TTF/dogicapixel.ttf", 12);
-    public WeaponsScreen(int width, int height, Player hero,
-                         LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters, ArrayList<Collectable> items) {
-        super(width, height, hero, lr, exits, "Weapons Screen", monsters, items);
+    public WeaponsScreen(Player hero,
+                         LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                         ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Weapons Screen", monsters, items);
     }
 
     @Override
@@ -33,7 +34,10 @@ public class WeaponsScreen extends LevelScreen {
         rightTextBox.setFitWidth(198);
         rightTextBox.setFitHeight(165);
 
-        Label instrLabel = new Label("pickup with SPACE \n\n change item with C \n\n use item with X");
+        Label instrLabel = new Label(
+                "pickup with SPACE "
+                + "\n\n change item with C "
+                + "\n\n use item with X");
         instrLabel.setFont(DOGICA_FONT_MY);
         instrLabel.setAlignment(Pos.CENTER);
         instrLabel.setLineSpacing(30);
