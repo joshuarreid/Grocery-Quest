@@ -167,7 +167,7 @@ public class Controller extends Application {
                     Level levelOne = new Level(1, difficultyLevel);
                     hero = new Player(name, weaponChoice, difficultyLevel, tempList);
                     goToGameScreen();
-                    System.out.println("VALID!"); //Delete after previous lines implemented
+                    //System.out.println("VALID!"); //Delete after previous lines implemented
                 }
             }
         });

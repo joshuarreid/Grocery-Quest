@@ -265,13 +265,13 @@ public class Monster {
 
     public int getAttackDamage() {
         int prob = (int) Math.round(Math.random() * (9));
-        System.out.println("index: " + prob);
+        //System.out.println("index: " + prob);
         doIAttack = attackProbabilty[prob];
         if (!doIAttack) {
             return 0;
         } else {
             int num =  (int) Math.round(Math.random() * ((maxDamage)));
-            System.out.println("not just a num: " + num);
+            //System.out.println("not just a num: " + num);
             return num;
         }
     }

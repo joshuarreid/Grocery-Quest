@@ -190,7 +190,7 @@ public abstract class LevelScreen {
      */
     private void loadInventory(boolean update) {
         if (hero.getInventoryList().size() > 0) { //If inventory is not empty
-            System.out.println("Hero's inventory size: " + hero.getInventoryList().size());
+            //System.out.println("Hero's inventory size: " + hero.getInventoryList().size());
             List<ImageView> imgViewList = new LinkedList<>(); //Used to store imageViews of items
 
             //Used to update the visual inventory if an object is used. First, it's removed from the

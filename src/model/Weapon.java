@@ -19,7 +19,7 @@ public class Weapon extends Collectable {
      */
     @Override
     public void action(Player hero) {
-        System.out.println(super.getId().substring(0, super.getId().indexOf("_")));
+        //System.out.println(super.getId().substring(0, super.getId().indexOf("_")));
         hero.setWeaponInUse(this);
     }
 

@@ -479,7 +479,7 @@ public class LevelSetup {
 
     private void initializeWeaponsArrayLists() {
         weaponsItems = new ArrayList<Collectable>();
-        System.out.println(hero.getWeaponInUse());
+        //System.out.println(hero.getWeaponInUse());
         switch (hero.getWeaponInUse()) {
         case "DisinfectantSpray":
             weaponsItems.add(new Weapon("WipeCrossbow_1", 6, 11, false));
