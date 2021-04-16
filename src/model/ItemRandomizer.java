@@ -15,7 +15,7 @@ public class ItemRandomizer {
             "CannedSoup", "CannedSoup",
             "CannedSoup", "ToiletPaper",
             "ToiletPaper", "ToiletPaper",
-            "N95Mask", "HandSanitizer"};
+            "N95Mask", "HandSanitizer", "FireThermometerSword"};
         startingNumber = 6;
     }
 
@@ -29,6 +29,8 @@ public class ItemRandomizer {
             item = new HandSanitizer(itemSelected + "_" + startingNumber, row, col, false, 1);
         } else if (itemSelected.compareTo("ToiletPaper") == 0) {
             item = new Potion(itemSelected + "_" + startingNumber, row, col, false, 1, 2);
+        } else if (itemSelected.compareTo("FireThermometerSword") == 0) {
+            item = new Weapon(itemSelected + "_" + startingNumber, row, col, false);
         } else {
             item = new Potion(itemSelected + "_" + startingNumber, row, col, false, 1, 1);
         }
