@@ -145,6 +145,7 @@ public abstract class LevelScreen {
         loadInventory(false);
         loadMonsters();
         loadItems();
+//        loadObjects();
         return gameScene;
     }
 

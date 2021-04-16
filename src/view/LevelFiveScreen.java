@@ -41,7 +41,7 @@ public class LevelFiveScreen extends LevelScreen {
         ImageView aisle3 = new ImageView(new Image("file:resources/pngs/Aisle3.png"));
         aisle3.setFitWidth(90);
         aisle3.setFitHeight(30);
-        super.board.addObject(aisle3, "Aisle3", true, 9, 1, 12, 3);
+        super.board.addObject(aisle3, "Aisle3", true, 9, 1, 13, 3);
 
         ImageView aisle31 = new ImageView(new Image("file:resources/pngs/Aisle3.png"));
         aisle31.setFitWidth(90);

@@ -57,7 +57,7 @@ public class LevelTwoScreen extends LevelScreen {
         ImageView aisle4 = new ImageView(new Image("file:resources/pngs/Aisle4.png"));
         aisle4.setFitWidth(30);
         aisle4.setFitHeight(120);
-        super.board.addObject(aisle4, "Aisle4", true, 7, 4, 5, 1);
+        super.board.addObject(aisle4, "Aisle4", true, 7, 4, 2, 1);
 
         ImageView aisle41 = new ImageView(new Image("file:resources/pngs/Aisle4.png"));
         aisle41.setFitWidth(30);

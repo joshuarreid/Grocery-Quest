@@ -510,15 +510,15 @@ public class LevelController {
                     currentLevelScreen.getInventory().removeObject(hero.getInventoryList().get(currentSelectedItem));
                     hero.getInventoryList().remove(currentSelectedItem);
                     currentSelectedItem = (currentSelectedItem - 1) % hero.getInventoryList().size();
-                    hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                    hero.getInventoryList().get(currentSelectedItem).changeSelected(true);
                 }
                 switchHeroSide(hero, board);
                 updateLevelScreen(false, null);
                 break;
             case C: //next item
-                hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                hero.getInventoryList().get(currentSelectedItem).changeSelected(false);
                 currentSelectedItem = (currentSelectedItem + 1) % hero.getInventoryList().size();
-                hero.getInventoryList().get(currentSelectedItem).changeSelected();
+                hero.getInventoryList().get(currentSelectedItem).changeSelected(true);
                 updateLevelScreen(false, null);
                 break;
             default:
