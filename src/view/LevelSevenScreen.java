@@ -2,19 +2,17 @@ package view;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.Exit;
-import model.LevelRandomizer;
-import model.Monster;
-import model.Player;
+import model.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 public class LevelSevenScreen extends LevelScreen {
-    public LevelSevenScreen(int width, int height, Player hero,
-                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
-        super(width, height, hero, lr, exits, "Level 7", monsters);
+    public LevelSevenScreen(Player hero,
+                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                            ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Level 7", monsters, items);
     }
 
     @Override
@@ -70,7 +68,7 @@ public class LevelSevenScreen extends LevelScreen {
         ImageView aisle41 = new ImageView(new Image("file:resources/pngs/Aisle4.png"));
         aisle41.setFitWidth(30);
         aisle41.setFitHeight(120);
-        super.board.addObject(aisle41, "Aisle4.1", true, 2, 4, 8, 1);
+        super.board.addObject(aisle41, "Aisle4.1", true, 3, 4, 8, 1);
 
         //AISLE5
         ImageView aisle5 = new ImageView(new Image("file:resources/pngs/Aisle5.png"));

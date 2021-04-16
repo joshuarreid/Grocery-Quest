@@ -3,6 +3,9 @@ package model;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**The Player Class
  *
  * The Player class is responsible for creating a Player object
@@ -14,37 +17,39 @@ import javafx.scene.image.ImageView;
  * WeaponInUse - the chosen weapon for the player
  */
 public class Player {
-    private int health;
-    private int money;
-    private ImageView healthBar;   // current player health bar
-    private ImageView moneyBar;    // current player money bar
     private final String name;     // name cannot be changed later
-    private String weaponInUse;    // weapon info as a string for now
     private ImageView playerImage; // current player imageview
     private String currentSide;    // side player is facing
     private PlayerMovement playerMovement;
     private PlayerMoney playerMoney;
     private PlayerHealth playerHealth;
+    private Weapon weapon;
+    private String weaponInUse;    // weapon info as a string for now
+    /*
+    inventory needs to be stored in player since player an object that's passed through each level
+    and therefore does not need for inventory to be created again and again in each level.
+     */
+    private List<Collectable> inventoryList;
 
     /**
      * The Player Constructor
      *
-     * @param health the amount of health the player has
-     * @param money the amount of currency the player has
      * @param name The chosen name for the player
      * @param weaponInUse the chosen weapon for the player
      * @param difficultyLevel the chosen difficulty for the player
+     * @param inventoryList Player's item inventory
      */
-    public Player(int health, int money, String name,
-                  String weaponInUse, int difficultyLevel) {
+    public Player(String name,
+                  String weaponInUse, int difficultyLevel, List<Collectable> inventoryList) {
         this.weaponInUse = weaponInUse;
         this.currentSide = "right";
-        this.health = health;
-        this.money = money;
         this.name = name;
         this.playerMovement = new PlayerMovement(9, 17);
-        setWeaponInUse(weaponInUse, currentSide);
-
+        this.inventoryList = inventoryList;
+        this.weapon = new Weapon(this.weaponInUse + "_1", 0, 0, true);
+        this.weapon.changeSelected(true);
+        setWeaponInUse(this.weapon);
+        this.pickUpItem(this.weapon);
         playerHealth = new PlayerHealth(difficultyLevel, 150);
         playerMoney = new PlayerMoney(difficultyLevel, 150);
     }
@@ -75,6 +80,51 @@ public class Player {
                 playerMovement.getYPosition()
         };
         return coordinates;
+    }
+
+    /**
+     *
+     * @return the player's inventory list
+     */
+    public List<Collectable> getInventoryList() {
+        return inventoryList;
+    }
+
+    //to-do: Possible implementation for picking up multiple of the same item
+    /**
+     * Player picks up the item and adds the item to inventory list
+     *
+     * @param collectable the id of the item to pick up
+     * @return true if added, false otherwise
+     */
+    public boolean pickUpItem(Collectable collectable) {
+        String currItem = collectable.getId().substring(0, collectable.getId().indexOf("_"));
+        AtomicBoolean inList = new AtomicBoolean(false);
+        inventoryList.forEach((item) -> {
+            String itemID = item.getId().substring(0, item.getId().indexOf("_"));
+            if (itemID.compareTo(currItem) == 0) {
+                item.setQuantity(item.getQuantity() + 1);
+                inList.set(true);
+            }
+        });
+
+        if (!inList.get()) {
+            return inventoryList.add(collectable);
+        } else {
+            return inList.get();
+        }
+    }
+
+    //to-do: If player can pick up multiple of the same item,
+    //       then need to subtract from total number
+    /**
+     * Player uses item, and the item is removed from the inventory
+     *
+     * @param collectable the id of the item to use
+     * @return true if removed, false otherwise
+     */
+    public boolean useItem(Collectable collectable) {
+        return inventoryList.remove(collectable);
     }
 
     /**
@@ -157,17 +207,22 @@ public class Player {
      */
     public void setCurrentSide(String currentSide) {
         this.currentSide = currentSide;
-        setWeaponInUse(weaponInUse, currentSide);
+        setWeaponInUse(weapon);
     }
 
     /**
      *
-     * @param weaponInUse weapon the player must use
-     * @param side direction the player should face
+     * @param weapon weapon the player must use
      */
-    public void setWeaponInUse(String weaponInUse, String side) {
+    public void setWeaponInUse(Weapon weapon) {
+        this.weapon = weapon;
+        this.weaponInUse = weapon.getId().substring(0, weapon.getId().indexOf("_"));
         this.playerImage = new ImageView(
-                new Image("file:resources/pngs/" + weaponInUse + "Grandma" + side + ".png"));
+                new Image("file:resources/pngs/"
+                        + this.weaponInUse
+                        + "Grandma"
+                        + this.currentSide
+                        + ".png"));
         playerImage.setFitWidth(35);
         playerImage.setFitHeight(35);
         playerImage.setId("player");
@@ -186,5 +241,9 @@ public class Player {
             }
         }
         return true;
+    }
+
+    public Weapon getWeapon() {
+        return this.weapon;
     }
 }

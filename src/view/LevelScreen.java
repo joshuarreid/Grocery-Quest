@@ -1,13 +1,25 @@
 package view;
 
-import model.*;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import model.Board;
+import model.Collectable;
+import model.Exit;
+import model.ExitType;
+import model.Inventory;
+import model.LevelRandomizer;
+import model.Monster;
+import model.MonsterType;
+import model.Player;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The LevelScreen Class
@@ -16,17 +28,19 @@ import java.util.ArrayList;
  * all objects on the Level Screen.
  */
 public abstract class LevelScreen {
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
     private ImageView coinBar;
     private ImageView healthBar;
-    private Player hero;
+    protected Player hero;
     protected Board board;
     private String background;
     private Exit[] exits;
     private String iD;
     private Scene gameScene;
     private ArrayList<Monster> monsters;
+    private ArrayList<Collectable> items;
+    protected Inventory inventory;
 
 
     protected static final Font DOGICA_FONT = Font.loadFont(
@@ -35,27 +49,34 @@ public abstract class LevelScreen {
     /**
      * Initial Game Screen Constructor
      *
-     * @param width width of window
-     * @param height height of window
      * @param hero player
      * @param lr level randomizer
      * @param exits exits on level
      * @param iD level name
      * @param monsters ArrayList of Monsters on the level
+     * @param items items on level
      */
-    public LevelScreen(int width, int height, Player hero,
-                       LevelRandomizer lr, Exit[] exits, String iD, ArrayList<Monster> monsters) {
-        this.width = width;
-        this.height = height;
+    public LevelScreen(Player hero,
+                       LevelRandomizer lr, Exit[] exits, String iD,
+                       ArrayList<Monster> monsters, ArrayList<Collectable> items) {
+        this.width = 650;
+        this.height = 600;
         this.hero = hero;
         this.exits = exits;
         this.board = new Board(19, 19, this.exits, iD);
         this.background = lr.getLayout();
         this.iD = iD;
         this.monsters = monsters;
+        this.items = items;
+
+        //Set up inventory
+        inventory = new Inventory(12, 1);
+        inventory.createInventory(height, 50);
+        GridPane inventoryGridPane = inventory.getGridPane();
+
         board.createBoard(this.height, this.width);
         //Set up gridPane
-        GridPane gridPane = board.getGridPane();
+        GridPane boardGridPane = board.getGridPane();
         ImageView borderExitImage = new ImageView(
                 new Image("file:resources/pngs/FrameAll.png"));
         switch (exits.length) {
@@ -75,12 +96,23 @@ public abstract class LevelScreen {
         default:
         }
 
-        borderExitImage.setFitWidth(width + 4);
-        borderExitImage.setFitHeight(height + 4);
-        gridPane.setStyle("-fx-background-color: " + background);
+        borderExitImage.setFitWidth(width - 40);
+        borderExitImage.setFitHeight(height + 10);
+        boardGridPane.setStyle("-fx-background-color: " + background);
+        ImageView whiteGrid = new ImageView(
+                new Image("file:resources/pngs/WhiteGrid.png"));
+        whiteGrid.setFitWidth(width - 40);
+        whiteGrid.setFitHeight(height + 10);
+        inventoryGridPane.setStyle("-fx-background-color: tan");
+        ImageView borderInventory = new ImageView(
+                new Image("file:resources/pngs/InventoryOutline.png"));
+        borderInventory.setFitWidth(50);
+        borderInventory.setFitHeight(height + 10);
 
-        StackPane pane = new StackPane(gridPane, borderExitImage);
-        gameScene = new Scene(pane, width, height);
+        StackPane inventoryPane = new StackPane(inventoryGridPane, borderInventory);
+        StackPane pane = new StackPane(boardGridPane, borderExitImage); //, borderExitImage);
+        HBox hBox = new HBox(pane, inventoryPane);
+        gameScene = new Scene(hBox, 660, 610);
     }
 
     /**
@@ -91,15 +123,25 @@ public abstract class LevelScreen {
         return this.board;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     /**
      *
+     * @param initialEntrance is the call the first time the player is on the level screen?
      * @return the current scene
      */
-    public Scene getScene() {
+    public Scene getScene(boolean initialEntrance) {
+        if (initialEntrance) {
+            loadWhiteGrid();
+            loadObjects();
+        }
         loadCoinHealthBar();
         loadMainCharacter();
+        loadInventory(false);
         loadMonsters();
-        loadObjects();
+        loadItems();
         return gameScene;
     }
 
@@ -112,24 +154,73 @@ public abstract class LevelScreen {
     }
 
     /**
-     * Updates the scene
+     * Updates the scene. Has boolean parameters to avoid loading stuff
+     * that doesn't need to be loaded again.
      *
+     * @param update if inventory needs to be updated
      * @param monster the monster the player is attacking
      * @return the updated scene
      */
-    public Scene updateScene(Monster monster) {
+    public Scene updateScene(boolean update, Monster monster) {
         loadCoinHealthBar();
+        loadInventory(update);
         updateMonster(monster);
+        loadItems();
         return gameScene;
     }
 
     /**
+     * Updates the scene. Has boolean parameters to avoid loading stuff
+     * that doesn't need to be loaded again.
+     *
+     * @param update if inventory needs to be updated
+     * @return the updated scene
+     */
+    public Scene updateScene(boolean update) {
+        loadCoinHealthBar();
+        loadInventory(update);
+        loadItems();
+        return gameScene;
+    }
+
+    /**
+     * Loads the inventory
+     *
+     * @param update if inventory needs to be updated
+     */
+    private void loadInventory(boolean update) {
+        if (hero.getInventoryList().size() > 0) { //If inventory is not empty
+            //System.out.println("Hero's inventory size: " + hero.getInventoryList().size());
+            List<ImageView> imgViewList = new LinkedList<>(); //Used to store imageViews of items
+
+            //Used to update the visual inventory if an object is used. First, it's removed from the
+            //inventory. A string is returned in order to obtain the imageview to add it back into
+            //the inventory. The item is then removed from the board. The string is combined with a
+            //filepath to convert it back into an imageview. This imageview is added back into
+            //the inventory.
+            boolean condition = false;
+            for (Collectable collectable: hero.getInventoryList()) {
+                condition = inventory.removeObject(collectable);
+                if (update) {
+                    condition = board.removeCollectable(collectable);
+                }
+            }
+            int i = 0;
+            for (Collectable collectable: hero.getInventoryList()) {
+                inventory.addObject(collectable, i, 0);
+                i++;
+            }
+        }
+    }
+
+    /**
      * loads hero's health and money bar
+     *
      */
     private void loadCoinHealthBar() {
         healthBar = hero.getHealthBar();
         coinBar = hero.getMoneyBar();
-        board.removeObject("health", 1, 1,  1, 1);
+        board.removeObject("health", 1, 1, 1, 1);
         board.removeObject("money", 1, 1, 0, 1);
         board.addObject(healthBar, "health", false, 0, 1, 1, 5);
         board.addObject(coinBar, "money", false, 1, 1, 1, 5);
@@ -175,25 +266,53 @@ public abstract class LevelScreen {
      * @param monster the monster the player is attacking
      */
     private void updateMonster(Monster monster) {
-        if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) { //If regular enemy
-            board.removeObject(monster.getId(), monster.getRow(), 1, monster.getCol(), 1);
-            //If health > 0, add updated imageview
-            if (monster.getMonsterHealth().getHealthLevel() > 0) {
-                board.addObject(monster.getMonsterAndHealth(),
-                        monster.getId(), true,
-                        monster.getRow(), 1,
-                        monster.getCol(), 1);
-            }
-        } else { //If boss
-            board.removeObject(monster.getId(), monster.getRow(), 3, monster.getCol(), 5);
-            //If health > 0, add updated imageview
-            if (monster.getMonsterHealth().getHealthLevel() > 0) {
-                board.addObject(monster.getMonsterAndHealth(),
-                        monster.getId(), true,
-                        monster.getRow(), 3,
-                        monster.getCol(), 5);
+        if (monster != null) {
+            if (monster.getMonsterType() != MonsterType.COVIDBOSSLARGE) { //If regular enemy
+                board.removeObject(monster.getId(), monster.getRow(), 1, monster.getCol(), 1);
+                //If health > 0, add updated imageview
+                if (monster.getMonsterHealth().getHealthLevel() > 0) {
+                    board.addObject(monster.getMonsterAndHealth(),
+                            monster.getId(), true,
+                            monster.getRow(), 1,
+                            monster.getCol(), 1);
+                }
+            } else { //If boss
+                board.removeObject(monster.getId(), monster.getRow(), 3, monster.getCol(), 5);
+                //If health > 0, add updated imageview
+                if (monster.getMonsterHealth().getHealthLevel() > 0) {
+                    board.addObject(monster.getMonsterAndHealth(),
+                            monster.getId(), true,
+                            monster.getRow(), 3,
+                            monster.getCol(), 5);
+                }
             }
         }
+    }
+
+    /**
+     * Load items
+     */
+    private void loadItems() {
+        items.forEach((item) -> {
+            board.removeCollectable(item);
+            if (!item.isCollected()) {
+                board.addCollectable(item);
+            }
+        });
+    }
+
+    public ArrayList<Collectable> getItems() {
+        return items;
+    }
+
+    protected void loadWhiteGrid() {
+        ImageView whiteGrid = new ImageView(
+                new Image("file:resources/pngs/WhiteGrid.png"));
+        whiteGrid.setFitWidth(610);
+        whiteGrid.setFitHeight(610);
+        whiteGrid.toBack();
+        board.addObject(whiteGrid, "grid", false, 0, 19, 0, 19);
+
     }
 
     /**

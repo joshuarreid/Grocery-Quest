@@ -5,6 +5,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+
 /**The Board Class
  *
  * Represents the coordinate system - GridPane that the user
@@ -14,6 +15,7 @@ public class Board {
     private final int maxRow;
     private final int maxColumn;
     private String[][] hiddenBoard;
+    private Collectable[][] itemBoard;
     private GridPane gridPane;
     private Exit[] exits;
     private Exit[][] exitBoard;
@@ -33,6 +35,7 @@ public class Board {
         this.maxColumn = column;
         this.gridPane = new GridPane();
         this.hiddenBoard = new String[maxRow][maxColumn];
+        this.itemBoard = new Collectable[maxRow][maxColumn];
         this.exitBoard = new Exit[maxRow][maxColumn];
         this.exits = exits;
         this.iD = iD;
@@ -45,14 +48,14 @@ public class Board {
      * @param width width of screen
      */
     public void createBoard(double height, double width) {
-        gridPane.setGridLinesVisible(true);
+        gridPane.setGridLinesVisible(false);
         for (int i = 0; i < maxRow; i++) { //Makes 18 rows = Fixed number of rows
 
-            RowConstraints rowConst = new RowConstraints(height / maxRow);
+            RowConstraints rowConst = new RowConstraints(600.0 / maxRow);
             gridPane.getRowConstraints().add(rowConst);
         }
         for (int i = 0; i < maxColumn; i++) { //Makes 18 columns = Fixed number of columns
-            ColumnConstraints colConst = new ColumnConstraints(width / maxColumn);
+            ColumnConstraints colConst = new ColumnConstraints(600.0 / maxColumn);
             gridPane.getColumnConstraints().add(colConst);
         }
         setUpExitBoard();
@@ -97,7 +100,7 @@ public class Board {
      *
      * @param row The vertical location of the spot ahead.
      * @param column The horizontal location of the spot ahead.
-     * @return true if spot ahead is blocked
+     * @return true if spot ahead is blocked, false otherwise
      */
     public boolean isBlocked(int row, int column) {
         if (row < 0
@@ -108,6 +111,17 @@ public class Board {
         }
         //If blocked by node except door
         return hiddenBoard[row][column] != null;
+    }
+
+    /**
+     * Determines whether an item exists on the specified spot
+     *
+     * @param row row
+     * @param col column
+     * @return true if an item exists, false otherwise
+     */
+    public boolean hasItem(int row, int col) {
+        return itemBoard[row][col] != null;
     }
 
     /**
@@ -139,6 +153,7 @@ public class Board {
                 hiddenBoard[firstRow][firstCol] = id;
             }
         } else { //If thing occupies more than one spot
+            thing.setId(id);
             gridPane.add(thing, firstCol, firstRow, colSpan, rowSpan);
             if (blockPlayer) { //If object should block player
                 for (int i = firstRow; i < (firstRow + rowSpan); i++) {
@@ -148,6 +163,23 @@ public class Board {
                 }
             }
         }
+        return true;
+    }
+
+    /**
+     * Adds only collectables to the gridpane
+     *
+     * @param collectable collectable to be added
+     * @return true when added
+     */
+    public boolean addCollectable(Collectable collectable) {
+        int row = collectable.getRow();
+        int col = collectable.getCol();
+        String collectableId = collectable.getId();
+        Node imgView = collectable.getImage();
+        imgView.setId(collectableId);
+        itemBoard[row][col] = collectable;
+        gridPane.add(imgView, col, row);
         return true;
     }
 
@@ -166,7 +198,11 @@ public class Board {
             //Checks valid node on gridPane
             if (node != null && node.getId() != null && node.getId().equals(id)) {
                 if (rowSpan == 1 && colSpan == 1) {
-                    this.hiddenBoard[row][col] = null;
+                    if (id.substring(0, 4).equals("item")) {
+                        itemBoard[row][col] = null;
+                    } else {
+                        this.hiddenBoard[row][col] = null;
+                    }
                 } else {
                     for (int i = row; i < (row + rowSpan); i++) {
                         for (int j = col; j < (col + colSpan); j++) {
@@ -174,6 +210,23 @@ public class Board {
                         }
                     }
                 }
+                return this.gridPane.getChildren().remove(node);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Only removes collectables from the gridpane
+     *
+     * @param collectable collectable to be removed
+     * @return true if removed, false otherwise
+     */
+    public boolean removeCollectable(Collectable collectable) {
+        for (Node node : this.gridPane.getChildren()) {
+            //Checks valid node on gridPane
+            if (node != null && node.getId() != null && node.getId().equals(collectable.getId())) {
+                itemBoard[collectable.getRow()][collectable.getCol()] = null;
                 return this.gridPane.getChildren().remove(node);
             }
         }
@@ -227,6 +280,22 @@ public class Board {
      */
     public GridPane getGridPane() {
         return gridPane;
+    }
+
+    public Collectable[][] getItemBoard() {
+        return itemBoard;
+    }
+
+    /**
+     *
+     * @param row row
+     * @param col column
+     * @return the item at the postion
+     */
+    public Collectable getItem(int row, int col) {
+        Collectable item = itemBoard[row][col];
+        itemBoard[row][col] = null;
+        return item;
     }
 
     /**

@@ -2,19 +2,17 @@ package view;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.Exit;
-import model.LevelRandomizer;
-import model.Monster;
-import model.Player;
+import model.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 public class LevelThreeScreen extends LevelScreen {
-    public LevelThreeScreen(int width, int height, Player hero,
-                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
-        super(width, height, hero, lr, exits, "Level 3", monsters);
+    public LevelThreeScreen(Player hero,
+                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                            ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Level 3", monsters, items);
     }
 
     @Override

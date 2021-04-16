@@ -69,8 +69,8 @@ public class LoseScreen {
         exitButton.setStyle("-fx-background-color: #C54741; -fx-background-radius: 30px");
         exitButton.setMinSize(190, 148);
         exitButton.setMaxSize(190, 148);
-        exitButton.setOnMouseEntered(e -> replayButton.setStyle(HOVERED_BUTTON_STYLE));
-        exitButton.setOnMouseExited(e -> replayButton.setStyle(IDLE_BUTTON_STYLE));
+        exitButton.setOnMouseEntered(e -> exitButton.setStyle(HOVERED_BUTTON_STYLE));
+        exitButton.setOnMouseExited(e -> exitButton.setStyle(IDLE_BUTTON_STYLE));
         exitButton.setId("exitButton");
 
         Label replayText = new Label("play again");

@@ -1,21 +1,20 @@
 package view;
 
-import model.LevelRandomizer;
-import model.Monster;
-import model.Player;
-import model.Exit;
+import javafx.scene.layout.StackPane;
+import model.*;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 
 public class GameScreen extends LevelScreen {
-    public GameScreen(int width, int height, Player hero,
-                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters) {
-        super(width, height, hero, lr, exits, "Game Screen", monsters);
+
+    public GameScreen(Player hero,
+                      LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                      ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Game Screen", monsters, items);
     }
 
     /*
@@ -48,6 +47,7 @@ public class GameScreen extends LevelScreen {
             ImageView flower = new ImageView(new Image("file:resources/pngs/Flower.png"));
             flower.setFitWidth(30);
             flower.setFitHeight(45);
+            flower.toFront();
             super.board.addObject(flower, "flower", true, i, 2, j, 1);
         }
 
@@ -62,6 +62,7 @@ public class GameScreen extends LevelScreen {
         leftLabel.setPrefHeight(160);
         StackPane leftStackPane = new StackPane();
         leftStackPane.getChildren().addAll(leftTextBox, leftLabel);
+        leftStackPane.toFront();
 
         ImageView rightTextBox = new ImageView(new Image("file:resources/pngs/EmptyTextBox.png"));
         rightTextBox.setFitWidth(198);
@@ -73,23 +74,26 @@ public class GameScreen extends LevelScreen {
         rightLabel.setPrefHeight(160);
         StackPane rightStackPane = new StackPane();
         rightStackPane.getChildren().addAll(rightTextBox, rightLabel);
-
+        rightStackPane.toFront();
         super.board.addObject(leftStackPane, "text box", true, 3, 5, 1, 6);
         super.board.addObject(rightStackPane, "text box", true, 3, 5, 12, 6);
 
         Label startLabel = new Label("  start");
         startLabel.setFont(DOGICA_FONT);
         startLabel.setAlignment(Pos.CENTER);
+        startLabel.toFront();
         super.board.addObject(startLabel, "start", false, 0, 1, 8, 3);
 
         Label exitLabel = new Label("   exit");
         exitLabel.setFont(DOGICA_FONT);
         exitLabel.setAlignment(Pos.CENTER);
+        exitLabel.toFront();
         super.board.addObject(exitLabel, "exit", false, 18, 1, 8, 3);
 
         Label spaceBarInstr = new Label("press space to move between rooms");
         spaceBarInstr.setFont(DOGICA_FONT);
         spaceBarInstr.setAlignment(Pos.CENTER);
+        spaceBarInstr.toFront();
         super.board.addObject(spaceBarInstr, "spaceBarInstr", false, 9, 1, 3, 16);
     }
 }
