@@ -12,6 +12,7 @@ import model.Collectable;
 import model.GameModel;
 import model.Level;
 import model.Player;
+import view.ChallengeScreen;
 import view.ConfigurationScreen;
 import view.StartScreen;
 
