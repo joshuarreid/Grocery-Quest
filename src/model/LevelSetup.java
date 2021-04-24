@@ -21,6 +21,7 @@ public class LevelSetup {
 
     private Exit level1Level2;
     private Exit level2Level3;
+    private Exit level2FirstChallenge; //*****************************************************************************
     private Exit level3Level4;
 
     private Exit level4Level5;
@@ -35,6 +36,7 @@ public class LevelSetup {
     private Exit[] initialGameScreenExits;
     private Exit[] levelOneScreenExits;
     private Exit[] levelTwoScreenExits;
+    private Exit[] firstChallengeScreenExits; //************************************************************************
     private Exit[] levelThreeScreenExits;
     private Exit[] levelFourScreenExits;
     private Exit[] levelFiveScreenExits;
@@ -50,6 +52,7 @@ public class LevelSetup {
     private ArrayList<Monster> trainingMonsters;
     private ArrayList<Monster> levelOneMonsters;
     private ArrayList<Monster> levelTwoMonsters;
+    private ArrayList<Monster> firstChallengeMonsters; //************************************************************
     private ArrayList<Monster> levelThreeMonsters;
     private ArrayList<Monster> levelFourMonsters;
     private ArrayList<Monster> levelFiveMonsters;
@@ -62,6 +65,7 @@ public class LevelSetup {
     private ArrayList<Collectable> weaponsItems;
     private ArrayList<Collectable> levelOneItems;
     private ArrayList<Collectable> levelTwoItems;
+    private ArrayList<Collectable> firstChallengeItems; //***********************************************************8
     private ArrayList<Collectable> levelThreeItems;
     private ArrayList<Collectable> levelFourItems;
     private ArrayList<Collectable> levelFiveItems;
@@ -74,6 +78,7 @@ public class LevelSetup {
     private LevelScreen gameScreen;
     private LevelScreen levelOne;
     private LevelScreen levelTwo;
+    private ChallengeScreen firstChallenge; //***********************************************************************
     private LevelScreen levelThree;
     private LevelScreen levelFour;
     private LevelScreen levelFive;
@@ -121,6 +126,9 @@ public class LevelSetup {
         levelTwo = new LevelTwoScreen(hero,
                 levelRandomizer, levelTwoScreenExits,
                 levelTwoMonsters, levelTwoItems);
+        firstChallenge = new ChallengeScreen(hero,
+                levelRandomizer, firstChallengeScreenExits,
+                firstChallengeMonsters, null); //*********************************************************
         levelThree =
                 new LevelThreeScreen(hero,
                         levelRandomizer, levelThreeScreenExits,
@@ -171,6 +179,7 @@ public class LevelSetup {
                 new Exit(ExitType.BOTTOM, ExitType.TOP, "Game Screen", "Exit Game", true);
         level1Level2 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 1", "Level 2", false);
         level2Level3 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 2", "Level 3", false);
+        level2FirstChallenge = new Exit(ExitType.LEFT, ExitType.RIGHT, "Level 2", "Challenge 1", true); //***************
         level3Level4 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 3", "Level 4", false);
         level4Level5 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 4", "Level 5", false);
         level5Level6 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 5", "Level 6", false);
@@ -191,6 +200,7 @@ public class LevelSetup {
             intialGameScreenExitGame};
         levelOneScreenExits = new Exit[]{initialGameScreenLevel1, level1Level2};
         levelTwoScreenExits = new Exit[]{level1Level2, level2Level3};
+        firstChallengeScreenExits = new Exit[]{level2FirstChallenge}; //*******************************************
         levelThreeScreenExits = new Exit[]{level2Level3, level3Level4};
         levelFourScreenExits = new Exit[]{level3Level4, level4Level5};
         levelFiveScreenExits = new Exit[]{level4Level5,  level5Level6};
@@ -207,6 +217,7 @@ public class LevelSetup {
         initializeMonsterTrainingArrayLists();
         initializeMonsterLevelOneArrayLists();
         initializeMonsterLevelTwoArrayLists();
+        initializeMonsterFirstChallengeArrayLists(); //*****************************************************
         initializeMonsterLevelThreeArrayLists();
         initializeMonsterLevelFourArrayLists();
         initializeMonsterLevelFiveArrayLists();
@@ -257,6 +268,14 @@ public class LevelSetup {
                 new Monster(MonsterType.MAANTIMASKER, "Down",
                         1, 16, 16,
                         "monster4", "Level 2"));
+    }
+
+    private void initializeMonsterFirstChallengeArrayLists() { //**************************************************
+        firstChallengeMonsters = new ArrayList<Monster>();
+        firstChallengeMonsters.add(
+                new Monster(MonsterType.FAANTIMASKER, "Down",
+                        1, 5, 10,
+                        "monster1", "Challenge 1"));
     }
 
     private void initializeMonsterLevelThreeArrayLists() {
@@ -599,6 +618,12 @@ public class LevelSetup {
     public LevelScreen getLevelTwo() {
         return levelTwo;
     }
+
+    /**
+     *
+     * @return First Challenge Screen
+     */
+    public ChallengeScreen getFirstChallenge() { return firstChallenge; } //*******************************************
 
     /**
      *

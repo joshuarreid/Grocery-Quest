@@ -34,6 +34,7 @@ public class LevelRandomizer {
             "#7e7ee0",
             "#cbc0d3",
             "#fcd5ce",
+                "#fcd5ce", //TODO: Replace with different color if you want
             "#1d81cb",
             "#c29a59"
 

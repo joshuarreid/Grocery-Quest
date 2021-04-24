@@ -41,6 +41,7 @@ public class LevelController {
     private boolean levelThreeInitialEntrance;
     private boolean levelFourInitialEntrance;
     private boolean levelFiveInitialEntrance;
+    private boolean firstChallengeInitialEntrance;
     private boolean levelSixInitialEntrance;
     private boolean levelSevenInitialEntrance;
     private boolean levelEightInitialEntrance;
@@ -75,6 +76,7 @@ public class LevelController {
         levelThreeInitialEntrance = true;
         levelFourInitialEntrance = true;
         levelFiveInitialEntrance = true;
+        firstChallengeInitialEntrance = true;
         levelSixInitialEntrance = true;
         levelSevenInitialEntrance = true;
         levelEightInitialEntrance = true;
@@ -129,6 +131,19 @@ public class LevelController {
         currentBoard = levelSetup.getLevelTwo().getBoard();
         currentLevelScreen = levelSetup.getLevelTwo();
         levelTwoInitialEntrance = (levelTwoInitialEntrance ? false : false);
+        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+    }
+
+    /**
+     * Displays first challenge screen
+     */
+    public void firstChallengeScreen() {
+        timer.stop();
+        gameModel.setState("Challenge 1");
+        currentScene = levelSetup.getFirstChallenge().getScene(firstChallengeInitialEntrance);
+        currentBoard = levelSetup.getFirstChallenge().getBoard();
+        System.out.println("After get scene");
+        firstChallengeInitialEntrance = (firstChallengeInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -333,6 +348,9 @@ public class LevelController {
         case "Level 2":
             levelTwoScreen();
             break;
+        case "Challenge 1":
+            firstChallengeScreen();
+            break;
         case "Level 3":
             levelThreeScreen();
             break;
@@ -407,9 +425,11 @@ public class LevelController {
             case SPACE: //Go to next or previous level or pick up item
                 if (board.onExit(hero) != null
                         && currentLevelScreen.getMonstersList().size() == 0) {
+                    System.out.println("111111111111111111111111");
                     board.onExit(hero).setIsOpen(true);
                 }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen()) {
+                    System.out.println("222222222222222222222222");
                     getNextLevel(board.onExit(hero, gameModel));
                 }
                 deltaY = hero.getPlayerMovement().getYPosition();

@@ -85,6 +85,7 @@ public class Board {
                 exitBoard[(maxRow / 2) + 1][maxColumn - 1] = exits[i];
                 break;
             case LEFT:
+                System.out.println("I made it to the exitboard");
                 exitBoard[(maxRow / 2) - 1][0] = exits[i];
                 exitBoard[(maxRow / 2)][0] = exits[i];
                 exitBoard[(maxRow / 2) + 1][0] = exits[i];
@@ -247,8 +248,8 @@ public class Board {
         }
         //If detect a node
         if (hiddenBoard[row][col] != null) {
-            //Check node if monster
-            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) {
+            //Check node if monster, first if statement is needed bc I encountered index out of bounds exception while playing - Josh Josh
+            if (hiddenBoard[row][col].length() >= 8 && hiddenBoard[row][col].substring(0, 7).equals("monster")) {
                 return hiddenBoard[row][col];
             }
         }

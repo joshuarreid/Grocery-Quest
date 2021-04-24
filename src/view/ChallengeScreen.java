@@ -11,8 +11,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import model.*;
 
-public class ChallengeScreen {
+import java.util.ArrayList;
+
+public class ChallengeScreen extends LevelScreen {
     private int width;
     private int height;
     private Button playButton;
@@ -23,13 +26,16 @@ public class ChallengeScreen {
     private static final String HOVERED_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #BF6C2E";
 
-    public ChallengeScreen(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public ChallengeScreen(Player hero,
+                           LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                           ArrayList<Collectable> items) {
+        super(hero, lr, exits, "Challenge 1", monsters, items);
         playButton = new Button();
         exitButton = new Button();
     }
-    public Scene getScene() {
+
+    public Scene getScene(boolean condition) {
+        System.out.println("I'm in here");
         BorderPane pane = new BorderPane();
         VBox top = new VBox();
         HBox middle = new HBox();
@@ -43,16 +49,19 @@ public class ChallengeScreen {
                 new Image("file:resources/pngs/Challenge.png"));
         title.setFitWidth(500);
         title.setPreserveRatio(true);
+        //super.board.addObject(title, "Challenge 1 Title", false, 0, 2, 15, 3);
 
         ImageView replay = new ImageView(
                 new Image("file:resources/pngs/PlayButton.png"));
         replay.setFitWidth(190);
         replay.setPreserveRatio(true);
+        //super.board.addObject(replay, "Challenge 1 Replay", false, 0, 2, 15, 3);
 
         ImageView exit = new ImageView(
                 new Image("file:resources/pngs/QuitButton.png"));
         exit.setFitWidth(190);
         exit.setPreserveRatio(true);
+        //super.board.addObject(exit, "Challenge 1 Exit", false, 0, 2, 15, 3);
 
         playButton.setGraphic(replay);
         playButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
@@ -72,6 +81,7 @@ public class ChallengeScreen {
 
         Label playText = new Label("play again");
         playText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
+        
 
         Label exitText = new Label("exit game");
         exitText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
@@ -95,6 +105,16 @@ public class ChallengeScreen {
         Scene challengeScene = new Scene(pane, width, height);
 
         return challengeScene;
+
+
+    }
+
+    @Override
+    void loadObjects() {
+        ImageView cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
+        cart.setFitWidth(30);
+        cart.setFitHeight(30);
+        super.board.addObject(cart, "cart", true, 10, 1, 10, 1);
     }
 
     public Button getPlayButton() {
