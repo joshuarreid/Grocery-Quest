@@ -18,8 +18,14 @@ import java.util.ArrayList;
 public class ChallengeScreen extends LevelScreen {
     private int width;
     private int height;
-    private Button playButton;
-    private Button exitButton;
+    private Button acceptButton;
+    private Button declineButton;
+    /**
+     * "question" == current scene is question scene.
+     * "room" == current scene is room.
+     */
+    private String state;
+
 
     private static final String IDLE_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #F68C35";
@@ -30,11 +36,29 @@ public class ChallengeScreen extends LevelScreen {
                            LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
                            ArrayList<Collectable> items) {
         super(hero, lr, exits, "Challenge 1", monsters, items);
-        playButton = new Button();
-        exitButton = new Button();
+        acceptButton = new Button();
+        declineButton = new Button();
+        this.state = "question";
     }
 
-    public Scene getScene(boolean condition) {
+    private int roomLoading = 0;
+
+    @Override
+    public Scene getScene(boolean initialEntrance) {
+
+        if(initialEntrance) {
+            return getChallenge();
+        } else {
+            if(roomLoading == 0){
+                roomLoading++;
+                return super.getScene(true);
+            } else {
+                return super.getScene(false);
+            }
+        }
+    }
+
+    public Scene getChallenge() {
         System.out.println("I'm in here");
         BorderPane pane = new BorderPane();
         VBox top = new VBox();
@@ -63,27 +87,27 @@ public class ChallengeScreen extends LevelScreen {
         exit.setPreserveRatio(true);
         //super.board.addObject(exit, "Challenge 1 Exit", false, 0, 2, 15, 3);
 
-        playButton.setGraphic(replay);
-        playButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
-        playButton.setMinSize(190, 148);
-        playButton.setMaxSize(190, 148);
-        playButton.setOnMouseEntered(e -> playButton.setStyle(HOVERED_BUTTON_STYLE));
-        playButton.setOnMouseExited(e -> playButton.setStyle(IDLE_BUTTON_STYLE));
-        playButton.setId("replayButton");
+        acceptButton.setGraphic(replay);
+        acceptButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
+        acceptButton.setMinSize(190, 148);
+        acceptButton.setMaxSize(190, 148);
+        acceptButton.setOnMouseEntered(e -> acceptButton.setStyle(HOVERED_BUTTON_STYLE));
+        acceptButton.setOnMouseExited(e -> acceptButton.setStyle(IDLE_BUTTON_STYLE));
+        acceptButton.setId("replayButton");
 
-        exitButton.setGraphic(exit);
-        exitButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
-        exitButton.setMinSize(190, 148);
-        exitButton.setMaxSize(190, 148);
-        exitButton.setOnMouseEntered(e -> exitButton.setStyle(HOVERED_BUTTON_STYLE));
-        exitButton.setOnMouseExited(e -> exitButton.setStyle(IDLE_BUTTON_STYLE));
-        exitButton.setId("exitButton");
+        declineButton.setGraphic(exit);
+        declineButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
+        declineButton.setMinSize(190, 148);
+        declineButton.setMaxSize(190, 148);
+        declineButton.setOnMouseEntered(e -> declineButton.setStyle(HOVERED_BUTTON_STYLE));
+        declineButton.setOnMouseExited(e -> declineButton.setStyle(IDLE_BUTTON_STYLE));
+        declineButton.setId("exitButton");
 
-        Label playText = new Label("play again");
+        Label playText = new Label("accept");
         playText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
         
 
-        Label exitText = new Label("exit game");
+        Label exitText = new Label("decline");
         exitText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
 
         //scene
@@ -94,7 +118,7 @@ public class ChallengeScreen extends LevelScreen {
         BorderPane.setMargin(top, insets);
 
         pane.setCenter(middle);
-        middle.getChildren().addAll(playButton, exitButton);
+        middle.getChildren().addAll(acceptButton, declineButton);
         middle.setSpacing(30);
 
         pane.setBottom(bottom);
@@ -102,11 +126,9 @@ public class ChallengeScreen extends LevelScreen {
         bottom.setSpacing(60);
         BorderPane.setMargin(bottom, insets);
 
-        Scene challengeScene = new Scene(pane, width, height);
+        Scene challengeScene = new Scene(pane, 660, 610);
 
         return challengeScene;
-
-
     }
 
     @Override
@@ -117,13 +139,24 @@ public class ChallengeScreen extends LevelScreen {
         super.board.addObject(cart, "cart", true, 10, 1, 10, 1);
     }
 
-    public Button getPlayButton() {
-        return playButton;
+    public Button getAcceptButton() {
+        return acceptButton;
     }
 
-    public Button getExitButton() {
-        return exitButton;
+    public Button getDeclineButton() {
+        return declineButton;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Exit getExit() {
+       return super.exits[0];
+    }
 }
 

@@ -128,7 +128,7 @@ public class LevelSetup {
                 levelTwoMonsters, levelTwoItems);
         firstChallenge = new ChallengeScreen(hero,
                 levelRandomizer, firstChallengeScreenExits,
-                firstChallengeMonsters, null); //*********************************************************
+                firstChallengeMonsters, new ArrayList<Collectable>()); //*********************************************************
         levelThree =
                 new LevelThreeScreen(hero,
                         levelRandomizer, levelThreeScreenExits,
@@ -199,7 +199,7 @@ public class LevelSetup {
             intialGameScreenTrainingScreen,
             intialGameScreenExitGame};
         levelOneScreenExits = new Exit[]{initialGameScreenLevel1, level1Level2};
-        levelTwoScreenExits = new Exit[]{level1Level2, level2Level3};
+        levelTwoScreenExits = new Exit[]{level1Level2, level2Level3, level2FirstChallenge};
         firstChallengeScreenExits = new Exit[]{level2FirstChallenge}; //*******************************************
         levelThreeScreenExits = new Exit[]{level2Level3, level3Level4};
         levelFourScreenExits = new Exit[]{level3Level4, level4Level5};

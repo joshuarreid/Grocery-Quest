@@ -3,6 +3,8 @@ package controller;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import model.*;
@@ -141,10 +143,27 @@ public class LevelController {
         timer.stop();
         gameModel.setState("Challenge 1");
         currentScene = levelSetup.getFirstChallenge().getScene(firstChallengeInitialEntrance);
-        currentBoard = levelSetup.getFirstChallenge().getBoard();
-        System.out.println("After get scene");
-        firstChallengeInitialEntrance = (firstChallengeInitialEntrance ? false : false);
-        moveCharacter(mainWindow, currentScene, hero, currentBoard);
+        if(levelSetup.getFirstChallenge().getState().compareTo("question") == 0){
+            System.out.println("in here");
+            Button yes = levelSetup.getFirstChallenge().getAcceptButton();
+            Button no = levelSetup.getFirstChallenge().getDeclineButton();
+            yes.setOnAction(e -> {
+                firstChallengeInitialEntrance = false;
+                levelSetup.getFirstChallenge().setState("room");
+                System.out.println("yes");
+//                levelSetup.getFirstChallenge().getExit().setIsOpen(false);
+                firstChallengeScreen();
+            });
+            no.setOnAction(e -> {
+                System.out.println("no");
+            });
+            mainWindow.setScene(currentScene);
+            mainWindow.show();
+        } else {
+            currentBoard = levelSetup.getFirstChallenge().getBoard();
+            System.out.println("After get scene");
+            moveCharacter(mainWindow, currentScene, hero, currentBoard);
+        }
     }
 
     /**
@@ -403,6 +422,7 @@ public class LevelController {
      */
     public void moveCharacter(Stage mainWindow, Scene scene, Player hero, Board board) {
         mainWindow.setScene(scene);
+        mainWindow.show();
         timer.start();
 
     }
@@ -425,11 +445,9 @@ public class LevelController {
             case SPACE: //Go to next or previous level or pick up item
                 if (board.onExit(hero) != null
                         && currentLevelScreen.getMonstersList().size() == 0) {
-                    System.out.println("111111111111111111111111");
                     board.onExit(hero).setIsOpen(true);
                 }
                 if (board.onExit(hero) != null && board.onExit(hero).getIsOpen()) {
-                    System.out.println("222222222222222222222222");
                     getNextLevel(board.onExit(hero, gameModel));
                 }
                 deltaY = hero.getPlayerMovement().getYPosition();
@@ -651,6 +669,8 @@ public class LevelController {
      * @param monster the monster the player is attacking
      */
     private void updateLevelScreen(boolean update, Monster monster) {
+        System.out.println("update");
+        timer.stop();
         if (monster != null) {
             currentLevelScreen.updateScene(update, monster);
         } else {
