@@ -80,6 +80,7 @@ public class LevelSetup {
     private ArrayList<Collectable> thirdChallengeItems; //***********************************************************8
     private ArrayList<Collectable> levelEightItems;
     private ArrayList<Collectable> bossItems;
+    private ArrayList<Collectable> vaccineItems;
 
     //screens
     private LevelScreen gameScreen;
@@ -180,7 +181,7 @@ public class LevelSetup {
         vaccineScreen =
                 new VaccineScreen(hero,
                         levelRandomizer, vaccineScreenExits,
-                        new ArrayList<Monster>(), new ArrayList<Collectable>());
+                        new ArrayList<Monster>(), vaccineItems);
     }
 
     private void initializeExits() {
@@ -349,31 +350,31 @@ public class LevelSetup {
     private void initializeMonsterLevelFiveArrayLists() {
         levelFiveMonsters = new ArrayList<Monster>();
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.MAANTIMASKER, "Down",
                         1, 9, 12,
                         "monster1", "Level 5"));
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.MAANTIMASKER, "Down",
                         1, 14, 6,
                         "monster2", "Level 5"));
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.FAANTIMASKER, "Down",
                         1, 10, 12,
                         "monster3", "Level 5"));
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.MAANTIMASKER, "Down",
                         1, 7, 9,
                         "monster4", "Level 5"));
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.MAANTIMASKER, "Down",
                         1, 17, 16,
                         "monster5", "Level 5"));
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.FAANTIMASKER, "Down",
                         1, 4, 4,
                         "monster6", "Level 5"));
         levelFiveMonsters.add(
-                new Monster(MonsterType.TRUMP, "Down",
+                new Monster(MonsterType.MAANTIMASKER, "Down",
                         1, 4, 12,
                         "monster7", "Level 5"));
     }
@@ -437,7 +438,7 @@ public class LevelSetup {
     private void initializeMonsterLevelEightArrayLists() {
         levelEightMonsters = new ArrayList<Monster>();
         levelEightMonsters.add(
-                new Monster(MonsterType.FAANTIMASKER, "Down",
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
                         1, 14, 9,
                         "monster1", "Level 8"));
         levelEightMonsters.add(
@@ -445,7 +446,7 @@ public class LevelSetup {
                         1, 12, 4,
                         "monster2", "Level 8"));
         levelEightMonsters.add(
-                new Monster(MonsterType.FAANTIMASKER, "Down",
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
                         1, 9, 11,
                         "monster3", "Level 8"));
         levelEightMonsters.add(
@@ -597,6 +598,7 @@ public class LevelSetup {
         initializeItemLevelSevenArrayLists();
         initializeItemLevelEightArrayLists();
         initializeItemBossArrayLists();
+        initializeVaccineArrayLists();
 
         initializeItemFirstChallengeArrayLists();
         initializeItemSecondChallengeArrayLists();
@@ -665,7 +667,7 @@ public class LevelSetup {
         levelFourItems.add(new Potion("ToiletPaper_1", 3, 16, false, 1, 2));
         levelFourItems.add(new Potion("CannedSoup_1", 14, 5, false, 1, 1));
         //weapons
-        levelFourItems.add(new Weapon("FireDisinfectantSpray_1", 4, 7, false));
+        //levelFourItems.add(new Weapon("FireDisinfectantSpray_1", 4, 7, false));
     }
 
     private void initializeItemLevelFiveArrayLists() {
@@ -696,17 +698,23 @@ public class LevelSetup {
         //potions
         levelEightItems.add(new HandSanitizer("HandSanitizer_1", 15, 14, false, 1));
         //weapons
-        levelEightItems.add(new Weapon("FireWipeCrossBow_1", 1, 8, false));
+        //levelEightItems.add(new Weapon("FireWipeCrossBow_1", 1, 8, false));
     }
 
     private void initializeItemBossArrayLists() {
         bossItems = new ArrayList<Collectable>();
     }
 
+    private void initializeVaccineArrayLists() {
+        vaccineItems = new ArrayList<Collectable>();
+        vaccineItems.add(new Potion("Vaccine_1", 9,9,false,1,10));
+        vaccineItems.add(new Potion("Vaccine_1", 11,9,false,1,10));
+    }
+
     private void initializeItemFirstChallengeArrayLists() {
         firstChallengeItems = new ArrayList<Collectable>();
 
-        firstChallengeItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
+        firstChallengeItems.add(new Weapon("FireWipeCrossBow_1", 1, 8, false));
         firstChallengeItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
     }
 
@@ -714,7 +722,7 @@ public class LevelSetup {
         secondChallengeItems = new ArrayList<Collectable>();
 
         secondChallengeItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
-        secondChallengeItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
+        secondChallengeItems.add(new Weapon("FireDisinfectantSpray_1", 4, 7, false));
     }
 
     private void initializeItemThirdChallengeArrayLists() {
@@ -722,6 +730,7 @@ public class LevelSetup {
 
         thirdChallengeItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
         thirdChallengeItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
+        thirdChallengeItems.add(new Weapon("FireThermometerSword_1", 6,6,false));
     }
     /**
      *
