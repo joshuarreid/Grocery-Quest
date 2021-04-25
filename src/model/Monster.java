@@ -44,7 +44,11 @@ public class Monster {
         this.monsterType = monsterType;
         this.currentSide = currentSide;
         this.healthHitChange = healthHitChange;
-        this.monsterHealth = new MonsterHealth(4, this.healthHitChange, 30);
+        if(monsterType == MonsterType.COVIDBOSSLARGE) {
+            this.monsterHealth = new BossHealth(24, this.healthHitChange, 30);
+        } else {
+            this.monsterHealth = new MonsterHealth(4, this.healthHitChange, 30);
+        }
         this.row = row;
         this.col = col;
         this.id = iD;
@@ -54,10 +58,6 @@ public class Monster {
                 new boolean[]{false, false, false, false, false, false, false, false, false, false};
 
         switch (level) {
-        case "Training Screen":
-            this.attackProbabilty[9] = true;
-            this.maxDamage = 0;
-            break;
         case"Level 1":
             this.attackProbabilty[9] = true;
             this.maxDamage = 1;
@@ -73,6 +73,13 @@ public class Monster {
             this.attackProbabilty[7] = true;
             this.maxDamage = 1;
             break;
+        case"Challenge 1":
+            this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[1] = true;
+            this.maxDamage = 1;
+            break;
         case "Level 4":
             this.attackProbabilty[9] = true;
             this.attackProbabilty[8] = true;
@@ -86,6 +93,15 @@ public class Monster {
             this.attackProbabilty[7] = true;
             this.attackProbabilty[6] = true;
             this.attackProbabilty[5] = true;
+            this.maxDamage = 1;
+            break;
+        case"Challenge 2":
+            this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
+            this.attackProbabilty[5] = true;
+            this.attackProbabilty[1] = true;
             this.maxDamage = 1;
             break;
         case"Level 6":
@@ -107,6 +123,17 @@ public class Monster {
             this.attackProbabilty[3] = true;
             this.maxDamage = 1;
             break;
+        case"Challenge 3":
+            this.attackProbabilty[9] = true;
+            this.attackProbabilty[8] = true;
+            this.attackProbabilty[7] = true;
+            this.attackProbabilty[6] = true;
+            this.attackProbabilty[5] = true;
+            this.attackProbabilty[4] = true;
+            this.attackProbabilty[3] = true;
+            this.attackProbabilty[1] = true;
+            this.maxDamage = 1;
+            break;
         case"Level 8":
             this.attackProbabilty[9] = true;
             this.attackProbabilty[8] = true;
@@ -124,7 +151,6 @@ public class Monster {
                 this.attackProbabilty[8] = true;
                 this.attackProbabilty[7] = true;
                 this.attackProbabilty[6] = true;
-                this.attackProbabilty[5] = true;
                 this.maxDamage = 2;
             } else {
                 this.attackProbabilty[9] = true;
@@ -163,6 +189,10 @@ public class Monster {
         case TRUMP:
             this.monsterImage = new ImageView(
                     new Image("file:resources/pngs/Trump" + currentSide + ".png"));
+            break;
+        case SNEEZECLOUD:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/SneezeCloud.png"));
             break;
         default:
         }

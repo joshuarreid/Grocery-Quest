@@ -21,6 +21,7 @@ public abstract class ChallengeScreen extends LevelScreen {
     private Button acceptButton;
     private Button declineButton;
     private Scene challengeScreenScene;
+    private String specialWeapon;
     /**
      * "question" == current scene is question scene.
      * "room" == current scene is room.
@@ -40,6 +41,13 @@ public abstract class ChallengeScreen extends LevelScreen {
         acceptButton = new Button();
         declineButton = new Button();
         this.state = "question";
+
+        for(Collectable item: items) {
+            if(item instanceof Weapon) {
+                specialWeapon = item.getId();
+            }
+        }
+
         getChallenge();
     }
 
@@ -83,6 +91,11 @@ public abstract class ChallengeScreen extends LevelScreen {
         title.setFitWidth(500);
         title.setPreserveRatio(true);
 
+        ImageView special = new ImageView(new Image("file:resources/pngs/"
+                + specialWeapon.substring(0, specialWeapon.indexOf("_")) + ".png"));
+        special.setFitWidth(190);
+        special.setFitHeight(190);
+
         ImageView replay = new ImageView(
                 new Image("file:resources/pngs/PlayButton.png"));
         replay.setFitWidth(190);
@@ -118,9 +131,9 @@ public abstract class ChallengeScreen extends LevelScreen {
 
         //scene
         pane.setTop(top);
-        top.getChildren().addAll(title);
-        top.setSpacing(40);
-        Insets insets = new Insets(100,40,40,40);
+        top.getChildren().addAll(title, special);
+        top.setSpacing(20);
+        Insets insets = new Insets(60,0,10,0);
         BorderPane.setMargin(top, insets);
 
         left.getChildren().addAll(acceptButton, acceptText);
@@ -133,7 +146,7 @@ public abstract class ChallengeScreen extends LevelScreen {
         middle.getChildren().addAll(left, right);
         middle.setSpacing(100);
 
-        challengeScreenScene = new Scene(pane, 660, 610);
+        challengeScreenScene = new Scene(pane, 600, 600);
 
     }
 

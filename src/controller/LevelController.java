@@ -61,6 +61,8 @@ public class LevelController {
     private boolean firstChallengeInitialEntrance;
     private boolean secondChallengeInitialEntrance;
     private boolean thirdChallengeInitialEntrance;
+
+    private Statistics statistics;
     /**
      * Level Controller constructor
      *
@@ -103,6 +105,7 @@ public class LevelController {
         this.mediaPlayer = mediaPlayer;
         this.volume = volume;
         mediaPlayer.setVolume(volume);
+        statistics = new Statistics();
 
         timer = new AnimationTimer() {
             @Override
@@ -123,6 +126,7 @@ public class LevelController {
         currentBoard = levelSetup.getGameScreen().getBoard();
         currentLevelScreen = levelSetup.getGameScreen();
         gameScreenInitialEntrance = (gameScreenInitialEntrance ? false : false);
+        statistics.startTime();
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
     }
 
@@ -302,15 +306,16 @@ public class LevelController {
      */
     private void winScreen() {
         timer.stop();
-
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/win.mp3").toURI().toString());
         mediaPlayer.setVolume(volume);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
-
+      
+        statistics.endTime();
+      
         gameModel.setState("Win Screen");
-        WinScreen screen = new WinScreen(width, height);
+        WinScreen screen = new WinScreen(width, height, statistics);
         Button replayButton = screen.getReplayButton();
         replayButton.setOnAction(e -> {
             try {
@@ -334,14 +339,17 @@ public class LevelController {
      */
     private void loseScreen() {
         timer.stop();
+
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/ending.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(volume);
         mediaPlayer.play();
 
+        statistics.endTime();
+
         gameModel.setState("Lose Screen");
-        LoseScreen screen = new LoseScreen(width, height);
+        LoseScreen screen = new LoseScreen(width, height, statistics);
         Button replayButton = screen.getReplayButton();
         replayButton.setOnAction(e -> {
             try {
@@ -578,6 +586,7 @@ public class LevelController {
                     Collectable currItem = board.getItem(deltaY, deltaX);
                     hero.pickUpItem(currItem);
                     currItem.setCollected(true);
+                    statistics.addItem();
                     updateLevelScreen(true, null);
                 }
                 break;
@@ -644,6 +653,7 @@ public class LevelController {
                             monster.getMonsterHealth().removeHealth(hero.getWeapon().getDamage());
                             //If monster has no health
                             if (monster.getMonsterHealth().getHealthLevel() == 0) {
+                                statistics.addAntimasker();
                                 //Remove it from game
                                 currentLevelScreen.getMonstersList().remove(i);
                                 if (randomItemChance[prob]) {
