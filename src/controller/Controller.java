@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.Collectable;
@@ -16,6 +18,7 @@ import view.ChallengeScreen;
 import view.ConfigurationScreen;
 import view.StartScreen;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,6 +44,8 @@ public class Controller extends Application {
     private final int width = 600;
     private final int height = 600;
     private Player hero;
+    private  MediaPlayer mediaPlayer;
+    private double volume;
 
     @Override
     /**
@@ -54,6 +59,11 @@ public class Controller extends Application {
         mainWindow.setTitle("Grocery Quest");
         mainWindow.setResizable(false);
         gameModel = new GameModel();
+        Media media = new Media(new File("resources/music/opening.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+        volume = 0.5;
+        mediaPlayer.setVolume(volume);
         initStartScreen();
     }
 
@@ -65,9 +75,17 @@ public class Controller extends Application {
         gameModel.setState("Start Screen");
         StartScreen screen = new StartScreen(width, height);
         Button startButton = screen.getStartButton();
+        Button muteButton = screen.getMute();
         startButton.setOnAction(e -> {
             goToConfigurationScreen();
         });
+
+        muteButton.setOnAction(e -> {
+            volume = 0;
+            mediaPlayer.setVolume(volume);
+            muteButton.setEffect(new DropShadow(2.0, Color.BLACK));
+        });
+
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -218,7 +236,7 @@ public class Controller extends Application {
                 gameModel,
                 difficultyLevel,
                 weaponChoice,
-                hero);
+                hero, mediaPlayer, volume);
         lc.initialGameScreen();
     }
 

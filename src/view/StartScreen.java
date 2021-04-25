@@ -1,5 +1,6 @@
 package view;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ public class StartScreen {
     private int width;
     private int height;
     private Button startButton;
+    private Button mute;
 
     private static final String IDLE_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #a0d3b2";
@@ -26,6 +28,7 @@ public class StartScreen {
         this.width = width;
         this.height = height;
         startButton = new Button();
+        mute = new Button();
     }
     public Scene getScene() {
         BorderPane pane = new BorderPane();
@@ -54,10 +57,36 @@ public class StartScreen {
         Label inst = new Label("click to start");
         inst.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 30));
 
+        ImageView muteImage = new ImageView(
+                new Image("file:resources/pngs/mute.png"));
+        muteImage.setFitWidth(40);
+        muteImage.setFitHeight(40);
+
+
+        mute.setGraphic(muteImage);
+        mute.setStyle("-fx-background-color: #a0d3b2; -fx-background-radius: 5px;");
+        mute.setMinSize(40, 40);
+        mute.setMaxSize(40, 40);
+        mute.setOnMouseEntered(e -> mute.setStyle("-fx-background-color: #91bfa1; -fx-background-radius: 5px;"));
+        mute.setOnMouseExited(e -> mute.setStyle("-fx-background-color: #a0d3b2; -fx-background-radius: 5px;"));
+        mute.setId("muteButton");
+
+        VBox muteBox = new VBox();
+        muteBox.getChildren().addAll(mute);
+        muteBox.setAlignment(Pos.TOP_RIGHT);
+        muteBox.setPadding(new Insets(10));
+        muteBox.setMaxWidth(40);
+
         //scene
         pane.setCenter(center);
         center.getChildren().addAll(title, startButton, inst);
         center.setSpacing(20);
+
+        pane.setRight(muteBox);
+        VBox imaginaryLeft = new VBox();
+        imaginaryLeft.setMinWidth(60);
+        pane.setLeft(imaginaryLeft);
+
         Scene welcomeScene = new Scene(pane, width, height);
 
         return welcomeScene;
@@ -67,4 +96,7 @@ public class StartScreen {
         return startButton;
     }
 
+    public Button getMute() {
+        return mute;
+    }
 }
