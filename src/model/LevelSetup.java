@@ -630,9 +630,8 @@ public class LevelSetup {
 
     private void initializeItemLevelOneArrayLists() {
         levelOneItems = new ArrayList<Collectable>();
-        //potions
+
         levelOneItems.add(new Potion("CannedSoup_1", 10, 11, false, 1, 1));
-        //levelOneItems.add(new Potion("CannedSoup_2", 5, 2, false, 1, 1));
         levelOneItems.add(new Potion("ToiletPaper_1", 1, 14, false, 1, 2));
 
         //weapons
@@ -647,60 +646,50 @@ public class LevelSetup {
 
     private void initializeItemLevelTwoArrayLists() {
         levelTwoItems = new ArrayList<Collectable>();
-        //potions
         levelTwoItems.add(new Potion("CannedSoup_1", 15, 3, false, 1, 1));
-        //levelTwoItems.add(new Potion("CannedSoup_2", 5, 15, false, 1, 2));
         levelTwoItems.add(new Potion("ToiletPaper_1", 14, 6, false, 1, 2));
         levelTwoItems.add(new N95("N95Mask_1", 10, 10, false, 1, 10));
     }
 
     private void initializeItemLevelThreeArrayLists() {
-        //Will become a challenge level
         levelThreeItems = new ArrayList<Collectable>();
-        //potions
+
         levelThreeItems.add(new Potion("CannedSoup_1", 5, 3, false, 1, 1));
-        //weapons
-        levelThreeItems.add(new Weapon("ThermometerSword_1", 14, 7, false));
+        levelThreeItems.add(new Potion("ToiletPaper_1", 0, 0, false, 1, 2));
     }
 
     private void initializeItemLevelFourArrayLists() {
         levelFourItems = new ArrayList<Collectable>();
-        //potions
+
         levelFourItems.add(new Potion("ToiletPaper_1", 3, 16, false, 1, 2));
         levelFourItems.add(new Potion("CannedSoup_1", 14, 5, false, 1, 1));
-        //weapons
-        //levelFourItems.add(new Weapon("FireDisinfectantSpray_1", 4, 7, false));
     }
 
     private void initializeItemLevelFiveArrayLists() {
         levelFiveItems = new ArrayList<Collectable>();
-        //potions
+
         levelFiveItems.add(new Potion("ToiletPaper_1", 8, 10, false, 1, 2));
         levelFiveItems.add(new Potion("ToiletPaper_1", 12, 5, false, 1, 2));
     }
 
     private void initializeItemLevelSixArrayLists() {
         levelSixItems = new ArrayList<Collectable>();
-        //potions
+
         levelSixItems.add(new HandSanitizer("HandSanitizer_1", 13, 2, false, 1));
         levelSixItems.add(new Potion("ToiletPaper_1", 5, 14, false, 1, 2));
 
     }
 
     private void initializeItemLevelSevenArrayLists() {
-        //Will become a challenge level of small covid monsters
         levelSevenItems = new ArrayList<Collectable>();
-        //potions
         levelSevenItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
         levelSevenItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
     }
 
     private void initializeItemLevelEightArrayLists() {
         levelEightItems = new ArrayList<Collectable>();
-        //potions
         levelEightItems.add(new HandSanitizer("HandSanitizer_1", 15, 14, false, 1));
-        //weapons
-        //levelEightItems.add(new Weapon("FireWipeCrossBow_1", 1, 8, false));
+
     }
 
     private void initializeItemBossArrayLists() {
@@ -710,6 +699,7 @@ public class LevelSetup {
 
     private void initializeVaccineArrayLists() {
         vaccineItems = new ArrayList<Collectable>();
+
         vaccineItems.add(new Potion("Vaccine_1", 9,9,false,1,10));
         vaccineItems.add(new Potion("Vaccine_2", 11,9,false,1,10));
     }
