@@ -42,6 +42,7 @@ public class LevelController {
     private ItemRandomizer itemRandomizer;
 
     private  MediaPlayer mediaPlayer;
+    private double volume;
 
     private boolean gameScreenInitialEntrance;
     private boolean levelOneInitialEntrance;
@@ -70,7 +71,7 @@ public class LevelController {
      * @param hero current Player
      */
     public LevelController(Stage mainWindow, GameModel gameModel, int difficultyLevel,
-                           String weaponChoice, Player hero, MediaPlayer mediaPlayer) {
+                           String weaponChoice, Player hero, MediaPlayer mediaPlayer, Double volume) {
         this.mainWindow = mainWindow;
         this.gameModel = gameModel;
         this.difficultyLevel = difficultyLevel;
@@ -100,6 +101,8 @@ public class LevelController {
         thirdChallengeInitialEntrance = true;
 
         this.mediaPlayer = mediaPlayer;
+        this.volume = volume;
+        mediaPlayer.setVolume(volume);
 
         timer = new AnimationTimer() {
             @Override
@@ -132,6 +135,7 @@ public class LevelController {
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/option1.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
         mediaPlayer.play();
 
         gameModel.setState("Level 1");
@@ -190,6 +194,7 @@ public class LevelController {
 
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/option2.mp3").toURI().toString());
+        mediaPlayer.setVolume(volume);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
 
@@ -300,6 +305,7 @@ public class LevelController {
 
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/win.mp3").toURI().toString());
+        mediaPlayer.setVolume(volume);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
 
@@ -331,6 +337,7 @@ public class LevelController {
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/ending.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
         mediaPlayer.play();
 
         gameModel.setState("Lose Screen");

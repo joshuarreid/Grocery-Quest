@@ -45,6 +45,8 @@ public class Controller extends Application {
     private final int height = 600;
     private Player hero;
     private  MediaPlayer mediaPlayer;
+    private double volume;
+
     @Override
     /**
      * Creates the stage and starts the game
@@ -60,6 +62,8 @@ public class Controller extends Application {
         Media media = new Media(new File("resources/music/opening.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+        volume = 0.5;
+        mediaPlayer.setVolume(volume);
         initStartScreen();
     }
 
@@ -71,9 +75,17 @@ public class Controller extends Application {
         gameModel.setState("Start Screen");
         StartScreen screen = new StartScreen(width, height);
         Button startButton = screen.getStartButton();
+        Button muteButton = screen.getMute();
         startButton.setOnAction(e -> {
             goToConfigurationScreen();
         });
+
+        muteButton.setOnAction(e -> {
+            volume = 0;
+            mediaPlayer.setVolume(volume);
+            muteButton.setEffect(new DropShadow(2.0, Color.BLACK));
+        });
+
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -224,7 +236,7 @@ public class Controller extends Application {
                 gameModel,
                 difficultyLevel,
                 weaponChoice,
-                hero, mediaPlayer);
+                hero, mediaPlayer, volume);
         lc.initialGameScreen();
     }
 
