@@ -503,23 +503,87 @@ public class LevelSetup {
         firstChallengeMonsters = new ArrayList<Monster>();
         firstChallengeMonsters.add(
                 new Monster(MonsterType.FAANTIMASKER, "Down",
-                        1, 5, 10,
+                        1, 5, 15,
                         "monster1", "Challenge 1"));
+        firstChallengeMonsters.add(
+                new Monster(MonsterType.MAANTIMASKER, "Down",
+                        1, 14, 14,
+                        "monster2", "Challenge 1"));
+        firstChallengeMonsters.add(
+                new Monster(MonsterType.FAANTIMASKER, "Down",
+                        1, 3, 5,
+                        "monster3", "Challenge 1"));
+        firstChallengeMonsters.add(
+                new Monster(MonsterType.MAANTIMASKER, "Down",
+                        1, 9, 11,
+                        "monster4", "Challenge 1"));
+        firstChallengeMonsters.add(
+                new Monster(MonsterType.FAANTIMASKER, "Down",
+                        1, 12, 6,
+                        "monster5", "Challenge 1"));
     }
     private void initializeMonsterSecondChallengeArrayLists() { //**************************************************
         secondChallengeMonsters = new ArrayList<Monster>();
         secondChallengeMonsters.add(
-                new Monster(MonsterType.FAANTIMASKER, "Down",
+                new Monster(MonsterType.TRUMP, "Down",
                         1, 5, 10,
                         "monster1", "Challenge 2"));
+        secondChallengeMonsters.add(
+                new Monster(MonsterType.TRUMP, "Down",
+                        1, 11, 8,
+                        "monster2", "Challenge 2"));
+        secondChallengeMonsters.add(
+                new Monster(MonsterType.TRUMP, "Down",
+                        1, 2, 3,
+                        "monster3", "Challenge 2"));
+        secondChallengeMonsters.add(
+                new Monster(MonsterType.TRUMP, "Down",
+                        1, 9, 16,
+                        "monster4", "Challenge 2"));
+        secondChallengeMonsters.add(
+                new Monster(MonsterType.TRUMP, "Down",
+                        1, 15, 12,
+                        "monster5", "Challenge 2"));
+        secondChallengeMonsters.add(
+                new Monster(MonsterType.TRUMP, "Down",
+                        1, 4, 6,
+                        "monster6", "Challenge 2"));
     }
 
     private void initializeMonsterThirdChallengeArrayLists() { //**************************************************
         thirdChallengeMonsters = new ArrayList<Monster>();
         thirdChallengeMonsters.add(
-                new Monster(MonsterType.FAANTIMASKER, "Down",
-                        1, 5, 10,
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 2, 8,
                         "monster1", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 14, 9,
+                        "monster2", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 8, 2,
+                        "monster3", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 5, 10,
+                        "monster4", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 5, 16,
+                        "monster5", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 13, 16,
+                        "monster6", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 15, 6,
+                        "monster7", "Challenge 3"));
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.COVIDBOSSSMALL, "Down",
+                        1, 2, 10,
+                        "monster8", "Challenge 3"));
     }
 
     private void initializeItemArrayLists() {
