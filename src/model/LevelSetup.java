@@ -22,11 +22,13 @@ public class LevelSetup {
     private Exit level1Level2;
     private Exit level2Level3;
     private Exit level3Level4;
-
+    private Exit level3FirstChallenge; //*****************************************************************************
     private Exit level4Level5;
     private Exit level5Level6;
+    private Exit level5SecondChallenge; //*****************************************************************************
     private Exit level6Level7;
     private Exit level7Level8;
+    private Exit level7ThirdChallenge; //*****************************************************************************
     private Exit level8BossScreen;
     private Exit bossScreenVaccineScreen;
     private Exit vaccineScreenWinScreen;
@@ -36,10 +38,13 @@ public class LevelSetup {
     private Exit[] levelOneScreenExits;
     private Exit[] levelTwoScreenExits;
     private Exit[] levelThreeScreenExits;
+    private Exit[] firstChallengeScreenExits; //************************************************************************
     private Exit[] levelFourScreenExits;
     private Exit[] levelFiveScreenExits;
+    private Exit[] secondChallengeScreenExits; //************************************************************************
     private Exit[] levelSixScreenExits;
     private Exit[] levelSevenScreenExits;
+    private Exit[] thirdChallengeScreenExits; //************************************************************************
     private Exit[] levelEightScreenExits;
     private Exit[] weaponsScreenExits;
     private Exit[] trainingScreenExits;
@@ -51,10 +56,13 @@ public class LevelSetup {
     private ArrayList<Monster> levelOneMonsters;
     private ArrayList<Monster> levelTwoMonsters;
     private ArrayList<Monster> levelThreeMonsters;
+    private ArrayList<Monster> firstChallengeMonsters; //************************************************************
     private ArrayList<Monster> levelFourMonsters;
     private ArrayList<Monster> levelFiveMonsters;
+    private ArrayList<Monster> secondChallengeMonsters; //************************************************************
     private ArrayList<Monster> levelSixMonsters;
     private ArrayList<Monster> levelSevenMonsters;
+    private ArrayList<Monster> thirdChallengeMonsters; //************************************************************
     private ArrayList<Monster> levelEightMonsters;
     private ArrayList<Monster> bossMonsters;
 
@@ -63,10 +71,13 @@ public class LevelSetup {
     private ArrayList<Collectable> levelOneItems;
     private ArrayList<Collectable> levelTwoItems;
     private ArrayList<Collectable> levelThreeItems;
+    private ArrayList<Collectable> firstChallengeItems; //***********************************************************8
     private ArrayList<Collectable> levelFourItems;
     private ArrayList<Collectable> levelFiveItems;
+    private ArrayList<Collectable> secondChallengeItems; //***********************************************************8
     private ArrayList<Collectable> levelSixItems;
     private ArrayList<Collectable> levelSevenItems;
+    private ArrayList<Collectable> thirdChallengeItems; //***********************************************************8
     private ArrayList<Collectable> levelEightItems;
     private ArrayList<Collectable> bossItems;
 
@@ -75,10 +86,13 @@ public class LevelSetup {
     private LevelScreen levelOne;
     private LevelScreen levelTwo;
     private LevelScreen levelThree;
+    private ChallengeScreen firstChallenge; //***********************************************************************
     private LevelScreen levelFour;
     private LevelScreen levelFive;
+    private ChallengeScreen secondChallenge; //***********************************************************************
     private LevelScreen levelSix;
     private LevelScreen levelSeven;
+    private ChallengeScreen thirdChallenge; //***********************************************************************
     private LevelScreen levelEight;
     private LevelScreen weaponsScreen;
     private LevelScreen trainingScreen;
@@ -125,12 +139,18 @@ public class LevelSetup {
                 new LevelThreeScreen(hero,
                         levelRandomizer, levelThreeScreenExits,
                         levelThreeMonsters, levelThreeItems);
+        firstChallenge = new ChallengeScreenFirst(hero,
+                levelRandomizer, firstChallengeScreenExits,
+                firstChallengeMonsters, firstChallengeItems); //*********************************************************
         levelFour = new LevelFourScreen(hero,
                 levelRandomizer, levelFourScreenExits,
                 levelFourMonsters, levelFourItems);
         levelFive = new LevelFiveScreen(hero,
                 levelRandomizer, levelFiveScreenExits,
                 levelFiveMonsters, levelFiveItems);
+        secondChallenge = new ChallengeScreenSecond(hero,
+                levelRandomizer, secondChallengeScreenExits,
+                secondChallengeMonsters, secondChallengeItems); //*********************************************************
         levelSix = new LevelSixScreen(hero,
                 levelRandomizer, levelSixScreenExits,
                 levelSixMonsters, levelSixItems);
@@ -138,6 +158,9 @@ public class LevelSetup {
                 new LevelSevenScreen(hero,
                         levelRandomizer, levelSevenScreenExits,
                         levelSevenMonsters, levelSevenItems);
+        thirdChallenge = new ChallengeScreenThird(hero,
+                levelRandomizer, thirdChallengeScreenExits,
+                thirdChallengeMonsters, thirdChallengeItems); //*********************************************************
         levelEight =
                 new LevelEightScreen(hero,
                         levelRandomizer, levelEightScreenExits,
@@ -181,6 +204,10 @@ public class LevelSetup {
                 new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen", false);
         vaccineScreenWinScreen =
                 new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", true);
+
+        level3FirstChallenge = new Exit(ExitType.LEFT, ExitType.RIGHT, "Level 3", "Challenge 1", true); //***************
+        level5SecondChallenge = new Exit(ExitType.RIGHT, ExitType.LEFT, "Level 5", "Challenge 2", true); //***************
+        level7ThirdChallenge = new Exit(ExitType.LEFT, ExitType.RIGHT, "Level 7", "Challenge 3", true); //***************
     }
 
     private void initializeExitArrays() {
@@ -189,13 +216,18 @@ public class LevelSetup {
             intialGameScreenWeaponsScreen,
             intialGameScreenTrainingScreen,
             intialGameScreenExitGame};
+
+        firstChallengeScreenExits = new Exit[]{level3FirstChallenge}; //*******************************************
+        secondChallengeScreenExits = new Exit[]{level5SecondChallenge}; //*******************************************
+        thirdChallengeScreenExits = new Exit[]{level7ThirdChallenge}; //*******************************************
+
         levelOneScreenExits = new Exit[]{initialGameScreenLevel1, level1Level2};
         levelTwoScreenExits = new Exit[]{level1Level2, level2Level3};
-        levelThreeScreenExits = new Exit[]{level2Level3, level3Level4};
+        levelThreeScreenExits = new Exit[]{level2Level3, level3Level4, level3FirstChallenge};
         levelFourScreenExits = new Exit[]{level3Level4, level4Level5};
-        levelFiveScreenExits = new Exit[]{level4Level5,  level5Level6};
+        levelFiveScreenExits = new Exit[]{level4Level5,  level5Level6, level5SecondChallenge};
         levelSixScreenExits = new Exit[]{level5Level6, level6Level7};
-        levelSevenScreenExits = new Exit[]{level6Level7, level7Level8};
+        levelSevenScreenExits = new Exit[]{level6Level7, level7Level8, level7ThirdChallenge};
         levelEightScreenExits = new Exit[]{level7Level8, level8BossScreen};
         weaponsScreenExits = new Exit[]{intialGameScreenWeaponsScreen};
         trainingScreenExits = new Exit[]{intialGameScreenTrainingScreen};
@@ -215,6 +247,9 @@ public class LevelSetup {
         initializeMonsterLevelEightArrayLists();
         initializeMonsterLevelBossArrayLists();
 
+        initializeMonsterFirstChallengeArrayLists(); //*****************************************************
+        initializeMonsterSecondChallengeArrayLists(); //*****************************************************
+        initializeMonsterThirdChallengeArrayLists(); //*****************************************************
     }
 
     private void initializeMonsterTrainingArrayLists() {
@@ -464,6 +499,29 @@ public class LevelSetup {
                         "monster9", "Boss Screen"));
     }
 
+    private void initializeMonsterFirstChallengeArrayLists() { //**************************************************
+        firstChallengeMonsters = new ArrayList<Monster>();
+        firstChallengeMonsters.add(
+                new Monster(MonsterType.FAANTIMASKER, "Down",
+                        1, 5, 10,
+                        "monster1", "Challenge 1"));
+    }
+    private void initializeMonsterSecondChallengeArrayLists() { //**************************************************
+        secondChallengeMonsters = new ArrayList<Monster>();
+        secondChallengeMonsters.add(
+                new Monster(MonsterType.FAANTIMASKER, "Down",
+                        1, 5, 10,
+                        "monster1", "Challenge 2"));
+    }
+
+    private void initializeMonsterThirdChallengeArrayLists() { //**************************************************
+        thirdChallengeMonsters = new ArrayList<Monster>();
+        thirdChallengeMonsters.add(
+                new Monster(MonsterType.FAANTIMASKER, "Down",
+                        1, 5, 10,
+                        "monster1", "Challenge 3"));
+    }
+
     private void initializeItemArrayLists() {
         initializeWeaponsArrayLists();
         initializeItemLevelOneArrayLists();
@@ -475,6 +533,11 @@ public class LevelSetup {
         initializeItemLevelSevenArrayLists();
         initializeItemLevelEightArrayLists();
         initializeItemBossArrayLists();
+
+        initializeItemFirstChallengeArrayLists();
+        initializeItemSecondChallengeArrayLists();
+        initializeItemThirdChallengeArrayLists();
+
     }
 
     private void initializeWeaponsArrayLists() {
@@ -576,6 +639,26 @@ public class LevelSetup {
         bossItems = new ArrayList<Collectable>();
     }
 
+    private void initializeItemFirstChallengeArrayLists() {
+        firstChallengeItems = new ArrayList<Collectable>();
+
+        firstChallengeItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
+        firstChallengeItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
+    }
+
+    private void initializeItemSecondChallengeArrayLists() {
+        secondChallengeItems = new ArrayList<Collectable>();
+
+        secondChallengeItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
+        secondChallengeItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
+    }
+
+    private void initializeItemThirdChallengeArrayLists() {
+        thirdChallengeItems = new ArrayList<Collectable>();
+
+        thirdChallengeItems.add(new N95("N95Mask_1", 5, 9, false, 1, 10));
+        thirdChallengeItems.add(new Potion("ToiletPaper_1", 13, 6, false, 1, 2));
+    }
     /**
      *
      * @return Initial Game Screen
@@ -599,6 +682,7 @@ public class LevelSetup {
     public LevelScreen getLevelTwo() {
         return levelTwo;
     }
+
 
     /**
      *
@@ -679,4 +763,22 @@ public class LevelSetup {
     public LevelScreen getVaccineScreen() {
         return vaccineScreen;
     }
+
+    /**
+     *
+     * @return First Challenge Screen
+     */
+    public ChallengeScreen getFirstChallenge() { return firstChallenge; } //*******************************************
+
+    /**
+     *
+     * @return Second Challenge Screen
+     */
+    public ChallengeScreen getSecondChallenge() { return secondChallenge; } //*******************************************
+
+    /**
+     *
+     * @return Third Challenge Screen
+     */
+    public ChallengeScreen getThirdChallenge() { return thirdChallenge; } //*******************************************
 }

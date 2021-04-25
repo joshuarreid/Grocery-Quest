@@ -1,11 +1,15 @@
 package view;
 
 import javafx.scene.layout.StackPane;
-import model.*;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
+import model.Collectable;
+import model.Exit;
+import model.LevelRandomizer;
+import model.Monster;
+import model.Player;
 
 import java.util.ArrayList;
 

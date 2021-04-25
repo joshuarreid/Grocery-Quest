@@ -34,8 +34,11 @@ public class LevelRandomizer {
             "#7e7ee0",
             "#cbc0d3",
             "#fcd5ce",
+            "#9fc7ff",
             "#1d81cb",
-            "#c29a59"
+            "#c29a59",
+            "#798aa7",
+            "#f4c450"
 
         };
         //Adding background objects to stack

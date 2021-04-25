@@ -35,9 +35,9 @@ public abstract class LevelScreen {
     protected Player hero;
     protected Board board;
     private String background;
-    private Exit[] exits;
+    protected Exit[] exits;
     private String iD;
-    private Scene gameScene;
+    protected Scene gameScene;
     private ArrayList<Monster> monsters;
     private ArrayList<Collectable> items;
     protected Inventory inventory;

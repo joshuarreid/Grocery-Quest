@@ -247,31 +247,13 @@ public class Board {
         }
         //If detect a node
         if (hiddenBoard[row][col] != null) {
-            //Check node if monster
-            if (hiddenBoard[row][col].substring(0, 7).equals("monster")) {
+            //Check node if monster, first if statement is needed bc I encountered index out of bounds exception while playing - Josh Josh
+            if (hiddenBoard[row][col].length() >= 8 && hiddenBoard[row][col].substring(0, 7).equals("monster")) {
                 return hiddenBoard[row][col];
             }
         }
         return null;
     }
-
-    // need to fix this method
-    //    public boolean removeObject(String id, int x, int y, int rowSpan, int colSpan) {
-    //        for (Node node : this.gridPane.getChildren()) {
-    //            if (node != null
-    //                    && node.getId() != null
-    //                    && node.getId().equals(id)) {
-    ////                this.hiddenBoard[y + 1][x + 1] = null;
-    //                for (int i = y; i < (y + rowSpan); i++) {
-    //                    for (int j = x; j < (x + colSpan); j++) {
-    //                        hiddenBoard[i + 1][j + 1] = null;
-    //                    }
-    //                }
-    //                return this.gridPane.getChildren().remove(node);
-    //            }
-    //        }
-    //        return false;
-    //    }
 
     /**
      *
@@ -339,6 +321,27 @@ public class Board {
     public Exit onExit(Player player) {
         int[] playerCoordinates = player.getPlayerPosition();
         Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+        return exit;
+    }
+
+    public Exit onExit(Player player, Exit exit , GameModel gameModel) {
+        int[] playerCoordinates = player.getPlayerPosition();
+//        Exit exit = exitBoard[playerCoordinates[1]][playerCoordinates[0]];
+        switch (exit.getExitType(gameModel.getState())) {
+            case TOP:
+                player.getPlayerMovement().setYPosition(maxRow - 1);
+                break;
+            case BOTTOM:
+                player.getPlayerMovement().setYPosition(0);
+                break;
+            case LEFT:
+                player.getPlayerMovement().setXPosition(maxColumn - 1);
+                break;
+            case RIGHT:
+                player.getPlayerMovement().setXPosition(0);
+                break;
+            default:
+        }
         return exit;
     }
 }

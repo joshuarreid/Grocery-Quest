@@ -11,25 +11,60 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import model.*;
 
-public class ChallengeScreen {
+import java.util.ArrayList;
+
+public abstract class ChallengeScreen extends LevelScreen {
     private int width;
     private int height;
-    private Button playButton;
-    private Button exitButton;
+    private Button acceptButton;
+    private Button declineButton;
+    private Scene challengeScreenScene;
+    /**
+     * "question" == current scene is question scene.
+     * "room" == current scene is room.
+     */
+    private String state;
+
 
     private static final String IDLE_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #F68C35";
     private static final String HOVERED_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #BF6C2E";
 
-    public ChallengeScreen(int width, int height) {
-        this.width = width;
-        this.height = height;
-        playButton = new Button();
-        exitButton = new Button();
+    public ChallengeScreen(Player hero,
+                           LevelRandomizer lr, Exit[] exits, String id,ArrayList<Monster> monsters,
+                           ArrayList<Collectable> items) {
+        super(hero, lr, exits, id, monsters, items);
+        acceptButton = new Button();
+        declineButton = new Button();
+        this.state = "question";
+        getChallenge();
     }
-    public Scene getScene() {
+
+    private int roomLoading = 0;
+
+    @Override
+    public Scene getScene(boolean initialEntrance) {
+
+        if(initialEntrance) {
+            return getChallengeScene();
+        } else {
+            if(roomLoading == 0){
+                roomLoading++;
+                return super.getScene(true);
+            } else {
+                return super.getScene(false);
+            }
+        }
+    }
+
+    private Scene getChallengeScene(){
+        return this.challengeScreenScene;
+    }
+
+    private void getChallenge() {
         BorderPane pane = new BorderPane();
         VBox top = new VBox();
         HBox middle = new HBox();
@@ -43,37 +78,41 @@ public class ChallengeScreen {
                 new Image("file:resources/pngs/Challenge.png"));
         title.setFitWidth(500);
         title.setPreserveRatio(true);
+        //super.board.addObject(title, "Challenge 1 Title", false, 0, 2, 15, 3);
 
         ImageView replay = new ImageView(
                 new Image("file:resources/pngs/PlayButton.png"));
         replay.setFitWidth(190);
         replay.setPreserveRatio(true);
+        //super.board.addObject(replay, "Challenge 1 Replay", false, 0, 2, 15, 3);
 
         ImageView exit = new ImageView(
                 new Image("file:resources/pngs/QuitButton.png"));
         exit.setFitWidth(190);
         exit.setPreserveRatio(true);
+        //super.board.addObject(exit, "Challenge 1 Exit", false, 0, 2, 15, 3);
 
-        playButton.setGraphic(replay);
-        playButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
-        playButton.setMinSize(190, 148);
-        playButton.setMaxSize(190, 148);
-        playButton.setOnMouseEntered(e -> playButton.setStyle(HOVERED_BUTTON_STYLE));
-        playButton.setOnMouseExited(e -> playButton.setStyle(IDLE_BUTTON_STYLE));
-        playButton.setId("replayButton");
+        acceptButton.setGraphic(replay);
+        acceptButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
+        acceptButton.setMinSize(190, 148);
+        acceptButton.setMaxSize(190, 148);
+        acceptButton.setOnMouseEntered(e -> acceptButton.setStyle(HOVERED_BUTTON_STYLE));
+        acceptButton.setOnMouseExited(e -> acceptButton.setStyle(IDLE_BUTTON_STYLE));
+        acceptButton.setId("replayButton");
 
-        exitButton.setGraphic(exit);
-        exitButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
-        exitButton.setMinSize(190, 148);
-        exitButton.setMaxSize(190, 148);
-        exitButton.setOnMouseEntered(e -> exitButton.setStyle(HOVERED_BUTTON_STYLE));
-        exitButton.setOnMouseExited(e -> exitButton.setStyle(IDLE_BUTTON_STYLE));
-        exitButton.setId("exitButton");
+        declineButton.setGraphic(exit);
+        declineButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
+        declineButton.setMinSize(190, 148);
+        declineButton.setMaxSize(190, 148);
+        declineButton.setOnMouseEntered(e -> declineButton.setStyle(HOVERED_BUTTON_STYLE));
+        declineButton.setOnMouseExited(e -> declineButton.setStyle(IDLE_BUTTON_STYLE));
+        declineButton.setId("exitButton");
 
-        Label playText = new Label("play again");
+        Label playText = new Label("accept");
         playText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
+        
 
-        Label exitText = new Label("exit game");
+        Label exitText = new Label("decline");
         exitText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
 
         //scene
@@ -84,7 +123,7 @@ public class ChallengeScreen {
         BorderPane.setMargin(top, insets);
 
         pane.setCenter(middle);
-        middle.getChildren().addAll(playButton, exitButton);
+        middle.getChildren().addAll(acceptButton, declineButton);
         middle.setSpacing(30);
 
         pane.setBottom(bottom);
@@ -92,18 +131,32 @@ public class ChallengeScreen {
         bottom.setSpacing(60);
         BorderPane.setMargin(bottom, insets);
 
-        Scene challengeScene = new Scene(pane, width, height);
+        challengeScreenScene = new Scene(pane, 660, 610);
 
-        return challengeScene;
+//        return challengeScene;
     }
 
-    public Button getPlayButton() {
-        return playButton;
+    @Override
+    abstract void loadObjects();
+
+    public Button getAcceptButton() {
+        return acceptButton;
     }
 
-    public Button getExitButton() {
-        return exitButton;
+    public Button getDeclineButton() {
+        return declineButton;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Exit getExit() {
+       return super.exits[0];
+    }
 }
 
