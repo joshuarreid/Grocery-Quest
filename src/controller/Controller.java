@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 import model.Collectable;
@@ -16,6 +18,7 @@ import view.ChallengeScreen;
 import view.ConfigurationScreen;
 import view.StartScreen;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class Controller extends Application {
     private final int width = 600;
     private final int height = 600;
     private Player hero;
-
+    private  MediaPlayer mediaPlayer;
     @Override
     /**
      * Creates the stage and starts the game
@@ -54,6 +57,9 @@ public class Controller extends Application {
         mainWindow.setTitle("Grocery Quest");
         mainWindow.setResizable(false);
         gameModel = new GameModel();
+        Media media = new Media(new File("resources/music/opening.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
         initStartScreen();
     }
 
@@ -218,7 +224,7 @@ public class Controller extends Application {
                 gameModel,
                 difficultyLevel,
                 weaponChoice,
-                hero);
+                hero, mediaPlayer);
         lc.initialGameScreen();
     }
 

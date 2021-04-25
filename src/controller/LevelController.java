@@ -4,6 +4,8 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -11,6 +13,8 @@ import model.*;
 import view.LevelScreen;
 import view.WinScreen;
 import view.LoseScreen;
+
+import java.io.File;
 
 
 /**
@@ -36,6 +40,8 @@ public class LevelController {
     private AnimationTimer timer;
     private int currentSelectedItem;
     private ItemRandomizer itemRandomizer;
+
+    private  MediaPlayer mediaPlayer;
 
     private boolean gameScreenInitialEntrance;
     private boolean levelOneInitialEntrance;
@@ -64,7 +70,7 @@ public class LevelController {
      * @param hero current Player
      */
     public LevelController(Stage mainWindow, GameModel gameModel, int difficultyLevel,
-                           String weaponChoice, Player hero) {
+                           String weaponChoice, Player hero, MediaPlayer mediaPlayer) {
         this.mainWindow = mainWindow;
         this.gameModel = gameModel;
         this.difficultyLevel = difficultyLevel;
@@ -92,6 +98,8 @@ public class LevelController {
         firstChallengeInitialEntrance = true;
         secondChallengeInitialEntrance = true;
         thirdChallengeInitialEntrance = true;
+
+        this.mediaPlayer = mediaPlayer;
 
         timer = new AnimationTimer() {
             @Override
@@ -301,11 +309,17 @@ public class LevelController {
      */
     private void loseScreen() {
         timer.stop();
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/ending.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         gameModel.setState("Lose Screen");
         LoseScreen screen = new LoseScreen(width, height);
         Button replayButton = screen.getReplayButton();
         replayButton.setOnAction(e -> {
             try {
+                mediaPlayer.stop();
                 Controller newGame = new Controller();
                 newGame.start(mainWindow);
             } catch (Exception exception) {
@@ -316,6 +330,7 @@ public class LevelController {
         exitButton.setOnAction(e -> {
             System.exit(0);
         });
+
         Scene scene = screen.getScene();
         mainWindow.setScene(scene);
     }
