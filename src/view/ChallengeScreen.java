@@ -15,11 +15,12 @@ import model.*;
 
 import java.util.ArrayList;
 
-public class ChallengeScreen extends LevelScreen {
+public abstract class ChallengeScreen extends LevelScreen {
     private int width;
     private int height;
     private Button acceptButton;
     private Button declineButton;
+    private Scene challengeScreenScene;
     /**
      * "question" == current scene is question scene.
      * "room" == current scene is room.
@@ -33,12 +34,13 @@ public class ChallengeScreen extends LevelScreen {
             "-fx-background-radius: 20; -fx-background-color: #BF6C2E";
 
     public ChallengeScreen(Player hero,
-                           LevelRandomizer lr, Exit[] exits, ArrayList<Monster> monsters,
+                           LevelRandomizer lr, Exit[] exits, String id,ArrayList<Monster> monsters,
                            ArrayList<Collectable> items) {
-        super(hero, lr, exits, "Challenge 1", monsters, items);
+        super(hero, lr, exits, id, monsters, items);
         acceptButton = new Button();
         declineButton = new Button();
         this.state = "question";
+        getChallenge();
     }
 
     private int roomLoading = 0;
@@ -47,7 +49,7 @@ public class ChallengeScreen extends LevelScreen {
     public Scene getScene(boolean initialEntrance) {
 
         if(initialEntrance) {
-            return getChallenge();
+            return getChallengeScene();
         } else {
             if(roomLoading == 0){
                 roomLoading++;
@@ -58,8 +60,11 @@ public class ChallengeScreen extends LevelScreen {
         }
     }
 
-    public Scene getChallenge() {
-        System.out.println("I'm in here");
+    private Scene getChallengeScene(){
+        return this.challengeScreenScene;
+    }
+
+    private void getChallenge() {
         BorderPane pane = new BorderPane();
         VBox top = new VBox();
         HBox middle = new HBox();
@@ -126,18 +131,13 @@ public class ChallengeScreen extends LevelScreen {
         bottom.setSpacing(60);
         BorderPane.setMargin(bottom, insets);
 
-        Scene challengeScene = new Scene(pane, 660, 610);
+        challengeScreenScene = new Scene(pane, 660, 610);
 
-        return challengeScene;
+//        return challengeScene;
     }
 
     @Override
-    void loadObjects() {
-        ImageView cart = new ImageView(new Image("file:resources/pngs/ShoppingCart.png"));
-        cart.setFitWidth(30);
-        cart.setFitHeight(30);
-        super.board.addObject(cart, "cart", true, 10, 1, 10, 1);
-    }
+    abstract void loadObjects();
 
     public Button getAcceptButton() {
         return acceptButton;

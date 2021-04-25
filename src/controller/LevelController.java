@@ -43,7 +43,6 @@ public class LevelController {
     private boolean levelThreeInitialEntrance;
     private boolean levelFourInitialEntrance;
     private boolean levelFiveInitialEntrance;
-    private boolean firstChallengeInitialEntrance;
     private boolean levelSixInitialEntrance;
     private boolean levelSevenInitialEntrance;
     private boolean levelEightInitialEntrance;
@@ -51,6 +50,10 @@ public class LevelController {
     private boolean vaccineInitialEntrance;
     private boolean trainingInitialEntrance;
     private boolean weaponsInitialEntrance;
+
+    private boolean firstChallengeInitialEntrance;
+    private boolean secondChallengeInitialEntrance;
+    private boolean thirdChallengeInitialEntrance;
     /**
      * Level Controller constructor
      *
@@ -78,7 +81,6 @@ public class LevelController {
         levelThreeInitialEntrance = true;
         levelFourInitialEntrance = true;
         levelFiveInitialEntrance = true;
-        firstChallengeInitialEntrance = true;
         levelSixInitialEntrance = true;
         levelSevenInitialEntrance = true;
         levelEightInitialEntrance = true;
@@ -86,6 +88,10 @@ public class LevelController {
         vaccineInitialEntrance = true;
         trainingInitialEntrance = true;
         weaponsInitialEntrance = true;
+
+        firstChallengeInitialEntrance = true;
+        secondChallengeInitialEntrance = true;
+        thirdChallengeInitialEntrance = true;
 
         timer = new AnimationTimer() {
             @Override
@@ -134,36 +140,6 @@ public class LevelController {
         currentLevelScreen = levelSetup.getLevelTwo();
         levelTwoInitialEntrance = (levelTwoInitialEntrance ? false : false);
         moveCharacter(mainWindow, currentScene, hero, currentBoard);
-    }
-
-    /**
-     * Displays first challenge screen
-     */
-    public void firstChallengeScreen() {
-        timer.stop();
-        gameModel.setState("Challenge 1");
-        currentScene = levelSetup.getFirstChallenge().getScene(firstChallengeInitialEntrance);
-        if(levelSetup.getFirstChallenge().getState().compareTo("question") == 0){
-            System.out.println("in here");
-            Button yes = levelSetup.getFirstChallenge().getAcceptButton();
-            Button no = levelSetup.getFirstChallenge().getDeclineButton();
-            yes.setOnAction(e -> {
-                firstChallengeInitialEntrance = false;
-                levelSetup.getFirstChallenge().setState("room");
-                System.out.println("yes");
-//                levelSetup.getFirstChallenge().getExit().setIsOpen(false);
-                firstChallengeScreen();
-            });
-            no.setOnAction(e -> {
-                System.out.println("no");
-            });
-            mainWindow.setScene(currentScene);
-            mainWindow.show();
-        } else {
-            currentBoard = levelSetup.getFirstChallenge().getBoard();
-            System.out.println("After get scene");
-            moveCharacter(mainWindow, currentScene, hero, currentBoard);
-        }
     }
 
     /**
@@ -352,6 +328,105 @@ public class LevelController {
     }
 
     /**
+     * Displays first challenge screen
+     */
+    public void firstChallengeScreen() {
+        timer.stop();
+        gameModel.setState("Challenge 1");
+        currentScene = levelSetup.getFirstChallenge().getScene(firstChallengeInitialEntrance);
+        if(levelSetup.getFirstChallenge().getState().compareTo("question") == 0){
+            Button yes = levelSetup.getFirstChallenge().getAcceptButton();
+            Button no = levelSetup.getFirstChallenge().getDeclineButton();
+            yes.setOnAction(e -> {
+                firstChallengeInitialEntrance = false;
+                levelSetup.getFirstChallenge().setState("room");
+                levelSetup.getFirstChallenge().getExit().setIsOpen(false);
+                firstChallengeScreen();
+            });
+            mainWindow.setScene(currentScene);
+            mainWindow.show();
+            no.setOnAction(e -> {
+                currentBoard.removeObject(
+                        "player",
+                        hero.getPlayerMovement().getYPosition(), 1,
+                        hero.getPlayerMovement().getXPosition(), 1);
+                currentBoard.onExit(hero, levelSetup.getFirstChallenge().getExit(),gameModel);
+                levelThreeScreen();
+            });
+        } else {
+            currentBoard = levelSetup.getFirstChallenge().getBoard();
+            currentLevelScreen = levelSetup.getFirstChallenge();
+            moveCharacter(mainWindow, currentScene, hero, currentBoard);
+        }
+    }
+
+    /**
+     * Displays first challenge screen
+     */
+    public void secondChallengeScreen() {
+        timer.stop();
+        gameModel.setState("Challenge 2");
+        currentScene = levelSetup.getSecondChallenge().getScene(secondChallengeInitialEntrance);
+        if(levelSetup.getSecondChallenge().getState().compareTo("question") == 0){
+            Button yes = levelSetup.getSecondChallenge().getAcceptButton();
+            Button no = levelSetup.getSecondChallenge().getDeclineButton();
+            yes.setOnAction(e -> {
+                secondChallengeInitialEntrance = false;
+                levelSetup.getSecondChallenge().setState("room");
+                levelSetup.getSecondChallenge().getExit().setIsOpen(false);
+                secondChallengeScreen();
+            });
+            mainWindow.setScene(currentScene);
+            mainWindow.show();
+            no.setOnAction(e -> {
+                currentBoard.removeObject(
+                        "player",
+                        hero.getPlayerMovement().getYPosition(), 1,
+                        hero.getPlayerMovement().getXPosition(), 1);
+                currentBoard.onExit(hero, levelSetup.getSecondChallenge().getExit(),gameModel);
+                levelFiveScreen();
+            });
+        } else {
+            currentBoard = levelSetup.getSecondChallenge().getBoard();
+            currentLevelScreen = levelSetup.getSecondChallenge();
+            moveCharacter(mainWindow, currentScene, hero, currentBoard);
+        }
+    }
+
+    /**
+     * Displays first challenge screen
+     */
+    public void thirdChallengeScreen() {
+        timer.stop();
+        gameModel.setState("Challenge 3");
+        currentScene = levelSetup.getThirdChallenge().getScene(thirdChallengeInitialEntrance);
+        if(levelSetup.getThirdChallenge().getState().compareTo("question") == 0){
+            Button yes = levelSetup.getThirdChallenge().getAcceptButton();
+            Button no = levelSetup.getThirdChallenge().getDeclineButton();
+            yes.setOnAction(e -> {
+                thirdChallengeInitialEntrance = false;
+                levelSetup.getThirdChallenge().setState("room");
+                levelSetup.getThirdChallenge().getExit().setIsOpen(false);
+                thirdChallengeScreen();
+            });
+            mainWindow.setScene(currentScene);
+            mainWindow.show();
+            no.setOnAction(e -> {
+                currentBoard.removeObject(
+                        "player",
+                        hero.getPlayerMovement().getYPosition(), 1,
+                        hero.getPlayerMovement().getXPosition(), 1);
+                currentBoard.onExit(hero, levelSetup.getThirdChallenge().getExit(),gameModel);
+                levelSevenScreen();
+            });
+        } else {
+            currentBoard = levelSetup.getThirdChallenge().getBoard();
+            currentLevelScreen = levelSetup.getThirdChallenge();
+            moveCharacter(mainWindow, currentScene, hero, currentBoard);
+        }
+    }
+
+    /**
      * launches the appropriate next screen based of of exit and current state
      *
      * @param exit exit that is being used
@@ -366,9 +441,6 @@ public class LevelController {
             break;
         case "Level 2":
             levelTwoScreen();
-            break;
-        case "Challenge 1":
-            firstChallengeScreen();
             break;
         case "Level 3":
             levelThreeScreen();
@@ -405,6 +477,15 @@ public class LevelController {
             break;
         case "Exit Game":
             exitGame();
+            break;
+        case "Challenge 1":
+            firstChallengeScreen();
+            break;
+        case "Challenge 2":
+            secondChallengeScreen();
+            break;
+        case "Challenge 3":
+            thirdChallengeScreen();
             break;
         default:
         }
@@ -669,7 +750,6 @@ public class LevelController {
      * @param monster the monster the player is attacking
      */
     private void updateLevelScreen(boolean update, Monster monster) {
-        System.out.println("update");
         timer.stop();
         if (monster != null) {
             currentLevelScreen.updateScene(update, monster);
