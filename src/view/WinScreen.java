@@ -11,37 +11,48 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import model.Statistics;
 
 public class WinScreen {
     private int width;
     private int height;
     private Button replayButton;
     private Button exitButton;
+    private Statistics statistics;
 
     private static final String IDLE_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #83AA51";
     private static final String HOVERED_BUTTON_STYLE =
             "-fx-background-radius: 20; -fx-background-color: #688741";
 
-    public WinScreen(int width, int height) {
+    public WinScreen(int width, int height, Statistics statistics) {
         this.width = width;
         this.height = height;
+        this.statistics = statistics;
         replayButton = new Button();
         exitButton = new Button();
     }
     public Scene getScene() {
-        BorderPane pane = new BorderPane();
+        VBox pane = new VBox();
         VBox top = new VBox();
+        VBox middle = new VBox();
         VBox left = new VBox();
         VBox right = new VBox();
-        HBox middle = new HBox();
-//        HBox bottom = new HBox();
+        HBox bottom = new HBox();
+        pane.setAlignment(Pos.CENTER);
         top.setAlignment(Pos.CENTER);
         middle.setAlignment(Pos.CENTER);
-//        bottom.setAlignment(Pos.CENTER);
+        bottom.setAlignment(Pos.CENTER);
         left.setAlignment(Pos.CENTER);
         right.setAlignment(Pos.CENTER);
         pane.setStyle("-fx-background-color: #83AA51");
+
+        Label timeText = new Label("time - " + (statistics.getTimeElapsed() / 60) + ":" + (statistics.getTimeElapsed() % 60));
+        timeText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
+        Label itemsText = new Label("items collected - " + statistics.getItems());
+        itemsText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
+        Label monstersText = new Label("antimaskers masked - " + statistics.getAntimaskers());
+        monstersText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
 
         ImageView title = new ImageView(
                 new Image("file:resources/pngs/YouWon.png"));
@@ -81,11 +92,11 @@ public class WinScreen {
         exitText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
 
         //scene
-        pane.setTop(top);
-        top.getChildren().addAll(title);
+        top.getChildren().addAll(timeText, itemsText, monstersText);
         top.setSpacing(20);
-        Insets insets = new Insets(80,40,40,40);
-        BorderPane.setMargin(top, insets);
+
+        middle.getChildren().addAll(title);
+//        middle.setSpacing(20);
 
         left.getChildren().addAll(replayButton, replayText);
         left.setSpacing(10);
@@ -93,9 +104,11 @@ public class WinScreen {
         right.getChildren().addAll(exitButton, exitText);
         right.setSpacing(10);
 
-        pane.setCenter(middle);
-        middle.getChildren().addAll(left, right);
-        middle.setSpacing(100);
+        bottom.getChildren().addAll(left, right);
+        bottom.setSpacing(100);
+
+        pane.getChildren().addAll(top,middle,bottom);
+        pane.setSpacing(30);
 
         Scene winScene = new Scene(pane, width, height);
 
