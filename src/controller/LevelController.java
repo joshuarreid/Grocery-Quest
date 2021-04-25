@@ -128,6 +128,12 @@ public class LevelController {
      */
     public void levelOneScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/option1.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         gameModel.setState("Level 1");
         currentScene = levelSetup.getLevelOne().getScene(levelOneInitialEntrance);
         currentBoard = levelSetup.getLevelOne().getBoard();
@@ -181,6 +187,12 @@ public class LevelController {
      */
     public void levelFiveScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/option2.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         gameModel.setState("Level 5");
         currentScene = levelSetup.getLevelFive().getScene(levelFiveInitialEntrance);
         currentBoard = levelSetup.getLevelFive().getBoard();
@@ -285,11 +297,18 @@ public class LevelController {
      */
     private void winScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/win.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         gameModel.setState("Win Screen");
         WinScreen screen = new WinScreen(width, height);
         Button replayButton = screen.getReplayButton();
         replayButton.setOnAction(e -> {
             try {
+                mediaPlayer.stop();
                 Controller newGame = new Controller();
                 newGame.start(mainWindow);
             } catch (Exception exception) {
