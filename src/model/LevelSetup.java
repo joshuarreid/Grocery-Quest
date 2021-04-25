@@ -193,6 +193,8 @@ public class LevelSetup {
                 new Exit(ExitType.RIGHT, ExitType.LEFT, "Game Screen", "Training Screen", true);
         intialGameScreenExitGame =
                 new Exit(ExitType.BOTTOM, ExitType.TOP, "Game Screen", "Exit Game", true);
+
+        //******** can set these to true when adding layouts - for claudia :)
         level1Level2 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 1", "Level 2", false);
         level2Level3 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 2", "Level 3", false);
         level3Level4 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 3", "Level 4", false);
@@ -203,8 +205,10 @@ public class LevelSetup {
         level8BossScreen = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 8", "Boss Screen", false);
         bossScreenVaccineScreen =
                 new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen", false);
+
         vaccineScreenWinScreen =
-                new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", true);
+                new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", false);
+        //*********
 
         level3FirstChallenge = new Exit(ExitType.LEFT, ExitType.RIGHT, "Level 3", "Challenge 1", true); //***************
         level5SecondChallenge = new Exit(ExitType.RIGHT, ExitType.LEFT, "Level 5", "Challenge 2", true); //***************
@@ -702,13 +706,14 @@ public class LevelSetup {
     }
 
     private void initializeItemBossArrayLists() {
+
         bossItems = new ArrayList<Collectable>();
     }
 
     private void initializeVaccineArrayLists() {
         vaccineItems = new ArrayList<Collectable>();
         vaccineItems.add(new Potion("Vaccine_1", 9,9,false,1,10));
-        vaccineItems.add(new Potion("Vaccine_1", 11,9,false,1,10));
+        vaccineItems.add(new Potion("Vaccine_2", 11,9,false,1,10));
     }
 
     private void initializeItemFirstChallengeArrayLists() {
