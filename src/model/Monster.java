@@ -164,6 +164,10 @@ public class Monster {
             this.monsterImage = new ImageView(
                     new Image("file:resources/pngs/Trump" + currentSide + ".png"));
             break;
+        case SNEEZECLOUD:
+            this.monsterImage = new ImageView(
+                    new Image("file:resources/pngs/SneezeCloud.png"));
+            break;
         default:
         }
 

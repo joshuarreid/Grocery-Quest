@@ -261,6 +261,8 @@ public class LevelSetup {
         trainingMonsters = new ArrayList<Monster>();
         trainingMonsters.add(new Monster(MonsterType.FAANTIMASKER, "Down", 1, 9, 7,
                 "monster1", "Training"));
+        trainingMonsters.add(new Monster(MonsterType.SNEEZECLOUD, "Down", 1, 10, 7,
+                "monster2", "Training"));
     }
 
     private void initializeMonsterLevelOneArrayLists() {

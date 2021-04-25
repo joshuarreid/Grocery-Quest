@@ -9,6 +9,7 @@ public enum MonsterType {
     MAANTIMASKER,
     COVIDBOSSLARGE,
     COVIDBOSSSMALL,
-    TRUMP
+    TRUMP,
+    SNEEZECLOUD,
 }
 
