@@ -44,7 +44,11 @@ public class Monster {
         this.monsterType = monsterType;
         this.currentSide = currentSide;
         this.healthHitChange = healthHitChange;
-        this.monsterHealth = new MonsterHealth(4, this.healthHitChange, 30);
+        if(monsterType == MonsterType.COVIDBOSSLARGE) {
+            this.monsterHealth = new BossHealth(24, this.healthHitChange, 30);
+        } else {
+            this.monsterHealth = new MonsterHealth(4, this.healthHitChange, 30);
+        }
         this.row = row;
         this.col = col;
         this.id = iD;

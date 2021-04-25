@@ -10,10 +10,10 @@ import javafx.scene.image.ImageView;
  * monster internally and visually.
  */
 public class MonsterHealth {
-    private int healthLevel; //current health level
-    private int healthHitChange;
-    private final double barWidth;
-    private final ImageView[] healthBARS = {
+    protected int healthLevel; //current health level
+    protected int healthHitChange;
+    protected final double barWidth;
+    protected final ImageView[] healthBARS = {
         new ImageView(new Image("file:resources/pngs/EnemyHealthBar0.png")),
         new ImageView(new Image("file:resources/pngs/EnemyHealthBar1.png")),
         new ImageView(new Image("file:resources/pngs/EnemyHealthBar2.png")),
@@ -51,20 +51,20 @@ public class MonsterHealth {
         return barSettings(healthBARS[healthLevel]);
     }
 
-    /**
-     * Increases the health of the monster internally and
-     * visually
-     *
-     * @param amount the amount to increase by
-     * @return the updated "increased" health bar imageview
-     */
-    public ImageView addHealth(int amount) {
-        int newHealth = this.healthLevel + amount;
-        if (newHealth > 10) {
-            this.healthLevel = 10;
-        }
-        return barSettings(healthBARS[healthLevel]);
-    }
+//    /**
+//     * Increases the health of the monster internally and
+//     * visually
+//     *
+//     * @param amount the amount to increase by
+//     * @return the updated "increased" health bar imageview
+//     */
+//    public ImageView addHealth(int amount) {
+//        int newHealth = this.healthLevel + amount;
+//        if (newHealth > 4) {
+//            this.healthLevel = 4;
+//        }
+//        return barSettings(healthBARS[healthLevel]);
+//    }
 
     /**
      *
@@ -88,7 +88,7 @@ public class MonsterHealth {
      * @param bar the bar to modify
      * @return bar
      */
-    private ImageView barSettings(ImageView bar) {
+    protected ImageView barSettings(ImageView bar) {
         bar.setFitWidth(barWidth);
         bar.setPreserveRatio(true);
         bar.setId("health");
