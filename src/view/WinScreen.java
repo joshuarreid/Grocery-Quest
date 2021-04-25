@@ -32,11 +32,15 @@ public class WinScreen {
     public Scene getScene() {
         BorderPane pane = new BorderPane();
         VBox top = new VBox();
+        VBox left = new VBox();
+        VBox right = new VBox();
         HBox middle = new HBox();
-        HBox bottom = new HBox();
+//        HBox bottom = new HBox();
         top.setAlignment(Pos.CENTER);
         middle.setAlignment(Pos.CENTER);
-        bottom.setAlignment(Pos.CENTER);
+//        bottom.setAlignment(Pos.CENTER);
+        left.setAlignment(Pos.CENTER);
+        right.setAlignment(Pos.CENTER);
         pane.setStyle("-fx-background-color: #83AA51");
 
         ImageView title = new ImageView(
@@ -80,17 +84,18 @@ public class WinScreen {
         pane.setTop(top);
         top.getChildren().addAll(title);
         top.setSpacing(20);
-        Insets insets = new Insets(50);
+        Insets insets = new Insets(80,40,40,40);
         BorderPane.setMargin(top, insets);
 
-        pane.setCenter(middle);
-        middle.getChildren().addAll(replayButton, exitButton);
-        middle.setSpacing(30);
+        left.getChildren().addAll(replayButton, replayText);
+        left.setSpacing(10);
 
-        pane.setBottom(bottom);
-        bottom.getChildren().addAll(replayText, exitText);
-        bottom.setSpacing(60);
-        BorderPane.setMargin(bottom, insets);
+        right.getChildren().addAll(exitButton, exitText);
+        right.setSpacing(10);
+
+        pane.setCenter(middle);
+        middle.getChildren().addAll(left, right);
+        middle.setSpacing(100);
 
         Scene winScene = new Scene(pane, width, height);
 

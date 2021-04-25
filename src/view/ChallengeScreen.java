@@ -67,30 +67,31 @@ public abstract class ChallengeScreen extends LevelScreen {
     private void getChallenge() {
         BorderPane pane = new BorderPane();
         VBox top = new VBox();
+        VBox left = new VBox();
+        VBox right = new VBox();
         HBox middle = new HBox();
-        HBox bottom = new HBox();
+//        HBox bottom = new HBox();
         top.setAlignment(Pos.CENTER);
         middle.setAlignment(Pos.CENTER);
-        bottom.setAlignment(Pos.CENTER);
+        left.setAlignment(Pos.CENTER);
+        right.setAlignment(Pos.CENTER);
+//        bottom.setAlignment(Pos.CENTER);
         pane.setStyle("-fx-background-color: #F68C35");
 
         ImageView title = new ImageView(
                 new Image("file:resources/pngs/Challenge.png"));
         title.setFitWidth(500);
         title.setPreserveRatio(true);
-        //super.board.addObject(title, "Challenge 1 Title", false, 0, 2, 15, 3);
 
         ImageView replay = new ImageView(
                 new Image("file:resources/pngs/PlayButton.png"));
         replay.setFitWidth(190);
         replay.setPreserveRatio(true);
-        //super.board.addObject(replay, "Challenge 1 Replay", false, 0, 2, 15, 3);
 
         ImageView exit = new ImageView(
                 new Image("file:resources/pngs/QuitButton.png"));
         exit.setFitWidth(190);
         exit.setPreserveRatio(true);
-        //super.board.addObject(exit, "Challenge 1 Exit", false, 0, 2, 15, 3);
 
         acceptButton.setGraphic(replay);
         acceptButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
@@ -108,32 +109,32 @@ public abstract class ChallengeScreen extends LevelScreen {
         declineButton.setOnMouseExited(e -> declineButton.setStyle(IDLE_BUTTON_STYLE));
         declineButton.setId("exitButton");
 
-        Label playText = new Label("accept");
-        playText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
+        Label acceptText = new Label("accept");
+        acceptText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
         
 
-        Label exitText = new Label("decline");
-        exitText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
+        Label declineText = new Label("decline");
+        declineText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
 
         //scene
         pane.setTop(top);
         top.getChildren().addAll(title);
         top.setSpacing(40);
-        Insets insets = new Insets(100,0,100, 0);
+        Insets insets = new Insets(100,40,40,40);
         BorderPane.setMargin(top, insets);
 
-        pane.setCenter(middle);
-        middle.getChildren().addAll(acceptButton, declineButton);
-        middle.setSpacing(30);
+        left.getChildren().addAll(acceptButton, acceptText);
+        left.setSpacing(10);
 
-        pane.setBottom(bottom);
-        bottom.getChildren().addAll(playText, exitText);
-        bottom.setSpacing(60);
-        BorderPane.setMargin(bottom, insets);
+        right.getChildren().addAll(declineButton, declineText);
+        right.setSpacing(10);
+
+        pane.setCenter(middle);
+        middle.getChildren().addAll(left, right);
+        middle.setSpacing(100);
 
         challengeScreenScene = new Scene(pane, 660, 610);
 
-//        return challengeScene;
     }
 
     @Override

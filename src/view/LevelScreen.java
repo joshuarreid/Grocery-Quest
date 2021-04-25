@@ -93,6 +93,16 @@ public abstract class LevelScreen {
             borderExitImage = new ImageView(
                     new Image("file:resources/pngs/FrameUpDown.png"));
             break;
+
+        case 3:
+            if(exits[2].getExitType(this.iD).equals(ExitType.LEFT)) {
+                borderExitImage = new ImageView(
+                        new Image("file:resources/pngs/FrameLeftUpDown.png"));
+            } else {
+                borderExitImage = new ImageView(
+                        new Image("file:resources/pngs/FrameRightUpDown.png"));
+            }
+            break;
         default:
         }
 
