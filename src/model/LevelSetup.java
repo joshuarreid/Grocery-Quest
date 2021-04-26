@@ -195,19 +195,19 @@ public class LevelSetup {
                 new Exit(ExitType.BOTTOM, ExitType.TOP, "Game Screen", "Exit Game", true);
 
         //******** can set these to true when adding layouts - for claudia :)
-        level1Level2 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 1", "Level 2", true);
-        level2Level3 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 2", "Level 3", true);
-        level3Level4 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 3", "Level 4", true);
-        level4Level5 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 4", "Level 5", true);
-        level5Level6 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 5", "Level 6", true);
-        level6Level7 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 6", "Level 7", true);
-        level7Level8 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 7", "Level 8", true);
-        level8BossScreen = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 8", "Boss Screen", true);
+        level1Level2 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 1", "Level 2", false);
+        level2Level3 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 2", "Level 3", false);
+        level3Level4 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 3", "Level 4", false);
+        level4Level5 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 4", "Level 5", false);
+        level5Level6 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 5", "Level 6", false);
+        level6Level7 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 6", "Level 7", false);
+        level7Level8 = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 7", "Level 8", false);
+        level8BossScreen = new Exit(ExitType.TOP, ExitType.BOTTOM, "Level 8", "Boss Screen", false);
         bossScreenVaccineScreen =
-                new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen", true);
+                new Exit(ExitType.TOP, ExitType.BOTTOM, "Boss Screen", "Vaccine Screen", false);
 
         vaccineScreenWinScreen =
-                new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", true);
+                new Exit(ExitType.TOP, ExitType.BOTTOM, "Vaccine Screen", "Win Screen", false);
         //*********
 
         level3FirstChallenge = new Exit(ExitType.LEFT, ExitType.RIGHT, "Level 3", "Challenge 1", true); //***************
