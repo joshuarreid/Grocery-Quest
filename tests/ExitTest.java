@@ -33,10 +33,7 @@ public class ExitTest extends ApplicationTest {
 
         //Moving player to first exit
         int stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
+
 
         //Saving position of player before Exit
         int initYPosition = PlayerMovement.getYPosition();
@@ -136,7 +133,7 @@ public class ExitTest extends ApplicationTest {
         clickOn("#thermometerSwordButton");
         clickOn("#easyButton");
         clickOn("#readyButton");
-        assertEquals("Game Screen", controller.getState());
+
 
         //Moving player to bottom exit
         int stepCounter = 1;
@@ -144,10 +141,9 @@ public class ExitTest extends ApplicationTest {
             press(KeyCode.DOWN).release(KeyCode.DOWN);
             stepCounter++;
         }
-
-
+        assertEquals("Game Screen", controller.getState());
         press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Inside", controller.getState());
+
     }
 
 
@@ -164,23 +160,7 @@ public class ExitTest extends ApplicationTest {
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //Moving player to first exit
-        int stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 1", controller.getState());
-
-        //Moving player to second exit
-        stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        completeLevelOne();
         assertEquals("Level 2", controller.getState());
     }
 
@@ -197,32 +177,8 @@ public class ExitTest extends ApplicationTest {
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //Moving player to first exit
-        int stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 1", controller.getState());
-
-        //Moving player to second exit
-        stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 2", controller.getState());
-
-        //Moving player to third exit
-        stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
+       completeLevelOne();
+       completeLevelTwo();
         assertEquals("Level 3", controller.getState());
     }
 
@@ -272,31 +228,7 @@ public class ExitTest extends ApplicationTest {
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //Moving player to first exit
-        int stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 1", controller.getState());
-
-        //Moving player to second exit
-        stepCounter = 1;
-        while (stepCounter <= 18) {
-            press(KeyCode.UP).release(KeyCode.UP);
-            stepCounter++;
-        }
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 2", controller.getState());
-
-        //Moving back
-        stepCounter = 1;
-        while (stepCounter <= 3) {
-            press(KeyCode.DOWN).release(KeyCode.DOWN);
-            stepCounter++;
-        }
+        completeLevelOne();
         press(KeyCode.SPACE).release(KeyCode.SPACE);
         assertEquals("Level 1", controller.getState());
     }
@@ -314,41 +246,159 @@ public class ExitTest extends ApplicationTest {
         clickOn("#readyButton");
         assertEquals("Game Screen", controller.getState());
 
-        //Moving player to first exit
+       completeLevelOne();
+       completeLevelTwo();
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+        assertEquals("Level 2", controller.getState());
+    }
+
+    /**
+     *  Completes level 1
+     */
+    public void completeLevelOne() {
+        //Moving player to first Level
         int stepCounter = 1;
         while (stepCounter <= 18) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
-
         press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 1", controller.getState());
-
-        //Moving player to second exit
+        //Moving player to monster
         stepCounter = 1;
-        while (stepCounter <= 18) {
+        while (stepCounter <= 8) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 2", controller.getState());
 
-        //Moving player to third exit
+
+        //Attacking first Monster
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+
+        //moving to second monster
+        press(KeyCode.DOWN).release(KeyCode.DOWN);
+
         stepCounter = 1;
-        while (stepCounter <= 18) {
+        while (stepCounter <= 5) {
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+            stepCounter += 1;
+        }
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+
+        stepCounter = 1;
+        while (stepCounter <= 13) {
+            press(KeyCode.LEFT).release(KeyCode.LEFT);
+            stepCounter += 1;
+        }
+
+        stepCounter = 1;
+        while (stepCounter <= 7) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter += 1;
+        }
+
+        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+        press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+
+        stepCounter = 1;
+        while (stepCounter <= 5) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter += 1;
+        }
+        stepCounter = 1;
+        while (stepCounter <= 6) {
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+            stepCounter += 1;
+        }
+        press(KeyCode.SPACE).release(KeyCode.SPACE);
+
+    }
+
+    /**
+     * Completes level 2
+     *
+     */
+    public void completeLevelTwo() {
+        int stepCounter = 1;
+        while (stepCounter <= 2) {
             press(KeyCode.UP).release(KeyCode.UP);
             stepCounter++;
         }
-        press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 3", controller.getState());
 
-        //Moving back
+        stepCounter = 1;
+        while (stepCounter <= 7) {
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+            stepCounter++;
+        }
+
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+
+        stepCounter = 1;
+        while (stepCounter <= 11) {
+            press(KeyCode.LEFT).release(KeyCode.LEFT);
+            stepCounter++;
+        }
+
+        press(KeyCode.UP).release(KeyCode.UP);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+
+        stepCounter = 1;
+        while (stepCounter <= 4) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
         stepCounter = 1;
         while (stepCounter <= 3) {
-            press(KeyCode.DOWN).release(KeyCode.DOWN);
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
+            stepCounter++;
+        }
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+
+        stepCounter = 1;
+        while (stepCounter <= 2) {
+            press(KeyCode.LEFT).release(KeyCode.LEFT);
+            stepCounter++;
+        }
+        stepCounter = 1;
+        while (stepCounter <= 3) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        press(KeyCode.Z).release(KeyCode.Z);
+        stepCounter = 1;
+        while (stepCounter <= 8) {
+            press(KeyCode.UP).release(KeyCode.UP);
+            stepCounter++;
+        }
+        stepCounter = 1;
+        while (stepCounter <= 3) {
+            press(KeyCode.RIGHT).release(KeyCode.RIGHT);
             stepCounter++;
         }
         press(KeyCode.SPACE).release(KeyCode.SPACE);
-        assertEquals("Level 2", controller.getState());
     }
+
 }
