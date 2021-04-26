@@ -3,10 +3,8 @@ package controller;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import model.*;
@@ -297,8 +295,8 @@ public class LevelController {
 
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/boss.mp3").toURI().toString());
-        mediaPlayer.setVolume(volume);
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
         mediaPlayer.play();
 
         gameModel.setState("Boss Screen");
@@ -317,8 +315,8 @@ public class LevelController {
 
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/win.mp3").toURI().toString());
-        mediaPlayer.setVolume(volume);
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
         mediaPlayer.play();
 
         gameModel.setState("Vaccine Screen");
