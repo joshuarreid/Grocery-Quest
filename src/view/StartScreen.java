@@ -58,15 +58,16 @@ public class StartScreen {
         inst.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 30));
 
         ImageView muteImage = new ImageView(
-                new Image("file:resources/pngs/mute.png"));
+                new Image("file:resources/pngs/Music.png"));
         muteImage.setFitWidth(40);
-        muteImage.setFitHeight(40);
+        muteImage.setPreserveRatio(true);
+//        muteImage.setFitHeight(40);
 
 
         mute.setGraphic(muteImage);
         mute.setStyle("-fx-background-color: #a0d3b2; -fx-background-radius: 5px;");
-        mute.setMinSize(40, 40);
-        mute.setMaxSize(40, 40);
+        mute.setMinSize(50, 50);
+        mute.setMaxSize(50, 50);
         mute.setOnMouseEntered(e -> mute.setStyle("-fx-background-color: #91bfa1; -fx-background-radius: 5px;"));
         mute.setOnMouseExited(e -> mute.setStyle("-fx-background-color: #a0d3b2; -fx-background-radius: 5px;"));
         mute.setId("muteButton");

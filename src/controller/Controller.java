@@ -62,7 +62,7 @@ public class Controller extends Application {
         Media media = new Media(new File("resources/music/opening.mp3").toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
-        volume = 0.5;
+        volume = 0.3;
         mediaPlayer.setVolume(volume);
         initStartScreen();
     }

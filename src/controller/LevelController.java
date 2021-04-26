@@ -169,6 +169,13 @@ public class LevelController {
      */
     public void levelThreeScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/option4.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.play();
+
         gameModel.setState("Level 3");
         currentScene = levelSetup.getLevelThree().getScene(levelThreeInitialEntrance);
         currentBoard = levelSetup.getLevelThree().getBoard();
@@ -228,6 +235,13 @@ public class LevelController {
      */
     public void levelSevenScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/option3.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.play();
+
         gameModel.setState("Level 7");
         currentScene = levelSetup.getLevelSeven().getScene(levelSevenInitialEntrance);
         currentBoard = levelSetup.getLevelSeven().getBoard();
@@ -280,6 +294,13 @@ public class LevelController {
      */
     public void bossScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/boss.mp3").toURI().toString());
+        mediaPlayer.setVolume(volume);
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         gameModel.setState("Boss Screen");
         currentScene = levelSetup.getBossScreen().getScene(bossInitialEntrance);
         currentBoard = levelSetup.getBossScreen().getBoard();
@@ -293,6 +314,13 @@ public class LevelController {
      */
     public void vaccineScreen() {
         timer.stop();
+
+        mediaPlayer.stop();
+        Media media = new Media(new File("resources/music/win.mp3").toURI().toString());
+        mediaPlayer.setVolume(volume);
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         gameModel.setState("Vaccine Screen");
         currentScene = levelSetup.getVaccineScreen().getScene(vaccineInitialEntrance);
         currentBoard = levelSetup.getVaccineScreen().getBoard();
@@ -306,12 +334,6 @@ public class LevelController {
      */
     private void winScreen() {
         timer.stop();
-        mediaPlayer.stop();
-        Media media = new Media(new File("resources/music/win.mp3").toURI().toString());
-        mediaPlayer.setVolume(volume);
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
-      
         statistics.endTime();
       
         gameModel.setState("Win Screen");
@@ -381,9 +403,17 @@ public class LevelController {
      */
     public void firstChallengeScreen() {
         timer.stop();
+
         gameModel.setState("Challenge 1");
         currentScene = levelSetup.getFirstChallenge().getScene(firstChallengeInitialEntrance);
         if(levelSetup.getFirstChallenge().getState().compareTo("question") == 0){
+
+            mediaPlayer.stop();
+            Media media = new Media(new File("resources/music/challenge.mp3").toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(volume);
+            mediaPlayer.play();
+
             Button yes = levelSetup.getFirstChallenge().getAcceptButton();
             Button no = levelSetup.getFirstChallenge().getDeclineButton();
             yes.setOnAction(e -> {
@@ -400,6 +430,7 @@ public class LevelController {
                         hero.getPlayerMovement().getYPosition(), 1,
                         hero.getPlayerMovement().getXPosition(), 1);
                 currentBoard.onExit(hero, levelSetup.getFirstChallenge().getExit(),gameModel);
+
                 levelThreeScreen();
             });
         } else {
@@ -414,9 +445,17 @@ public class LevelController {
      */
     public void secondChallengeScreen() {
         timer.stop();
+
         gameModel.setState("Challenge 2");
         currentScene = levelSetup.getSecondChallenge().getScene(secondChallengeInitialEntrance);
         if(levelSetup.getSecondChallenge().getState().compareTo("question") == 0){
+
+            mediaPlayer.stop();
+            Media media = new Media(new File("resources/music/challenge.mp3").toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(volume);
+            mediaPlayer.play();
+
             Button yes = levelSetup.getSecondChallenge().getAcceptButton();
             Button no = levelSetup.getSecondChallenge().getDeclineButton();
             yes.setOnAction(e -> {
@@ -433,6 +472,7 @@ public class LevelController {
                         hero.getPlayerMovement().getYPosition(), 1,
                         hero.getPlayerMovement().getXPosition(), 1);
                 currentBoard.onExit(hero, levelSetup.getSecondChallenge().getExit(),gameModel);
+
                 levelFiveScreen();
             });
         } else {
@@ -447,9 +487,17 @@ public class LevelController {
      */
     public void thirdChallengeScreen() {
         timer.stop();
+
         gameModel.setState("Challenge 3");
         currentScene = levelSetup.getThirdChallenge().getScene(thirdChallengeInitialEntrance);
         if(levelSetup.getThirdChallenge().getState().compareTo("question") == 0){
+
+            mediaPlayer.stop();
+            Media media = new Media(new File("resources/music/challenge.mp3").toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(volume);
+            mediaPlayer.play();
+
             Button yes = levelSetup.getThirdChallenge().getAcceptButton();
             Button no = levelSetup.getThirdChallenge().getDeclineButton();
             yes.setOnAction(e -> {
@@ -466,6 +514,7 @@ public class LevelController {
                         hero.getPlayerMovement().getYPosition(), 1,
                         hero.getPlayerMovement().getXPosition(), 1);
                 currentBoard.onExit(hero, levelSetup.getThirdChallenge().getExit(),gameModel);
+
                 levelSevenScreen();
             });
         } else {
