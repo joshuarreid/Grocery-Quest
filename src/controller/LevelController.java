@@ -205,8 +205,8 @@ public class LevelController {
 
         mediaPlayer.stop();
         Media media = new Media(new File("resources/music/option2.mp3").toURI().toString());
-        mediaPlayer.setVolume(volume);
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(this.volume);
         mediaPlayer.play();
 
         gameModel.setState("Level 5");
