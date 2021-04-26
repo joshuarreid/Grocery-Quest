@@ -3,11 +3,11 @@ package model;
 import java.util.concurrent.TimeUnit;
 
 public class Statistics {
-    private int antimaskers;
-    private int items;
+    private static int antimaskers;
+    private static int items;
     private long startTime;
     private long endTime;
-    private long timeElapsed;
+    private static long timeElapsed;
 
     public Statistics() {
         this.antimaskers = 0;
@@ -34,15 +34,15 @@ public class Statistics {
         timeElapsed = endTime - startTime;
     }
 
-    public long getTimeElapsed(){
+    public static long getTimeElapsed(){
         return TimeUnit.SECONDS.convert(timeElapsed, TimeUnit.NANOSECONDS);
     }
 
-    public int getAntimaskers(){
+    public static int getAntimaskers(){
         return antimaskers;
     }
 
-    public int getItems(){
+    public static int getItems(){
         return items;
     }
 

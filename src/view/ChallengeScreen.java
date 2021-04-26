@@ -112,7 +112,7 @@ public abstract class ChallengeScreen extends LevelScreen {
         acceptButton.setMaxSize(190, 148);
         acceptButton.setOnMouseEntered(e -> acceptButton.setStyle(HOVERED_BUTTON_STYLE));
         acceptButton.setOnMouseExited(e -> acceptButton.setStyle(IDLE_BUTTON_STYLE));
-        acceptButton.setId("replayButton");
+        acceptButton.setId("acceptButton");
 
         declineButton.setGraphic(exit);
         declineButton.setStyle("-fx-background-color: #F68C35; -fx-background-radius: 30px");
@@ -120,11 +120,11 @@ public abstract class ChallengeScreen extends LevelScreen {
         declineButton.setMaxSize(190, 148);
         declineButton.setOnMouseEntered(e -> declineButton.setStyle(HOVERED_BUTTON_STYLE));
         declineButton.setOnMouseExited(e -> declineButton.setStyle(IDLE_BUTTON_STYLE));
-        declineButton.setId("exitButton");
+        declineButton.setId("declineButton");
 
         Label acceptText = new Label("accept");
         acceptText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
-        
+
 
         Label declineText = new Label("decline");
         declineText.setFont(Font.loadFont("file:resources/dogica/TTF/dogicapixel.ttf", 20));
@@ -170,7 +170,7 @@ public abstract class ChallengeScreen extends LevelScreen {
     }
 
     public Exit getExit() {
-       return super.exits[0];
+        return super.exits[0];
     }
 }
 
